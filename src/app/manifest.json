@@ -1,0 +1,10 @@
+{
+  "name": "Babyzzu",
+  "short_name": "Babyzzu",
+  "start_url": "https://babyzzu.com",
+  "id": "https://babyzzu.com",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [{ "src": "https://cdn.pushalert.co/icons/app-icon-75212-2.png?1730776287", "sizes": "256x256" }]
+}

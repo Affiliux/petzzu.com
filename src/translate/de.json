@@ -1,0 +1,625 @@
+{
+  "config": {
+    "title": "Babyzzu ©",
+    "description": "Babyzzu ist eine Plattform, die es ermöglicht, personalisierte Seiten für besondere Menschen zu erstellen.",
+    "keywords": "Liebe, Beziehung, Freundschaften, Geburtstag, Geschenk, Seite, Widmung, Überraschung",
+    "skip": "Schritt überspringen",
+    "footer": {
+      "copyright": "Copyright © 2024 - Babyzzu.com",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzrichtlinie",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "tiktok": "TikTok",
+      "twitter": "Twitter"
+    },
+    "header": {
+      "nav": {
+        "plans": "Pläne",
+        "affiliate": "Partnerprogramm",
+        "badge": "Kommt bald"
+      },
+      "languages": {
+        "pt": "Portugiesisch",
+        "en": "Englisch",
+        "es": "Spanisch",
+        "de": "Deutsch"
+      }
+    },
+    "offer": {
+      "title": "💥 Super-Verkäufe",
+      "description1": "Alle Pläne mit",
+      "description2": "Rabatt, nutzen Sie es aus!"
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "description": "Wir verwenden Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website machen. Durch die weitere Nutzung der Website stimmen Sie unserer Datenschutzrichtlinie zu.",
+      "button": "Zustimmen"
+    },
+    "defaults": {
+      "currency": "eur",
+      "country": "de-DE"
+    }
+  },
+  "themes": {
+    "default": {
+      "awaiting": "Warten auf den großen Tag!",
+      "together": "Teilen von Momenten seit",
+      "surprise": "Überraschung!",
+      "years": "Jahre",
+      "months": "Monate",
+      "days": "Tage",
+      "hours": "Stunden",
+      "minutes": "Minuten",
+      "seconds": "Sekunden",
+      "mili": "Millisekunden",
+      "of": "von",
+      "since": "Seit"
+    },
+    "netflix": {
+      "since": "Veröffentlicht am",
+      "of": "von",
+      "top-10": "Derzeit im Trend",
+      "play": "Abspielen",
+      "pause": "Pause",
+      "favorite": "Favorit",
+      "ep-title": "Beste Episoden"
+    }
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "sub-title": "Fangen wir an?",
+        "title": {
+          "1": "Überrasche",
+          "2": "jemanden Besonderen",
+          "3": "deine Liebe",
+          "4": "deinen Freund",
+          "5": "dein Familienmitglied",
+          "6": "das Geburtstagskind"
+        },
+        "description": "Kleine Gesten machen den Unterschied. Zeige deine Zuneigung auf unerwartete Weise, indem du eine Seite für jemanden Besonderen erstellst.",
+        "input": {
+          "placeholder": "Z.B.: Hans & Maria oder Alles Gute zum Geburtstag oder etc.",
+          "errors": {
+            "min": "Mindestens 3 Zeichen",
+            "max": "Maximal 100 Zeichen"
+          }
+        },
+        "button": "Anfangen",
+        "people": {
+          "1": {
+            "name": "Hans & Maria",
+            "time": "vor 1 Monat"
+          },
+          "2": {
+            "name": "Anna & Peter",
+            "time": "vor 2 Tagen"
+          },
+          "3": {
+            "name": "Lukas & Carol",
+            "time": "vor 3 Monaten"
+          },
+          "4": {
+            "name": "Camila & Philipp",
+            "time": "vor 4 Monaten",
+            "image": "https://cdn.babyzzu.com/lp-assets/Michael%20Franca%20Studio.jpg"
+          },
+          "5": {
+            "name": "Bia & Heinrich",
+            "time": "vor 1 Jahr"
+          },
+          "6": {
+            "name": "Clara & Rafael",
+            "time": "vor 2 Monaten"
+          }
+        },
+        "rating": "Von 34.225 Personen genehmigt"
+      },
+      "how-work": {
+        "subtitle": "Wie funktioniert es?",
+        "title": "Erstelle die Seite in 4 Schritten",
+        "description": "Überrasche jemanden Besonderen mit einer personalisierten Seite. Es ist einfach und schnell.",
+        "steps": {
+          "1": {
+            "title": "1. Erstellungsformular",
+            "description": "Folge den Schritten und fülle das Formular aus."
+          },
+          "2": {
+            "title": "2. Sichere Zahlung",
+            "description": "Zahle sicher mit Kreditkarte oder PIX."
+          },
+          "3": {
+            "title": "3. QR-Code und Link",
+            "description": "Du erhältst einen QR-Code und einen Link per E-Mail, um auf die personalisierte Seite zuzugreifen."
+          },
+          "4": {
+            "title": "4. Mache die Überraschung",
+            "description": "Überrasche jemanden Besonderen, indem du den Link oder den QR-Code teilst."
+          }
+        },
+        "example": {
+          "title": {
+            "1": "Es ist",
+            "2": "einfach und schnell",
+            "3": "zu erstellen, siehe ein Beispiel einer Seite."
+          }
+        }
+      },
+      "themes": {
+        "title": "Wähle das ideale Thema",
+        "description": "Wähle das ideale Thema für die personalisierte Seite. Du kannst aus den folgenden Themen wählen.",
+        "1": {
+          "title": "Standard",
+          "description": "Standardthema mit Zeitmesser und Hintergrundanimationen.",
+          "try-now": "Jetzt ausprobieren",
+          "start-now": "Jetzt anfangen"
+        },
+        "2": {
+          "title": "Netflix",
+          "description": "Thema inspiriert von Netflix mit Datum und Lieblingsfolgen (Fotos).",
+          "try-now": "Jetzt ausprobieren",
+          "start-now": "Jetzt anfangen"
+        }
+      },
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "description": "Hier sind einige häufig gestellte Fragen, um dir zu helfen, Babyzzu besser zu verstehen. Wenn du Fragen hast, kontaktiere uns.",
+        "1": {
+          "question": "Was ist Babyzzu?",
+          "answer": "Babyzzu ist eine Plattform, die es ermöglicht, personalisierte Seiten für besondere Menschen zu erstellen. Du kannst Fotos, eine Nachricht und auch die Dauer der Verbindung hinzufügen."
+        },
+        "2": {
+          "question": "Wie kann ich eine personalisierte Seite auf Babyzzu erstellen?",
+          "answer": "Um deine personalisierte Seite zu erstellen, folge den Schritten und fülle das Formular mit den erforderlichen Informationen aus. Nach dem Ausfüllen wirst du zur Zahlung weitergeleitet."
+        },
+        "3": {
+          "question": "Was ist in meiner personalisierten Seite enthalten?",
+          "answer": "Deine personalisierte Seite enthält alles, was du im Formular ausgefüllt hast, abhängig vom gewählten Plan."
+        },
+        "4": {
+          "question": "Wie erhalte ich meine personalisierte Seite nach der Zahlung?",
+          "answer": "Nach der Zahlungsbestätigung erhältst du einen QR-Code und einen Link per E-Mail, um die Seite zu teilen und darauf zuzugreifen."
+        },
+        "5": {
+          "question": "Hat die personalisierte Seite eine Gültigkeit?",
+          "answer": "Ja, im Basisplan ist die Seite für 1 Jahr verfügbar. Im erweiterten Plan ist die Seite lebenslang verfügbar."
+        },
+        "6": {
+          "question": "Wie lange dauert es, bis der QR-Code per E-Mail ankommt?",
+          "answer": "Zahlungen mit Kreditkarte und PIX werden sofort verarbeitet."
+        },
+        "7": {
+          "question": "Welche Zahlungsmethoden werden akzeptiert?",
+          "answer": "Wir akzeptieren Zahlungen mit Kreditkarte oder Pix."
+        },
+        "8": {
+          "question": "Wie kann ich den Kundensupport kontaktieren?",
+          "answer": "Du kannst den Kundensupport per E-Mail kontaktieren: contact@babyzzu.com."
+        }
+      },
+      "testimonials": {
+        "title": "Erfahrungsberichte",
+        "description": "Sieh dir an, was unsere Kunden über Babyzzu sagen",
+        "1": {
+          "name": "Mariana und Hans",
+          "time": "vor 1 Monat",
+          "message": "Ich liebte die Erfahrung! Ich konnte eine spezielle Seite für Hans mit unseren Lieblingsfotos, einer personalisierten Playlist und einem Text, der unsere Geschichte repräsentiert, erstellen. Er war sehr gerührt, als er sie sah!"
+        },
+        "2": {
+          "name": "Anna und Peter",
+          "time": "vor 2 Tagen",
+          "message": "Mit Babyzzu konnte ich meine Liebe auf eine völlig andere Weise ausdrücken. Ich liebte es, eine Seite nur für uns beide zu erstellen."
+        },
+        "3": {
+          "name": "Lukas und Carol",
+          "time": "vor 3 Monaten",
+          "message": "Ich habe eine Überraschungsseite für Carol gemacht, mit unseren Reisefotos und einer aufrichtigen Nachricht. Sie liebte es! Ich werde es definitiv wieder verwenden."
+        },
+        "4": {
+          "name": "Camila und Philipp",
+          "time": "vor 4 Monaten",
+          "message": "Die Benutzeroberfläche ist einfach und das Erstellen einer Seite mit unseren Lieblingsfotos und -liedern war super besonders!"
+        },
+        "5": {
+          "name": "Bia und Heinrich",
+          "time": "vor 1 Jahr",
+          "message": "Die Seite war unglaublich und personalisiert! Ich erwartete nicht etwas so Emotionales."
+        },
+        "6": {
+          "name": "Clara und Rafael",
+          "time": "vor 2 Monaten",
+          "message": "Die Nutzung von Babyzzu war unglaublich! Die Plattform ist sehr intuitiv und einfach zu bedienen. Wir konnten ein perfektes digitales Geschenk mit Liedern erstellen, die unsere Beziehung geprägt haben."
+        },
+        "7": {
+          "name": "Vanessa und Richard",
+          "time": "vor 1 Woche",
+          "message": "Babyzzu machte unsere Beziehung noch spezieller. Er liebte die Überraschung voller Erinnerungen."
+        },
+        "8": {
+          "name": "Carla und Bruno",
+          "time": "vor 4 Monaten",
+          "message": "Wir feierten unser erstes Jahr zusammen auf eine sehr besondere Weise. Die personalisierte Seite war das perfekte Geschenk!"
+        },
+        "9": {
+          "name": "Larissa und Tiago",
+          "time": "vor 9 Monaten",
+          "message": "Ich erwartete keine so personalisierte Überraschung. Es war aufregend, diese Seite mit allem, was wir lieben, zu erstellen."
+        }
+      },
+      "cta": {
+        "title": "Sichere es dir jetzt und überrasche!",
+        "button": "Jetzt anfangen"
+      },
+      "plans": {
+        "title": "Unsere Pläne",
+        "description": "Wähle den idealen Plan für deine personalisierte Seite. Du kannst aus den folgenden Plänen wählen.",
+        "basic": {
+          "title": "Jährlich",
+          "counter": "Echtzeit-Zähler",
+          "text": "Widmungstext",
+          "date": "Startdatum",
+          "qr-code": "Exklusiver QR-Code",
+          "images": "Maximal 4 Bilder",
+          "music": "Keine Musik",
+          "background": "Kein dynamischer Hintergrund",
+          "animations": "Keine exklusiven Animationen",
+          "url": "Personalisierte URL",
+          "support": "24-Stunden-Support",
+          "price_recurrency": "/pro Jahr"
+        },
+        "pro": {
+          "title": "Für immer",
+          "counter": "Echtzeit-Zähler",
+          "text": "Widmungstext",
+          "date": "Startdatum",
+          "qr-code": "Exklusiver QR-Code",
+          "images": "Maximal 8 Bilder",
+          "music": "Mit Musik",
+          "background": "Dynamischer Hintergrund",
+          "animations": "Mit exklusiven Animationen",
+          "url": "Personalisierte URL",
+          "support": "24-Stunden-Support",
+          "price_recurrency": "/einmalig"
+        },
+        "recommended": "Empfohlen",
+        "button": "Jetzt überraschen"
+      },
+      "features": {
+        "title": "Verschiedene Funktionen",
+        "description": "Sieh dir die Funktionen an, die du zu deiner personalisierten Seite hinzufügen kannst",
+        "1": {
+          "title": "Zeitmesser",
+          "description": "Zeige, wie lange ihr zusammen seid, mit einem Echtzeit-Zähler."
+        },
+        "2": {
+          "title": "Hintergrundanimationen",
+          "description": "Wähle aus verschiedenen Hintergrundanimationen, um die Seite zu personalisieren."
+        },
+        "3": {
+          "title": "Gewidmete Musik",
+          "description": "Widme ein besonderes Lied. Die Musik wird automatisch auf der Seite abgespielt."
+        },
+        "4": {
+          "title": "Überall",
+          "description": "Erstelle deine Seite und teile sie von überall auf der Welt. Wir akzeptieren internationale Zahlungen."
+        }
+      }
+    },
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "content": {
+        "introduction_title": "1. Einführung",
+        "introduction_description": "Ihre Privatsphäre ist uns äußerst wichtig. Diese Datenschutzrichtlinie beschreibt, wie wir Ihre persönlichen Daten erfassen, verwenden, speichern und schützen, wenn Sie unsere Plattform nutzen.",
+
+        "information_we_collect_title": "2. Informationen, die wir sammeln",
+        "information_we_collect": "Wir sammeln die folgenden Informationen, wenn Sie unsere Plattform nutzen:",
+
+        "registration_info": "• Registrierungsinformationen: Name, Startdatum der Beziehung, personalisierte Nachricht, Fotos des Paares und E-Mail-Adresse.",
+        "payment_info": "• Zahlungsinformationen: Die bei Stripe oder Pagar.me / Stone registrierte E-Mail-Adresse, um die Zahlung zu verarbeiten und den Link zur personalisierten Seite zu senden.",
+
+        "how_we_use_information_title": "3. Wie wir Ihre Informationen verwenden",
+        "how_we_use_information": "Wir verwenden Ihre Informationen, um:",
+
+        "use_payment_process": "• Die Zahlung zu verarbeiten und den Link zur personalisierten Seite per E-Mail zu senden.",
+        "use_personalize_page": "• Die Seite des Paares mit den bereitgestellten Informationen zu personalisieren und zu erstellen.",
+        "use_improve_service": "• Unsere Dienstleistungen und den Kundensupport zu verbessern.",
+
+        "sharing_information_title": "4. Weitergabe von Informationen",
+        "sharing_information": "Wir geben Ihre persönlichen Daten nicht an Dritte weiter, außer wenn dies zur Abwicklung von Zahlungen (Stripe und Pagar.me / Stone) erforderlich ist oder gesetzlich vorgeschrieben ist.",
+
+        "security_title": "5. Sicherheit",
+        "security_description": "Wir ergreifen geeignete Sicherheitsmaßnahmen, um Ihre persönlichen Daten vor unbefugtem Zugriff, Nutzung oder Offenlegung zu schützen. Keine Datenübertragung über das Internet ist jedoch vollständig sicher, und wir können die absolute Sicherheit nicht garantieren.",
+
+        "data_retention_title": "6. Datenaufbewahrung",
+        "data_retention_description": "Wir bewahren Ihre persönlichen Daten nur so lange auf, wie es zur Erfüllung der Zwecke, für die sie gesammelt wurden, erforderlich ist oder gesetzlich vorgeschrieben ist.",
+
+        "your_rights_title": "7. Ihre Rechte",
+        "your_rights_description": "Sie haben das Recht, auf Ihre persönlichen Daten zuzugreifen, diese zu korrigieren oder zu löschen. Um diese Rechte auszuüben, kontaktieren Sie uns bitte per E-Mail: contact@babyzzu.com.",
+
+        "changes_to_policy_title": "8. Änderungen dieser Datenschutzrichtlinie",
+        "changes_to_policy_description": "Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Wenn dies der Fall ist, wird das Datum der „letzten Aktualisierung“ oben auf dieser Seite geändert. Es liegt in Ihrer Verantwortung, diese Richtlinie regelmäßig zu überprüfen, um über mögliche Änderungen informiert zu bleiben.",
+
+        "contact_title": "9. Kontakt",
+        "contact_description": "Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte per E-Mail: contact@babyzzu.com."
+      }
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "description": "Durch den Zugriff auf und die Nutzung unserer Plattform erklären Sie sich damit einverstanden, diese Nutzungsbedingungen einzuhalten und an sie gebunden zu sein. Wenn Sie mit einem Teil dieser Bedingungen nicht einverstanden sind, nutzen Sie die Plattform bitte nicht. Letzte Aktualisierung: 01.09.2024",
+      "content": {
+        "acceptance_of_terms": "1. Annahme der Bedingungen",
+        "acceptance_description": "Durch den Zugriff auf und die Nutzung unserer Plattform erklären Sie sich damit einverstanden, diese Nutzungsbedingungen einzuhalten und an sie gebunden zu sein. Wenn Sie mit einem Teil dieser Bedingungen nicht einverstanden sind, nutzen Sie die Plattform bitte nicht.",
+
+        "service_description_title": "2. Beschreibung des Dienstes",
+        "service_description": "Babyzzu bietet einen Dienst an, der es Paaren ermöglicht, eine personalisierte Seite zu erstellen, indem sie ein Formular mit ihren Namen, dem Startdatum der Beziehung, einer speziellen Nachricht und bis zu 8 Medien ausfüllen. Nach dem Ausfüllen werden die Paare zur Zahlung weitergeleitet und erhalten nach Abschluss einen Link mit einem QR-Code per E-Mail.",
+
+        "registration_and_security_title": "3. Registrierung und Sicherheit",
+        "registration_and_security": "Um unsere Dienste nutzen zu können, müssen Sie eine gültige E-Mail-Adresse angeben. Wir werden Ihre E-Mail-Adresse nicht an Dritte weitergeben.",
+
+        "privacy_policy_title": "4. Datenschutzrichtlinie",
+        "privacy_policy": "Wir schätzen Ihre Privatsphäre. Ihre Daten werden nicht verarbeitet oder an Dritte verkauft. Die angegebene E-Mail-Adresse wird ausschließlich zum Versenden des Links zu Ihrer personalisierten Seite verwendet.",
+
+        "user_content_title": "5. Benutzerinhalt",
+        "user_content": "Sie sind allein verantwortlich für den Inhalt, den Sie auf der Plattform eingeben, einschließlich Fotos, Nachrichten und Informationen über die Beziehung. Wir sind nicht verantwortlich für unangemessene oder illegale Inhalte, die von Benutzern hochgeladen werden.",
+
+        "payments_refund_policy_title": "6. Zahlungen und Rückerstattungsrichtlinie",
+        "payments_refund_policy": "Die Zahlungen werden über Stripe und Pagar.me / Stone abgewickelt. Nach Bestätigung der Zahlung erhalten die Paare einen Link, um auf die personalisierte Seite per E-Mail zuzugreifen. Rückerstattungen werden nicht angeboten, außer in Ausnahmefällen nach unserem alleinigen Ermessen.",
+
+        "service_changes_title": "7. Änderungen des Dienstes",
+        "service_changes": "Wir verpflichten uns, den Dienst während des vertraglich vereinbarten Zeitraums gemäß dem gewählten Plan (1 Jahr im Basisplan oder lebenslang im erweiterten Plan) verfügbar zu halten. In außergewöhnlichen Situationen, wie technischen, rechtlichen oder finanziellen Problemen, behalten wir uns das Recht vor, den Dienst zu ändern oder einzustellen. Im Falle einer Einstellung werden wir die Benutzer im Voraus benachrichtigen und nach Möglichkeit geeignete Alternativen anbieten. Babyzzu haftet nicht für Verluste, die durch Änderungen oder Unterbrechungen unter außergewöhnlichen Umständen entstehen, wird jedoch bemüht sein, die Auswirkungen zu minimieren.",
+
+        "limitation_of_liability_title": "8. Haftungsbeschränkung",
+        "limitation_of_liability": "Wir haften nicht für indirekte, zufällige, besondere oder Folgeschäden im Zusammenhang mit der Nutzung oder der Unfähigkeit zur Nutzung der Plattform.",
+
+        "terms_update_title": "9. Aktualisierung der Bedingungen",
+        "terms_update": "Wir können diese Nutzungsbedingungen von Zeit zu Zeit überarbeiten. Wenn dies der Fall ist, wird das Datum der „letzten Aktualisierung“ oben auf dieser Seite geändert. Es liegt in Ihrer Verantwortung, die Nutzungsbedingungen regelmäßig zu überprüfen, um über mögliche Änderungen informiert zu bleiben.",
+
+        "contact_title": "10. Kontakt",
+        "contact": "Wenn Sie Fragen zu den Nutzungsbedingungen haben, kontaktieren Sie uns bitte per E-Mail: contact@babyzzu.com"
+      }
+    }
+  },
+  "steps": {
+    "continue": {
+      "title": "Möchten Sie fortfahren?",
+      "description": "Sie haben eine laufende Seite. Möchten Sie dort weitermachen, wo Sie aufgehört haben, oder eine neue Seite beginnen?",
+      "cancel": "Neue Seite beginnen",
+      "continue": "Seite fortsetzen"
+    },
+    "step1": {
+      "title": "Seitentitel",
+      "description": "Schreiben Sie den Widmungstitel für die Seite. Z.B.: Hans & Maria oder Alles Gute zum Geburtstag oder etc!",
+      "input": {
+        "placeholder": "Z.B.: Hans & Maria oder Alles Gute zum Geburtstag oder etc",
+        "errors": {
+          "min": "Mindestens 3 Zeichen",
+          "max": "Maximal 100 Zeichen"
+        }
+      },
+      "back": "Schritt zurück",
+      "button": "Nächster Schritt"
+    },
+    "step2": {
+      "title": "Nachricht",
+      "description": "Schreiben Sie eine besondere Nachricht. Seien Sie kreativ und zeigen Sie Ihre Zuneigung.",
+      "input": {
+        "label": "Nachricht",
+        "placeholder": "Z.B.: Hans, du bist der unglaublichste Mensch, den ich je getroffen habe. Danke für alles!",
+        "errors": {
+          "min": "Mindestens 2 Zeichen",
+          "max": "Maximal {limit} Zeichen"
+        }
+      },
+      "back": "Schritt zurück",
+      "button": "Nächster Schritt"
+    },
+    "step3": {
+      "title": "Startdatum",
+      "description": "Geben Sie das Startdatum an, das den Beginn einer Verbindung, Beziehung, Freundschaft usw. symbolisiert.",
+      "show-types": {
+        "title": "Anzeigemodus",
+        "default": "Standard",
+        "classic": "Klassisch",
+        "simple": "Einfach"
+      },
+      "back": "Schritt zurück",
+      "button": "Nächster Schritt"
+    },
+    "step4": {
+      "title": "Fotos",
+      "description": "Fügen Sie Fotos hinzu und wählen Sie den Anzeigemodus, um die Seite zu personalisieren. Sie können bis zu 8 Fotos hinzufügen.",
+      "input": {
+        "label": "Klicken Sie, um Fotos hinzuzufügen",
+        "placeholder": "PNG, JPG, JPEG, GIF (max. 8 Fotos)",
+        "errors": {
+          "maxFiles": "Maximal 8 Fotos erlaubt",
+          "not-image": "Die Datei muss ein Bild sein",
+          "big-size": "Die Datei ist zu groß. Maximal 100MB",
+          "empty": "Bild ist beschädigt",
+          "not-supported": "Dateiformat nicht unterstützt"
+        }
+      },
+      "toast": {
+        "error-save": {
+          "title": "Fehler beim Speichern",
+          "description": "Beim Speichern des Bildes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+        }
+      },
+      "show-types": {
+        "title": "Anzeigemodus",
+        "coverflow": "Coverflow",
+        "cards": "Karten",
+        "flip": "Flip",
+        "cube": "Würfel"
+      },
+      "back": "Schritt zurück",
+      "button": "Nächster Schritt"
+    },
+    "step5": {
+      "title": "Gewidmete Musik",
+      "description": "Widmen Sie ein besonderes Lied. Die Musik wird automatisch auf der Seite abgespielt.",
+      "input": {
+        "label": "YouTube Musik",
+        "placeholder": "Z.B.: Coldplay - Sky full of stars"
+      },
+      "click-select": "Klicken Sie, um auszuwählen",
+      "back": "Schritt zurück",
+      "go-payment": "Zur Zahlung gehen",
+      "button": "Nächster Schritt"
+    },
+    "step6": {
+      "title": "Hintergrundanimation",
+      "description": "Wählen Sie eine Hintergrundanimation für die Seite. Sie können aus den untenstehenden Optionen wählen.",
+      "is-pro": "Pro-Plan",
+      "animations": {
+        "none": "Keine",
+        "hearts": "Herzregen",
+        "stars": "Sternenhimmel mit Kometen",
+        "meteors": "Sternenhimmel mit Meteoren",
+        "aurora": "Aurora",
+        "vortex": "Farbwirbel",
+        "emojis": "oder wählen Sie 3 Emojis"
+      },
+      "back": "Schritt zurück",
+      "button": "Nächster Schritt"
+    },
+    "step7": {
+      "title": "Idealer Plan",
+      "description": "Wählen Sie den idealen Plan für Ihre Seite. Sie können aus den folgenden Plänen wählen.",
+      "plans": {
+        "basic": {
+          "title": "Jährlich",
+          "counter": "Echtzeit-Zähler",
+          "text": "Widmungstext",
+          "date": "Startdatum",
+          "qr-code": "Exklusiver QR-Code",
+          "images": "Maximal 4 Bilder",
+          "music": "Keine Musik",
+          "background": "Kein dynamischer Hintergrund",
+          "animations": "Keine exklusiven Animationen",
+          "url": "Personalisierte URL",
+          "support": "24-Stunden-Support",
+          "price_recurrency": "/pro Jahr"
+        },
+        "pro": {
+          "title": "Für immer",
+          "counter": "Echtzeit-Zähler",
+          "text": "Widmungstext",
+          "date": "Startdatum",
+          "qr-code": "Exklusiver QR-Code",
+          "images": "Maximal 8 Bilder",
+          "music": "Mit Musik",
+          "background": "Dynamischer Hintergrund",
+          "animations": "Mit exklusiven Animationen",
+          "url": "Personalisierte URL",
+          "support": "24-Stunden-Support",
+          "price_recurrency": "/einmalig"
+        }
+      },
+      "recommended": "Empfohlen",
+      "back": "Schritt zurück",
+      "button": "Fertigstellen"
+    }
+  },
+  "checkout": {
+    "payment": {
+      "select-method": "Zahlungsmethode",
+      "footer": {
+        "accept": "Mit der Zahlung akzeptieren Sie die",
+        "terms-of-policy": "Nutzungsbedingungen",
+        "and": "und",
+        "privacy-policy": "Datenschutzrichtlinie"
+      },
+      "inputs": {
+        "title": "Informationen",
+        "name": {
+          "label": "Name",
+          "placeholder": "Z.B.: Hans Müller",
+          "invalid": "Ungültiger Name",
+          "required": "Pflichtfeld"
+        },
+        "document": {
+          "label": "CPF",
+          "placeholder": "Z.B.: 999.999.999-99",
+          "invalid": "Ungültiger CPF",
+          "required": "Pflichtfeld"
+        },
+        "email": {
+          "label": "E-Mail",
+          "placeholder": "Z.B.: ihre.email@gmail.com",
+          "invalid": "Ungültige E-Mail",
+          "required": "Pflichtfeld"
+        },
+        "phone": {
+          "label": "Telefon",
+          "placeholder": "Z.B.: (99) 99999-9999",
+          "important": "* Sie erhalten Ihr Produkt auch per WhatsApp, falls Sie es nicht per E-Mail erhalten.",
+          "invalid": "Ungültiges Telefon",
+          "required": "Pflichtfeld"
+        }
+      },
+      "inputs-card": {
+        "title": "Karteninformationen",
+        "name": {
+          "label": "Name",
+          "placeholder": "Z.B.: Hans Müller",
+          "invalid": "Ungültiger Name",
+          "required": "Pflichtfeld"
+        },
+        "number": {
+          "label": "Kartennummer",
+          "placeholder": "Z.B.: 1234 5678 123 4567",
+          "invalid": "Ungültige Nummer",
+          "required": "Pflichtfeld"
+        },
+        "expiry": {
+          "label": "Gültigkeit",
+          "placeholder": "MM/JJ",
+          "invalid": "Ungültiges Datum",
+          "required": "Pflichtfeld"
+        },
+        "cvv": {
+          "label": "CVV",
+          "placeholder": "Z.B.: 123",
+          "invalid": "Ungültiger CVV",
+          "required": "Pflichtfeld"
+        }
+      },
+      "go-to": "Zur Zahlung gehen",
+      "create-pix": "Pix QR Code erstellen",
+      "submit": "Zahlung durchführen",
+      "toast": {
+        "error-create": {
+          "title": "Ein Fehler ist aufgetreten!",
+          "description": "Die Seite konnte nicht erstellt werden. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support!"
+        },
+        "error-card": {
+          "title": "Ein Fehler ist aufgetreten!",
+          "description": "Die Zahlung konnte nicht durchgeführt werden. Bitte überprüfen Sie die Kartendaten und versuchen Sie es erneut!"
+        }
+      }
+    },
+    "pix": {
+      "title": "Zahlung per Pix",
+      "description": "Scannen Sie den QR Code mit Ihrer Banking-App oder kopieren Sie den untenstehenden Pix-Schlüssel.",
+      "tooltip": {
+        "copy": "Kopieren",
+        "copied": "Kopiert!"
+      },
+      "button": "Ich habe bezahlt"
+    },
+    "stone-card": {
+      "loading": "Einen Moment, wir verarbeiten Ihre Zahlung."
+    },
+    "success": {
+      "title": "Zahlung bestätigt!",
+      "description": "Ihre Seite wurde erfolgreich erstellt. Teilen Sie den Link oder den QR Code mit jemand Besonderem.",
+      "buttons": {
+        "download": "QR Code herunterladen",
+        "go": "Schließen und zur Seite gehen"
+      }
+    }
+  }
+}
