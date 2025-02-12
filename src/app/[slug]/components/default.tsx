@@ -106,7 +106,7 @@ export const DefaultTheme = ({ couple }: DefaultThemeProps) => {
                 dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
               />
 
-              {!!couple?.startDate && <DateCount type={DateShowTypeEnum.SIMPLE} date={couple.startDate} />}
+              {!!couple?.startDate && <DateCount type={DateShowTypeEnum.DEFAULT} date={couple.startDate} />}
               {!!couple?.startDate && <BabyTimeline />}
             </div>
           </div>
