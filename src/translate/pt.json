@@ -1,11 +1,24 @@
 {
   "config": {
-    "title": "Heartzzu ©",
-    "description": "A Heartzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais.",
+    "title": "Babyzzu ©",
+    "description": "A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais.",
     "keywords": "amor, relacionamento, amizades, aniversário, presente, página, dedicatória, surpresa",
     "skip": "Pular etapa",
+    "header": {
+      "nav": {
+        "plans": "Planos",
+        "affiliate": "Programa de afiliados",
+        "badge": "Em breve"
+      },
+      "languages": {
+        "pt": "Português",
+        "en": "Inglês",
+        "es": "Espanhol",
+        "de": "Alemão"
+      }
+    },
     "footer": {
-      "copyright": "Copyright © 2024 - Heartzzu.com",
+      "copyright": "Copyright © 2024 - Babyzzu.com",
       "terms": "Termos de uso",
       "privacy": "Política de privacidade",
       "instagram": "Instagram",
@@ -18,12 +31,6 @@
       "title": "💥 Super Promoção",
       "description1": "Todos os planos com",
       "description2": "de desconto, aproveite!"
-    },
-    "languages": {
-      "pt": "Português",
-      "en": "Inglês",
-      "es": "Espanhol",
-      "de": "Alemão"
     },
     "cookies": {
       "title": "Política de Cookies",
@@ -97,7 +104,7 @@
           "4": {
             "name": "Camila & Felipe",
             "time": "4 meses atrás",
-            "image": "https://cdn.heartzzu.com/lp-assets/Michael%20Franca%20Studio.jpg"
+            "image": "https://cdn.babyzzu.com/lp-assets/Michael%20Franca%20Studio.jpg"
           },
           "5": {
             "name": "Bia & Henrique",
@@ -131,39 +138,62 @@
             "title": "4. Faça a surpresa",
             "description": "Faça uma surpresa para alguém especial compartilhando o link ou o QR code."
           }
+        },
+        "example": {
+          "title": {
+            "1": "É",
+            "2": "fácil e rápido",
+            "3": "de criar, veja um exemplo de página."
+          }
+        }
+      },
+      "themes": {
+        "title": "Escolha o tema ideal",
+        "description": "Escolha o tema ideal para a página personalizada. Você pode escolher entre os temas abaixo.",
+        "1": {
+          "title": "Padrão",
+          "description": "Tema padrão com contador de tempo e animações de fundo.",
+          "try-now": "Experimentar agora",
+          "start-now": "Começar agora"
+        },
+        "2": {
+          "title": "Netflix",
+          "description": "Tema inspirado na Netflix com data e episódios(fotos) favoritos.",
+          "try-now": "Experimentar agora",
+          "start-now": "Começar agora"
         }
       },
       "faq": {
         "title": "Perguntas Frequentes",
         "description": "Aqui estão algumas perguntas frequentes para ajudar você a entender melhor a Babyzzu. Caso tenha alguma dúvida, entre em contato conosco.",
         "1": {
-          "question": "Como o Babyzzu funciona?",
-          "answer": "Para usar o Babyzzu, basta preencher os dados do seu bebê e finalizar o pagamento. Após a confirmação, enviamos o site personalizado e um QR code exclusivo para o seu e-mail. Com isso, você poderá acessar e compartilhar a linha do tempo sempre que quiser. O processo é rápido, seguro e totalmente online. Em poucos passos, você eterniza os momentos especiais do seu bebê."
+          "question": "O que é a Babyzzu?",
+          "answer": "Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e também o tempo da união."
         },
         "2": {
-          "question": "Como posso compartilhar a linha do tempo do meu bebê?",
-          "answer": "Você pode compartilhar a linha do tempo do seu bebê com amigos e familiares através do link do site personalizado ou utilizando o QR code fornecido."
+          "question": "Como posso criar uma página personalizada na Babyzzu?",
+          "answer": "Para criar sua página personalizada, siga as etapas preenchendo o formulário com as informações solicitadas. Após o preenchimento, você será direcionado para o pagamento."
         },
         "3": {
-          "question": "As fotos e informações do meu bebê estão seguras?",
-          "answer": "Sim, no Babyzzu, priorizamos a segurança e privacidade dos dados. Todas as fotos e informações fornecidas são armazenadas de forma segura e utilizadas apenas para a criação da linha do tempo do seu bebê."
+          "question": "O que está incluído na minha página personalizada?",
+          "answer": "Sua página personalizada contará com tudo o que preencher no formulário, dependendo do plano escolhido."
         },
         "4": {
-          "question": "O QR code gerado tem validade?",
-          "answer": "Não, o QR code gerado para a linha do tempo do seu bebê não possui data de validade. Você pode utilizá-lo sempre que desejar para acessar e compartilhar a linha do tempo."
+          "question": "Como recebo minha página personalizada após o pagamento?",
+          "answer": "Após a confirmação do pagamento, você receberá um QR code e um link via email para compartilhar e acessar a página."
         },
         "5": {
-          "question": "Quem pode acessar a linha do tempo do meu bebê?",
-          "answer": "A linha do tempo do seu bebê é acessível para qualquer pessoa que possua o link do site personalizado ou o QR code correspondente."
+          "question": "A página personalizada tem validade?",
+          "answer": "Sim, no plano básico, a página estará disponível por 1 ano. No plano avançado, a página será vitalícia."
         },
         "6": {
-          "question": "Preciso baixar algum aplicativo para usar o Babyzzu?",
-          "answer": "Não é necessário baixar nenhum aplicativo para utilizar o Babyzzu. Todo o processo é realizado online através do nosso site, de forma simples e prática."
+          "question": "Quanto tempo leva para receber o QR Code por email?",
+          "answer": "Pagamentos com Cartão de Crédito & PIX são processados imediatamente."
         }
       },
       "testimonials": {
         "title": "Depoimentos",
-        "description": "Veja o que nossos clientes estão dizendo sobre a Heartzzu",
+        "description": "Veja o que nossos clientes estão dizendo sobre a Babyzzu",
         "1": {
           "name": "Mariana e João",
           "time": "1 mês atrás",
@@ -210,10 +240,6 @@
           "message": "Ele não esperava por uma surpresa tão personalizada. Foi emocionante montar essa página com tudo o que amamos."
         }
       },
-      "examples": {
-        "title": "Exemplos já criados",
-        "description": "Veja algumas páginas personalizadas criadas por nossos clientes para se inspirar"
-      },
       "cta": {
         "title": "Garanta agora mesmo e surpreenda!",
         "button": "Começar agora"
@@ -223,24 +249,34 @@
         "description": "Escolha o plano ideal para sua página personalizada. Você pode escolher entre os planos abaixo.",
         "basic": {
           "title": "Anual",
+          "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
+          "qr-code": "QR Code exclusivo",
           "images": "Máximo de 4 imagens",
           "music": "Sem música",
+          "background": "Sem fundo dinâmico",
           "animations": "Sem animações exclusivas",
+          "url": "URL personalizada",
+          "support": "Suporte 24 horas",
           "price_recurrency": "/por ano"
         },
         "pro": {
           "title": "Para sempre",
+          "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
+          "qr-code": "QR Code exclusivo",
           "images": "Máximo de 8 imagens",
           "music": "Com música",
+          "background": "Fundo dinâmico",
           "animations": "Com animações exclusivas",
+          "url": "URL personalizada",
+          "support": "Suporte 24 horas",
           "price_recurrency": "/uma vez"
         },
         "recommended": "Recomendado",
-        "button": "Comprar agora"
+        "button": "Surpreenda agora"
       },
       "features": {
         "title": "Vários Recursos",
@@ -272,14 +308,14 @@
         "information_we_collect_title": "2. Informações que Coletamos",
         "information_we_collect": "Coletamos as seguintes informações ao utilizar a nossa plataforma:",
 
-        "registration_info": "• Informações de Cadastro: Nome, data de início de gravidez, data de nascimento, mensagem personalizada, fotos da gestação, fotos da criança e endereço de email.",
+        "registration_info": "• Informações de Cadastro: Nome, data de início do relacionamento, mensagem personalizada, fotos do casal e endereço de email.",
         "payment_info": "• Informações de Pagamento: O email cadastrado no Stripe ou Pagar.me / Stone para processar o pagamento e enviar o link da página personalizada.",
 
         "how_we_use_information_title": "3. Como Utilizamos Suas Informações",
         "how_we_use_information": "Utilizamos suas informações para:",
 
         "use_payment_process": "• Processar o pagamento e enviar o link da página personalizada via email.",
-        "use_personalize_page": "• Personalizar e criar a página da gestação com as informações fornecidas.",
+        "use_personalize_page": "• Personalizar e criar a página do casal com as informações fornecidas.",
         "use_improve_service": "• Melhorar nossos serviços e o suporte ao cliente.",
 
         "sharing_information_title": "4. Compartilhamento de Informações",
@@ -309,7 +345,7 @@
         "acceptance_description": "Ao acessar e utilizar nossa plataforma, você concorda em cumprir e ser vinculado a estes Termos de Uso. Se não concordar com qualquer parte desses termos, por favor, não utilize a plataforma.",
 
         "service_description_title": "2. Descrição do Serviço",
-        "service_description": "A Babyzzu oferece um serviço que permite a casais criarem uma página personalizada através do preenchimento de um formulário com nomes, data de nascimento e de inicio de gravidez, uma mensagem especial e até 4 mídias por categoria. Após o preenchimento, o casal é direcionado para o pagamento e, ao concluir, recebe um link com um QR Code enviado por email.",
+        "service_description": "A Babyzzu oferece um serviço que permite a casais criarem uma página personalizada através do preenchimento de um formulário com seus nomes, data de início do relacionamento, uma mensagem especial e até 8 mídias. Após o preenchimento, o casal é direcionado para o pagamento e, ao concluir, recebe um link com um QR Code enviado por email.",
 
         "registration_and_security_title": "3. Cadastro e Segurança",
         "registration_and_security": "Para utilizar nossos serviços, você deve fornecer um endereço de email válido. Não compartilharemos seu email com terceiros.",
@@ -318,13 +354,13 @@
         "privacy_policy": "Valorizamos sua privacidade. Seus dados não serão processados ou vendidos para terceiros. O email fornecido será usado exclusivamente para o envio do link da sua página personalizada.",
 
         "user_content_title": "5. Conteúdo do Usuário",
-        "user_content": "Você é o único responsável pelo conteúdo que insere na plataforma, incluindo fotos, mensagens e informações sobre a gravidez e o bebê. Não nos responsabilizamos por conteúdos impróprios ou ilegais que sejam carregados pelos usuários.",
+        "user_content": "Você é o único responsável pelo conteúdo que insere na plataforma, incluindo fotos, mensagens e informações sobre o relacionamento. Não nos responsabilizamos por conteúdos impróprios ou ilegais que sejam carregados pelos usuários.",
 
         "payments_refund_policy_title": "6. Pagamentos e Política de Reembolso",
-        "payments_refund_policy": "Os pagamentos são processados através da Stripe e Pagar.me / Stone. Após a confirmação do pagamento, o responsável receberá um link para acessar a página personalizada por email. Reembolsos não são oferecidos, exceto em casos excepcionais, a nosso critério exclusivo.",
+        "payments_refund_policy": "Os pagamentos são processados através da Stripe e Pagar.me / Stone. Após a confirmação do pagamento, o casal receberá um link para acessar a página personalizada por email. Reembolsos não são oferecidos, exceto em casos excepcionais, a nosso critério exclusivo.",
 
         "service_changes_title": "7. Alterações no Serviço",
-        "service_changes": "Nos comprometemos a manter o serviço disponível durante o período contratado, conforme o plano escolhido (no plano básico ou avançado). No entanto, em situações extraordinárias, como questões técnicas, legais ou financeiras, reservamo-nos o direito de modificar ou descontinuar o serviço. Em caso de descontinuação, notificaremos os usuários com antecedência e buscaremos oferecer alternativas adequadas sempre que possível. A Babyzzu não se responsabiliza por perdas decorrentes de modificações ou interrupções em circunstâncias extraordinárias, mas envidaremos esforços para minimizar impactos.",
+        "service_changes": "Nos comprometemos a manter o serviço disponível durante o período contratado, conforme o plano escolhido (1 ano no plano básico ou vitalício no plano avançado). No entanto, em situações extraordinárias, como questões técnicas, legais ou financeiras, reservamo-nos o direito de modificar ou descontinuar o serviço. Em caso de descontinuação, notificaremos os usuários com antecedência e buscaremos oferecer alternativas adequadas sempre que possível. A Babyzzu não se responsabiliza por perdas decorrentes de modificações ou interrupções em circunstâncias extraordinárias, mas envidaremos esforços para minimizar impactos.",
 
         "limitation_of_liability_title": "8. Limitação de Responsabilidade",
         "limitation_of_liability": "Não seremos responsáveis por danos indiretos, incidentais, especiais ou consequentes relacionados ao uso ou incapacidade de uso da plataforma.",
@@ -447,20 +483,30 @@
       "plans": {
         "basic": {
           "title": "Anual",
+          "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
+          "qr-code": "QR Code exclusivo",
           "images": "Máximo de 4 imagens",
           "music": "Sem música",
+          "background": "Sem fundo dinâmico",
           "animations": "Sem animações exclusivas",
+          "url": "URL personalizada",
+          "support": "Suporte 24 horas",
           "price_recurrency": "/por ano"
         },
         "pro": {
           "title": "Para sempre",
+          "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
+          "qr-code": "QR Code exclusivo",
           "images": "Máximo de 8 imagens",
           "music": "Com música",
+          "background": "Fundo dinâmico",
           "animations": "Com animações exclusivas",
+          "url": "URL personalizada",
+          "support": "Suporte 24 horas",
           "price_recurrency": "/uma vez"
         }
       },
