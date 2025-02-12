@@ -18,8 +18,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  colorScheme: 'dark',
-  themeColor: 'black',
+  colorScheme: 'light',
+  themeColor: 'white',
 }
 
 export const metadata: Metadata = {
@@ -54,12 +54,12 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className='dark scroll-smooth' data-color-scheme='dark' prefers-color-scheme='dark'>
+    <html lang={locale} className='light scroll-smooth' data-color-scheme='light' prefers-color-scheme='light'>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_TAG_MANAGER_ID ?? ''} />
 
       <NextIntlClientProvider messages={messages}>
         <Providers>
-          <body className={`antialiased overflow-x-hidden bg-black w-screen min-h-screen h-full`}>
+          <body className={`antialiased overflow-x-hidden bg-white w-screen min-h-screen h-full`}>
             {children}
 
             <Toaster />

@@ -13,7 +13,7 @@ export const CTA = () => {
   return (
     <div className='w-[calc(100%-4rem)] mx-auto rounded-md  h-[30rem] overflow-hidden'>
       <Vortex
-        backgroundColor='black'
+        backgroundColor='white'
         particleCount={200}
         baseHue={300}
         baseSpeed={0.01}
@@ -21,11 +21,11 @@ export const CTA = () => {
         rangeY={450}
         className='flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full'
       >
-        <h2 className='text-white text-3xl md:text-5xl font-bold text-center mx-auto max-w-2xl'>{t('cta.title')}</h2>
+        <h2 className='text-black text-3xl md:text-5xl font-bold text-center mx-auto max-w-2xl'>{t('cta.title')}</h2>
         <div className='flex flex-col sm:flex-row items-center gap-4 mt-6'>
           <Link
             href='/#start'
-            className='px-5 py-3 bg-red-600 hover:bg-red-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]'
+            className='px-5 py-3 bg-blue-600 hover:bg-blue-700 transition duration-200 rounded-lg text-black shadow-[0px_2px_0px_0px_#FFFFFF40_inset]'
           >
             {t('cta.button')}
           </Link>
