@@ -61,12 +61,12 @@ export function Testimonials() {
   ]
 
   return (
-    <div className='py-12 bg-black bg-dot-red-200/[0.05]'>
+    <div className='py-12 bg-white bg-dot-red-200/[0.05]'>
       <div className='container flex flex-col items-center justify-center'>
-        <h2 className='bg-clip-text text-transparent text-center bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-5xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+        <h2 className='bg-clip-text text-transparent text-center bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-5xl font-sans py-2 relative z-20 font-bold tracking-tight'>
           {t('testimonials.title')}
         </h2>
-        <p className='max-w-xl text-center text-base md:text-lg text-neutral-200 mb-4x'>
+        <p className='max-w-xl text-center text-base md:text-lg text-neutral-700 mb-4x'>
           {t('testimonials.description')}
         </p>
 

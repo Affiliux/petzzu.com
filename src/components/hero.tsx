@@ -112,15 +112,15 @@ export const Hero = () => {
         <HoverBorderGradient
           containerClassName='rounded-full'
           as='button'
-          className='bg-black text-white text-xs flex items-center space-x-2'
+          className='bg-white text-black text-xs flex items-center space-x-2'
         >
           <span> {t('pages.home.hero.sub-title')}</span>
         </HoverBorderGradient>
 
-        <h1 className='text-white text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
+        <h1 className='text-black text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
           {t('pages.home.hero.title.1')}
         </h1>
-        <h2 className='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-red-500 pb-8 z-20'>
+        <h2 className='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-blue-500 pb-8 z-20'>
           <TypeAnimation
             sequence={[
               t('pages.home.hero.title.2'),
@@ -138,7 +138,7 @@ export const Hero = () => {
           />
         </h2>
 
-        <p className='max-w-xl text-left text-base relative md:text-lg text-neutral-300'>
+        <p className='max-w-xl text-left text-base relative md:text-lg text-neutral-700'>
           {t('pages.home.hero.description')}
         </p>
 
@@ -150,8 +150,8 @@ export const Hero = () => {
             loading ? 'opacity-50' : ''
           }`}
         >
-          <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffcbcb_0%,#b23939_50%,#ffcbcb_100%)]' />
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+          <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#cbe7ff_0%,#3982b2_50%,#cbe4ff_100%)]' />
+          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white px-3 py-1 text-sm font-semibold text-black backdrop-blur-3xl'>
             {loading ? (
               <IconLoader size={20} className='animate-spin' />
             ) : (
@@ -175,12 +175,12 @@ export const Hero = () => {
               <IconStarFilled size={16} color='#FFD700' />
             </div>
 
-            <div className='text-neutral-300 text-xs mt-2'>{t('pages.home.hero.rating')}</div>
+            <div className='text-neutral-700 text-xs mt-2'>{t('pages.home.hero.rating')}</div>
           </div>
         </div>
       </div>
 
-      <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
+      {/* <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
         <div
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[0deg] lg:translate-x-[-200px] aspect-[9/16] transition-all duration-300 hover:z-50 hover:scale-110'
           style={{
@@ -226,7 +226,7 @@ export const Hero = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
