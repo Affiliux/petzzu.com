@@ -308,14 +308,14 @@
         "information_we_collect_title": "2. Informações que Coletamos",
         "information_we_collect": "Coletamos as seguintes informações ao utilizar a nossa plataforma:",
 
-        "registration_info": "• Informações de Cadastro: Nome, data de início do relacionamento, mensagem personalizada, fotos do casal e endereço de email.",
+        "registration_info": "• Informações de Cadastro: Nome, data de início de gravidez, data de nascimento, mensagem personalizada, fotos da gestação, fotos da criança e endereço de email.",
         "payment_info": "• Informações de Pagamento: O email cadastrado no Stripe ou Pagar.me / Stone para processar o pagamento e enviar o link da página personalizada.",
 
         "how_we_use_information_title": "3. Como Utilizamos Suas Informações",
         "how_we_use_information": "Utilizamos suas informações para:",
 
         "use_payment_process": "• Processar o pagamento e enviar o link da página personalizada via email.",
-        "use_personalize_page": "• Personalizar e criar a página do casal com as informações fornecidas.",
+        "use_personalize_page": "• Personalizar e criar a página da gestação com as informações fornecidas.",
         "use_improve_service": "• Melhorar nossos serviços e o suporte ao cliente.",
 
         "sharing_information_title": "4. Compartilhamento de Informações",
@@ -345,7 +345,7 @@
         "acceptance_description": "Ao acessar e utilizar nossa plataforma, você concorda em cumprir e ser vinculado a estes Termos de Uso. Se não concordar com qualquer parte desses termos, por favor, não utilize a plataforma.",
 
         "service_description_title": "2. Descrição do Serviço",
-        "service_description": "A Babyzzu oferece um serviço que permite a casais criarem uma página personalizada através do preenchimento de um formulário com seus nomes, data de início do relacionamento, uma mensagem especial e até 8 mídias. Após o preenchimento, o casal é direcionado para o pagamento e, ao concluir, recebe um link com um QR Code enviado por email.",
+        "service_description": "A Babyzzu oferece um serviço que permite a casais criarem uma página personalizada através do preenchimento de um formulário com nomes, data de nascimento e de inicio de gravidez, uma mensagem especial e até 4 mídias por categoria. Após o preenchimento, o casal é direcionado para o pagamento e, ao concluir, recebe um link com um QR Code enviado por email.",
 
         "registration_and_security_title": "3. Cadastro e Segurança",
         "registration_and_security": "Para utilizar nossos serviços, você deve fornecer um endereço de email válido. Não compartilharemos seu email com terceiros.",
@@ -354,13 +354,13 @@
         "privacy_policy": "Valorizamos sua privacidade. Seus dados não serão processados ou vendidos para terceiros. O email fornecido será usado exclusivamente para o envio do link da sua página personalizada.",
 
         "user_content_title": "5. Conteúdo do Usuário",
-        "user_content": "Você é o único responsável pelo conteúdo que insere na plataforma, incluindo fotos, mensagens e informações sobre o relacionamento. Não nos responsabilizamos por conteúdos impróprios ou ilegais que sejam carregados pelos usuários.",
+        "user_content": "Você é o único responsável pelo conteúdo que insere na plataforma, incluindo fotos, mensagens e informações sobre a gravidez e o bebê. Não nos responsabilizamos por conteúdos impróprios ou ilegais que sejam carregados pelos usuários.",
 
         "payments_refund_policy_title": "6. Pagamentos e Política de Reembolso",
-        "payments_refund_policy": "Os pagamentos são processados através da Stripe e Pagar.me / Stone. Após a confirmação do pagamento, o casal receberá um link para acessar a página personalizada por email. Reembolsos não são oferecidos, exceto em casos excepcionais, a nosso critério exclusivo.",
+        "payments_refund_policy": "Os pagamentos são processados através da Stripe e Pagar.me / Stone. Após a confirmação do pagamento, o responsável receberá um link para acessar a página personalizada por email. Reembolsos não são oferecidos, exceto em casos excepcionais, a nosso critério exclusivo.",
 
         "service_changes_title": "7. Alterações no Serviço",
-        "service_changes": "Nos comprometemos a manter o serviço disponível durante o período contratado, conforme o plano escolhido (1 ano no plano básico ou vitalício no plano avançado). No entanto, em situações extraordinárias, como questões técnicas, legais ou financeiras, reservamo-nos o direito de modificar ou descontinuar o serviço. Em caso de descontinuação, notificaremos os usuários com antecedência e buscaremos oferecer alternativas adequadas sempre que possível. A Babyzzu não se responsabiliza por perdas decorrentes de modificações ou interrupções em circunstâncias extraordinárias, mas envidaremos esforços para minimizar impactos.",
+        "service_changes": "Nos comprometemos a manter o serviço disponível durante o período contratado, conforme o plano escolhido (no plano básico ou avançado). No entanto, em situações extraordinárias, como questões técnicas, legais ou financeiras, reservamo-nos o direito de modificar ou descontinuar o serviço. Em caso de descontinuação, notificaremos os usuários com antecedência e buscaremos oferecer alternativas adequadas sempre que possível. A Babyzzu não se responsabiliza por perdas decorrentes de modificações ou interrupções em circunstâncias extraordinárias, mas envidaremos esforços para minimizar impactos.",
 
         "limitation_of_liability_title": "8. Limitação de Responsabilidade",
         "limitation_of_liability": "Não seremos responsáveis por danos indiretos, incidentais, especiais ou consequentes relacionados ao uso ou incapacidade de uso da plataforma.",
