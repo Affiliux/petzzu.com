@@ -1,6 +1,6 @@
 'use client'
 
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 
 import Image from 'next/image'
 import { Autoplay, EffectCards, EffectCoverflow, EffectCube, EffectFlip, Pagination } from 'swiper/modules'
