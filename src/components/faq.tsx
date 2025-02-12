@@ -36,8 +36,6 @@ export function Faq() {
         <FaqItem title={t('faq.4.question')} description={t('faq.4.answer')} />
         <FaqItem title={t('faq.5.question')} description={t('faq.5.answer')} />
         <FaqItem title={t('faq.6.question')} description={t('faq.6.answer')} />
-        <FaqItem title={t('faq.7.question')} description={t('faq.7.answer')} />
-        <FaqItem title={t('faq.8.question')} description={t('faq.8.answer')} />
       </div>
     </div>
   )
