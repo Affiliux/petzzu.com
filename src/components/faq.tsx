@@ -15,15 +15,15 @@ export function Faq() {
       <div className='w-full md:w-1/2 mb-12 md:mb-0'>
         <HoverBorderGradient
           containerClassName='rounded-full'
-          className='bg-black text-white text-xs flex items-center space-x-2'
+          className='bg-white text-black text-xs flex items-center space-x-2'
         >
           <span>F.A.Q</span>
         </HoverBorderGradient>
 
-        <h2 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-5xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+        <h2 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-5xl font-sans py-2 relative z-20 font-bold tracking-tight'>
           {t('faq.title')}
         </h2>
-        <p className='max-w-xl text-left text-base md:text-lg text-neutral-300 mt-2 mb-8'>{t('faq.description')}</p>
+        <p className='max-w-xl text-left text-base md:text-lg text-neutral-600 mt-2 mb-8'>{t('faq.description')}</p>
         <a className='text-left text-sm md:text-lg text-neutral-500 mt-8 underline' href='mailto:contact@babyzzu.com'>
           contact@babyzzu.com
         </a>

@@ -22,13 +22,13 @@ export function Language() {
           type='button'
           className='relative h-11 overflow-hidden flex items-center justify-center rounded-full p-[1px] focus:outline-none focus:ring-0'
         >
-          <span className='flex h-full cursor-pointer items-center justify-center gap-2 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl'>
+          <span className='flex h-full cursor-pointer items-center justify-center gap-2 px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl'>
             <IconLanguage />
             <ChevronDown size={12} />
           </span>
         </button>
 
-        <div className='origin-top-left lg:origin-top-right min-w-48 mt-0.5 z-[99999] border border-neutral-800 absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 rounded-lg shadow-lg bg-black ring-1 ring-black ring-opacity-5'>
+        <div className='origin-top-left lg:origin-top-right min-w-48 mt-0.5 z-[99999] border border-neutral-200 absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5'>
           <div className='py-1 grid grid-cols-1 gap-2' role='none'>
             {locales.map((locale, index) => {
               return (
@@ -36,8 +36,8 @@ export function Language() {
                   key={locale}
                   onClick={() => handleChangeLocale(locale)}
                   className={`${
-                    SELECTED === locale ? 'hidden' : 'text-gray-300'
-                  } px-6 py-2 text-start items-center inline-flex hover:bg-neutral-800 ${
+                    SELECTED === locale ? 'hidden' : 'text-neutral-800'
+                  } px-6 py-2 text-start items-center inline-flex hover:bg-neutral-200 ${
                     index % 2 === 0 ? 'rounded-r' : 'rounded-l'
                   }`}
                 >
