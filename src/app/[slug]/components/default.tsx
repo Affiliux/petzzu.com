@@ -46,50 +46,8 @@ export const DefaultTheme = ({ couple }: DefaultThemeProps) => {
 
   return (
     <>
-      <div className='absolute top-0 left-0 w-full h-full brightness-125 overflow-hidden z-30'>
-        {couple.backgroundAnimation === BackgroundAnimationEnum.STARS && (
-          <>
-            <ShootingStars starHeight={3} starWidth={16} maxDelay={200} />
-            <StarsBackground starDensity={0.001} twinkleProbability={10} minTwinkleSpeed={0.5} maxTwinkleSpeed={1} />
-          </>
-        )}
-
-        {couple.backgroundAnimation === BackgroundAnimationEnum.METEORS && (
-          <>
-            <Meteors number={20} />
-            <StarsBackground starDensity={0.001} twinkleProbability={10} minTwinkleSpeed={0.5} maxTwinkleSpeed={1} />
-          </>
-        )}
-
-        {couple.backgroundAnimation === BackgroundAnimationEnum.HEARTS && <EmojiRain emojis={['❤️']} quantity={35} />}
-
-        {couple.backgroundAnimation === BackgroundAnimationEnum.AURORA && <AuroraBackground children={<></>} />}
-
-        {couple.backgroundAnimation === BackgroundAnimationEnum.VORTEX && (
-          <Vortex
-            backgroundColor='transparent'
-            particleCount={400}
-            baseHue={300}
-            baseSpeed={0.01}
-            rangeSpeed={0.2}
-            rangeY={typeof window !== 'undefined' ? window?.outerHeight : 0}
-          />
-        )}
-
-        {couple.backgroundAnimation === BackgroundAnimationEnum.EMOJIS && couple.backgroundEmojis && (
-          <EmojiRain
-            emojis={[
-              couple.backgroundEmojis.split('|')[0],
-              couple.backgroundEmojis.split('|')[1],
-              couple.backgroundEmojis.split('|')[2],
-            ]}
-            quantity={35}
-          />
-        )}
-      </div>
-
       <div className='h-full min-h-screen w-full bg-transparent overflow-hidden'>
-        <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-neutral-900/70 lg:bg-neutral-900/40 w-full rounded-lg container py-8'>
+        <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-white/80 lg:bg-white/80 w-full rounded-lg container py-8'>
           <div className={!!couple?.media.length ? 'w-full lg:w-1/2 mt-8' : 'w-full'}>
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
               {!!couple?.media.length && (

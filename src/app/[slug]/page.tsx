@@ -66,7 +66,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }, [queryParams])
 
   return (
-    <div className='relative bg-[#141414] h-full min-h-screen'>
+    <div className='relative bg-white h-full min-h-screen'>
       {loading && (
         <div className='h-screen w-full flex flex-col items-center justify-center text-center py-8'>
           {/* <Animation src={'lotties/loading.lottie'} style={{ width: 200, height: 100 }} /> */}
