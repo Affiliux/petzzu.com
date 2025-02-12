@@ -40,6 +40,10 @@ export type CoupleProps = {
   updatedAt: string
 }
 
+interface DefaultThemeProps {
+  couple: CoupleResponseProps
+}
+
 // Get Couple
 export interface CouplePayloadProps {}
 export interface CoupleResponseProps extends CoupleProps, PaymentProps {
