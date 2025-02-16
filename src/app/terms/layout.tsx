@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import { useTranslations } from 'next-intl'
+
 import { CTA } from '@/components/cta'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
@@ -11,11 +13,13 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const t = useTranslations()
+
   return (
     <div>
       <Header />
 
-      <div className='w-full bg-transparent bg-dot-red-200/10 relative flex items-center justify-center'>
+      <div className='w-full bg-transparent bg-dot-blue-300/40 relative flex items-center justify-center'>
         {children}
       </div>
 

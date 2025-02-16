@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use, useCallback, useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 
 import { LoaderIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
