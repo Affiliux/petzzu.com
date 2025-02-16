@@ -29,8 +29,7 @@ export enum DateShowTypeEnum {
 }
 
 export enum ThemeShowTypeEnum {
-  DEFAULT = 'default',
-  NETFLIX = 'netflix',
-  CHRISTMAS = 'christmas',
-  ENVELOPE = 'envelope',
+  BLUE = 'blue',
+  PINK = 'pink',
+  YELLOW = 'yellow',
 }

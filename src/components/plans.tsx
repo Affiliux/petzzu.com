@@ -2,148 +2,113 @@
 
 import React from 'react'
 
-import { ChevronRight } from 'lucide-react'
+import { Clock, Cloud, CloudLightningIcon as Lightning, Code2, Headphones, Shield, Star, Zap } from 'lucide-react'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { IconCheck, IconStarFilled, IconX } from '@tabler/icons-react'
 
-import { useApplication } from '@/contexts/ApplicationContext'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { HoverBorderGradient } from './ui/hover-border-gradient'
-import { ShootingStars } from './ui/shooting-stars'
-import { StarsBackground } from './ui/stars-background'
-
-export const Plans = () => {
-  // hooks
+export function Plans() {
   const t = useTranslations()
 
-  // contexts
-  const { plans, discount, currency } = useApplication()
+  const benefits = [
+    {
+      icon: Lightning,
+      title: 'Alta Performance',
+      description: 'Velocidade incomparável',
+    },
+    {
+      icon: Shield,
+      title: 'Segurança Total',
+      description: 'Proteção avançada',
+    },
+    {
+      icon: Cloud,
+      title: 'Cloud Storage',
+      description: '100GB de armazenamento',
+    },
+    {
+      icon: Headphones,
+      title: 'Suporte 24/7',
+      description: 'Sempre disponível',
+    },
+    {
+      icon: Code2,
+      title: 'API Completa',
+      description: 'Integração flexível',
+    },
+    {
+      icon: Star,
+      title: 'Recursos Premium',
+      description: 'Funções exclusivas',
+    },
+    {
+      icon: Clock,
+      title: 'Uptime 99.9%',
+      description: 'Sempre no ar',
+    },
+    {
+      icon: Zap,
+      title: 'Atualizações',
+      description: 'Sempre atualizado',
+    },
+  ]
 
-  const format_intl_currency = currency ?? 'brl'
-  const format_intl_locale = t('config.defaults.country')
-
-  return plans && format_intl_locale.includes('-') && format_intl_currency ? (
+  return (
     <div id='plans' className='relative w-full rounded-md overflow-hidden'>
       <div className='flex items-center flex-col justify-center gap-16 px-2 md:px-10 py-8 w-full h-full'>
         <div className='mx-auto max-w-xl'>
-          <h2 className='text-white text-3xl md:text-5xl font-bold text-center'>{t('pages.home.plans.title')}</h2>
-          <p className='text-neutral-300 text-center mt-2'>{t('pages.home.plans.description')}</p>
+          <h2 className='bg-clip-text text-transparent text-center bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-5xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+            {t('pages.home.plans.title')}
+          </h2>
+          <p className='max-w-xl text-center text-base md:text-lg text-neutral-500'>
+            {t('pages.home.plans.description')}
+          </p>
         </div>
+      </div>
 
-        <div className='grid lg:grid-cols-2 gap-4'>
-          {plans.map(plan =>
-            plan.currency.includes(format_intl_currency) ? (
-              <div key={plan.sku} className='w-full bg-black'>
-                <HoverBorderGradient
-                  containerClassName={`rounded-xl w-full transform duration-200 bg-neutral-900`}
-                  className={`relative py-6 px-8 w-full text-left cursor-pointer bg-neutral-950 transform duration-200`}
+      <div className='p-4 md:p-8 bg-gradient-to-b from-background to-muted/20'>
+        <Card className='w-full max-w-5xl mx-auto border-2'>
+          <CardHeader className='text-center space-y-6 pb-8 pt-8 px-6 border-b bg-muted/10'>
+            <div>
+              <CardTitle className='text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary-foreground bg-clip-text text-transparent'>
+                Plano Enterprise
+              </CardTitle>
+              <p className='text-muted-foreground mt-2'>Solução completa para sua empresa</p>
+            </div>
+            <div className='flex items-baseline justify-center gap-x-2'>
+              <span className='text-5xl font-bold'>R$ 199</span>
+              <span className='text-muted-foreground'>/mês</span>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 px-2'>
+              {benefits.map((benefit, index) => (
+                <div
+                  key={index}
+                  className='flex flex-col items-center text-center p-4 rounded-lg transition-colors hover:bg-muted/50'
                 >
-                  <div className='w-full'>
-                    <p className='text-3xl font-bold relative z-20 text-left text-white mt-4'>
-                      {t(`pages.home.plans.${plan.sku.split('_')[1]}.title`)}
-                    </p>
-
-                    <div className='text-neutral-200 relative z-20'>
-                      <ul className='list-none mt-4'>
-                        <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.text`)} />
-                        <StepCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.counter`)} />
-                        <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.date`)} />
-                        <StepCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.qr-code`)} />
-                        <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.images`)} />
-
-                        {plan.sku.includes('pro') ? (
-                          <>
-                            <StepCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.music`)} />
-                            <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.background`)} />
-                            <StepCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.animations`)} />
-                            <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.url`)} />
-                            <StepCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.support`)} />
-                          </>
-                        ) : (
-                          <>
-                            <StepUnCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.music`)} />
-                            <StepUnCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.background`)} />
-                            <StepUnCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.animations`)} />
-                            <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.url`)} />
-                            <StepCheck bold title={t(`pages.home.plans.${plan.sku.split('_')[1]}.support`)} />
-                          </>
-                        )}
-                      </ul>
-                    </div>
+                  <div className='h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 transition-transform hover:scale-110'>
+                    <benefit.icon className='h-6 w-6 text-primary' />
                   </div>
-
-                  {plan.sku.includes('pro') && (
-                    <div className='bg-black text-yellow-500 text-sm gap-1 font-semibold flex items-center rounded-full px-2 py-[2px] z-50 absolute -top-3'>
-                      <IconStarFilled size={12} />
-                      <p>{t('pages.home.plans.recommended')}</p>
-                    </div>
-                  )}
-
-                  <div className='mt-8'>
-                    <p className='text-xl font-black text-red-600 line-through'>
-                      {Intl.NumberFormat(format_intl_locale, {
-                        style: 'currency',
-                        currency: plan.currency,
-                      }).format(plan.price + plan.price)}
-                    </p>
-
-                    <p className='text-3xl font-black text-white'>
-                      {Intl.NumberFormat(format_intl_locale, {
-                        style: 'currency',
-                        currency: plan.currency,
-                      }).format(
-                        discount
-                          ? plan.price - (plan.sku.includes('basic') ? discount.discount_basic : discount.discount_pro)
-                          : plan.price,
-                      )}{' '}
-                      <span className='font-light text-xs text-neutral-300'>
-                        {t(`pages.home.plans.${plan.sku.split('_')[1]}.price_recurrency`)}
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className='flex flex-col sm:flex-row items-center gap-4 mt-8 w-full'>
-                    <a
-                      href='#start'
-                      className='px-4 py-3 bg-red-600 hover:bg-red-700 w-full transition duration-200 flex items-center justify-between rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]'
-                    >
-                      {t('pages.home.plans.button')}
-                      <ChevronRight size={20} />
-                    </a>
-                  </div>
-                </HoverBorderGradient>
-              </div>
-            ) : null,
-          )}
-        </div>
+                  <h3 className='font-semibold mb-2'>{benefit.title}</h3>
+                  <p className='text-sm text-muted-foreground'>{benefit.description}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter className='flex flex-col gap-4 items-center py-8'>
+            <Link
+              href='#start'
+              className='w-full bg-blue-600 rounded-md text-white md:w-auto px-8 py-2 text-lg font-semibold'
+            >
+              Começar agora
+            </Link>
+            <p className='text-sm text-muted-foreground'>Cancele a qualquer momento</p>
+          </CardFooter>
+        </Card>
       </div>
-
-      <ShootingStars />
-      <StarsBackground />
     </div>
-  ) : (
-    <></>
-  )
-}
-
-const StepCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-green-600 rounded-full p-0.5'>
-        <IconCheck size={14} />
-      </div>
-      <p className={`text-neutral-300 text-base ${bold && 'font-bold'}`}>{title}</p>
-    </li>
-  )
-}
-
-const StepUnCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-red-600 rounded-full p-0.5'>
-        <IconX size={14} />
-      </div>
-      <p className={`text-neutral-300 text-base ${bold && 'font-bold'}`}>{title}</p>
-    </li>
   )
 }
