@@ -59,7 +59,10 @@ export default async function RootLayout({
 
       <NextIntlClientProvider messages={messages}>
         <Providers>
-          <body className={`antialiased overflow-x-hidden bg-white w-screen min-h-screen h-full`}>
+          <body
+            className={`antialiased overflow-x-hidden bg-white w-screen min-h-screen h-full`}
+            suppressHydrationWarning
+          >
             {children}
 
             <Toaster />

@@ -4,23 +4,38 @@
 import React from 'react'
 
 import { MenuIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { useApplication } from '@/contexts/ApplicationContext'
+
 import { Language } from './language'
+import { ThemeSwitcher } from './theme-switcher'
 
 export function Header() {
   const t = useTranslations()
 
+  const { theme } = useApplication()
+
   return (
-    <div className='absolute top-0 left-0 w-full py-[8px] bg-white border-b border-neutral-200/60 z-50'>
-      <div className='container flex flex-row items-center justify-between'>
+    <div className='absolute top-0 left-0 w-full bg-white border-b border-neutral-200/60 z-50'>
+      <div className='py-1.5 px-4 text-left md:text-center font-medium font-sans tracking-tight text-xs md:text-sm bg-gradient-to-r text-white from-theme-100 via-theme-500 to-theme-200'>
+        <p className='text-center text-white'>
+          <b>{t('config.offer.title')}</b> - {t('config.offer.description1')}{' '}
+          <b className='text-sm md:text-base'>50%</b> {t('config.offer.description2')}
+        </p>
+      </div>
+
+      <div className='container flex flex-row items-center justify-between py-[10px]'>
         <div className='flex flex-row items-center gap-12'>
-          <img src='/logo+name.png' className='h-12' alt='Babyzzu logo' width={200} height={56} />
+          <Link href='/' className='cursor-pointer'>
+            <Image src={`/logos/${theme}/logo+name.png`} className='h-12' alt='Babyzzu logo' width={200} height={56} />
+          </Link>
 
           <div className='lg:flex flex-row items-center gap-6 hidden'>
             <Link
-              href='#plans'
+              href='/#plans'
               className='text-neutral-800 text-sm hover:text-neutral-700 hover:underline cursor-pointer'
               scroll
             >
@@ -41,6 +56,7 @@ export function Header() {
 
         <div className='relative flex items-center gap-2'>
           <Language />
+          <ThemeSwitcher />
 
           <div className='flex flex-row items-center gap-1 md:gap-4 lg:hidden'>
             <div className='relative group'>

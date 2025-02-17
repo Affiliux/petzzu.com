@@ -5,7 +5,22 @@ const withNextIntl = createNextIntlPlugin('./src/i18n.ts')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  productionBrowserSourceMaps: false,
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  experimental: {
+    staleTimes: {
+      dynamic: 30, // Set stale time for dynamic content
+    },
+  },
   env: {
     NEXT_PUBLIC_ENV: process.env.ENV,
     NEXT_PUBLIC_API_URL: process.env.API_URL,

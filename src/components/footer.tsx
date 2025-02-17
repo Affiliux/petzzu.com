@@ -7,15 +7,19 @@ import React from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { useApplication } from '@/contexts/ApplicationContext'
+
 export function Footer() {
   const t = useTranslations('config')
+
+  const { theme } = useApplication()
 
   return (
     <div className='py-10 md:pt-20 mt-20 border-t border-t-neutral-200'>
       <div className='container flex flex-col md:flex-row justify-between'>
         <div className='w-full md:w-1/3'>
           <Link href='/'>
-            <img src='/logo+name.png' className='h-12' alt='Babyzzu logo' width={200} height={56} />
+            <img src={`/logos/${theme}/logo+name.png`} className='h-12' alt='Babyzzu logo' width={200} height={56} />
           </Link>
           <p className='text-sm text-neutral-500 mt-4'>{t('description')}</p>
 
