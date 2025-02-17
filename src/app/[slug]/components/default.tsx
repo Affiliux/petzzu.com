@@ -47,7 +47,7 @@ export const DefaultTheme = ({ couple }: DefaultThemeProps) => {
   return (
     <>
       <div className='h-full min-h-screen w-full bg-transparent overflow-hidden'>
-        <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-white/80 lg:bg-white/80 w-full rounded-lg container py-8'>
+        <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-blue-300 lg:bg-blue-300 w-full rounded-lg container py-8'>
           <div className={!!couple?.media.length ? 'w-full lg:w-1/2 mt-8' : 'w-full'}>
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
               {!!couple?.media.length && (
