@@ -19,26 +19,6 @@ export function Plans() {
       description: 'Velocidade incomparável',
     },
     {
-      icon: Shield,
-      title: 'Segurança Total',
-      description: 'Proteção avançada',
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud Storage',
-      description: '100GB de armazenamento',
-    },
-    {
-      icon: Headphones,
-      title: 'Suporte 24/7',
-      description: 'Sempre disponível',
-    },
-    {
-      icon: Code2,
-      title: 'API Completa',
-      description: 'Integração flexível',
-    },
-    {
       icon: Star,
       title: 'Recursos Premium',
       description: 'Funções exclusivas',
@@ -73,12 +53,12 @@ export function Plans() {
           <CardHeader className='text-center space-y-6 pb-8 pt-8 px-6 border-b bg-muted/10'>
             <div>
               <CardTitle className='text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary-foreground bg-clip-text text-transparent'>
-                Plano Enterprise
+                Assinatura Anual
               </CardTitle>
               <p className='text-muted-foreground mt-2'>Solução completa para sua empresa</p>
             </div>
             <div className='flex items-baseline justify-center gap-x-2'>
-              <span className='text-5xl font-bold'>R$ 199</span>
+              <span className='text-5xl font-bold'>R$ 17,99</span>
               <span className='text-muted-foreground'>/mês</span>
             </div>
           </CardHeader>
@@ -101,7 +81,48 @@ export function Plans() {
           <CardFooter className='flex flex-col gap-4 items-center py-8'>
             <Link
               href='#start'
-              className='w-full bg-blue-600 rounded-md text-white md:w-auto px-8 py-2 text-lg font-semibold'
+              className='w-full bg-blue-600 rounded-md text-white text-center md:w-auto px-8 py-2 text-lg font-semibold'
+            >
+              Começar agora
+            </Link>
+            <p className='text-sm text-muted-foreground'>Cancele a qualquer momento</p>
+          </CardFooter>
+        </Card>
+      </div>
+      <div className='p-4 md:p-8 bg-gradient-to-b from-background to-muted/20'>
+        <Card className='w-full max-w-5xl mx-auto border-2'>
+          <CardHeader className='text-center space-y-6 pb-8 pt-8 px-6 border-b bg-muted/10'>
+            <div>
+              <CardTitle className='text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary-foreground bg-clip-text text-transparent'>
+                Assinatura Anual
+              </CardTitle>
+              <p className='text-muted-foreground mt-2'>Solução completa para sua empresa</p>
+            </div>
+            <div className='flex items-baseline justify-center gap-x-2'>
+              <span className='text-5xl font-bold'>R$ 17,99</span>
+              <span className='text-muted-foreground'>/mês</span>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 px-2'>
+              {benefits.map((benefit, index) => (
+                <div
+                  key={index}
+                  className='flex flex-col items-center text-center p-4 rounded-lg transition-colors hover:bg-muted/50'
+                >
+                  <div className='h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 transition-transform hover:scale-110'>
+                    <benefit.icon className='h-6 w-6 text-primary' />
+                  </div>
+                  <h3 className='font-semibold mb-2'>{benefit.title}</h3>
+                  <p className='text-sm text-muted-foreground'>{benefit.description}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter className='flex flex-col gap-4 items-center py-8'>
+            <Link
+              href='#start'
+              className='w-full bg-blue-600 rounded-md text-white text-center md:w-auto px-8 py-2 text-lg font-semibold'
             >
               Começar agora
             </Link>
