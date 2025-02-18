@@ -603,12 +603,12 @@
     },
     "pix": {
       "title": "Payment via Pix",
-      "description": "Scan the QR Code with your bank app or copy the Pix key below.",
+      "description": "Scan the QR Code with your banking app or copy the Pix key below.",
       "tooltip": {
         "copy": "Copy",
         "copied": "Copied!"
       },
-      "button": "I have paid"
+      "button": "I've already paid"
     },
     "stone-card": {
       "loading": "One moment, we are processing your payment."

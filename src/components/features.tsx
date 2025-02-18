@@ -22,18 +22,6 @@ export function Features() {
       skeleton: <SkeletonThree />,
       className: 'col-span-1 lg:col-span-2 border-b border-neutral-300',
     },
-    {
-      title: t('pages.home.features.2.title'),
-      description: t('pages.home.features.2.description'),
-      skeleton: <SkeletonTwo />,
-      className: 'col-span-1 lg:col-span-3 lg:border-r border-neutral-300 hidden lg:block',
-    },
-    {
-      title: t('pages.home.features.4.title'),
-      description: t('pages.home.features.4.description'),
-      skeleton: <SkeletonFour />,
-      className: 'col-span-1 lg:col-span-3 border-b lg:border-none',
-    },
   ]
 
   return (

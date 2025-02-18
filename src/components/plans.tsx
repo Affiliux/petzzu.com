@@ -58,7 +58,7 @@ export function Plans() {
               <p className='text-muted-foreground mt-2'>O melhor album digital para o seu bebe</p>
             </div>
             <div className='flex items-baseline justify-center gap-x-2'>
-              <span className='text-5xl font-bold'>R$ 17,99</span>
+              <span className='text-5xl font-bold'>R$ 15,99</span>
               <span className='text-muted-foreground'>/mês</span>
             </div>
           </CardHeader>
@@ -96,10 +96,10 @@ export function Plans() {
               <CardTitle className='text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary-foreground bg-clip-text text-transparent'>
                 Assinatura Anual
               </CardTitle>
-              <p className='text-muted-foreground mt-2'>Solução completa para sua empresa</p>
+              <p className='text-muted-foreground mt-2'>O melhor album digital para o seu bebe</p>
             </div>
             <div className='flex items-baseline justify-center gap-x-2'>
-              <span className='text-5xl font-bold'>R$ 17,99</span>
+              <span className='text-5xl font-bold'>R$ 15,99</span>
               <span className='text-muted-foreground'>/mês</span>
             </div>
           </CardHeader>

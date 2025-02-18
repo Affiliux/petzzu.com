@@ -46,7 +46,7 @@ export function Footer() {
               <Link href='https://www.instagram.com/babyzzu.oficial/'>{t('footer.instagram')}</Link>
             </li>
             <li className='py-1'>
-              <Link href='https://tiktok.com/babyzzu.com'>{t('footer.tiktok')}</Link>
+              <Link href='https://www.tiktok.com/@babyzzu.oficial'>{t('footer.tiktok')}</Link>
             </li>
           </ul>
         </div>
