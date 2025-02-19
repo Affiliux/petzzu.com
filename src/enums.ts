@@ -32,4 +32,5 @@ export enum ThemeShowTypeEnum {
   BLUE = 'blue',
   PINK = 'pink',
   YELLOW = 'yellow',
+  DEFAULT = 'default',
 }
