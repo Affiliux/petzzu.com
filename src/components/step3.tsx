@@ -4,12 +4,17 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
 
 import { CreatePrePayloadProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
 import { Calendar } from './ui/calendar'
+import { Input } from './ui/input'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
@@ -49,6 +54,38 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
     { id: 3, name: t('steps.step3.show-types.simple'), data: DateShowTypeEnum.SIMPLE },
   ]
 
+  const formSchema = z.object({
+    coupleName: z
+      .string()
+      .min(2, {
+        message: t('steps.step1.input.errors.min'),
+      })
+      .max(100, {
+        message: t('steps.step1.input.errors.max'),
+      }),
+    description: z
+      .string()
+      .min(2, {
+        message: t('steps.step1.input.errors.min'),
+      })
+      .max(100, {
+        message: t('steps.step1.input.errors.max'),
+      }),
+  })
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    mode: 'onChange',
+    defaultValues: {
+      coupleName: couple.coupleName ?? '',
+      // description: couple.description ?? '',
+    },
+  })
+
   useEffect(() => {
     if (date) setCouple({ ...couple, startDate: date.toISOString() })
   }, [date])
@@ -56,37 +93,59 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
       <div className='flex flex-col lg:flex-row lg:gap-4 gap-8'>
-        <Calendar
-          mode='single'
-          locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
-          captionLayout='dropdown'
-          className={`rounded-md border border-neutral-800 flex items-center justify-center relative z-50 ${theme === ThemeShowTypeEnum.DEFAULT ? 'lg:w-2/3' : 'lg:w-full'}`}
-          selected={date}
-          onSelect={setDate}
-          fromYear={1950}
-          toYear={new Date().getFullYear()}
-        />
-
-        {theme === ThemeShowTypeEnum.DEFAULT && (
-          <div className='w-full lg:w-1/3'>
-            <h2 className='font-semibold text-white'>{t('steps.step4.show-types.title')}</h2>
-            <div className='flex flex-col gap-4 mt-4'>
-              {types.map(type => (
-                <div
-                  key={type.id}
-                  className={`transform relative bg-neutral-800 rounded-xl h-14 overflow-hidden duration-300 hover:opacity-100 cursor-pointer ${
-                    dateShowType === type.data ? 'opacity-100 border border-neutral-500' : 'opacity-80'
-                  }`}
-                  onClick={() => setDateShowType(type.data)}
-                >
-                  <div className='z-50 absolute top-4 left-4 max-w-xs'>
-                    <h2 className='font-semibold text-white'>{type.name}</h2>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <Accordion type='single' collapsible>
+          <AccordionItem value={'a'}>
+            <AccordionTrigger>Lembrança 1</AccordionTrigger>
+            <AccordionContent>
+              <Input
+                {...register('coupleName')}
+                id='coupleName'
+                placeholder={t('steps.step1.input.placeholder')}
+                type='text'
+                autoFocus={true}
+                autoComplete='off'
+                className='w-full'
+                onChange={e =>
+                  setCouple({
+                    ...couple,
+                    coupleName: e.target.value.replace(
+                      /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
+                      '',
+                    ),
+                  })
+                }
+              />
+              <Input
+                {...register('description')}
+                id='description'
+                placeholder={t('steps.step1.input.placeholder')}
+                type='text'
+                autoFocus={true}
+                autoComplete='off'
+                className='w-full'
+                onChange={e =>
+                  setCouple({
+                    ...couple,
+                    coupleName: e.target.value.replace(
+                      /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
+                      '',
+                    ),
+                  })
+                }
+              />
+              <Calendar
+                mode='single'
+                locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
+                captionLayout='dropdown'
+                className={`rounded-md border border-neutral-800 flex items-center justify-center relative z-50 ${theme === ThemeShowTypeEnum.DEFAULT ? 'lg:w-2/3' : 'lg:w-full'}`}
+                selected={date}
+                onSelect={setDate}
+                fromYear={1950}
+                toYear={new Date().getFullYear()}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
 
       <div className='flex items-center justify-between gap-4 mt-4'>

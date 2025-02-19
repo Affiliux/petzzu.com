@@ -135,11 +135,8 @@ export const Steps = ({
 
           {step === 2 && (
             <Step2
-              theme={theme}
               couple={couple}
               setCouple={setCouple}
-              setMediaShowType={setMediaShowType}
-              mediaShowType={mediaShowType}
               medias={medias}
               onSaveMedia={onNewMedia}
               onRemoveMedia={onRemoveMedia}

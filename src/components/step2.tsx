@@ -1,8 +1,8 @@
 'use client'
 
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-import imageCompression from 'browser-image-compression'
+import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 import { IconChevronLeft, IconChevronRight, IconLoader, IconX } from '@tabler/icons-react'
 
@@ -10,17 +10,16 @@ import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 
 import { toast } from '@/hooks/use-toast'
 
+import { Calendar } from './ui/calendar'
 import { RenderImage } from './render-image'
+import { useApplication } from '../contexts/ApplicationContext'
 
 import { MAX_FILE_SIZE, MAX_FILES } from '@/constants'
-import { PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { Genders } from '@/enums'
 
 interface Step2Props {
-  theme: ThemeShowTypeEnum
   couple: CreatePrePayloadProps
-  mediaShowType: PhotosSliderEnum
   setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
-  setMediaShowType: Dispatch<SetStateAction<PhotosSliderEnum>>
   onNext: () => Promise<void>
   onBack: () => void
   onSaveMedia: (media: FormData) => Promise<void>
@@ -28,21 +27,13 @@ interface Step2Props {
   medias: MediaPreProps[]
 }
 
-export const Step2 = ({
-  theme,
-  couple,
-  setCouple,
-  mediaShowType,
-  onNext,
-  onBack,
-  onSaveMedia,
-  onRemoveMedia,
-  medias,
-  setMediaShowType,
-}: Step2Props) => {
+export const Step2 = ({ couple, setCouple, onNext, onBack, onSaveMedia, onRemoveMedia, medias }: Step2Props) => {
   const t = useTranslations()
 
   const [loading, setLoading] = useState<boolean>(false)
+
+  const { locale } = useApplication()
+  const [date, setDate] = useState<Date | undefined>(couple?.startDate ? new Date(couple?.startDate) : undefined)
 
   async function onSelectFiles(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault()
@@ -52,11 +43,11 @@ export const Step2 = ({
       if (!event.target.files) return
       const new_files = Array.from(event.target.files)
 
-      if (medias?.length + new_files.length > MAX_FILES) {
+      if (medias?.length + new_files.length > 1) {
         toast({
           variant: 'destructive',
           title: 'Image Error!!',
-          description: t('steps.step4.input.errors.maxFiles'),
+          description: t('steps.step2.input.errors.maxFiles'),
         })
 
         return
@@ -126,22 +117,34 @@ export const Step2 = ({
     }
   }
 
-  const types = [
-    { id: 1, name: t('steps.step4.show-types.coverflow'), data: PhotosSliderEnum.COVERFLOW },
-    { id: 2, name: t('steps.step4.show-types.cube'), data: PhotosSliderEnum.CUBE },
-    { id: 3, name: t('steps.step4.show-types.cards'), data: PhotosSliderEnum.CARDS },
-    { id: 4, name: t('steps.step4.show-types.flip'), data: PhotosSliderEnum.FLIP },
+  const genders = [
+    { id: 1, name: t('steps.step2.gender.male'), data: Genders.MALE },
+    { id: 2, name: t('steps.step2.gender.female'), data: Genders.FEMALE },
   ]
+
+  useEffect(() => {
+    if (date) setCouple({ ...couple, startDate: date.toISOString() })
+  }, [date])
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
+      <Calendar
+        mode='single'
+        locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
+        captionLayout='dropdown'
+        className={'rounded-md border border-neutral-300 flex items-center justify-center relative z-50'}
+        selected={date}
+        onSelect={setDate}
+        fromYear={2010}
+        toYear={new Date().getFullYear()}
+      />
+
+      <h2 className='font-semibold text-black'>{t('steps.step2.input.picture.label')}</h2>
       <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
         <input
-          multiple
           type='file'
           accept='image/*'
           size={100 * 1024 * 1024}
-          max={medias?.length - 8}
           className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
           onChange={onSelectFiles}
         />
@@ -149,10 +152,10 @@ export const Step2 = ({
         <div className='text-center'>
           <h3 className='mt-2 text-sm font-medium text-white'>
             <label htmlFor='file-upload' className='relative cursor-pointer'>
-              <span>{t('steps.step4.input.label')}</span>
+              <span>{t('steps.step2.input.picture.title')}</span>
             </label>
           </h3>
-          <p className='mt-1 text-xs text-gray-500'>{t('steps.step4.input.placeholder')}</p>
+          <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
         </div>
 
         <div className='grid grid-cols-4 gap-4 mt-8'>
@@ -181,24 +184,22 @@ export const Step2 = ({
         </div>
       </div>
 
-      <>
-        <h2 className='font-semibold text-white'>{t('steps.step4.show-types.title')}</h2>
-        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
-          {types.map(type => (
-            <div
-              key={type.id}
-              className={`transform relative bg-neutral-800 rounded-xl h-14 overflow-hidden duration-300 hover:opacity-100 cursor-pointer ${
-                mediaShowType === type.data ? 'opacity-100 border border-neutral-500' : 'opacity-80'
-              }`}
-              onClick={() => setMediaShowType(type.data)}
-            >
-              <div className='z-50 absolute top-4 left-4 max-w-xs'>
-                <h2 className='font-semibold text-white'>{type.name}</h2>
-              </div>
-            </div>
-          ))}
-        </div>
-      </>
+      <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
+      <div className='flex items-center gap-4'>
+        {genders.map(gender => (
+          <label key={gender.id} className='flex items-center font-semibold text-black'>
+            <input
+              type='radio'
+              name='gender'
+              value={gender.data}
+              checked={couple.gender === gender.data}
+              onChange={() => setCouple({ ...couple, gender: gender.data })}
+              className='form-radio '
+            />
+            <span className='ml-2'>{gender.name}</span>
+          </label>
+        ))}
+      </div>
 
       <div className='flex items-center justify-between gap-4 mt-4'>
         <button
@@ -212,7 +213,7 @@ export const Step2 = ({
           <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
             <>
               <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step4.back')}
+              {t('steps.step2.back')}
             </>
           </span>
         </button>
