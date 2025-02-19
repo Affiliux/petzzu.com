@@ -15,6 +15,7 @@ import { useApplication } from '@/contexts/ApplicationContext'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
 import { Calendar } from './ui/calendar'
 import { Input } from './ui/input'
+import RichTextEditor from './ui/text-editor'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
@@ -71,20 +72,35 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
       .max(100, {
         message: t('steps.step1.input.errors.max'),
       }),
+    message: z.string().optional(),
   })
 
   const {
     register,
     handleSubmit,
+    setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
+    reValidateMode: 'onChange',
     defaultValues: {
       coupleName: couple.coupleName ?? '',
-      // description: couple.description ?? '',
+      message: couple.message ?? '',
     },
   })
+
+  const VALUE = couple.message
+    ?.replaceAll('<p>', '')
+    .replaceAll('</p>', '')
+    .replaceAll('<em>', '')
+    .replaceAll('</em>', '')
+    .replaceAll('<strong>', '')
+    .replaceAll('</strong>', '')
+    .replaceAll('<s>', '')
+    .replaceAll('</s>', '')
 
   useEffect(() => {
     if (date) setCouple({ ...couple, startDate: date.toISOString() })
@@ -115,24 +131,40 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
                   })
                 }
               />
-              <Input
-                {...register('description')}
-                id='description'
-                placeholder={t('steps.step1.input.placeholder')}
-                type='text'
-                autoFocus={true}
-                autoComplete='off'
-                className='w-full'
-                onChange={e =>
-                  setCouple({
-                    ...couple,
-                    coupleName: e.target.value.replace(
-                      /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
-                      '',
-                    ),
-                  })
-                }
-              />
+              <div className='relative'>
+                <RichTextEditor
+                  placeholder={t('steps.step2.input.placeholder')}
+                  value={couple.message ?? ''}
+                  onChange={e => {
+                    const formated = e
+                      ?.replaceAll('<p>', '')
+                      .replaceAll('</p>', '')
+                      .replaceAll('<em>', '')
+                      .replaceAll('</em>', '')
+                      .replaceAll('<strong>', '')
+                      .replaceAll('</strong>', '')
+                      .replaceAll('<s>', '')
+                      .replaceAll('</s>', '')
+
+                    if (theme === ThemeShowTypeEnum.DEFAULT) {
+                      if (formated.length > 750)
+                        setError('message', { message: t('steps.step2.input.errors.max', { limit: 750 }) })
+                      if (formated.length <= 750) clearErrors()
+                    } else {
+                      if (formated.length > 400)
+                        setError('message', { message: t('steps.step2.input.errors.max', { limit: 400 }) })
+                      if (formated.length <= 400) clearErrors()
+                    }
+
+                    setValue('message', e)
+                    setCouple({ ...couple, message: e })
+                  }}
+                />
+
+                <p className='absolute bottom-2 right-3 text-xs text-neutral-400'>
+                  {VALUE?.length ?? 0}/{theme === ThemeShowTypeEnum.DEFAULT ? 750 : 400}
+                </p>
+              </div>
               <Calendar
                 mode='single'
                 locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
@@ -165,7 +197,7 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
           </span>
         </button>
         <button
-          onClick={onSubmit}
+          onClick={handleSubmit(onSubmit)}
           disabled={loading || (theme !== ThemeShowTypeEnum.DEFAULT && !couple.startDate)}
           className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
             loading || (theme !== ThemeShowTypeEnum.DEFAULT && !couple.startDate) ? 'opacity-50' : ''
