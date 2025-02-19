@@ -99,7 +99,6 @@ export const Steps = ({
   const t = useTranslations()
   const router = useRouter()
 
-
   return (
     <div className='relative w-full h-full z-50' id='startSteps'>
       <div className='py-1.5 px-4 text-left md:text-center font-medium font-sans tracking-tight text-xs md:text-sm bg-gradient-to-r text-white from-red-500 via-rose-800 to-pink-500'>
@@ -192,8 +191,8 @@ export const Steps = ({
               setSong={setSong}
               onBack={() => setStep(4)}
               onNext={async () => {
-              await onUpdate()
-               setStep(6)
+                await onUpdate()
+                setStep(6)
               }}
             />
           )}
@@ -218,7 +217,7 @@ export const Steps = ({
               selected={plan}
               setPlan={setPlan}
               onBack={() => {
-                 setStep(6)
+                setStep(6)
               }}
               onNext={async () => {
                 await onUpdate()
@@ -229,16 +228,15 @@ export const Steps = ({
         </div>
 
         <div className='w-full lg:w-1/2 h-full'>
-            <PreviewDefault
-              couple={couple}
-              medias={medias}
-              song={song}
-              dateShowType={dateShowType}
-              mediaShowType={mediaShowType}
-              animation={animation}
-              plan={plan}
-            />
-
+          <PreviewDefault
+            couple={couple}
+            medias={medias}
+            song={song}
+            dateShowType={dateShowType}
+            mediaShowType={mediaShowType}
+            animation={animation}
+            plan={plan}
+          />
         </div>
       </div>
     </div>
