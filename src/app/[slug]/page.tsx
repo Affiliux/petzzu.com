@@ -74,14 +74,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
       )}
 
-      {couple && !loading && (
-        <>
-          {couple.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme couple={couple} />}
-          {couple.themeShowType === ThemeShowTypeEnum.NETFLIX && <NetflixTheme couple={couple} />}
-        </>
-      )}
-
-      {couple && (success || payment || (!view && couple.themeShowType === ThemeShowTypeEnum.DEFAULT)) && (
+      {couple && (success || payment || (!view )) && (
         <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
           <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-black bg-opacity-95 backdrop-blur-lg transition-opacity duration-300'>
             <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg shadow-sm'>
@@ -95,11 +88,11 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 <SuccessModal
                   couple={couple}
                   onClose={() => {
-                    if (couple.themeShowType === ThemeShowTypeEnum.DEFAULT) set_view(true)
+                    set_view(true)
                     set_success(false)
                   }}
                 />
-              ) : !view && couple.themeShowType === ThemeShowTypeEnum.DEFAULT ? (
+              ) : !view ? (
                 <div className='animate-bounce'>
                   <button
                     onClick={() => set_view(true)}

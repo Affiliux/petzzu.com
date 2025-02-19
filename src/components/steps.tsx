@@ -99,7 +99,6 @@ export const Steps = ({
   const t = useTranslations()
   const router = useRouter()
 
-  const IS_DEFAULT = theme === ThemeShowTypeEnum.DEFAULT
 
   return (
     <div className='relative w-full h-full z-50' id='startSteps'>
@@ -140,6 +139,11 @@ export const Steps = ({
               theme={theme}
               couple={couple}
               setCouple={setCouple}
+              setMediaShowType={setMediaShowType}
+              mediaShowType={mediaShowType}
+              medias={medias}
+              onSaveMedia={onNewMedia}
+              onRemoveMedia={onRemoveMedia}
               onBack={() => setStep(1)}
               onNext={async () => {
                 await onUpdate()
@@ -188,13 +192,8 @@ export const Steps = ({
               setSong={setSong}
               onBack={() => setStep(4)}
               onNext={async () => {
-                await onUpdate()
-
-                if (IS_DEFAULT) setStep(6)
-                else {
-                  await onUpdate()
-                  router.push('/checkout')
-                }
+              await onUpdate()
+               setStep(6)
               }}
             />
           )}
@@ -219,8 +218,7 @@ export const Steps = ({
               selected={plan}
               setPlan={setPlan}
               onBack={() => {
-                if (IS_DEFAULT) setStep(6)
-                else setStep(5)
+                 setStep(6)
               }}
               onNext={async () => {
                 await onUpdate()
@@ -231,7 +229,6 @@ export const Steps = ({
         </div>
 
         <div className='w-full lg:w-1/2 h-full'>
-          {theme === ThemeShowTypeEnum.DEFAULT && (
             <PreviewDefault
               couple={couple}
               medias={medias}
@@ -241,9 +238,7 @@ export const Steps = ({
               animation={animation}
               plan={plan}
             />
-          )}
 
-          {theme === ThemeShowTypeEnum.NETFLIX && <PreviewNetflix couple={couple} medias={medias} song={song} />}
         </div>
       </div>
     </div>

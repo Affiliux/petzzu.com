@@ -14,8 +14,9 @@ export type CreatePreProps = {
   imageShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum
+  gender?: string
+  birthDate?: string
 }
-
 // Create Pre
 export interface CreatePrePayloadProps extends CreatePreProps {}
 export interface CreatePreResponseProps {
