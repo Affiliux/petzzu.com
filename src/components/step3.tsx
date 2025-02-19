@@ -72,7 +72,7 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
         message: t('steps.step1.input.errors.max'),
       }),
   })
-  
+
   const {
     register,
     handleSubmit,

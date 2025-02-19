@@ -406,8 +406,8 @@
       "description": "Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho.",
       "input": {
         "picture": {
-          "title" : "PNG, JPG, JPEG, GIF (máx. 1 foto)",
-          "label" : "Foto principal"
+          "title": "PNG, JPG, JPEG, GIF (máx. 1 foto)",
+          "label": "Foto principal"
         },
         "label": "Mensagem",
         "placeholder": "Ex: João, você é a pessoa mais incrível que já conheci. Obrigado por tudo!",
