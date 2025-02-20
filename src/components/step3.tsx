@@ -1,21 +1,24 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconLoader, IconX } from '@tabler/icons-react'
 
-import { CreatePrePayloadProps } from '@/typings/create'
+import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
 import { Calendar } from './ui/calendar'
 import { Input } from './ui/input'
 import RichTextEditor from './ui/text-editor'
+import { RenderImage } from './render-image'
+import { MAX_FILE_SIZE } from '../constants'
+import { toast } from '../hooks/use-toast'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
@@ -27,9 +30,23 @@ interface Step3Props {
   setDateShowType: Dispatch<SetStateAction<DateShowTypeEnum>>
   onNext: () => Promise<void>
   onBack: () => void
+  onSaveMedia: (media: FormData) => Promise<void>
+  onRemoveMedia: (id: string) => Promise<void>
+  medias: MediaPreProps[]
 }
 
-export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType, onNext, onBack }: Step3Props) => {
+export const Step3 = ({
+  theme,
+  couple,
+  dateShowType,
+  setCouple,
+  setDateShowType,
+  onNext,
+  onBack,
+  onSaveMedia,
+  onRemoveMedia,
+  medias,
+}: Step3Props) => {
   const t = useTranslations()
 
   const { locale } = useApplication()
@@ -44,6 +61,76 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
       await onNext()
     } catch (error) {
       console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function onRemove(id: string) {
+    setLoading(true)
+
+    try {
+      await onRemoveMedia(id)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function onSelectFiles(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault()
+    setLoading(true)
+
+    try {
+      if (!event.target.files) return
+      const new_files = Array.from(event.target.files)
+
+      if (medias?.length + new_files.length > 1) {
+        toast({
+          variant: 'destructive',
+          title: 'Image Error!!',
+          description: t('steps.step2.input.errors.maxFiles'),
+        })
+
+        return
+      }
+
+      await Promise.all(
+        new_files.map(async file => {
+          if (file.size === 0) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.empty'),
+            })
+          } else if (file.size > MAX_FILE_SIZE) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.big-size'),
+            })
+          } else if (!file.type.startsWith('image/')) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.not-image'),
+            })
+          } else {
+            const formData = new FormData()
+            formData.append('file', file)
+            await onSaveMedia(formData)
+          }
+        }),
+      )
+    } catch (error: any) {
+      console.error(error)
+
+      toast({
+        title: t('steps.step4.toast.error-save.title'),
+        description: t('steps.step4.toast.error-save.description'),
+        variant: 'destructive',
+      })
     } finally {
       setLoading(false)
     }
@@ -109,72 +196,118 @@ export const Step3 = ({ theme, couple, dateShowType, setCouple, setDateShowType,
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
       <div className='flex flex-col lg:flex-row lg:gap-4 gap-8'>
-        <Accordion type='single' collapsible>
+        <Accordion type='single' collapsible className='w-full'>
           <AccordionItem value={'a'}>
             <AccordionTrigger>Lembrança 1</AccordionTrigger>
             <AccordionContent>
-              <Input
-                {...register('coupleName')}
-                id='coupleName'
-                placeholder={t('steps.step1.input.placeholder')}
-                type='text'
-                autoFocus={true}
-                autoComplete='off'
-                className='w-full'
-                onChange={e =>
-                  setCouple({
-                    ...couple,
-                    coupleName: e.target.value.replace(
-                      /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
-                      '',
-                    ),
-                  })
-                }
-              />
-              <div className='relative'>
-                <RichTextEditor
-                  placeholder={t('steps.step2.input.placeholder')}
-                  value={couple.message ?? ''}
-                  onChange={e => {
-                    const formated = e
-                      ?.replaceAll('<p>', '')
-                      .replaceAll('</p>', '')
-                      .replaceAll('<em>', '')
-                      .replaceAll('</em>', '')
-                      .replaceAll('<strong>', '')
-                      .replaceAll('</strong>', '')
-                      .replaceAll('<s>', '')
-                      .replaceAll('</s>', '')
-
-                    if (theme === ThemeShowTypeEnum.DEFAULT) {
-                      if (formated.length > 750)
-                        setError('message', { message: t('steps.step2.input.errors.max', { limit: 750 }) })
-                      if (formated.length <= 750) clearErrors()
-                    } else {
-                      if (formated.length > 400)
-                        setError('message', { message: t('steps.step2.input.errors.max', { limit: 400 }) })
-                      if (formated.length <= 400) clearErrors()
-                    }
-
-                    setValue('message', e)
-                    setCouple({ ...couple, message: e })
-                  }}
+              <div className='flex flex-col gap-4 mb-4'>
+                <Input
+                  {...register('coupleName')}
+                  id='coupleName'
+                  placeholder={t('steps.step1.input.placeholder')}
+                  type='text'
+                  autoFocus={true}
+                  autoComplete='off'
+                  className='w-full'
+                  onChange={e =>
+                    setCouple({
+                      ...couple,
+                      coupleName: e.target.value.replace(
+                        /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
+                        '',
+                      ),
+                    })
+                  }
                 />
 
-                <p className='absolute bottom-2 right-3 text-xs text-neutral-400'>
-                  {VALUE?.length ?? 0}/{theme === ThemeShowTypeEnum.DEFAULT ? 750 : 400}
-                </p>
+                <div className='flex flex-col 2xl:flex-row gap-4 w-full'>
+                  <div className='relative sm:w-full 2xl:w-1/2'>
+                    <RichTextEditor
+                      placeholder={t('steps.step2.input.placeholder')}
+                      value={couple.message ?? ''}
+                      onChange={e => {
+                        const formated = e
+                          ?.replaceAll('<p>', '')
+                          .replaceAll('</p>', '')
+                          .replaceAll('<em>', '')
+                          .replaceAll('</em>', '')
+                          .replaceAll('<strong>', '')
+                          .replaceAll('</strong>', '')
+                          .replaceAll('<s>', '')
+                          .replaceAll('</s>', '')
+
+                        if (theme === ThemeShowTypeEnum.DEFAULT) {
+                          if (formated.length > 750)
+                            setError('message', { message: t('steps.step2.input.errors.max', { limit: 750 }) })
+                          if (formated.length <= 750) clearErrors()
+                        } else {
+                          if (formated.length > 400)
+                            setError('message', { message: t('steps.step2.input.errors.max', { limit: 400 }) })
+                          if (formated.length <= 400) clearErrors()
+                        }
+
+                        setValue('message', e)
+                        setCouple({ ...couple, message: e })
+                      }}
+                    />
+                    <p className='absolute bottom-2 right-3 text-xs text-neutral-400'>
+                      {VALUE?.length ?? 0}/{theme === ThemeShowTypeEnum.DEFAULT ? 750 : 400}
+                    </p>
+                  </div>
+                  <Calendar
+                    mode='single'
+                    locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
+                    captionLayout='dropdown'
+                    className='rounded-md border border-neutral-300 flex items-center justify-center relative z-50 sm:w-full 2xl:w-1/2 h-full'
+                    selected={date}
+                    onSelect={setDate}
+                    fromYear={1950}
+                    toYear={new Date().getFullYear()}
+                  />
+                </div>
               </div>
-              <Calendar
-                mode='single'
-                locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
-                captionLayout='dropdown'
-                className={`rounded-md border border-neutral-800 flex items-center justify-center relative z-50 ${theme === ThemeShowTypeEnum.DEFAULT ? 'lg:w-2/3' : 'lg:w-full'}`}
-                selected={date}
-                onSelect={setDate}
-                fromYear={1950}
-                toYear={new Date().getFullYear()}
-              />
+
+              {/* Upload de fotos */}
+              <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
+                <input
+                  type='file'
+                  accept='image/*'
+                  size={100 * 1024 * 1024}
+                  className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
+                  onChange={onSelectFiles}
+                />
+                <div className='text-center'>
+                  <h3 className='mt-2 text-sm font-medium text-white'>
+                    <label htmlFor='file-upload' className='relative cursor-pointer'>
+                      <span>{t('steps.step2.input.picture.title')}</span>
+                    </label>
+                  </h3>
+                  <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
+                </div>
+                <div className='grid grid-cols-4 gap-4 mt-8'>
+                  {medias?.map(file => (
+                    <div
+                      key={file.id}
+                      className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
+                    >
+                      <RenderImage
+                        src={file.url}
+                        alt={file.id}
+                        className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
+                        height={65}
+                        width={65}
+                      />
+                      <button
+                        onClick={() => onRemove(file.id)}
+                        disabled={loading}
+                        className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                      >
+                        <IconX size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

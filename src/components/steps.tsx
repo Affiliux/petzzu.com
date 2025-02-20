@@ -155,6 +155,9 @@ export const Steps = ({
               dateShowType={dateShowType}
               setCouple={setCouple}
               setDateShowType={setDateShowType}
+              medias={medias}
+              onSaveMedia={onNewMedia}
+              onRemoveMedia={onRemoveMedia}
               onBack={() => setStep(2)}
               onNext={async () => {
                 await onUpdate()

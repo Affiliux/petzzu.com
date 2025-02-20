@@ -185,20 +185,27 @@ export const Step2 = ({ couple, setCouple, onNext, onBack, onSaveMedia, onRemove
       </div>
 
       <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
-      <div className='flex items-center gap-4'>
-        {genders.map(gender => (
-          <label key={gender.id} className='flex items-center font-semibold text-black'>
-            <input
-              type='radio'
-              name='gender'
-              value={gender.data}
-              checked={couple.gender === gender.data}
-              onChange={() => setCouple({ ...couple, gender: gender.data })}
-              className='form-radio '
-            />
-            <span className='ml-2'>{gender.name}</span>
-          </label>
-        ))}
+      <div className='w-full space-y-6'>
+        <div className='flex flex-row gap-4'>
+          {genders.map(gender => (
+            <label
+              key={gender.id}
+              className='flex items-center space-x-3 space-y-0 rounded-lg border p-4 cursor-pointer hover:bg-accent [&:has([data-state=checked])]:border-primary w-full'
+            >
+              <input
+                type='radio'
+                name='gender'
+                value={gender.data}
+                checked={couple.gender === gender.data}
+                onChange={() => setCouple({ ...couple, gender: gender.data })}
+                className='form-radio data-[state=checked]:border-primary data-[state=checked]:bg-primary'
+              />
+              <div className='space-y-1'>
+                <p className='text-sm font-medium leading-none'>{gender.name}</p>
+              </div>
+            </label>
+          ))}
+        </div>
       </div>
 
       <div className='flex items-center justify-between gap-4 mt-4'>
