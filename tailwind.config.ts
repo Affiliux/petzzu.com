@@ -154,7 +154,7 @@ module.exports = {
       },
       screens: {
         '2xl': '1400px',
-      }
+      },
     },
   },
   plugins: [
