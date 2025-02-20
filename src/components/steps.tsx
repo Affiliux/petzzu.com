@@ -58,7 +58,7 @@ interface StepsComponentProps {
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
   onUpdate: () => Promise<void>
-  onCreatePre: (coupleName: string) => Promise<void>
+  onCreatePre: (child_name: string) => Promise<void>
 }
 
 export const Steps = ({
@@ -114,8 +114,8 @@ export const Steps = ({
               onBack={onClose}
               onNew={
                 !pre
-                  ? async (coupleName: string) => {
-                      await onCreatePre(coupleName)
+                  ? async (child_name: string) => {
+                      await onCreatePre(child_name)
                       setStep(2)
                     }
                   : null

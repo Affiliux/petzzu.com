@@ -19,7 +19,7 @@ interface Step1Props {
   child: CreatePrePayloadProps
   setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
-  onNew: ((coupleName: string) => Promise<void>) | null
+  onNew: ((child_name: string) => Promise<void>) | null
   onBack: () => void
 }
 
@@ -73,7 +73,7 @@ export const Step1 = ({ child, setChild, onNext, onNew, onBack }: Step1Props) =>
       <div className='relative'>
         <Input
           {...register('child_name')}
-          id='coupleName'
+          id='child_name'
           placeholder={t('steps.step1.input.placeholder')}
           type='text'
           autoFocus={true}

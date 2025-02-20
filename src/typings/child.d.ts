@@ -16,7 +16,6 @@ export type PaymentProps = {
 export type MediaProps = {
   id: string
   key?: string
-  name?: string
   url: string
   createdAt?: string
   updatedAt?: string

@@ -27,7 +27,7 @@ import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/e
 
 const dancing = Dancing_Script({
   weight: '700',
-  subsets: ['latin'],
+  subsets: ['latin'], 
 })
 
 const lora = Lora({
@@ -81,7 +81,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
     <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-white shadow-lg shadow-neutral-500'>
       <div className='bg-transparent'></div>
 
-      <div className='absolute z-50 w-full items-center justify-center lg:text-center text-right bg-white rounded-t-lg p-3'>
+      <div className='absolute z-50 w-full items-center justify-center lg:text-center text-right bg-gray-300 rounded-t-lg p-3'>
         <p className='text-xs text-neutral-900 mt-[1.5px]'>https://babyzzu.com/{baseSlug}</p>
 
         <div className='absolute top-4 left-4 w-3 h-3 rounded-full bg-red-500' />
@@ -99,7 +99,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
             )}
 
             <h1
-              className={`${dancing.className} text-3xl text-[#FF0000] font-bold text-center ${
+              className={`${lora.className} text-3xl text-[#FF0000] font-bold text-center ${
                 !!medias.length && 'mt-12'
               }`}
             >
