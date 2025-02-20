@@ -27,7 +27,7 @@ import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/e
 
 const dancing = Dancing_Script({
   weight: '700',
-  subsets: ['latin'], 
+  subsets: ['latin'],
 })
 
 const lora = Lora({
