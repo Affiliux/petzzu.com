@@ -1,0 +1,7 @@
+export interface TimelineContextProps {
+  createTimeline: (idPreWebsite: string, payload: CreateTimelinePayloadProps) => Promise<CreateTimelineResponse>
+  uploadTimelineFile: (idPreWebsiteTimeLine: string, file: File) => Promise<UploadFileResponse>
+  deleteTimelineFile: (idPreWebsiteTimeLine: string, idFile: string) => Promise<DeleteFileResponse>
+  findOneTimeline: (idPreWebsite: string) => Promise<FindOneTimelineResponse>
+  updateTimeline: (idPreWebsiteTimeLine: string, payload: UpdateTimelinePayloadProps) => Promise<UpdateTimelineResponse>
+}

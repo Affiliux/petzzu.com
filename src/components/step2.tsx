@@ -186,7 +186,7 @@ export const Step2 = ({ couple, setCouple, onNext, onBack, onSaveMedia, onRemove
 
       <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
       <div className='w-full space-y-6'>
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-col md:flex-row gap-4'>
           {genders.map(gender => (
             <label
               key={gender.id}

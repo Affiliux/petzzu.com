@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconChevronLeft, IconChevronRight, IconLoader, IconX } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconLoader, IconPlus, IconTrash,IconX } from '@tabler/icons-react'
 
 import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
@@ -53,6 +53,15 @@ export const Step3 = ({
 
   const [loading, setLoading] = useState(false)
   const [date, setDate] = useState<Date | undefined>(couple?.startDate ? new Date(couple?.startDate) : undefined)
+  const [accordions, setAccordions] = useState([{ id: 1 }])
+
+  const addAccordion = () => {
+    setAccordions([...accordions, { id: accordions.length + 1 }])
+  }
+
+  const removeAccordion = (id: number) => {
+    setAccordions(accordions.filter(accordion => accordion.id !== id))
+  }
 
   async function onSubmit() {
     setLoading(true)
@@ -195,123 +204,15 @@ export const Step3 = ({
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
-      <div className='flex flex-col lg:flex-row lg:gap-4 gap-8'>
-        <Accordion type='single' collapsible className='w-full'>
-          <AccordionItem value={'a'}>
-            <AccordionTrigger>Lembrança 1</AccordionTrigger>
-            <AccordionContent>
-              <div className='flex flex-col gap-4 mb-4'>
-                <Input
-                  {...register('coupleName')}
-                  id='coupleName'
-                  placeholder={t('steps.step1.input.placeholder')}
-                  type='text'
-                  autoFocus={true}
-                  autoComplete='off'
-                  className='w-full'
-                  onChange={e =>
-                    setCouple({
-                      ...couple,
-                      coupleName: e.target.value.replace(
-                        /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
-                        '',
-                      ),
-                    })
-                  }
-                />
-
-                <div className='flex flex-col 2xl:flex-row gap-4 w-full'>
-                  <div className='relative sm:w-full 2xl:w-1/2'>
-                    <RichTextEditor
-                      placeholder={t('steps.step2.input.placeholder')}
-                      value={couple.message ?? ''}
-                      onChange={e => {
-                        const formated = e
-                          ?.replaceAll('<p>', '')
-                          .replaceAll('</p>', '')
-                          .replaceAll('<em>', '')
-                          .replaceAll('</em>', '')
-                          .replaceAll('<strong>', '')
-                          .replaceAll('</strong>', '')
-                          .replaceAll('<s>', '')
-                          .replaceAll('</s>', '')
-
-                        if (theme === ThemeShowTypeEnum.DEFAULT) {
-                          if (formated.length > 750)
-                            setError('message', { message: t('steps.step2.input.errors.max', { limit: 750 }) })
-                          if (formated.length <= 750) clearErrors()
-                        } else {
-                          if (formated.length > 400)
-                            setError('message', { message: t('steps.step2.input.errors.max', { limit: 400 }) })
-                          if (formated.length <= 400) clearErrors()
-                        }
-
-                        setValue('message', e)
-                        setCouple({ ...couple, message: e })
-                      }}
-                    />
-                    <p className='absolute bottom-2 right-3 text-xs text-neutral-400'>
-                      {VALUE?.length ?? 0}/{theme === ThemeShowTypeEnum.DEFAULT ? 750 : 400}
-                    </p>
-                  </div>
-                  <Calendar
-                    mode='single'
-                    locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
-                    captionLayout='dropdown'
-                    className='rounded-md border border-neutral-300 flex items-center justify-center relative z-50 sm:w-full 2xl:w-1/2 h-full'
-                    selected={date}
-                    onSelect={setDate}
-                    fromYear={1950}
-                    toYear={new Date().getFullYear()}
-                  />
-                </div>
-              </div>
-
-              {/* Upload de fotos */}
-              <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
-                <input
-                  type='file'
-                  accept='image/*'
-                  size={100 * 1024 * 1024}
-                  className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
-                  onChange={onSelectFiles}
-                />
-                <div className='text-center'>
-                  <h3 className='mt-2 text-sm font-medium text-white'>
-                    <label htmlFor='file-upload' className='relative cursor-pointer'>
-                      <span>{t('steps.step2.input.picture.title')}</span>
-                    </label>
-                  </h3>
-                  <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
-                </div>
-                <div className='grid grid-cols-4 gap-4 mt-8'>
-                  {medias?.map(file => (
-                    <div
-                      key={file.id}
-                      className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
-                    >
-                      <RenderImage
-                        src={file.url}
-                        alt={file.id}
-                        className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
-                        height={65}
-                        width={65}
-                      />
-                      <button
-                        onClick={() => onRemove(file.id)}
-                        disabled={loading}
-                        className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
-                      >
-                        <IconX size={14} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
+      
+      <button
+        type='button'
+        onClick={addAccordion}
+        className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
+      >
+        <IconPlus className='mr-2' />
+        Nova lembrança
+      </button>
 
       <div className='flex items-center justify-between gap-4 mt-4'>
         <button
