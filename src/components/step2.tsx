@@ -15,11 +15,11 @@ import { RenderImage } from './render-image'
 import { useApplication } from '../contexts/ApplicationContext'
 
 import { MAX_FILE_SIZE, MAX_FILES } from '@/constants'
-import { Genders } from '@/enums'
+import { Sex } from '@/enums'
 
 interface Step2Props {
-  couple: CreatePrePayloadProps
-  setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  child: CreatePrePayloadProps
+  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
   onBack: () => void
   onSaveMedia: (media: FormData) => Promise<void>
@@ -27,13 +27,13 @@ interface Step2Props {
   medias: MediaPreProps[]
 }
 
-export const Step2 = ({ couple, setCouple, onNext, onBack, onSaveMedia, onRemoveMedia, medias }: Step2Props) => {
+export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMedia, medias }: Step2Props) => {
   const t = useTranslations()
 
   const [loading, setLoading] = useState<boolean>(false)
 
   const { locale } = useApplication()
-  const [date, setDate] = useState<Date | undefined>(couple?.startDate ? new Date(couple?.startDate) : undefined)
+  const [date, setDate] = useState<Date | undefined>(child?.birth_date ? new Date(child?.birth_date) : undefined)
 
   async function onSelectFiles(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault()
@@ -117,13 +117,13 @@ export const Step2 = ({ couple, setCouple, onNext, onBack, onSaveMedia, onRemove
     }
   }
 
-  const genders = [
-    { id: 1, name: t('steps.step2.gender.male'), data: Genders.MALE },
-    { id: 2, name: t('steps.step2.gender.female'), data: Genders.FEMALE },
+  const sex = [
+    { id: 1, name: t('steps.step2.gender.male'), data: Sex.MALE },
+    { id: 2, name: t('steps.step2.gender.female'), data: Sex.FEMALE },
   ]
 
   useEffect(() => {
-    if (date) setCouple({ ...couple, startDate: date.toISOString() })
+    if (date) setChild({ ...child, birth_date: date.toISOString() })
   }, [date])
 
   return (
@@ -187,21 +187,21 @@ export const Step2 = ({ couple, setCouple, onNext, onBack, onSaveMedia, onRemove
       <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
       <div className='w-full space-y-6'>
         <div className='flex flex-col md:flex-row gap-4'>
-          {genders.map(gender => (
+          {sex.map(sex => (
             <label
-              key={gender.id}
+              key={sex.id}
               className='flex items-center space-x-3 space-y-0 rounded-lg border p-4 cursor-pointer hover:bg-accent [&:has([data-state=checked])]:border-primary w-full'
             >
               <input
                 type='radio'
                 name='gender'
-                value={gender.data}
-                checked={couple.gender === gender.data}
-                onChange={() => setCouple({ ...couple, gender: gender.data })}
+                value={sex.data}
+                checked={child.sex === sex.data}
+                onChange={() => setChild({ ...child, sex: sex.data })}
                 className='form-radio data-[state=checked]:border-primary data-[state=checked]:bg-primary'
               />
               <div className='space-y-1'>
-                <p className='text-sm font-medium leading-none'>{gender.name}</p>
+                <p className='text-sm font-medium leading-none'>{sex.name}</p>
               </div>
             </label>
           ))}

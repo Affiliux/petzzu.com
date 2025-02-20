@@ -35,7 +35,7 @@ export enum ThemeShowTypeEnum {
   DEFAULT = 'default',
 }
 
-export enum Genders {
+export enum Sex {
   MALE = 'male',
   FEMALE = 'female',
 }

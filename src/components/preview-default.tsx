@@ -37,24 +37,15 @@ const lora = Lora({
 })
 
 interface PreviewDefaultProps {
-  couple: CreatePrePayloadProps
+  child: CreatePrePayloadProps
   mediaShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
   medias: MediaPreProps[]
   song: YouTubeVideoProps | undefined
-  animation: BackgroundAnimationProps
   plan: PlanProps | undefined
 }
 
-export const PreviewDefault = ({
-  couple,
-  song,
-  medias,
-  mediaShowType,
-  dateShowType,
-  animation,
-  plan,
-}: PreviewDefaultProps) => {
+export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowType, plan }: PreviewDefaultProps) => {
   const t = useTranslations()
 
   const { locale } = useApplication()
@@ -70,7 +61,7 @@ export const PreviewDefault = ({
       .replace(/[\u{2700}-\u{27BF}]/gu, '') // Removes various symbol emojis
   }
 
-  const baseSlug = removeEmojis(couple?.coupleName ?? '')
+  const baseSlug = removeEmojis(child?.child_name ?? '')
     .normalize('NFD') // Normalize to separate accent from letters
     .replace(/[\u0300-\u036f]/g, '') // Remove accent marks
     .replace(/[^a-zA-Z0-9 ]/g, '') // Removes special characters
@@ -87,50 +78,8 @@ export const PreviewDefault = ({
   }, [plan, song])
 
   return (
-    <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-neutral-900 shadow-lg shadow-black'>
-      <div className='bg-transparent'>
-        {animation.id === BackgroundAnimationEnum.STARS && showPro && (
-          <>
-            <ShootingStars starHeight={3} starWidth={16} maxDelay={200} />
-            <StarsBackground starDensity={0.001} twinkleProbability={10} minTwinkleSpeed={0.5} maxTwinkleSpeed={1} />
-          </>
-        )}
-
-        {animation.id === BackgroundAnimationEnum.METEORS && showPro && (
-          <>
-            <Meteors number={20} />
-            <StarsBackground starDensity={0.001} twinkleProbability={10} minTwinkleSpeed={0.5} maxTwinkleSpeed={1} />
-          </>
-        )}
-
-        {animation.id === BackgroundAnimationEnum.HEARTS && <EmojiRain emojis={['❤️']} quantity={25} />}
-
-        {animation.id === BackgroundAnimationEnum.AURORA && showPro && <AuroraBackground children={<></>} />}
-
-        {animation.id === BackgroundAnimationEnum.VORTEX && showPro && (
-          <div className='min-h-screen h-full w-full absolute top-0 z-20 bg-transparent'>
-            <Vortex
-              backgroundColor='transparent'
-              particleCount={400}
-              baseHue={300}
-              baseSpeed={0.01}
-              rangeSpeed={0.2}
-              rangeY={typeof window !== 'undefined' ? window?.outerHeight : 0}
-            />
-          </div>
-        )}
-
-        {animation.id === BackgroundAnimationEnum.EMOJIS && (
-          <EmojiRain
-            emojis={[
-              animation.component.split('-')[0],
-              animation.component.split('-')[1],
-              animation.component.split('-')[2],
-            ]}
-            quantity={20}
-          />
-        )}
-      </div>
+    <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-white shadow-lg shadow-neutral-500'>
+      <div className='bg-transparent'></div>
 
       <div className='absolute z-50 w-full items-center justify-center lg:text-center text-right bg-white rounded-t-lg p-3'>
         <p className='text-xs text-neutral-900 mt-[1.5px]'>https://babyzzu.com/{baseSlug}</p>
@@ -140,7 +89,7 @@ export const PreviewDefault = ({
         <div className='absolute top-4 left-12 w-3 h-3 rounded-full bg-green-500' />
       </div>
 
-      <div className='relative container h-full mt-14 bg-neutral-900/70 lg:bg-neutral-900/40 z-40'>
+      <div className='relative container h-full mt-14 bg-white lg:bg-white z-40'>
         {dateShowType === DateShowTypeEnum.DEFAULT && (
           <div className='rounded-lg h-full'>
             {!!medias.length && (
@@ -154,14 +103,14 @@ export const PreviewDefault = ({
                 !!medias.length && 'mt-12'
               }`}
             >
-              {couple?.coupleName}
+              {child?.child_name}
             </h1>
             <p
-              className={`${lora.className} text-gray-300 text-md text-center mt-2 mb-16`}
-              dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
+              className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
+              dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
             />
 
-            {!!couple?.startDate && <DateCount type={dateShowType} date={couple.startDate} />}
+            {!!child?.birth_date && <DateCount type={dateShowType} date={child.birth_date} />}
           </div>
         )}
 
@@ -172,7 +121,7 @@ export const PreviewDefault = ({
                 !!medias.length ? 'mt-12' : 'mb-4'
               }`}
             >
-              {couple?.coupleName}
+              {child?.child_name}
             </h1>
 
             {!!medias.length && (
@@ -181,20 +130,20 @@ export const PreviewDefault = ({
               </div>
             )}
 
-            {!!couple?.startDate && <DateCount type={dateShowType} date={couple.startDate} />}
+            {!!child?.birth_date && <DateCount type={dateShowType} date={child.birth_date} />}
 
             <p
-              className={`${lora.className} text-gray-300 text-md text-center mt-2`}
-              dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
+              className={`${lora.className} text-neutral-900 text-md text-center mt-2`}
+              dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
             />
           </div>
         )}
 
         {dateShowType === DateShowTypeEnum.SIMPLE && (
           <div className='rounded-lg h-full'>
-            {!!couple?.startDate && (
+            {!!child?.birth_date && (
               <div className='my-10'>
-                <DateCount type={dateShowType} date={couple.startDate} />
+                <DateCount type={dateShowType} date={child.birth_date} />
               </div>
             )}
 
@@ -204,11 +153,11 @@ export const PreviewDefault = ({
               </div>
             )}
 
-            {couple.startDate && (
-              <p className='text-sm font-semibold text-center text-white mt-8 mb-14 opacity-60'>
-                {t('themes.default.since')} {format(new Date(couple.startDate), 'dd')} {t('themes.default.of')}{' '}
-                {format(new Date(couple.startDate), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
-                {format(new Date(couple.startDate), 'yyy', { locale: ptBR })}
+            {child.birth_date && (
+              <p className='text-sm font-semibold text-center text-neutral-900 mt-8 mb-14 opacity-60'>
+                {t('themes.default.since')} {format(new Date(child.birth_date), 'dd')} {t('themes.default.of')}{' '}
+                {format(new Date(child.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
+                {format(new Date(child.birth_date), 'yyy', { locale: ptBR })}
               </p>
             )}
 
@@ -217,11 +166,11 @@ export const PreviewDefault = ({
                 !!medias.length && 'mt-12'
               }`}
             >
-              {couple?.coupleName}
+              {child?.birth_date}
             </h1>
             <p
-              className={`${lora.className} text-gray-300 text-md text-center mt-3`}
-              dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
+              className={`${lora.className} text-neutral-900 text-md text-center mt-3`}
+              dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
             />
           </div>
         )}
@@ -237,3 +186,4 @@ export const PreviewDefault = ({
     </div>
   )
 }
+  

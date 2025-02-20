@@ -1,22 +1,22 @@
-export interface BaseProps {
+export interface BaseEntity {
   id: string
   createdAt: string
   updatedAt: string
 }
 
-export interface Media extends BaseProps {
+export interface Media extends BaseEntity {
   key: string
   url: string
 }
 
-export interface TimelineEntry extends BaseProps {
+export interface TimelineEntry extends BaseEntity {
   date: string
   title: string
   description: string
   media: Media[]
 }
 
-export interface PreWebsite extends BaseProps {
+export interface PreWebsite extends BaseEntity {
   birth_date: string
   sex: string
   media: Media[]

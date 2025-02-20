@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 import { BackgroundAnimationProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
-import { CoupleResponseProps, PaymentProps } from '@/typings/couple'
+import { ChildResponseProps, PaymentProps } from '@/typings/child'
 import {
   CreateFromPrePayloadProps,
   CreatePrePayloadProps,
@@ -17,7 +17,7 @@ import { CreateContextType, CreateProviderProps } from './types'
 
 import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 import { get_search_yt } from '@/infrastructure/http/services/application'
-import { get_couple_id } from '@/infrastructure/http/services/couple'
+import { get_child_id } from '@/infrastructure/http/services/couple'
 import {
   create_from_pre,
   create_pre,
@@ -32,60 +32,14 @@ export const CreateContext = createContext<CreateContextType>({} as CreateContex
 export default function CreateProvider({ children }: CreateProviderProps) {
   const t = useTranslations()
 
-  const animations = [
-    {
-      id: 'none',
-      name: t('steps.step6.animations.none'),
-      pro: false,
-      component: '',
-    },
-    {
-      id: 'hearts',
-      name: t('steps.step6.animations.hearts'),
-      pro: false,
-      component: '/videos/features/hearts-animation.webm',
-    },
-    {
-      id: 'stars',
-      name: t('steps.step6.animations.stars'),
-      pro: true,
-      component: '/videos/features/stars-animation.webm',
-    },
-    {
-      id: 'meteors',
-      name: t('steps.step6.animations.meteors'),
-      pro: true,
-      component: '/videos/features/meteors-animation.webm',
-    },
-    {
-      id: 'aurora',
-      name: t('steps.step6.animations.aurora'),
-      pro: true,
-      component: '/videos/features/aurora-animation.webm',
-    },
-    {
-      id: 'vortex',
-      name: t('steps.step6.animations.vortex'),
-      pro: true,
-      component: '/videos/features/vortex-animation.webm',
-    },
-    {
-      id: 'emoji',
-      name: t('steps.step6.animations.emojis'),
-      pro: false,
-      component: '',
-    },
-  ]
-
   const [pre, set_pre] = useState<string | null>(null)
   const [pre_medias, set_pre_medias] = useState<MediaPreProps[]>([])
-  const [couple, set_couple] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
+  const [child, set_child] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
   const [media_show_type, set_media_show_type] = useState<PhotosSliderEnum>(PhotosSliderEnum.COVERFLOW)
   const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
   const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.DEFAULT)
   const [song, set_song] = useState<YouTubeVideoProps | undefined>()
   const [plan, set_plan] = useState<PlanProps | undefined>()
-  const [animation, set_animation] = useState<BackgroundAnimationProps>(animations[0])
   const [payment, set_payment] = useState<PaymentProps | null>(null)
 
   async function handleCreatePre(payload: CreatePrePayloadProps): Promise<void> {
@@ -148,9 +102,9 @@ export default function CreateProvider({ children }: CreateProviderProps) {
     }
   }
 
-  async function handleCheckPayment(id: string): Promise<CoupleResponseProps> {
+  async function handleCheckPayment(id: string): Promise<ChildResponseProps> {
     try {
-      const response = await get_couple_id(id)
+      const response = await get_child_id(id)
       return response
     } catch (error: any) {
       console.error(error)
@@ -164,22 +118,17 @@ export default function CreateProvider({ children }: CreateProviderProps) {
 
       if (response) {
         set_pre(response.id)
-        set_couple({
-          coupleName: response.coupleName,
+        set_child({
+          child_name: response.child_name,
           message: response.message,
-          startDate: response.startDate,
+          birth_date: response.birth_date,
+          parent_name: response.parent_name,
+          sex: response.sex,
           yt_song: response.yt_song,
+          lang: response.lang,
           imageShowType: response.imageShowType ?? PhotosSliderEnum.COVERFLOW,
           dateShowType: response.dateShowType ?? DateShowTypeEnum.DEFAULT,
           themeShowType: response.themeShowType ?? ThemeShowTypeEnum.DEFAULT,
-          backgroundAnimation: response.backgroundAnimation,
-          backgroundEmojis: response.backgroundEmojis
-            ? [
-                response.backgroundEmojis.split('|')[0],
-                response.backgroundEmojis.split('|')[1],
-                response.backgroundEmojis.split('|')[2],
-              ]
-            : undefined,
         })
 
         set_media_show_type(response.imageShowType ?? PhotosSliderEnum.COVERFLOW)
@@ -192,16 +141,6 @@ export default function CreateProvider({ children }: CreateProviderProps) {
           const responseYt = await get_search_yt(response.yt_song)
           if (responseYt && responseYt[0]) set_song(responseYt[0])
         }
-
-        set_animation(animations.find(animation => animation.id === response.backgroundAnimation) || animations[0])
-        if (response.backgroundEmojis) {
-          set_animation({
-            id: 'emoji',
-            name: t('steps.step6.animations.emojis'),
-            pro: false,
-            component: `${response.backgroundEmojis[0]}-${response.backgroundEmojis[1]}-${response.backgroundEmojis[2]}`,
-          })
-        }
       }
     } catch (error: any) {
       console.log(error)
@@ -212,15 +151,13 @@ export default function CreateProvider({ children }: CreateProviderProps) {
   return (
     <CreateContext.Provider
       value={{
-        animations,
         //
         pre,
         pre_medias,
         payment,
-        couple,
+        child,
         song,
         plan,
-        animation,
         media_show_type,
         date_show_type,
         theme_show_type,
@@ -228,10 +165,9 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         set_pre,
         set_pre_medias,
         set_payment,
-        set_couple,
+        set_child,
         set_song,
         set_plan,
-        set_animation,
         set_media_show_type,
         set_date_show_type,
         set_theme_show_type,
