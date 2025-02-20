@@ -23,7 +23,7 @@ interface Step1Props {
   onBack: () => void
 }
 
-export const Step1 = ({child, setChild, onNext, onNew, onBack }: Step1Props) => {
+export const Step1 = ({ child, setChild, onNext, onNew, onBack }: Step1Props) => {
   const t = useTranslations()
 
   const [loading, setLoading] = useState<boolean>(false)

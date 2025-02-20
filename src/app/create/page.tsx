@@ -264,7 +264,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_child ({ ...child })
+      set_child({ ...child })
 
       set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)

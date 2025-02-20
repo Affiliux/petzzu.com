@@ -186,4 +186,3 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
     </div>
   )
 }
-  
