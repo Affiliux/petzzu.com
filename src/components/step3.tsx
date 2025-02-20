@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconChevronLeft, IconChevronRight, IconLoader, IconPlus, IconTrash,IconX } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconLoader, IconPlus, IconTrash, IconX } from '@tabler/icons-react'
 
 import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
@@ -204,7 +204,6 @@ export const Step3 = ({
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
-      
       <button
         type='button'
         onClick={addAccordion}

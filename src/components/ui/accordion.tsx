@@ -18,8 +18,8 @@ const AccordionItem = React.forwardRef<
 AccordionItem.displayName = 'AccordionItem'
 
 type AccordionTriggerProps = React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
-  noUnderline?: boolean;
-};
+  noUnderline?: boolean
+}
 
 const AccordionTrigger = React.forwardRef<React.ElementRef<typeof AccordionPrimitive.Trigger>, AccordionTriggerProps>(
   ({ className, children, noUnderline, ...props }, ref) => (
