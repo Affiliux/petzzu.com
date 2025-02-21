@@ -75,11 +75,11 @@
           "1": "Surpreenda",
           "2": "alguém especial",
           "3": "seu amor",
-          "4": "seu amigo",
+          "4": "seu filho",
           "5": "seu familiar",
           "6": "o aniversariante"
         },
-        "description": "Pequenos gestos fazem toda a diferença. Mostre seu carinho de uma forma inesperada, criando uma página dedicada para alguém especial.",
+        "description": "Pequenos gestos fazem toda a diferença. Mostre seu carinho de uma forma inesperada, Eternizando um album dedicado para alguém especial.",
         "input": {
           "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
           "errors": {
@@ -135,8 +135,8 @@
             "description": "Você receberá um QR code e um link via email para acessar a página personalizada."
           },
           "4": {
-            "title": "4. Faça a surpresa",
-            "description": "Faça uma surpresa para alguém especial compartilhando o link ou o QR code."
+            "title": "4. Crie seu Álbum",
+            "description": "Deixe eternizado seu Álbum eternizado compartilhando o link ou o QR code entre pessoas especiais."
           }
         },
         "example": {
@@ -389,10 +389,9 @@
       "continue": "Continuar página"
     },
     "step1": {
-      "title": "Titulo da página",
-      "description": "Escreva o titulo dedicatório para a página. Ex: João & Maria ou Feliz Aniversário ou etc!",
+      "title": "Qual nome do seu Filho(a)?",
       "input": {
-        "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
+        "placeholder": "Ex: Sylvester Stallone Jr.",
         "errors": {
           "min": "Mínimo de 3 caracteres",
           "max": "Máximo de 100 caracteres"
@@ -402,15 +401,13 @@
       "button": "Próxima etapa"
     },
     "step2": {
-      "title": "Mensagem",
-      "description": "Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho.",
+      "title": "Quando ele Nasceu?",
       "input": {
         "picture": {
-          "title": "PNG, JPG, JPEG, GIF (máx. 1 foto)",
-          "label": "Foto principal"
+          "title": "PNG, JPG, JPEG, GIF (máximo 1 foto)",
+          "label": "Foto de capa do seu Album"
         },
         "label": "Mensagem",
-        "placeholder": "Ex: João, você é a pessoa mais incrível que já conheci. Obrigado por tudo!",
         "errors": {
           "min": "Mínimo de 2 caracteres",
           "max": "Máximo de {limit} caracteres",
@@ -420,7 +417,7 @@
       "back": "Voltar etapa",
       "button": "Próxima etapa",
       "gender": {
-        "title": "Gênero",
+        "title": "Gênero do seu Filho(a)",
         "male": "Masculino",
         "female": "Feminino"
       }
