@@ -21,6 +21,15 @@ export async function create_timeline(
   }
 }
 
+export async function delete_timeline(idPreWebsiteTimeLine: string): Promise<void> {
+  try {
+    const { data: response } = await api.delete(`website/pre/timeLine/${idPreWebsiteTimeLine}`)
+    return response
+  } catch (error: any) {
+    throw new Error(error.response.data.message ?? '')
+  }
+}
+
 export async function upload_timeline_file(idPreWebsiteTimeLine: string, file: File): Promise<UploadFileResponse> {
   try {
     const formData = new FormData()

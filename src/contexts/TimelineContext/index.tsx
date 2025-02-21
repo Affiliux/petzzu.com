@@ -6,6 +6,7 @@ import { TimelineContextProps } from './types'
 
 import {
   create_timeline,
+  delete_timeline,
   delete_timeline_file,
   find_one_timeline,
   update_timeline,
@@ -23,6 +24,15 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
       throw new Error(error.response?.data?.message ?? 'Error creating timeline')
     }
   }, [])
+
+    const deleteTimeline = useCallback(async (idPreWebsiteTimeLine: string) => {
+      try {
+        return await delete_timeline(idPreWebsiteTimeLine)
+      } catch (error: any) {
+        throw new Error(error.response?.data?.message ?? 'Error deleting file')
+      }
+    }, [])
+
 
   const uploadTimelineFile = useCallback(async (idPreWebsiteTimeLine: string, file: File) => {
     try {
@@ -64,6 +74,7 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
         deleteTimelineFile,
         findOneTimeline,
         updateTimeline,
+        deleteTimeline,
       }}
     >
       {children}
