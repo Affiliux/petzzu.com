@@ -1,11 +1,11 @@
-import { 
-  CreateTimelinePayloadProps, 
-  CreateTimelineResponse, 
-  DeleteFileResponse, 
-  FindOneTimelineResponse, 
-  UpdateTimelinePayloadProps, 
-  UpdateTimelineResponse, 
-  UploadFileResponse 
+import {
+  CreateTimelinePayloadProps,
+  CreateTimelineResponse,
+  DeleteFileResponse,
+  FindOneTimelineResponse,
+  UpdateTimelinePayloadProps,
+  UpdateTimelineResponse,
+  UploadFileResponse,
 } from '@/typings/timeline'
 
 export interface TimelineContextProps {

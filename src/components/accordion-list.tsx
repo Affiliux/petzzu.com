@@ -43,11 +43,11 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
   const addAccordion = async () => {
     try {
       const newTimeline: CreateTimelinePayloadProps = {
-        date: new Date().toISOString(), 
+        date: new Date().toISOString(),
         title: `Lembrança ${accordions.length + 1}`,
         description: '',
       }
-      
+
       const response = await createTimeline(pre, newTimeline)
 
       const newEntry = response as unknown as TimelineEntry
@@ -149,7 +149,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
 
   const handleRemoveMedia = async (timelineId: string, mediaId: string) => {
     try {
-      await onRemoveMedia(timelineId, mediaId) 
+      await onRemoveMedia(timelineId, mediaId)
 
       setChild(prev => ({
         ...prev,

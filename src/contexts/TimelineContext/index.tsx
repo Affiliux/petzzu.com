@@ -25,14 +25,13 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
     }
   }, [])
 
-    const deleteTimeline = useCallback(async (idPreWebsiteTimeLine: string) => {
-      try {
-        return await delete_timeline(idPreWebsiteTimeLine)
-      } catch (error: any) {
-        throw new Error(error.response?.data?.message ?? 'Error deleting file')
-      }
-    }, [])
-
+  const deleteTimeline = useCallback(async (idPreWebsiteTimeLine: string) => {
+    try {
+      return await delete_timeline(idPreWebsiteTimeLine)
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message ?? 'Error deleting file')
+    }
+  }, [])
 
   const uploadTimelineFile = useCallback(async (idPreWebsiteTimeLine: string, file: File) => {
     try {
