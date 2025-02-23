@@ -25,6 +25,7 @@ import { Step4 } from './step4'
 import { Step5 } from './step5'
 import { Step6 } from './step6'
 import { Step7 } from './step7'
+import { DeleteFileResponse, UploadFileResponse } from '../typings/timeline'
 
 import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 
@@ -57,6 +58,8 @@ interface StepsComponentProps {
   onClose: () => void
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
+  // onNewMediaTimeline: (idPreWebsiteTimeLine: string, file: File) => Promise<UploadFileResponse>;
+  // onRemoveMediaTimeline: (idPreWebsiteTimeLine: string, idFile: string) => Promise<DeleteFileResponse>;
   onUpdate: () => Promise<void>
   onCreatePre: (child_name: string) => Promise<void>
 }
@@ -144,14 +147,11 @@ export const Steps = ({
 
           {step === 3 && (
             <Step3
-              theme={theme}
               child={child}
               setChild={setChild}
-              dateShowType={dateShowType}
-              setDateShowType={setDateShowType}
               medias={medias}
-              onSaveMedia={onNewMedia}
-              onRemoveMedia={onRemoveMedia}
+              // onSaveMedia={onNewMediaTimeline}
+              // onRemoveMedia={onRemoveMediaTimeline}
               onBack={() => setStep(2)}
               onNext={async () => {
                 await onUpdate()

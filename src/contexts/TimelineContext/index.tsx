@@ -1,8 +1,9 @@
 import React, { createContext, useCallback, useContext, useState } from 'react'
 
-import { CreateTimelinePayloadProps, UpdateTimelinePayloadProps } from '@/typings/timeline'
+import { CreateTimelinePayloadProps, DeleteFileResponse, UpdateTimelinePayloadProps, UploadFileResponse } from '@/typings/timeline'
 
 import { TimelineContextProps } from './types'
+import { NewMediaPayloadProps } from '../../typings/create'
 
 import {
   create_timeline,
@@ -33,21 +34,27 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
     }
   }, [])
 
-  const uploadTimelineFile = useCallback(async (idPreWebsiteTimeLine: string, file: File) => {
-    try {
-      return await upload_timeline_file(idPreWebsiteTimeLine, file)
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message ?? 'Error uploading file')
-    }
-  }, [])
+ const uploadTimelineFile = useCallback(
+   async (idPreWebsiteTimeLine: string, payload: NewMediaPayloadProps): Promise<UploadFileResponse> => {
+     try {
+       return await upload_timeline_file(idPreWebsiteTimeLine, payload)
+     } catch (error: any) {
+       throw new Error(error.response?.data?.message ?? 'Error uploading file')
+     }
+   },
+   [],
+ )
 
-  const deleteTimelineFile = useCallback(async (idPreWebsiteTimeLine: string, idFile: string) => {
-    try {
-      return await delete_timeline_file(idPreWebsiteTimeLine, idFile)
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message ?? 'Error deleting file')
-    }
-  }, [])
+  const deleteTimelineFile = useCallback(
+    async (idPreWebsiteTimeLine: string, idFile: string): Promise<DeleteFileResponse> => {
+      try {
+        return await delete_timeline_file(idPreWebsiteTimeLine, idFile)
+      } catch (error: any) {
+        throw new Error(error.response?.data?.message ?? 'Error deleting file')
+      }
+    },
+    [],
+  )
 
   const findOneTimeline = useCallback(async (idPreWebsite: string) => {
     try {

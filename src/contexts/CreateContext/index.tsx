@@ -126,6 +126,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
           sex: response.sex,
           yt_song: response.yt_song,
           lang: response.lang,
+          timeLine: response.timeLine,
           imageShowType: response.imageShowType ?? PhotosSliderEnum.COVERFLOW,
           dateShowType: response.dateShowType ?? DateShowTypeEnum.DEFAULT,
           themeShowType: response.themeShowType ?? ThemeShowTypeEnum.DEFAULT,

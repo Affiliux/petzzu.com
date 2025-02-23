@@ -1,3 +1,4 @@
+import { NewMediaPayloadProps } from '../../../typings/create'
 import {
   CreateTimelinePayloadProps,
   CreateTimelineResponse,
@@ -30,19 +31,28 @@ export async function delete_timeline(idPreWebsiteTimeLine: string): Promise<voi
   }
 }
 
-export async function upload_timeline_file(idPreWebsiteTimeLine: string, file: File): Promise<UploadFileResponse> {
+export async function upload_timeline_file(
+  idPreWebsiteTimeLine: string,
+  payload: NewMediaPayloadProps,
+): Promise<UploadFileResponse> {
   try {
     const formData = new FormData()
-    formData.append('file', file)
+
+    if (payload.file instanceof File) {
+      formData.append('file', payload.file)
+    } else {
+      throw new Error('Invalid file type')
+    }
 
     const { data: response } = await api.patch(`website/pre/timeLine/file/${idPreWebsiteTimeLine}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
+
     return response
   } catch (error: any) {
-    throw new Error(error.response.data.message ?? '')
+    throw new Error(error.response?.data?.message ?? 'Error uploading file')
   }
 }
 
