@@ -76,7 +76,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
   const handleRemoveTimelineEntry = async (id: string) => {
     setTimelineEntries(prev => prev.filter(entry => entry.id !== id))
     try {
-      await deleteTimeline(id) 
+      await deleteTimeline(id)
     } catch (error) {
       toast({ variant: 'destructive', title: 'Error deleting timeline entry', description: error.message })
     }
@@ -101,44 +101,44 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
             <AccordionTrigger>{`Lembrança ${index + 1}`}</AccordionTrigger>
             <AccordionContent>
               <div className='flex flex-col gap-4'>
-              <Input
-                {...register(`title.${index}`)}
-                id={`timeline.${entry.id}.title`}
-                placeholder='Title'
-                type='text'
-                autoComplete='off'
-                value={entry.title}
-                onChange={e => {
-                  const updatedEntry = { ...entry, title: e.target.value }
-                  setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                }}
-              />
-              <RichTextEditor
-                value={entry.description}
-                onChange={newDesc => {
-                  const updatedEntry = { ...entry, description: newDesc }
-                  setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                }}
-                placeholder={''}
-              />
-              <Calendar
-                mode='single'
-                selected={new Date(entry.date)}
-                onSelect={selectedDate => {
-                  const updatedEntry = { ...entry, date: selectedDate.toISOString() }
-                  setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                }}
-              />
-              <div className='mt-4 flex justify-end'>
-                <button
-                  type='button'
-                  onClick={() => handleRemoveTimelineEntry(entry.id)}
-                  className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
-                >
-                  <IconTrash className='mr-2' />
-                  Excluir
-                </button>
-              </div>
+                <Input
+                  {...register(`title.${index}`)}
+                  id={`timeline.${entry.id}.title`}
+                  placeholder='Title'
+                  type='text'
+                  autoComplete='off'
+                  value={entry.title}
+                  onChange={e => {
+                    const updatedEntry = { ...entry, title: e.target.value }
+                    setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                  }}
+                />
+                <RichTextEditor
+                  value={entry.description}
+                  onChange={newDesc => {
+                    const updatedEntry = { ...entry, description: newDesc }
+                    setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                  }}
+                  placeholder={''}
+                />
+                <Calendar
+                  mode='single'
+                  selected={new Date(entry.date)}
+                  onSelect={selectedDate => {
+                    const updatedEntry = { ...entry, date: selectedDate.toISOString() }
+                    setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                  }}
+                />
+                <div className='mt-4 flex justify-end'>
+                  <button
+                    type='button'
+                    onClick={() => handleRemoveTimelineEntry(entry.id)}
+                    className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
+                  >
+                    <IconTrash className='mr-2' />
+                    Excluir
+                  </button>
+                </div>
               </div>
             </AccordionContent>
           </AccordionItem>
