@@ -32,4 +32,10 @@ export enum ThemeShowTypeEnum {
   BLUE = 'blue',
   PINK = 'pink',
   YELLOW = 'yellow',
+  DEFAULT = 'default',
+}
+
+export enum Sex {
+  MALE = 'male',
+  FEMALE = 'female',
 }

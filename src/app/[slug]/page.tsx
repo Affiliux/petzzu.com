@@ -75,10 +75,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       )}
 
       {couple && !loading && (
-        <>
-          {couple.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme couple={couple} />}
-          {couple.themeShowType === ThemeShowTypeEnum.NETFLIX && <NetflixTheme couple={couple} />}
-        </>
+        <>{couple.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme couple={couple} />}</>
       )}
 
       {couple && (success || payment || (!view && couple.themeShowType === ThemeShowTypeEnum.DEFAULT)) && (

@@ -16,20 +16,20 @@ import { ThemeShowTypeEnum } from '@/enums'
 
 interface Step1Props {
   theme: ThemeShowTypeEnum
-  couple: CreatePrePayloadProps
-  setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  child: CreatePrePayloadProps
+  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
-  onNew: ((coupleName: string) => Promise<void>) | null
+  onNew: ((child_name: string) => Promise<void>) | null
   onBack: () => void
 }
 
-export const Step1 = ({ theme, couple, setCouple, onNext, onNew, onBack }: Step1Props) => {
+export const Step1 = ({ child, setChild, onNext, onNew, onBack }: Step1Props) => {
   const t = useTranslations()
 
   const [loading, setLoading] = useState<boolean>(false)
 
   const formSchema = z.object({
-    coupleName: z
+    child_name: z
       .string()
       .min(2, {
         message: t('steps.step1.input.errors.min'),
@@ -47,19 +47,19 @@ export const Step1 = ({ theme, couple, setCouple, onNext, onNew, onBack }: Step1
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      coupleName: couple.coupleName ?? '',
+      child_name: child.child_name ?? '',
     },
   })
 
-  const DISABLED = loading || !couple.coupleName?.length || !!errors.coupleName?.message
+  const DISABLED = loading || !child.child_name?.length || !!errors.child_name?.message
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
 
     try {
-      setCouple({ ...couple, coupleName: values.coupleName })
+      setChild({ ...child, child_name: values.child_name })
 
-      if (onNew) await onNew(values.coupleName)
+      if (onNew) await onNew(values.child_name)
       else await onNext()
     } catch (error) {
       console.error(error)
@@ -72,17 +72,17 @@ export const Step1 = ({ theme, couple, setCouple, onNext, onNew, onBack }: Step1
     <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={handleSubmit(onSubmit)}>
       <div className='relative'>
         <Input
-          {...register('coupleName')}
-          id='coupleName'
+          {...register('child_name')}
+          id='child_name'
           placeholder={t('steps.step1.input.placeholder')}
           type='text'
           autoFocus={true}
           autoComplete='off'
           className='w-full'
           onChange={e =>
-            setCouple({
-              ...couple,
-              coupleName: e.target.value.replace(
+            setChild({
+              ...child,
+              child_name: e.target.value.replace(
                 /[^a-zA-ZÀ-ÿ0-9\s\p{Emoji}\s&!@()*\+\-_=,.?;:<>\/\\|^%$#\[\]{}~`'"]/gu,
                 '',
               ),
@@ -91,7 +91,7 @@ export const Step1 = ({ theme, couple, setCouple, onNext, onNew, onBack }: Step1
         />
       </div>
 
-      <p className='text-red-500 text-sm mt-1 text-right'>{errors.coupleName?.message}</p>
+      <p className='text-red-500 text-sm mt-1 text-right'>{errors.child_name?.message}</p>
 
       <div className='flex items-center justify-between gap-4 mt-4'>
         <button

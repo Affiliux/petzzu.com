@@ -1,4 +1,6 @@
-// Definition: Couple types
+// Definition: Child types
+
+import { TimelineEntry } from '@/typings/timeline'
 
 import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 
@@ -14,18 +16,21 @@ export type PaymentProps = {
 export type MediaProps = {
   id: string
   key?: string
-  name?: string
   url: string
   createdAt?: string
   updatedAt?: string
 }
 
-// Couple Props with the following properties:
-export type CoupleProps = {
-  coupleName: string
+// Child Props with the following properties:
+export type ChildProps = {
+  id: string
+  child_name: string
   slug: string
   message: string
-  startDate: string
+  sex: string
+  birth_date: string
+  media: MediaProps[]
+  timeLine: TimelineEntry[]
   isActive: boolean
   inactiveReason: string
   qrCodeUrl: string
@@ -41,11 +46,11 @@ export type CoupleProps = {
 }
 
 interface DefaultThemeProps {
-  couple: CoupleResponseProps
+  Child: ChildResponseProps
 }
 
-// Get Couple
-export interface CouplePayloadProps {}
-export interface CoupleResponseProps extends CoupleProps, PaymentProps {
+// Get Child
+export interface ChildPayloadProps {}
+export interface ChildResponseProps extends ChildProps, PaymentProps {
   media: MediaProps[]
 }

@@ -16,6 +16,8 @@ import { ButtonToTop } from '@/components/button-to-top'
 import { Cookies } from '@/components/cookies'
 import { Steps } from '@/components/steps'
 
+import { useTimeline } from '../../contexts/TimelineContext'
+
 import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 
 export default function Page() {
@@ -25,11 +27,9 @@ export default function Page() {
 
   const { theme, locale, plans, discount, currency } = useApplication()
   const {
-    animations,
     pre,
-    couple,
+    child,
     song,
-    animation,
     pre_medias,
     plan,
     payment,
@@ -37,9 +37,8 @@ export default function Page() {
     date_show_type,
     theme_show_type,
     set_pre,
-    set_couple,
+    set_child,
     set_song,
-    set_animation,
     set_pre_medias,
     set_plan,
     set_payment,
@@ -53,26 +52,28 @@ export default function Page() {
     handleRemoveMedia,
   } = useCreate()
 
+  const { uploadTimelineFile, deleteTimelineFile } = useTimeline()
+
   const steps = [
     {
       id: 1,
       title: t('steps.step1.title'),
       description: t('steps.step1.description'),
-      checked: !!couple.coupleName,
+      checked: !!child.child_name,
       skip: false,
     },
     {
       id: 2,
       title: t('steps.step2.title'),
       description: t('steps.step2.description'),
-      checked: !!couple.message,
+      checked: !!child.message,
       skip: false,
     },
     {
       id: 3,
       title: t('steps.step3.title'),
       description: t('steps.step3.description'),
-      checked: !!couple.startDate,
+      checked: !!child.birth_date,
       skip: true,
     },
     {
@@ -91,13 +92,6 @@ export default function Page() {
     },
     {
       id: 6,
-      title: t('steps.step6.title'),
-      description: t('steps.step6.description'),
-      checked: !!couple.backgroundAnimation,
-      skip: false,
-    },
-    {
-      id: 7,
       title: t('steps.step7.title'),
       description: t('steps.step7.description'),
       checked: !!plan,
@@ -121,7 +115,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_couple({} as CreatePrePayloadProps)
+      set_child({} as CreatePrePayloadProps)
 
       set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
@@ -129,7 +123,6 @@ export default function Page() {
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.DEFAULT)
 
-      set_animation(animations[0])
       set_plan(undefined)
       set_song(undefined)
 
@@ -178,12 +171,11 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_couple({} as CreatePrePayloadProps)
+      set_child({} as CreatePrePayloadProps)
 
       set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
-      set_animation(animations[0])
       set_plan(undefined)
       set_song(undefined)
 
@@ -194,7 +186,7 @@ export default function Page() {
     }
   }
 
-  async function onCreatePre(coupleName: string) {
+  async function onCreatePre(child_name: string) {
     set_loading(true)
 
     try {
@@ -202,7 +194,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_couple({ ...couple, coupleName })
+      set_child({ ...child, child_name })
 
       set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
@@ -210,14 +202,13 @@ export default function Page() {
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.DEFAULT)
 
-      set_animation(animations[0])
       set_plan(undefined)
       set_song(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
       set_plan(find)
 
-      await handleCreatePre({ ...couple, coupleName })
+      await handleCreatePre({ ...child, child_name: child_name })
     } catch (error: any) {
       console.error(error)
       router.replace('/')
@@ -229,31 +220,22 @@ export default function Page() {
   async function onUpdatePre() {
     try {
       if (!pre) throw new Error('Pre ID not found')
-      if (!animation) throw new Error('Please select an animation')
       if (!plan) throw new Error('Please select a plan')
 
       const yt_song = plan.sku.includes('pro') && song ? song.url : ''
-      const backgroundAnimation = (): BackgroundAnimationEnum => {
-        if (animation.pro && plan.sku.includes('pro')) return animation.id as BackgroundAnimationEnum
-        else if (animation.pro && plan.sku.includes('basic')) return BackgroundAnimationEnum.NONE
-        else return animation.id as BackgroundAnimationEnum
-      }
 
       await handleUpdatePre({
         id: pre,
-        coupleName: couple.coupleName,
-        message: couple.message,
-        startDate: couple.startDate,
+        child_name: child.child_name,
+        message: child.message,
+        birth_date: child.birth_date,
+        parent_name: child.parent_name,
+        sex: child.sex,
         lang: t('config.defaults.country'),
         yt_song,
         imageShowType: media_show_type,
         dateShowType: date_show_type,
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.DEFAULT,
-        backgroundAnimation: backgroundAnimation(),
-        backgroundEmojis:
-          backgroundAnimation() === BackgroundAnimationEnum.EMOJIS
-            ? [animation.component.split('-')[0], animation.component.split('-')[1], animation.component.split('-')[2]]
-            : undefined,
       })
     } catch (error: any) {
       console.error(error)
@@ -286,7 +268,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_couple({ ...couple })
+      set_child({ ...child })
 
       set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
@@ -294,7 +276,6 @@ export default function Page() {
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.DEFAULT)
 
-      set_animation(animations[0])
       set_plan(undefined)
       set_song(undefined)
 
@@ -311,13 +292,11 @@ export default function Page() {
         step={step}
         steps={steps}
         plans={plans}
-        animations={animations}
         //
-        couple={couple}
+        child={child}
         payment={payment}
         medias={pre_medias}
         song={song}
-        animation={animation}
         mediaShowType={media_show_type}
         dateShowType={date_show_type}
         themeShowType={theme_show_type}
@@ -326,8 +305,7 @@ export default function Page() {
         //
         setStep={set_step}
         setPlan={set_plan}
-        setAnimation={set_animation}
-        setCouple={set_couple}
+        setChild={set_child}
         setMediaShowType={set_media_show_type}
         setDateShowType={set_date_show_type}
         setThemeShowType={set_theme_show_type}
@@ -336,14 +314,15 @@ export default function Page() {
         onUpdate={async () => await onUpdatePre()}
         onNewMedia={async media => await handleNewMedia({ id: pre!, file: media })}
         onRemoveMedia={async id => await handleRemoveMedia({ idPreWebsite: pre!, idFile: id })}
+        // onNewMediaTimeline={async media => await uploadTimelineFile(idPreWebsiteTimeLine, file: media)}
+        // onRemoveMediaTimeline={async id => await deleteTimelineFile({ idPreWebsite: pre!, idFile: id })}
         onClose={() => {
           set_pre(null)
           set_payment(null)
           set_pre_medias([])
 
-          set_couple({} as CreatePrePayloadProps)
+          set_child({} as CreatePrePayloadProps)
           set_song(undefined)
-          set_animation(animations[0])
 
           router.replace('/')
         }}

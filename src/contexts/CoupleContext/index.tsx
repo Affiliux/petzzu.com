@@ -1,21 +1,21 @@
 import React, { createContext, useContext, useState } from 'react'
 
-import { CoupleResponseProps } from '@/typings/couple'
+import { ChildResponseProps } from '@/typings/child'
 
-import type { CoupleContextType, CoupleProviderProps } from './types'
+import type { ChildContextType, ChildProviderProps } from './types'
 import { useApplication } from '../ApplicationContext'
 
-import { get_couple_id, get_couple_slug } from '@/infrastructure/http/services/couple'
+import { get_child_id, get_child_slug } from '@/infrastructure/http/services/couple'
 
-export const CoupleContext = createContext<CoupleContextType>({} as CoupleContextType)
+export const ChildContext = createContext<ChildContextType>({} as ChildContextType)
 
-export default function CoupleProvider({ children }: CoupleProviderProps) {
+export default function ChildProvider({ children }: ChildProviderProps) {
   const { handleChangeLocale } = useApplication()
-  const [couple, set_couple] = useState<CoupleResponseProps | null>(null)
+  const [child, set_child] = useState<ChildResponseProps | null>(null)
 
-  async function handleGetCoupleBySlug(slug: string): Promise<void> {
+  async function handleGetChildBySlug(slug: string): Promise<void> {
     try {
-      const response = await get_couple_slug(slug)
+      const response = await get_child_slug(slug)
 
       if (response) {
         if (!response.isActive && response.inactiveReason !== 'Awaiting payment') {
@@ -23,7 +23,7 @@ export default function CoupleProvider({ children }: CoupleProviderProps) {
           return
         }
 
-        set_couple(response)
+        set_child(response)
         handleChangeLocale(response.lang.split('-')[0])
       }
     } catch (error: any) {
@@ -31,34 +31,32 @@ export default function CoupleProvider({ children }: CoupleProviderProps) {
     }
   }
 
-  async function handleGetCoupleById(id: string): Promise<void> {
+  async function handleGetChildById(id: string): Promise<void> {
     try {
-      const response = await get_couple_id(id)
-      if (response) set_couple(response)
+      const response = await get_child_id(id)
+      if (response) set_child(response)
     } catch (error: any) {
       console.error(error)
     }
   }
 
   return (
-    <CoupleContext.Provider
+    <ChildContext.Provider
       value={{
-        couple,
-
+        child,
         //
-        set_couple,
-
+        set_child,
         //
-        handleGetCoupleBySlug,
-        handleGetCoupleById,
+        handleGetChildBySlug,
+        handleGetChildById,
       }}
     >
       {children}
-    </CoupleContext.Provider>
+    </ChildContext.Provider>
   )
 }
 
 export const useCouple = () => {
-  const context = useContext(CoupleContext)
+  const context = useContext(ChildContext)
   return context
 }

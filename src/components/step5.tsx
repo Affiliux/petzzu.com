@@ -20,20 +20,19 @@ import { ThemeShowTypeEnum } from '@/enums'
 
 interface Step5Props {
   theme: ThemeShowTypeEnum
-  couple: CreatePrePayloadProps
+  child: CreatePrePayloadProps
   selected: YouTubeVideoProps | undefined
-  setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
   setSong: Dispatch<SetStateAction<YouTubeVideoProps | undefined>>
   onNext: () => Promise<void>
   onBack: () => void
 }
 
-export const Step5 = ({ theme, couple, selected, setSong, onNext, onBack }: Step5Props) => {
+export const Step5 = ({ theme, child, selected, setSong, onNext, onBack }: Step5Props) => {
   const t = useTranslations()
 
   const { yt_search_list, set_yt_search_list, handleGetYtVideos } = useApplication()
 
-  const [value, setValue] = useState<string | undefined>(couple.yt_song)
+  const [value, setValue] = useState<string | undefined>(child.yt_song)
   const [loading, setLoading] = useState<boolean>(false)
 
   const debouncedInput = useDebounce(value, 500)

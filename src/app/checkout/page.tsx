@@ -24,15 +24,13 @@ export default function Page() {
 
   const { discount, plans, currency } = useApplication()
   const {
-    animations,
     pre,
     payment,
     handleCreateFromPre,
     handleCheckPayment,
     plan,
     set_payment,
-    set_animation,
-    set_couple,
+    set_child,
     set_plan,
     set_pre_medias,
     set_pre,
@@ -47,9 +45,8 @@ export default function Page() {
     set_pre(null)
     set_payment(null)
 
-    set_couple({} as CreatePrePayloadProps)
+    set_child({} as CreatePrePayloadProps)
 
-    set_animation(animations[0])
     set_plan(undefined)
     set_song(undefined)
 

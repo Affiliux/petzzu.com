@@ -1,8 +1,8 @@
-import { CoupleResponseProps } from '@/typings/couple'
+import { ChildResponseProps } from '@/typings/child'
 
 import { api } from '..'
 
-export async function get_couple_id(id: string): Promise<CoupleResponseProps> {
+export async function get_child_id(id: string): Promise<ChildResponseProps> {
   try {
     const { data: response } = await api.get(`website/findOne-id/${id}`)
     return response
@@ -11,7 +11,7 @@ export async function get_couple_id(id: string): Promise<CoupleResponseProps> {
   }
 }
 
-export async function get_couple_slug(slug: string): Promise<CoupleResponseProps> {
+export async function get_child_slug(slug: string): Promise<ChildResponseProps> {
   try {
     const { data: response } = await api.get(`website/findOne-slug/${slug}`)
     return response

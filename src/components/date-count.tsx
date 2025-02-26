@@ -85,7 +85,7 @@ export const DateCount = ({ date, type }: { date: string; type: DateShowTypeEnum
         </div>
       ) : (
         <div>
-          <p className={`${lora.className} text-white text-xl text-center font-bold`}>{t('themes.default.together')}</p>
+          <p className={`${lora.className} text-black text-xl text-center font-bold`}>{t('themes.default.together')}</p>
 
           <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 mt-8'>
             <div className='group/card w-full lg:min-w-[7rem] h-[5rem] hover:shadow-2xl hover:shadow-rose-500/[0.1] flex flex-col lg:bg-black/50 bg-black/80 backdrop-blur-xl items-center justify-center rounded-xl p-4'>

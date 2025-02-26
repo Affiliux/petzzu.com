@@ -45,7 +45,7 @@
   "themes": {
     "default": {
       "awaiting": "Esperando o grande dia!",
-      "together": "Compartilhando momentos há",
+      "together": "Em nossas vidas há",
       "surprise": "Surpresaa!",
       "years": "anos",
       "months": "meses",
@@ -397,15 +397,25 @@
       "title": "Mensagem",
       "description": "Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho.",
       "input": {
+        "picture": {
+          "title": "PNG, JPG, JPEG, GIF (máx. 1 foto)",
+          "label": "Foto principal"
+        },
         "label": "Mensagem",
         "placeholder": "Ex: João, você é a pessoa mais incrível que já conheci. Obrigado por tudo!",
         "errors": {
           "min": "Mínimo de 2 caracteres",
-          "max": "Máximo de {limit} caracteres"
+          "max": "Máximo de {limit} caracteres",
+          "maxFiles": "Máximo de 1 foto permitida"
         }
       },
       "back": "Voltar etapa",
-      "button": "Próxima etapa"
+      "button": "Próxima etapa",
+      "gender": {
+        "title": "Gênero",
+        "male": "Masculino",
+        "female": "Feminino"
+      }
     },
     "step3": {
       "title": "Data de início",
