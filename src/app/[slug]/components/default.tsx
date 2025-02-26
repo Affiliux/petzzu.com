@@ -24,7 +24,7 @@ import { Vortex } from '@/components/ui/vortex'
 
 import { BabyTimeline } from '../../../components/baby-timeline'
 
-import { BackgroundAnimationEnum, DateShowTypeEnum } from '@/enums'
+import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
 
 const lora = Lora({
   weight: ['400', '700'],
@@ -52,7 +52,7 @@ export const DefaultTheme = ({ couple }: DefaultThemeProps) => {
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
               {!!couple?.media.length && (
                 <div className='w-full lg:w-3/4 mb-10'>
-                  <CarouselPhotos type={couple.imageShowType ?? 'coverflow'} images={couple.media} />
+                  <CarouselPhotos type={couple.imageShowType as PhotosSliderEnum} images={couple.media} />
                 </div>
               )}
 

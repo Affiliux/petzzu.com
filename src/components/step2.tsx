@@ -1,60 +1,102 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 
+import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
-import { useForm } from 'react-hook-form'
-import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconLoader, IconX } from '@tabler/icons-react'
 
-import { CreatePrePayloadProps } from '@/typings/create'
+import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 
-import RichTextEditor from './ui/text-editor'
+import { toast } from '@/hooks/use-toast'
 
-import { ThemeShowTypeEnum } from '@/enums'
+import { Calendar } from './ui/calendar'
+import { RenderImage } from './render-image'
+import { useApplication } from '../contexts/ApplicationContext'
+
+import { MAX_FILE_SIZE, MAX_FILES } from '@/constants'
+import { Sex } from '@/enums'
 
 interface Step2Props {
-  theme: ThemeShowTypeEnum
-  couple: CreatePrePayloadProps
-  setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  child: CreatePrePayloadProps
+  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
   onBack: () => void
+  onSaveMedia: (media: FormData) => Promise<void>
+  onRemoveMedia: (id: string) => Promise<void>
+  medias: MediaPreProps[]
 }
 
-export const Step2 = ({ theme, couple, setCouple, onNext, onBack }: Step2Props) => {
+export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMedia, medias }: Step2Props) => {
   const t = useTranslations()
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const {
-    handleSubmit,
-    setValue,
-    setError,
-    clearErrors,
-    formState: { errors },
-  } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      message: couple.message ?? '',
-    },
-  })
+  const { locale } = useApplication()
+  const [date, setDate] = useState<Date | undefined>(child?.birth_date ? new Date(child?.birth_date) : undefined)
 
-  const VALUE = couple.message
-    ?.replaceAll('<p>', '')
-    .replaceAll('</p>', '')
-    .replaceAll('<em>', '')
-    .replaceAll('</em>', '')
-    .replaceAll('<strong>', '')
-    .replaceAll('</strong>', '')
-    .replaceAll('<s>', '')
-    .replaceAll('</s>', '')
-  const DISABLED = loading || !couple.message?.length || !!errors.message?.message
-
-  async function onSubmit(values: { message: string }) {
+  async function onSelectFiles(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault()
     setLoading(true)
 
     try {
-      setCouple({ ...couple, message: values.message })
+      if (!event.target.files) return
+      const new_files = Array.from(event.target.files)
+
+      if (medias?.length + new_files.length > 1) {
+        toast({
+          variant: 'destructive',
+          title: 'Image Error!!',
+          description: t('steps.step2.input.errors.maxFiles'),
+        })
+
+        return
+      }
+
+      await Promise.all(
+        new_files.map(async file => {
+          if (file.size === 0) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.empty'),
+            })
+          } else if (file.size > MAX_FILE_SIZE) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.big-size'),
+            })
+          } else if (!file.type.startsWith('image/')) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.not-image'),
+            })
+          } else {
+            const formData = new FormData()
+            formData.append('file', file)
+            await onSaveMedia(formData)
+          }
+        }),
+      )
+    } catch (error: any) {
+      console.error(error)
+
+      toast({
+        title: t('steps.step4.toast.error-save.title'),
+        description: t('steps.step4.toast.error-save.description'),
+        variant: 'destructive',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function onSubmit() {
+    setLoading(true)
+
+    try {
       await onNext()
     } catch (error) {
       console.error(error)
@@ -63,44 +105,108 @@ export const Step2 = ({ theme, couple, setCouple, onNext, onBack }: Step2Props) 
     }
   }
 
+  async function onRemove(id: string) {
+    setLoading(true)
+
+    try {
+      await onRemoveMedia(id)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const sex = [
+    { id: 1, name: t('steps.step2.gender.male'), data: Sex.MALE },
+    { id: 2, name: t('steps.step2.gender.female'), data: Sex.FEMALE },
+  ]
+
+  useEffect(() => {
+    if (date) setChild({ ...child, birth_date: date.toISOString() })
+  }, [date])
+
   return (
-    <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={handleSubmit(onSubmit)}>
-      <div className='relative'>
-        <RichTextEditor
-          placeholder={t('steps.step2.input.placeholder')}
-          value={couple.message ?? ''}
-          onChange={e => {
-            const formated = e
-              ?.replaceAll('<p>', '')
-              .replaceAll('</p>', '')
-              .replaceAll('<em>', '')
-              .replaceAll('</em>', '')
-              .replaceAll('<strong>', '')
-              .replaceAll('</strong>', '')
-              .replaceAll('<s>', '')
-              .replaceAll('</s>', '')
+    <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
+      <Calendar
+        mode='single'
+        locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
+        captionLayout='dropdown'
+        className={'rounded-md border border-neutral-300 flex items-center justify-center relative z-50'}
+        selected={date}
+        onSelect={setDate}
+        fromYear={2010}
+        toYear={new Date().getFullYear()}
+      />
 
-            if (theme === ThemeShowTypeEnum.DEFAULT) {
-              if (formated.length > 750)
-                setError('message', { message: t('steps.step2.input.errors.max', { limit: 750 }) })
-              if (formated.length <= 750) clearErrors()
-            } else {
-              if (formated.length > 400)
-                setError('message', { message: t('steps.step2.input.errors.max', { limit: 400 }) })
-              if (formated.length <= 400) clearErrors()
-            }
-
-            setValue('message', e)
-            setCouple({ ...couple, message: e })
-          }}
+      <h2 className='font-semibold text-black'>{t('steps.step2.input.picture.label')}</h2>
+      <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
+        <input
+          type='file'
+          accept='image/*'
+          size={100 * 1024 * 1024}
+          className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
+          onChange={onSelectFiles}
         />
 
-        <p className='absolute bottom-2 right-3 text-xs text-neutral-400'>
-          {VALUE?.length ?? 0}/{theme === ThemeShowTypeEnum.DEFAULT ? 750 : 400}
-        </p>
+        <div className='text-center'>
+          <h3 className='mt-2 text-sm font-medium text-white'>
+            <label htmlFor='file-upload' className='relative cursor-pointer'>
+              <span>{t('steps.step2.input.picture.title')}</span>
+            </label>
+          </h3>
+          <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
+        </div>
+
+        <div className='grid grid-cols-4 gap-4 mt-8'>
+          {medias?.map(file => (
+            <div
+              key={file.id}
+              className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
+            >
+              <RenderImage
+                src={file.url}
+                alt={file.id}
+                className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
+                height={65}
+                width={65}
+              />
+
+              <button
+                onClick={() => onRemove(file.id)}
+                disabled={loading}
+                className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+              >
+                <IconX size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <p className='text-red-500 text-sm mt-2 text-right'>{errors.message?.message}</p>
+      <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
+      <div className='w-full space-y-6'>
+        <div className='flex flex-col md:flex-row gap-4'>
+          {sex.map(sex => (
+            <label
+              key={sex.id}
+              className='flex items-center space-x-3 space-y-0 rounded-lg border p-4 cursor-pointer hover:bg-accent [&:has([data-state=checked])]:border-primary w-full'
+            >
+              <input
+                type='radio'
+                name='gender'
+                value={sex.data}
+                checked={child.sex === sex.data}
+                onChange={() => setChild({ ...child, sex: sex.data })}
+                className='form-radio data-[state=checked]:border-primary data-[state=checked]:bg-primary'
+              />
+              <div className='space-y-1'>
+                <p className='text-sm font-medium leading-none'>{sex.name}</p>
+              </div>
+            </label>
+          ))}
+        </div>
+      </div>
 
       <div className='flex items-center justify-between gap-4 mt-4'>
         <button
@@ -119,10 +225,10 @@ export const Step2 = ({ theme, couple, setCouple, onNext, onBack }: Step2Props) 
           </span>
         </button>
         <button
-          type='submit'
-          disabled={DISABLED}
+          onClick={onSubmit}
+          disabled={loading || medias?.length === 0}
           className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            DISABLED ? 'opacity-50' : ''
+            loading || medias?.length === 0 ? 'opacity-50' : ''
           }`}
         >
           <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
@@ -130,13 +236,13 @@ export const Step2 = ({ theme, couple, setCouple, onNext, onBack }: Step2Props) 
               <IconLoader size={20} className='animate-spin' />
             ) : (
               <>
-                {t('steps.step2.button')}
+                {medias?.length ? t('steps.step4.button') : t('config.skip')}
                 <IconChevronRight size={20} className='ml-4' />
               </>
             )}
           </span>
         </button>
       </div>
-    </form>
+    </div>
   )
 }

@@ -12,7 +12,7 @@ import {
   StepsProps,
   YouTubeVideoProps,
 } from '@/typings/application'
-import { PaymentProps } from '@/typings/couple'
+import { PaymentProps } from '@/typings/child'
 import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 
 import { HeaderStep } from './header-step'
@@ -25,6 +25,7 @@ import { Step4 } from './step4'
 import { Step5 } from './step5'
 import { Step6 } from './step6'
 import { Step7 } from './step7'
+import { DeleteFileResponse, UploadFileResponse } from '../typings/timeline'
 
 import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 
@@ -35,22 +36,19 @@ interface StepsComponentProps {
   step: number
   steps: StepsProps[]
   plans: PlanProps[]
-  animations: BackgroundAnimationProps[]
   //
-  couple: CreatePrePayloadProps
+  child: CreatePrePayloadProps
   payment: PaymentProps | null
   medias: MediaPreProps[]
   song?: YouTubeVideoProps
-  animation: BackgroundAnimationProps
   mediaShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum
   plan?: PlanProps
   discount: DiscountProps | null
   //
-  setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   setSong: Dispatch<SetStateAction<YouTubeVideoProps | undefined>>
-  setAnimation: Dispatch<SetStateAction<BackgroundAnimationProps>>
   setMediaShowType: Dispatch<SetStateAction<PhotosSliderEnum>>
   setDateShowType: Dispatch<SetStateAction<DateShowTypeEnum>>
   setThemeShowType: Dispatch<SetStateAction<ThemeShowTypeEnum>>
@@ -60,8 +58,10 @@ interface StepsComponentProps {
   onClose: () => void
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
+  // onNewMediaTimeline: (idPreWebsiteTimeLine: string, file: File) => Promise<UploadFileResponse>;
+  // onRemoveMediaTimeline: (idPreWebsiteTimeLine: string, idFile: string) => Promise<DeleteFileResponse>;
   onUpdate: () => Promise<void>
-  onCreatePre: (coupleName: string) => Promise<void>
+  onCreatePre: (child_name: string) => Promise<void>
 }
 
 export const Steps = ({
@@ -71,20 +71,17 @@ export const Steps = ({
   step,
   steps,
   plans,
-  animations,
   //
-  couple,
+  child,
   medias,
   mediaShowType,
   dateShowType,
   song,
-  animation,
   plan,
   discount,
   //
-  setCouple,
+  setChild,
   setSong,
-  setAnimation,
   setMediaShowType,
   setDateShowType,
   setPlan,
@@ -98,8 +95,6 @@ export const Steps = ({
 }: StepsComponentProps) => {
   const t = useTranslations()
   const router = useRouter()
-
-  const IS_DEFAULT = theme === ThemeShowTypeEnum.DEFAULT
 
   return (
     <div className='relative w-full h-full z-50' id='startSteps'>
@@ -117,13 +112,13 @@ export const Steps = ({
           {step === 1 && (
             <Step1
               theme={theme}
-              couple={couple}
-              setCouple={setCouple}
+              child={child}
+              setChild={setChild}
               onBack={onClose}
               onNew={
                 !pre
-                  ? async (coupleName: string) => {
-                      await onCreatePre(coupleName)
+                  ? async (child_name: string) => {
+                      await onCreatePre(child_name)
                       setStep(2)
                     }
                   : null
@@ -137,9 +132,11 @@ export const Steps = ({
 
           {step === 2 && (
             <Step2
-              theme={theme}
-              couple={couple}
-              setCouple={setCouple}
+              child={child}
+              setChild={setChild}
+              medias={medias}
+              onSaveMedia={onNewMedia}
+              onRemoveMedia={onRemoveMedia}
               onBack={() => setStep(1)}
               onNext={async () => {
                 await onUpdate()
@@ -150,11 +147,11 @@ export const Steps = ({
 
           {step === 3 && (
             <Step3
-              theme={theme}
-              couple={couple}
-              dateShowType={dateShowType}
-              setCouple={setCouple}
-              setDateShowType={setDateShowType}
+              child={child}
+              setChild={setChild}
+              medias={medias}
+              // onSaveMedia={onNewMediaTimeline}
+              // onRemoveMedia={onRemoveMediaTimeline}
               onBack={() => setStep(2)}
               onNext={async () => {
                 await onUpdate()
@@ -182,32 +179,13 @@ export const Steps = ({
           {step === 5 && (
             <Step5
               theme={theme}
-              couple={couple}
-              setCouple={setCouple}
+              child={child}
               selected={song}
               setSong={setSong}
               onBack={() => setStep(4)}
               onNext={async () => {
                 await onUpdate()
-
-                if (IS_DEFAULT) setStep(6)
-                else {
-                  await onUpdate()
-                  router.push('/checkout')
-                }
-              }}
-            />
-          )}
-
-          {step === 6 && (
-            <Step6
-              animations={animations}
-              selected={animation}
-              setAnimation={setAnimation}
-              onBack={() => setStep(5)}
-              onNext={async () => {
-                await onUpdate()
-                setStep(7)
+                setStep(6)
               }}
             />
           )}
@@ -219,8 +197,7 @@ export const Steps = ({
               selected={plan}
               setPlan={setPlan}
               onBack={() => {
-                if (IS_DEFAULT) setStep(6)
-                else setStep(5)
+                setStep(6)
               }}
               onNext={async () => {
                 await onUpdate()
@@ -231,19 +208,14 @@ export const Steps = ({
         </div>
 
         <div className='w-full lg:w-1/2 h-full'>
-          {theme === ThemeShowTypeEnum.DEFAULT && (
-            <PreviewDefault
-              couple={couple}
-              medias={medias}
-              song={song}
-              dateShowType={dateShowType}
-              mediaShowType={mediaShowType}
-              animation={animation}
-              plan={plan}
-            />
-          )}
-
-          {theme === ThemeShowTypeEnum.NETFLIX && <PreviewNetflix couple={couple} medias={medias} song={song} />}
+          <PreviewDefault
+            child={child}
+            medias={medias}
+            song={song}
+            dateShowType={dateShowType}
+            mediaShowType={mediaShowType}
+            plan={plan}
+          />
         </div>
       </div>
     </div>

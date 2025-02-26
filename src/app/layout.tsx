@@ -66,7 +66,7 @@ export default async function RootLayout({
             {children}
 
             <Toaster />
-            <Script src='https://cdn.utmify.com.br/scripts/utms/latest.js' data-utmify-prevent-subids async defer />
+            {/* <Script src='https://cdn.utmify.com.br/scripts/utms/latest.js' data-utmify-prevent-subids async defer /> */}
           </body>
         </Providers>
       </NextIntlClientProvider>

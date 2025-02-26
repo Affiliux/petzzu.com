@@ -120,7 +120,7 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   useEffect(() => {
     const root = document.documentElement
     Object.entries(themes[theme]).forEach(([key, value]) => {
-      root.style.setProperty(key, value)
+      root.style.setProperty(key, value as string)
     })
   }, [theme])
 

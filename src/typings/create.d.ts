@@ -1,23 +1,25 @@
-import { MediaProps, PaymentProps } from './couple'
+import { MediaProps, PaymentProps } from './child'
+import { TimelineEntry } from './timeline'
 
 import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 
 // Create pre with the following properties:
 export type CreatePreProps = {
-  coupleName: string
-  message?: string
-  startDate?: string
+  child_name: string
+  message: string
+  birth_date: string
+  parent_name: string
+  sex: string
   yt_song?: string
   lang?: string
-  backgroundAnimation?: string
-  backgroundEmojis?: string[]
   imageShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum
 }
-
 // Create Pre
-export interface CreatePrePayloadProps extends CreatePreProps {}
+export interface CreatePrePayloadProps extends CreatePreProps {
+  timeLine: TimelineEntry[]
+}
 export interface CreatePreResponseProps {
   success: boolean
   id: string
@@ -90,13 +92,15 @@ export interface CreateFromPreResponseProps extends PaymentProps {
 // Get pre with the following properties:
 export type PreProps = {
   id: string
-  coupleName: string
+  child_name: string
   message: string
-  startDate: string
+  parent_name: string
+  lang: string
+  birth_date: string
+  sex: string
   media: MediaProps[]
+  timeLine: TimelineEntry[]
   yt_song: string
-  backgroundAnimation: string
-  backgroundEmojis: string
   imageShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum

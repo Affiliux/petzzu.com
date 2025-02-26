@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react'
 
-import { CoupleResponseProps, PaymentProps } from '@/typings/couple'
+import { ChildResponseProps, PaymentProps } from '@/typings/child'
 
-export type CoupleProviderProps = {
+export type ChildProviderProps = {
   children: ReactNode
 }
 
-export type CoupleContextType = {
-  couple: CoupleResponseProps | null
+export type ChildContextType = {
+  child: ChildResponseProps | null
   //
-  set_couple: (couple: CoupleResponseProps | null) => void
+  set_child: (Child: ChildResponseProps | null) => void
   //
-  handleGetCoupleBySlug: (slug: string) => Promise<void>
-  handleGetCoupleById: (id: string) => Promise<void>
+  handleGetChildBySlug: (slug: string) => Promise<void>
+  handleGetChildById: (id: string) => Promise<void>
 }

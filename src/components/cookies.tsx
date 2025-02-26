@@ -38,7 +38,7 @@ export const Cookies = () => {
         <div className='flex items-center justify-between mb-2'>
           <div className='flex items-center'>
             <img src='https://www.svgrepo.com/show/401340/cookie.svg' alt='Cookie' className='h-6 w-6 mr-2' />
-            <span className='text-white font-bold text-sm'>{t('title')}</span>
+            <span className='text-black font-bold text-sm'>{t('title')}</span>
           </div>
           <button onClick={handleDecline} className='text-gray-500 hover:text-gray-700 focus:outline-none'>
             <svg className='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
