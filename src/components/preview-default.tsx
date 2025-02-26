@@ -17,7 +17,9 @@ import { AuroraBackground } from './ui/aurora-background'
 import { Meteors } from './ui/meteors'
 import { ShootingStars } from './ui/shooting-stars'
 import { StarsBackground } from './ui/stars-background'
+import { Timeline } from './ui/timeline'
 import { Vortex } from './ui/vortex'
+import { BabyTimeline } from './baby-timeline'
 import { CarouselPhotos } from './carousel'
 import { DateCount } from './date-count'
 import { EmojiRain } from './emoji-rain'
@@ -111,67 +113,8 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
             />
 
             {!!child?.birth_date && <DateCount type={dateShowType} date={child.birth_date} />}
-          </div>
-        )}
 
-        {dateShowType === DateShowTypeEnum.CLASSIC && (
-          <div className='rounded-lg h-full'>
-            <h1
-              className={`${dancing.className} text-3xl text-[#FF0000] font-bold text-center ${
-                !!medias.length ? 'mt-12' : 'mb-4'
-              }`}
-            >
-              {child?.child_name}
-            </h1>
-
-            {!!medias.length && (
-              <div className='flex items-center justify-center w-full my-10'>
-                <CarouselPhotos type={mediaShowType} images={medias} />
-              </div>
-            )}
-
-            {!!child?.birth_date && <DateCount type={dateShowType} date={child.birth_date} />}
-
-            <p
-              className={`${lora.className} text-neutral-900 text-md text-center mt-2`}
-              dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
-            />
-          </div>
-        )}
-
-        {dateShowType === DateShowTypeEnum.SIMPLE && (
-          <div className='rounded-lg h-full'>
-            {!!child?.birth_date && (
-              <div className='my-10'>
-                <DateCount type={dateShowType} date={child.birth_date} />
-              </div>
-            )}
-
-            {!!medias.length && (
-              <div className='flex items-center justify-center w-full'>
-                <CarouselPhotos type={mediaShowType} images={medias} />
-              </div>
-            )}
-
-            {child.birth_date && (
-              <p className='text-sm font-semibold text-center text-neutral-900 mt-8 mb-14 opacity-60'>
-                {t('themes.default.since')} {format(new Date(child.birth_date), 'dd')} {t('themes.default.of')}{' '}
-                {format(new Date(child.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
-                {format(new Date(child.birth_date), 'yyy', { locale: ptBR })}
-              </p>
-            )}
-
-            <h1
-              className={`${dancing.className} text-3xl text-[#FF0000] font-bold text-center ${
-                !!medias.length && 'mt-12'
-              }`}
-            >
-              {child?.birth_date}
-            </h1>
-            <p
-              className={`${lora.className} text-neutral-900 text-md text-center mt-3`}
-              dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
-            />
+            {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
           </div>
         )}
       </div>

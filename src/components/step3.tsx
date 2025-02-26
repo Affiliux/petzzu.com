@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
@@ -15,6 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 import { Calendar } from './ui/calendar'
 import { Input } from './ui/input'
 import RichTextEditor from './ui/text-editor'
+import { useApplication } from '../contexts/ApplicationContext'
 import { useCreate } from '../contexts/CreateContext'
 import { useTimeline } from '../contexts/TimelineContext'
 
@@ -28,10 +30,12 @@ interface Step2Props {
 
 export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) => {
   const { createTimeline, updateTimeline, deleteTimeline } = useTimeline()
+  const [timelineEntries, setTimelineEntries] = useState(child.timeLine || [])
   const { pre } = useCreate()
   const [loading, setLoading] = useState(false)
 
   const t = useTranslations()
+  const { locale } = useApplication()
 
   const {
     register,
@@ -49,8 +53,6 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
     },
   })
 
-  const [timelineEntries, setTimelineEntries] = useState(child.timeLine || [])
-
   useEffect(() => {
     setChild({ ...child, timeLine: timelineEntries })
   }, [timelineEntries])
@@ -65,9 +67,10 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
-    setTimelineEntries(prev => [...prev, newEntry])
     try {
-      await createTimeline(pre, newEntry)
+      const response = await createTimeline(pre, newEntry)
+      const updatedEntry = { ...newEntry, id: response.id }
+      setTimelineEntries(prev => [...prev, updatedEntry])
     } catch (error) {
       toast({ variant: 'destructive', title: 'Error creating timeline entry', description: error.message })
     }
@@ -79,6 +82,19 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
       await deleteTimeline(id)
     } catch (error) {
       toast({ variant: 'destructive', title: 'Error deleting timeline entry', description: error.message })
+    }
+  }
+
+  const handleUpdateTimelineEntry = async (id: string, updatedEntry: any) => {
+    try {
+      const response = await updateTimeline(id, updatedEntry)
+      const updatedTimelineEntry = {
+        ...updatedEntry,
+        ...response,
+      }
+      setTimelineEntries(prev => prev.map(entry => (entry.id === id ? updatedTimelineEntry : entry)))
+    } catch (error) {
+      toast({ variant: 'destructive', title: 'Error updating timeline entry', description: error.message })
     }
   }
 
@@ -111,6 +127,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   onChange={e => {
                     const updatedEntry = { ...entry, title: e.target.value }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                    handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
                 />
                 <RichTextEditor
@@ -118,16 +135,22 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   onChange={newDesc => {
                     const updatedEntry = { ...entry, description: newDesc }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                    handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
                   placeholder={''}
                 />
                 <Calendar
                   mode='single'
+                  captionLayout='dropdown'
+                  locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
                   selected={new Date(entry.date)}
                   onSelect={selectedDate => {
                     const updatedEntry = { ...entry, date: selectedDate.toISOString() }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                    handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
+                  fromYear={1950}
+                  toYear={new Date().getFullYear()}
                 />
                 <div className='mt-4 flex justify-end'>
                   <button
