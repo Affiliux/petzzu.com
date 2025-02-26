@@ -43,10 +43,10 @@ export function Footer() {
         <div className='w-full md:w-1/3 md:flex md:justify-end mt-4 md:mt-0 pr-10'>
           <ul className='text-sm text-neutral-800 mt-4'>
             <li className='py-1'>
-              <Link href='https://instagram.com/babyzzu_'>{t('footer.instagram')}</Link>
+              <Link href='https://www.instagram.com/babyzzu.oficial/'>{t('footer.instagram')}</Link>
             </li>
             <li className='py-1'>
-              <Link href='https://tiktok.com/babyzzu.com'>{t('footer.tiktok')}</Link>
+              <Link href='https://www.tiktok.com/@babyzzu.oficial'>{t('footer.tiktok')}</Link>
             </li>
           </ul>
         </div>
