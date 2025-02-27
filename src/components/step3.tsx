@@ -49,7 +49,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
       }),
     ),
     defaultValues: {
-      title: child.timeLine.map(entry => entry.title),
+      title: child?.timeLine?.map(entry => entry.title),
     },
   })
 
@@ -127,16 +127,17 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   onChange={e => {
                     const updatedEntry = { ...entry, title: e.target.value }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                    handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
+                  onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
                 />
+
                 <RichTextEditor
                   value={entry.description}
                   onChange={newDesc => {
                     const updatedEntry = { ...entry, description: newDesc }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                    handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
+                  onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
                   placeholder={''}
                 />
                 <Calendar
