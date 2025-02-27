@@ -49,7 +49,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
       }),
     ),
     defaultValues: {
-      title: child.timeLine.map(entry => entry.title),
+      title: child?.timeLine?.map(entry => entry.title),
     },
   })
 
