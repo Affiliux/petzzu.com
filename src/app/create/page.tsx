@@ -314,6 +314,8 @@ export default function Page() {
         onUpdate={async () => await onUpdatePre()}
         onNewMedia={async media => await handleNewMedia({ id: pre!, file: media })}
         onRemoveMedia={async id => await handleRemoveMedia({ idPreWebsite: pre!, idFile: id })}
+        onNewMediaTimeline={async (idPreTimeline, media) => await uploadTimelineFile(idPreTimeline, media)}
+        onRemoveMediaTimeline={async (idPreTimeline, id) => await deleteTimelineFile(idPreTimeline, id)}
         onClose={() => {
           set_pre(null)
           set_payment(null)
