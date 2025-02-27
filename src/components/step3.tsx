@@ -53,6 +53,16 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
     },
   })
 
+  const VALUE = child.timeLine?.map(entry => entry.description) || ''
+    ?.replaceAll('<p>', '')
+    .replaceAll('</p>', '')
+    .replaceAll('<em>', '')
+    .replaceAll('</em>', '')
+    .replaceAll('<strong>', '')
+    .replaceAll('</strong>', '')
+    .replaceAll('<s>', '')
+    .replaceAll('</s>', '')
+
   useEffect(() => {
     setChild({ ...child, timeLine: timelineEntries })
   }, [timelineEntries])
@@ -114,7 +124,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
       <Accordion type='multiple' className='w-full'>
         {timelineEntries.map((entry, index) => (
           <AccordionItem key={entry.id} value={entry.id}>
-            <AccordionTrigger>{`Lembrança ${index + 1}`}</AccordionTrigger>
+            <AccordionTrigger noUnderline>{`Lembrança ${index + 1}`}</AccordionTrigger>
             <AccordionContent>
               <div className='flex flex-col gap-4'>
                 <Input
@@ -130,7 +140,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   }}
                   onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
                 />
-
+              <div className='relative'>
                 <RichTextEditor
                   value={entry.description}
                   onChange={newDesc => {
@@ -140,6 +150,10 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
                   placeholder={''}
                 />
+
+                <p className='absolute bottom-2 right-3 text-xs text-neutral-900'>{VALUE?.length ?? 0}/100</p>
+              </div>
+
                 <Calendar
                   mode='single'
                   captionLayout='dropdown'

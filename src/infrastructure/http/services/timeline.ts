@@ -36,23 +36,10 @@ export async function upload_timeline_file(
   payload: NewMediaPayloadProps,
 ): Promise<UploadFileResponse> {
   try {
-    const formData = new FormData()
-
-    if (payload.file instanceof File) {
-      formData.append('file', payload.file)
-    } else {
-      throw new Error('Invalid file type')
-    }
-
-    const { data: response } = await api.patch(`website/pre/timeLine/file/${idPreWebsiteTimeLine}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-
+    const { data: response } = await api.patch(`website/pre/timeLine/file/${idPreWebsiteTimeLine}`, payload.file)
     return response
   } catch (error: any) {
-    throw new Error(error.response?.data?.message ?? 'Error uploading file')
+    throw new Error(error.response.data.message ?? '')
   }
 }
 

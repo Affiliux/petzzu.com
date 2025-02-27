@@ -58,8 +58,6 @@ interface StepsComponentProps {
   onClose: () => void
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
-  // onNewMediaTimeline: (idPreWebsiteTimeLine: string, file: File) => Promise<UploadFileResponse>;
-  // onRemoveMediaTimeline: (idPreWebsiteTimeLine: string, idFile: string) => Promise<DeleteFileResponse>;
   onUpdate: () => Promise<void>
   onCreatePre: (child_name: string) => Promise<void>
 }
