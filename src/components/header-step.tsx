@@ -90,7 +90,7 @@ export function HeaderStep({ theme, activeStep, steps, setStep }: HeaderStepProp
       </div>
 
       <div className='mt-8'>
-        <h2 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+        <h2 className='bg-clip-text text-black bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
           {steps[activeStep - 1].title}
         </h2>
         <p className='max-w-xl text-left text-base relative md:text-md text-neutral-300'>

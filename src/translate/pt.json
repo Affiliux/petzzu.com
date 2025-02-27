@@ -415,8 +415,8 @@
       }
     },
     "step3": {
-      "title": "Data de início",
-      "description": "Informe a data de início que simbolize o início de uma união, relacionamento, amizade, etc.",
+      "title": "Adicione Lembranças Especiais",
+      "description": "Acrescente quantas lembranças quiser. Por exemplo: Primeiro banho, Primeiro sorriso.",
       "show-types": {
         "title": "Modo de mostrar",
         "default": "Padrão",
