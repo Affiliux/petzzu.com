@@ -58,14 +58,12 @@ export default function Page() {
     {
       id: 1,
       title: t('steps.step1.title'),
-      description: t('steps.step1.description'),
       checked: !!child.child_name,
       skip: false,
     },
     {
       id: 2,
       title: t('steps.step2.title'),
-      description: t('steps.step2.description'),
       checked: !!child.message,
       skip: false,
     },
