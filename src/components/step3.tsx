@@ -53,15 +53,17 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
     },
   })
 
-  const VALUE = child.timeLine?.map(entry => entry.description) || ''
-    ?.replaceAll('<p>', '')
-    .replaceAll('</p>', '')
-    .replaceAll('<em>', '')
-    .replaceAll('</em>', '')
-    .replaceAll('<strong>', '')
-    .replaceAll('</strong>', '')
-    .replaceAll('<s>', '')
-    .replaceAll('</s>', '')
+  const VALUE =
+    child.timeLine?.map(entry => entry.description) ||
+    ''
+      ?.replaceAll('<p>', '')
+      .replaceAll('</p>', '')
+      .replaceAll('<em>', '')
+      .replaceAll('</em>', '')
+      .replaceAll('<strong>', '')
+      .replaceAll('</strong>', '')
+      .replaceAll('<s>', '')
+      .replaceAll('</s>', '')
 
   useEffect(() => {
     setChild({ ...child, timeLine: timelineEntries })
@@ -140,19 +142,19 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   }}
                   onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
                 />
-              <div className='relative'>
-                <RichTextEditor
-                  value={entry.description}
-                  onChange={newDesc => {
-                    const updatedEntry = { ...entry, description: newDesc }
-                    setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                  }}
-                  onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
-                  placeholder={''}
-                />
+                <div className='relative'>
+                  <RichTextEditor
+                    value={entry.description}
+                    onChange={newDesc => {
+                      const updatedEntry = { ...entry, description: newDesc }
+                      setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                    }}
+                    onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
+                    placeholder={''}
+                  />
 
-                <p className='absolute bottom-2 right-3 text-xs text-neutral-900'>{VALUE?.length ?? 0}/100</p>
-              </div>
+                  <p className='absolute bottom-2 right-3 text-xs text-neutral-900'>{VALUE?.length ?? 0}/100</p>
+                </div>
 
                 <Calendar
                   mode='single'
