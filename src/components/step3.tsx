@@ -238,7 +238,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
                   locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
                   selected={new Date(entry.date)}
                   onSelect={selectedDate => {
-                    const updatedEntry = { ...entry, date: selectedDate.toISOString() }
+                    const updatedEntry = { ...entry, date: selectedDate?.toISOString() }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
                     handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
