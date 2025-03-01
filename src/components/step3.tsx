@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconChevronLeft, IconChevronRight, IconLoader, IconPlus, IconTrash, IconX } from '@tabler/icons-react'
 
-import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
+import { CreatePrePayloadProps, MediaPreProps, NewMediaPayloadProps } from '@/typings/create'
 
 import { toast } from '@/hooks/use-toast'
 
@@ -16,20 +16,25 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 import { Calendar } from './ui/calendar'
 import { Input } from './ui/input'
 import RichTextEditor from './ui/text-editor'
+import { RenderImage } from './render-image'
+import { MAX_FILE_SIZE } from '../constants'
 import { useApplication } from '../contexts/ApplicationContext'
 import { useCreate } from '../contexts/CreateContext'
 import { useTimeline } from '../contexts/TimelineContext'
+import { DeleteFileResponse, UploadFileResponse } from '../typings/timeline'
 
-interface Step2Props {
+interface Step3Props {
   child: CreatePrePayloadProps
   setChild: React.Dispatch<React.SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
   onBack: () => void
   medias: MediaPreProps[]
+  onSaveMedia: (id: string, media: FormData) => Promise<UploadFileResponse>
+  onRemoveMedia: (idPreTimeline: string, id: string) => Promise<DeleteFileResponse>
 }
 
-export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) => {
-  const { createTimeline, updateTimeline, deleteTimeline } = useTimeline()
+export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, onRemoveMedia }: Step3Props) => {
+  const { createTimeline, updateTimeline, deleteTimeline, uploadTimelineFile } = useTimeline()
   const [timelineEntries, setTimelineEntries] = useState(child.timeLine || [])
   const { pre } = useCreate()
   const [loading, setLoading] = useState(false)
@@ -52,6 +57,18 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
       title: child?.timeLine?.map(entry => entry.title),
     },
   })
+
+  const VALUE =
+    child.timeLine?.map(entry => entry.description) ||
+    ''
+      ?.replaceAll('<p>', '')
+      .replaceAll('</p>', '')
+      .replaceAll('<em>', '')
+      .replaceAll('</em>', '')
+      .replaceAll('<strong>', '')
+      .replaceAll('</strong>', '')
+      .replaceAll('<s>', '')
+      .replaceAll('</s>', '')
 
   useEffect(() => {
     setChild({ ...child, timeLine: timelineEntries })
@@ -98,6 +115,77 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
     }
   }
 
+  async function onSelectFiles(id: string, event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault()
+    setLoading(true)
+
+    try {
+      if (!event.target.files) return
+      const new_files = Array.from(event.target.files)
+      const entry = timelineEntries.find(entry => entry.id === id)
+
+      if (entry && entry.media.length + new_files.length > 4) {
+        toast({
+          variant: 'destructive',
+          title: 'Image Error!!',
+          description: t('steps.step2.input.errors.maxFiles'),
+        })
+
+        return
+      }
+
+      await Promise.all(
+        new_files.map(async file => {
+          if (file.size === 0) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.empty'),
+            })
+          } else if (file.size > MAX_FILE_SIZE) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.big-size'),
+            })
+          } else if (!file.type.startsWith('image/')) {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error!!',
+              description: t('steps.step4.input.errors.not-image'),
+            })
+          } else {
+            const formData = new FormData()
+            formData.append('file', file)
+            await onSaveMedia(id, formData)
+          }
+        }),
+      )
+    } catch (error: any) {
+      console.error(error)
+
+      toast({
+        title: t('steps.step4.toast.error-save.title'),
+        description: t('steps.step4.toast.error-save.description'),
+        variant: 'destructive',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function onRemove(idPreTimeline: string, id: string) {
+    setLoading(true)
+
+    try {
+      await onRemoveMedia(idPreTimeline, id)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const onSubmit = async () => {
     setLoading(true)
     try {
@@ -127,31 +215,79 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias }: Step2Props) =
                   onChange={e => {
                     const updatedEntry = { ...entry, title: e.target.value }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                    handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
+                  onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
                 />
-                <RichTextEditor
-                  value={entry.description}
-                  onChange={newDesc => {
-                    const updatedEntry = { ...entry, description: newDesc }
-                    setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                    handleUpdateTimelineEntry(entry.id, updatedEntry)
-                  }}
-                  placeholder={''}
-                />
+                <div className='relative'>
+                  <RichTextEditor
+                    value={entry.description}
+                    onChange={newDesc => {
+                      const updatedEntry = { ...entry, description: newDesc }
+                      setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                    }}
+                    onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
+                    placeholder={''}
+                  />
+
+                  <p className='absolute bottom-2 right-3 text-xs text-neutral-900'>{VALUE?.length ?? 0}/100</p>
+                </div>
+
                 <Calendar
                   mode='single'
                   captionLayout='dropdown'
                   locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
                   selected={new Date(entry.date)}
                   onSelect={selectedDate => {
-                    const updatedEntry = { ...entry, date: selectedDate.toISOString() }
+                    const updatedEntry = { ...entry, date: selectedDate?.toISOString() }
                     setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
                     handleUpdateTimelineEntry(entry.id, updatedEntry)
                   }}
                   fromYear={1950}
                   toYear={new Date().getFullYear()}
                 />
+                <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
+                  <input
+                    type='file'
+                    accept='image/*'
+                    size={100 * 1024 * 1024}
+                    className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
+                    onChange={e => onSelectFiles(entry.id, e)}
+                  />
+
+                  <div className='text-center'>
+                    <h3 className='mt-2 text-sm font-medium text-white'>
+                      <label htmlFor='file-upload' className='relative cursor-pointer'>
+                        <span>{t('steps.step2.input.picture.title')}</span>
+                      </label>
+                    </h3>
+                    <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
+                  </div>
+
+                  <div className='grid grid-cols-4 gap-4 mt-8'>
+                    {entry.media.map(file => (
+                      <div
+                        key={file.id}
+                        className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
+                      >
+                        <RenderImage
+                          src={file.url}
+                          alt={file.id}
+                          className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
+                          height={65}
+                          width={65}
+                        />
+
+                        <button
+                          onClick={() => onRemove(entry.id, file.id)}
+                          disabled={loading}
+                          className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                        >
+                          <IconX size={14} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <div className='mt-4 flex justify-end'>
                   <button
                     type='button'

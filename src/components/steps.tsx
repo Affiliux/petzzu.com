@@ -58,8 +58,8 @@ interface StepsComponentProps {
   onClose: () => void
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
-  // onNewMediaTimeline: (idPreWebsiteTimeLine: string, file: File) => Promise<UploadFileResponse>;
-  // onRemoveMediaTimeline: (idPreWebsiteTimeLine: string, idFile: string) => Promise<DeleteFileResponse>;
+  onNewMediaTimeline: (idPreTimeline: string, media: FormData) => Promise<UploadFileResponse>
+  onRemoveMediaTimeline: (idPreTimeline: string, id: string) => Promise<DeleteFileResponse>
   onUpdate: () => Promise<void>
   onCreatePre: (child_name: string) => Promise<void>
 }
@@ -90,6 +90,8 @@ export const Steps = ({
   onClose,
   onNewMedia,
   onRemoveMedia,
+  onNewMediaTimeline,
+  onRemoveMediaTimeline,
   onUpdate,
   onCreatePre,
 }: StepsComponentProps) => {
@@ -150,8 +152,8 @@ export const Steps = ({
               child={child}
               setChild={setChild}
               medias={medias}
-              // onSaveMedia={onNewMediaTimeline}
-              // onRemoveMedia={onRemoveMediaTimeline}
+              onSaveMedia={onNewMediaTimeline}
+              onRemoveMedia={onRemoveMediaTimeline}
               onBack={() => setStep(2)}
               onNext={async () => {
                 await onUpdate()

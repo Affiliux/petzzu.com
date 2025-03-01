@@ -40,8 +40,9 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
   }, [])
 
   const uploadTimelineFile = useCallback(
-    async (idPreWebsiteTimeLine: string, payload: NewMediaPayloadProps): Promise<UploadFileResponse> => {
+    async (idPreWebsiteTimeLine: string, file: FormData): Promise<UploadFileResponse> => {
       try {
+        const payload: NewMediaPayloadProps = { id: idPreWebsiteTimeLine, file }
         return await upload_timeline_file(idPreWebsiteTimeLine, payload)
       } catch (error: any) {
         throw new Error(error.response?.data?.message ?? 'Error uploading file')
