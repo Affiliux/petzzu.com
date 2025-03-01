@@ -382,6 +382,7 @@
     },
     "step1": {
       "title": "Qual nome do seu Filho(a)?",
+      "description": "A",
       "input": {
         "placeholder": "Ex: Sylvester Stallone Jr.",
         "errors": {
@@ -394,6 +395,7 @@
     },
     "step2": {
       "title": "Quando ele Nasceu?",
+      "description": "A",
       "input": {
         "picture": {
           "title": "PNG, JPG, JPEG, GIF (máximo 1 foto)",
