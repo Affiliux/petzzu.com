@@ -7,16 +7,16 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { IconDownload } from '@tabler/icons-react'
 
-import { CoupleProps } from '@/typings/couple'
+import { ChildProps } from '@/typings/child'
 
 import { Animation } from './animation'
 
 interface SuccessModalProps {
-  couple: CoupleProps
+  child: ChildProps
   onClose: () => void
 }
 
-export const SuccessModal = ({ couple, onClose }: SuccessModalProps) => {
+export const SuccessModal = ({ child, onClose }: SuccessModalProps) => {
   const t = useTranslations('checkout.success')
 
   useEffect(() => {
@@ -38,14 +38,14 @@ export const SuccessModal = ({ couple, onClose }: SuccessModalProps) => {
       <p className='text-neutral-300 text-sm w-3/4 text-center'>{t('description')}</p>
 
       <div className='flex flex-col mb-4 items-center justify-center w-full mt-8 border-dashed border border-neutral-800 p-8 rounded-lg'>
-        {couple?.qrCodeUrl && (
+        {child?.qrCodeUrl && (
           <div className='border-2 border-neutral-800 rounded-xl'>
-            <img src={couple?.qrCodeUrl} className='rounded-xl h-[200px]' width={200} height={200} alt='QR Code' />
+            <img src={child?.qrCodeUrl} className='rounded-xl h-[200px]' width={200} height={200} alt='QR Code' />
           </div>
         )}
 
         <a
-          href={couple?.qrCodeUrl}
+          href={child?.qrCodeUrl}
           target='_blank'
           className='text-white flex items-center justify-center text-center gap-2 text-xs lg:text-sm font-bold mt-4 cursor-pointer py-2 px-10 rounded-md bg-red-600'
         >

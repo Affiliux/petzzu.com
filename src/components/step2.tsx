@@ -14,7 +14,7 @@ import { Calendar } from './ui/calendar'
 import { RenderImage } from './render-image'
 import { useApplication } from '../contexts/ApplicationContext'
 
-import { MAX_FILE_SIZE, MAX_FILES } from '@/constants'
+import { MAX_FILE_SIZE } from '@/constants'
 import { Sex } from '@/enums'
 
 interface Step2Props {
@@ -117,7 +117,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
     }
   }
 
-  const sex = [
+  const sexOptions = [
     { id: 1, name: t('steps.step2.gender.male'), data: Sex.MALE },
     { id: 2, name: t('steps.step2.gender.female'), data: Sex.FEMALE },
   ]
@@ -187,7 +187,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
       <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
       <div className='w-full space-y-6'>
         <div className='flex flex-col md:flex-row gap-4'>
-          {sex.map(sex => (
+          {sexOptions.map(sex => (
             <label
               key={sex.id}
               className='flex items-center space-x-3 space-y-0 rounded-lg border p-4 cursor-pointer hover:bg-accent [&:has([data-state=checked])]:border-primary w-full'
@@ -226,9 +226,9 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
         </button>
         <button
           onClick={onSubmit}
-          disabled={loading || medias?.length === 0}
+          disabled={loading || medias?.length === 0 || !child.sex || !date}
           className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            loading || medias?.length === 0 ? 'opacity-50' : ''
+            loading || medias?.length === 0 || !child.sex || !date ? 'opacity-50' : ''
           }`}
         >
           <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>

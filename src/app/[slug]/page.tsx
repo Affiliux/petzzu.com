@@ -24,7 +24,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const router = useRouter()
   const t = useTranslations()
 
-  const { couple, handleGetCoupleBySlug } = useCouple()
+  const { child, handleGetChildBySlug } = useCouple()
 
   const [view, set_view] = useState<boolean>(false)
   const [payment, set_payment] = useState<boolean>(false)
@@ -35,7 +35,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
     set_loading(true)
 
     try {
-      await handleGetCoupleBySlug(slug)
+      await handleGetChildBySlug(slug)
     } catch (error: any) {
       console.error(error)
 
@@ -48,14 +48,14 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }
 
   useEffect(() => {
-    if (couple && couple.inactiveReason === 'Awaiting payment') {
-      if (couple.urlPayment && couple.urlPayment.includes('https')) {
-        router.replace(couple.urlPayment)
-      } else if (couple.urlPayment && !couple.urlPayment.includes('https')) {
+    if (child && child.inactiveReason === 'Awaiting payment') {
+      if (child.urlPayment && child.urlPayment.includes('https')) {
+        router.replace(child.urlPayment)
+      } else if (child.urlPayment && !child.urlPayment.includes('https')) {
         set_payment(true)
       }
     }
-  }, [couple])
+  }, [child])
 
   useEffect(() => {
     onGetBySlug(slug)
@@ -74,29 +74,27 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
       )}
 
-      {couple && !loading && (
-        <>{couple.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme couple={couple} />}</>
-      )}
+      {child && !loading && <>{child.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme couple={child} />}</>}
 
-      {couple && (success || payment || (!view && couple.themeShowType === ThemeShowTypeEnum.DEFAULT)) && (
+      {child && (success || payment || (!view && child.themeShowType === ThemeShowTypeEnum.DEFAULT)) && (
         <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
           <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-black bg-opacity-95 backdrop-blur-lg transition-opacity duration-300'>
             <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg shadow-sm'>
               {payment ? (
                 <>
-                  {couple.qrCode64 && !couple.qrCodeUrl && (
-                    <PixPayment payment={couple} onCheckPayment={() => onGetBySlug(slug)} />
+                  {child.qrCode64 && !child.qrCodeUrl && (
+                    <PixPayment payment={child} onCheckPayment={() => onGetBySlug(slug)} />
                   )}
                 </>
               ) : success ? (
                 <SuccessModal
-                  couple={couple}
+                  child={child}
                   onClose={() => {
-                    if (couple.themeShowType === ThemeShowTypeEnum.DEFAULT) set_view(true)
+                    if (child.themeShowType === ThemeShowTypeEnum.DEFAULT) set_view(true)
                     set_success(false)
                   }}
                 />
-              ) : !view && couple.themeShowType === ThemeShowTypeEnum.DEFAULT ? (
+              ) : !view && child.themeShowType === ThemeShowTypeEnum.DEFAULT ? (
                 <div className='animate-bounce'>
                   <button
                     onClick={() => set_view(true)}

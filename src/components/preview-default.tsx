@@ -92,7 +92,6 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
       </div>
 
       <div className='relative container h-full mt-14 bg-white lg:bg-white z-40'>
-        {dateShowType === DateShowTypeEnum.DEFAULT && (
           <div className='rounded-lg h-full'>
             {!!medias.length && (
               <div className='flex items-center justify-center w-full'>
@@ -116,7 +115,6 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
 
             {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
           </div>
-        )}
       </div>
 
       <div className='h-72' />
