@@ -73,7 +73,17 @@ export default function Page() {
       id: 3,
       title: t('steps.step3.title'),
       description: t('steps.step3.description'),
-      checked: !!child.timeLine.map,
+      checked:
+        Array.isArray(child.timeLine) &&
+        child.timeLine.length > 0 &&
+        child.timeLine.every(
+          entry =>
+            !!entry.title.trim() &&
+            !!entry.description.trim() &&
+            !!entry.date &&
+            Array.isArray(entry.media) &&
+            entry.media.length > 0,
+        ),
       skip: false,
     },
     {
