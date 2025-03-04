@@ -40,6 +40,7 @@ interface StepsComponentProps {
   child: CreatePrePayloadProps
   payment: PaymentProps | null
   medias: MediaPreProps[]
+  timelineMedias: MediaPreProps[]
   song?: YouTubeVideoProps
   mediaShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
@@ -58,8 +59,8 @@ interface StepsComponentProps {
   onClose: () => void
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
-  // onNewMediaTimeline: (idPreWebsiteTimeLine: string, file: File) => Promise<UploadFileResponse>;
-  // onRemoveMediaTimeline: (idPreWebsiteTimeLine: string, idFile: string) => Promise<DeleteFileResponse>;
+  onNewMediaTimeline: (idPreTimeline: string, media: FormData) => Promise<UploadFileResponse>
+  onRemoveMediaTimeline: (idPreTimeline: string, id: string) => Promise<void>
   onUpdate: () => Promise<void>
   onCreatePre: (child_name: string) => Promise<void>
 }
@@ -74,6 +75,7 @@ export const Steps = ({
   //
   child,
   medias,
+  timelineMedias,
   mediaShowType,
   dateShowType,
   song,
@@ -90,6 +92,8 @@ export const Steps = ({
   onClose,
   onNewMedia,
   onRemoveMedia,
+  onNewMediaTimeline,
+  onRemoveMediaTimeline,
   onUpdate,
   onCreatePre,
 }: StepsComponentProps) => {
@@ -149,9 +153,9 @@ export const Steps = ({
             <Step3
               child={child}
               setChild={setChild}
-              medias={medias}
-              // onSaveMedia={onNewMediaTimeline}
-              // onRemoveMedia={onRemoveMediaTimeline}
+              timelineMedias={timelineMedias}
+              onSaveMedia={onNewMediaTimeline}
+              onRemoveMedia={onRemoveMediaTimeline}
               onBack={() => setStep(2)}
               onNext={async () => {
                 await onUpdate()
@@ -161,28 +165,12 @@ export const Steps = ({
           )}
 
           {step === 4 && (
-            <Step4
-              theme={theme}
-              setMediaShowType={setMediaShowType}
-              mediaShowType={mediaShowType}
-              medias={medias}
-              onSaveMedia={onNewMedia}
-              onRemoveMedia={onRemoveMedia}
-              onBack={() => setStep(3)}
-              onNext={async () => {
-                await onUpdate()
-                setStep(5)
-              }}
-            />
-          )}
-
-          {step === 5 && (
             <Step5
               theme={theme}
               child={child}
               selected={song}
               setSong={setSong}
-              onBack={() => setStep(4)}
+              onBack={() => setStep(3)}
               onNext={async () => {
                 await onUpdate()
                 setStep(6)
@@ -190,14 +178,14 @@ export const Steps = ({
             />
           )}
 
-          {step === 7 && (
+          {step === 5 && (
             <Step7
               plans={plans}
               discount={discount}
               selected={plan}
               setPlan={setPlan}
               onBack={() => {
-                setStep(6)
+                setStep(4)
               }}
               onNext={async () => {
                 await onUpdate()

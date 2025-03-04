@@ -52,44 +52,49 @@ export default function Page() {
     handleRemoveMedia,
   } = useCreate()
 
-  const { uploadTimelineFile, deleteTimelineFile } = useTimeline()
+  const { uploadTimelineFile, deleteTimelineFile, set_timeline_medias, timeline_medias } = useTimeline()
 
   const steps = [
     {
       id: 1,
       title: t('steps.step1.title'),
+      description: t('steps.step1.description'),
       checked: !!child.child_name,
       skip: false,
     },
     {
       id: 2,
       title: t('steps.step2.title'),
-      checked: !!child.message,
+      description: t('steps.step2.description'),
+      checked: !!child.birth_date && !!child.sex,
       skip: false,
     },
     {
       id: 3,
       title: t('steps.step3.title'),
       description: t('steps.step3.description'),
-      checked: !!child.birth_date,
-      skip: true,
+      checked:
+        Array.isArray(child.timeLine) &&
+        child.timeLine.length > 0 &&
+        child.timeLine.every(
+          entry =>
+            !!entry.title.trim() &&
+            !!entry.description.trim() &&
+            !!entry.date &&
+            Array.isArray(entry.media) &&
+            entry.media.length > 0,
+        ),
+      skip: false,
     },
     {
       id: 4,
-      title: t('steps.step4.title'),
-      description: t('steps.step4.description'),
-      checked: !!pre_medias.length,
-      skip: true,
-    },
-    {
-      id: 5,
       title: t('steps.step5.title'),
       description: t('steps.step5.description'),
       checked: !!song,
       skip: true,
     },
     {
-      id: 6,
+      id: 5,
       title: t('steps.step7.title'),
       description: t('steps.step7.description'),
       checked: !!plan,
@@ -110,6 +115,7 @@ export default function Page() {
     try {
       set_step(1)
       set_pre_medias([])
+      set_timeline_medias([])
       set_pre(null)
       set_payment(null)
 
@@ -166,6 +172,7 @@ export default function Page() {
 
       set_step(1)
       set_pre_medias([])
+      set_timeline_medias([])
       set_pre(null)
       set_payment(null)
 
@@ -189,6 +196,7 @@ export default function Page() {
 
     try {
       set_pre_medias([])
+      set_timeline_medias([])
       set_pre(null)
       set_payment(null)
 
@@ -221,7 +229,6 @@ export default function Page() {
       if (!plan) throw new Error('Please select a plan')
 
       const yt_song = plan.sku.includes('pro') && song ? song.url : ''
-
       await handleUpdatePre({
         id: pre,
         child_name: child.child_name,
@@ -230,7 +237,7 @@ export default function Page() {
         parent_name: child.parent_name,
         sex: child.sex,
         lang: t('config.defaults.country'),
-        yt_song,
+        // yt_song,
         imageShowType: media_show_type,
         dateShowType: date_show_type,
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.DEFAULT,
@@ -263,6 +270,7 @@ export default function Page() {
     else {
       set_step(1)
       set_pre_medias([])
+      set_timeline_medias([])
       set_pre(null)
       set_payment(null)
 
@@ -294,6 +302,7 @@ export default function Page() {
         child={child}
         payment={payment}
         medias={pre_medias}
+        timelineMedias={timeline_medias}
         song={song}
         mediaShowType={media_show_type}
         dateShowType={date_show_type}
@@ -312,12 +321,13 @@ export default function Page() {
         onUpdate={async () => await onUpdatePre()}
         onNewMedia={async media => await handleNewMedia({ id: pre!, file: media })}
         onRemoveMedia={async id => await handleRemoveMedia({ idPreWebsite: pre!, idFile: id })}
-        // onNewMediaTimeline={async media => await uploadTimelineFile(idPreWebsiteTimeLine, file: media)}
-        // onRemoveMediaTimeline={async id => await deleteTimelineFile({ idPreWebsite: pre!, idFile: id })}
+        onNewMediaTimeline={async (idPreTimeline, media) => await uploadTimelineFile(idPreTimeline, media)}
+        onRemoveMediaTimeline={async (idPreTimeline, id) => await deleteTimelineFile(idPreTimeline, id)}
         onClose={() => {
           set_pre(null)
           set_payment(null)
           set_pre_medias([])
+          set_timeline_medias([])
 
           set_child({} as CreatePrePayloadProps)
           set_song(undefined)
