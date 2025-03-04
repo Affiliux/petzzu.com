@@ -165,7 +165,7 @@ export const Steps = ({
           )}
 
           {step === 4 && (
-             <Step5
+            <Step5
               theme={theme}
               child={child}
               selected={song}

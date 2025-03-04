@@ -92,29 +92,27 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
       </div>
 
       <div className='relative container h-full mt-14 bg-white lg:bg-white z-40'>
-          <div className='rounded-lg h-full'>
-            {!!medias.length && (
-              <div className='flex items-center justify-center w-full'>
-                <CarouselPhotos type={mediaShowType} images={medias} />
-              </div>
-            )}
+        <div className='rounded-lg h-full'>
+          {!!medias.length && (
+            <div className='flex items-center justify-center w-full'>
+              <CarouselPhotos type={mediaShowType} images={medias} />
+            </div>
+          )}
 
-            <h1
-              className={`${lora.className} text-3xl text-[#FF0000] font-bold text-center ${
-                !!medias.length && 'mt-12'
-              }`}
-            >
-              {child?.child_name}
-            </h1>
-            <p
-              className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
-              dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
-            />
+          <h1
+            className={`${lora.className} text-3xl text-[#FF0000] font-bold text-center ${!!medias.length && 'mt-12'}`}
+          >
+            {child?.child_name}
+          </h1>
+          <p
+            className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
+            dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
+          />
 
-            {!!child?.birth_date && <DateCount type={dateShowType} date={child.birth_date} />}
+          {!!child?.birth_date && <DateCount type={dateShowType} date={child.birth_date} />}
 
-            {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
-          </div>
+          {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
+        </div>
       </div>
 
       <div className='h-72' />

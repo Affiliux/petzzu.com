@@ -24,11 +24,7 @@ export function BabyTimeline({ timeline }) {
             className='text-neutral-700 text-sm md:text-base mt-2'
           />
           <div className='mt-4'>
-            {entry.media.length > 0 ? (
-              <CarouselPhotos type={PhotosSliderEnum.COVERFLOW} images={entry.media} />
-            ) : (
-              null
-            )}
+            {entry.media.length > 0 ? <CarouselPhotos type={PhotosSliderEnum.COVERFLOW} images={entry.media} /> : null}
           </div>
         </div>
       ),
