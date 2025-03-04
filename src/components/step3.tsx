@@ -226,7 +226,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
       <Accordion type='multiple' className='w-full'>
         {timelineEntries.map((entry, index) => (
           <AccordionItem key={entry.id} value={entry.id}>
-            <AccordionTrigger>{`${index + 1}° Lembrança `}</AccordionTrigger>
+            <AccordionTrigger noUnderline>{`${index + 1}° Lembrança `}</AccordionTrigger>
             <AccordionContent>
               <div className='flex flex-col gap-4'>
                 <Input
