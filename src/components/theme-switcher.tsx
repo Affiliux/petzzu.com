@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
           </span>
         </button>
 
-        <div className='origin-top-left lg:origin-top-right min-w-12 z-[99999] border border-neutral-200 absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5'>
+        <div className='origin-top-left lg:origin-top-right min-w-12 z-[99999] border border-neutral-200 absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5'>
           <div className='py-1 grid grid-cols-1 gap-2' role='none'>
             <button
               onClick={() => set_theme(ThemeShowTypeEnum.BLUE)}

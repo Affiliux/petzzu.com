@@ -247,6 +247,20 @@
       "plans": {
         "title": "Nossos Planos",
         "description": "Escolha o plano ideal para sua página personalizada. Você pode escolher entre os planos abaixo.",
+        "purchase": {
+          "title": "Aquisição Única",
+          "counter": "Contador em tempo real",
+          "text": "Texto dedicado",
+          "date": "Data de início",
+          "qr-code": "QR Code exclusivo",
+          "images": "Máximo de 4 imagens",
+          "music": "Sem música",
+          "background": "Sem fundo dinâmico",
+          "animations": "Sem animações exclusivas",
+          "url": "URL personalizada",
+          "support": "Suporte 24 horas",
+          "price_recurrency": "/por ano"
+        },
         "monthly": {
           "title": "Monthly",
           "counter": "Contador em tempo real",
