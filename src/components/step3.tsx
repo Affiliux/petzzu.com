@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import { time } from 'console'
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
@@ -28,13 +29,13 @@ interface Step3Props {
   setChild: React.Dispatch<React.SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
   onBack: () => void
-  medias: MediaPreProps[]
+  timelineMedias: MediaPreProps[]
   onSaveMedia: (id: string, media: FormData) => Promise<UploadFileResponse>
-  onRemoveMedia: (idPreTimeline: string, id: string) => Promise<DeleteFileResponse>
+  onRemoveMedia: (idPreTimeline: string, id: string) => Promise<void>
 }
 
-export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, onRemoveMedia }: Step3Props) => {
-  const { createTimeline, updateTimeline, deleteTimeline, uploadTimelineFile } = useTimeline()
+export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveMedia, onRemoveMedia }: Step3Props) => {
+  const { createTimeline, updateTimeline, deleteTimeline } = useTimeline()
   const [timelineEntries, setTimelineEntries] = useState(child.timeLine || [])
   const { pre } = useCreate()
   const [loading, setLoading] = useState(false)
@@ -140,24 +141,38 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
             toast({
               variant: 'destructive',
               title: 'Image Error!!',
-              description: t('steps.step4.input.errors.empty'),
+              description: t('steps.step3.input.errors.empty'),
             })
           } else if (file.size > MAX_FILE_SIZE) {
             toast({
               variant: 'destructive',
               title: 'Image Error!!',
-              description: t('steps.step4.input.errors.big-size'),
+              description: t('steps.step3.input.errors.big-size'),
             })
           } else if (!file.type.startsWith('image/')) {
             toast({
               variant: 'destructive',
               title: 'Image Error!!',
-              description: t('steps.step4.input.errors.not-image'),
+              description: t('steps.step3.input.errors.not-image'),
             })
           } else {
             const formData = new FormData()
             formData.append('file', file)
-            await onSaveMedia(id, formData)
+            await onSaveMedia(id, formData).then(response => {
+              setTimelineEntries(prev =>
+                prev.map(entry =>
+                  entry.id === id
+                    ? {
+                        ...entry,
+                        media: [
+                          ...entry.media,
+                          { id: response?.id, url: URL.createObjectURL(file), key: '', createdAt: '', updatedAt: '' },
+                        ],
+                      }
+                    : entry,
+                ),
+              )
+            })
           }
         }),
       )
@@ -165,8 +180,8 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
       console.error(error)
 
       toast({
-        title: t('steps.step4.toast.error-save.title'),
-        description: t('steps.step4.toast.error-save.description'),
+        title: t('steps.step3.toast.error-save.title'),
+        description: t('steps.step3.toast.error-save.description'),
         variant: 'destructive',
       })
     } finally {
@@ -179,6 +194,11 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
 
     try {
       await onRemoveMedia(idPreTimeline, id)
+      setTimelineEntries(prev =>
+        prev.map(entry =>
+          entry.id === idPreTimeline ? { ...entry, media: entry.media.filter(media => media.id !== id) } : entry,
+        ),
+      )
     } catch (error) {
       console.error(error)
     } finally {
@@ -196,6 +216,10 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
       setLoading(false)
     }
   }
+
+  const isNextButtonDisabled =
+    timelineEntries.length === 0 ||
+    timelineEntries.some(entry => !entry.title.trim() || !entry.date || entry.media.length === 0)
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
@@ -235,6 +259,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
                 <Calendar
                   mode='single'
                   captionLayout='dropdown'
+                  className={'rounded-md border border-neutral-300 flex items-center justify-center relative z-50'}
                   locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
                   selected={new Date(entry.date)}
                   onSelect={selectedDate => {
@@ -260,7 +285,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
                         <span>{t('steps.step2.input.picture.title')}</span>
                       </label>
                     </h3>
-                    <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
+                    <p className='mt-1 text-xs text-gray-500'>{t('steps.step3.input.placeholder')}</p>
                   </div>
 
                   <div className='grid grid-cols-4 gap-4 mt-8'>
@@ -333,17 +358,17 @@ export const Step3 = ({ child, setChild, onNext, onBack, medias, onSaveMedia, on
         </button>
         <button
           onClick={onSubmit}
-          disabled={loading || medias?.length === 0}
+          disabled={loading || isNextButtonDisabled}
           className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            loading || medias?.length === 0 ? 'opacity-50' : ''
+            loading || isNextButtonDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
           }`}
         >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
             {loading ? (
               <IconLoader size={20} className='animate-spin' />
             ) : (
               <>
-                {medias?.length ? t('steps.step4.button') : t('config.skip')}
+                {t('steps.step4.button')}
                 <IconChevronRight size={20} className='ml-4' />
               </>
             )}

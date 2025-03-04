@@ -419,6 +419,23 @@
     "step3": {
       "title": "Adicione Lembranças Especiais",
       "description": "Acrescente quantas lembranças quiser. Por exemplo: Primeiro banho, Primeiro sorriso.",
+      "input": {
+        "label": "Clique para adicionar fotos",
+        "placeholder": "PNG, JPG, JPEG, GIF (máx. 4 fotos)",
+        "errors": {
+          "maxFiles": "Máximo de 4 fotos permitidas",
+          "not-image": "O arquivo deve ser uma imagem",
+          "big-size": "O arquivo é muito grande. Máximo de 100MB",
+          "empty": "Imagem está corrompida",
+          "not-supported": "Formato de arquivo não suportado"
+        }
+      },
+      "toast": {
+        "error-save": {
+          "title": "Erro ao salvar",
+          "description": "Ocorreu um erro ao salvar a imagem. Tente novamente."
+        }
+      },
       "show-types": {
         "title": "Modo de mostrar",
         "default": "Padrão",
