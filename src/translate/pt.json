@@ -76,10 +76,9 @@
           "2": "alguém especial",
           "3": "seu amor",
           "4": "seu filho",
-          "5": "seu familiar",
-          "6": "o aniversariante"
+          "5": "seu familiar"
         },
-        "description": "Pequenos gestos fazem toda a diferença. Mostre seu carinho de uma forma inesperada, Eternizando um album dedicado para alguém especial.",
+        "description": "Pequenos gestos criam memórias inesquecíveis. Surpreenda quem você ama eternizando cada momento especial e acompanhe sua jornada desde os primeiros sorrisos.",
         "input": {
           "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
           "errors": {

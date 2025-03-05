@@ -26,8 +26,76 @@ export function Header() {
           <b className='text-sm md:text-base'>50%</b> {t('config.offer.description2')}
         </p>
       </div>
+      <div className='container max-w-screen-xl mx-auto flex flex-row items-center justify-between py-[10px] px-4 sm:px-6'>
+        <div className='flex flex-row items-center gap-4 sm:gap-12'>
+          <Link href='/' className='cursor-pointer'>
+            <Image
+              src={`/logos/${theme}/logo+name.png`}
+              className='h-8 sm:h-12 w-auto max-w-[140px] sm:max-w-[200px]'
+              alt='Babyzzu logo'
+              width={200}
+              height={56}
+            />
+          </Link>
 
-      <div className='container flex flex-row items-center justify-between py-[10px]'>
+          <div className='hidden lg:flex flex-row items-center gap-4 sm:gap-6'>
+            <Link
+              href='/#plans'
+              className='text-neutral-800 text-xs sm:text-sm hover:text-neutral-700 hover:underline cursor-pointer'
+              scroll
+            >
+              {t('config.header.nav.plans')}
+            </Link>
+
+            <div className='flex flex-row items-center gap-2 opacity-55'>
+              <Link href='https://affiliux.com' className='text-neutral-800 text-xs sm:text-sm cursor-pointer'>
+                {t('config.header.nav.affiliate')}
+              </Link>
+              <div className='bg-yellow-500 flex items-center rounded-sm px-2 py-[2px]'>
+                <p className='text-xs text-black font-bold'>{t('config.header.nav.badge')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='relative flex items-center gap-2'>
+          <Language />
+          <ThemeSwitcher />
+
+          <div className='flex lg:hidden'>
+            <button
+              type='button'
+              className='relative h-10 flex items-center justify-center rounded-full p-[1px] focus:outline-none focus:ring-0'
+            >
+              <span className='flex h-full cursor-pointer items-center justify-center gap-2 px-3 py-1 text-xs sm:text-sm font-medium text-black backdrop-blur-3xl'>
+                <MenuIcon />
+              </span>
+            </button>
+
+            <div className='absolute right-0 top-12 z-[99999] border border-neutral-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5 min-w-[240px]'>
+              <div className='py-1 grid grid-cols-1 gap-2' role='none'>
+                <Link
+                  href='#plans'
+                  className='text-neutral-800 px-6 py-2 text-start items-center inline-flex hover:bg-neutral-200 rounded-l'
+                >
+                  <span className='truncate text-xs font-bold'>{t('config.header.nav.plans')}</span>
+                </Link>
+                <Link
+                  href='https://affiliux.com'
+                  className='text-neutral-800 px-6 py-2 pb-4 text-start items-center opacity-55 inline-flex hover:bg-neutral-200 rounded-l'
+                >
+                  <span className='truncate text-xs font-bold mr-2'>{t('config.header.nav.affiliate')}</span>
+                  <div className='bg-yellow-500 flex items-center rounded-sm px-2 py-[2px]'>
+                    <p className='text-xs text-black font-bold'>{t('config.header.nav.badge')}</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className='container flex flex-row items-center justify-between py-[10px]'>
         <div className='flex flex-row items-center gap-12'>
           <Link href='/' className='cursor-pointer'>
             <Image src={`/logos/${theme}/logo+name.png`} className='h-12' alt='Babyzzu logo' width={200} height={56} />
@@ -95,7 +163,7 @@ export function Header() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
