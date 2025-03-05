@@ -11,7 +11,6 @@ import { api } from '..'
 export async function get_plans({}: GetPlanPayloadProps): Promise<GetPlanResponseProps> {
   try {
     const { data: response } = await api.get(`plan/find-all`)
-    console.log(response)
     return response
   } catch (error: any) {
     throw new Error(error.response.data.message ?? '')

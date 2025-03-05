@@ -62,7 +62,7 @@ export function Header() {
           <Language />
           <ThemeSwitcher />
 
-          <div className='flex lg:hidden'>
+          {/* <div className='flex lg:hidden'>
             <button
               type='button'
               className='relative h-10 flex items-center justify-center rounded-full p-[1px] focus:outline-none focus:ring-0'
@@ -91,7 +91,7 @@ export function Header() {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

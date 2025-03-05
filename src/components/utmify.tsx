@@ -15,7 +15,7 @@ export const UtmifyRedirect = ({ redirectUrl }: { redirectUrl: string }) => {
       history.pushState({}, '', location.href)
 
       const handlePopState = () => {
-        console.log('onpopstate', urlBackRedirect)
+        
         setTimeout(() => {
           window.location.href = urlBackRedirect
         }, 1)
