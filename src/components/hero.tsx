@@ -107,7 +107,7 @@ export const Hero = () => {
   ]
 
   return (
-    <div className='flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-36 relative z-50'>
+    <div className='flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-36 relative z-40'>
       <div className='w-full pt-[100px] lg:w-1/2 lg:pt-8'>
         <HoverBorderGradient
           containerClassName='rounded-full'
