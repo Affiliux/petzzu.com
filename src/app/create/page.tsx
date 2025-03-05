@@ -25,7 +25,7 @@ export default function Page() {
   const router = useRouter()
   const queryParams = useQueryParams()
 
-  const { theme, locale, plans, discount, currency , handleGetPlans} = useApplication()
+  const { theme, locale, plans, discount, currency, handleGetPlans } = useApplication()
   const {
     pre,
     child,
@@ -97,7 +97,9 @@ export default function Page() {
       id: 4,
       title: t('steps.step7.title'),
       description: t('steps.step7.description'),
-      checked: !!plan && Array.isArray(child.timeLine) &&
+      checked:
+        !!plan &&
+        Array.isArray(child.timeLine) &&
         child.timeLine.length > 0 &&
         child.timeLine.every(
           entry =>

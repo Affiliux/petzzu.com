@@ -120,37 +120,37 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }
 
   async function initLocale() {
-      set_loading_application(true)
-      set_client(true)
-  
-      try {
-        if (queryParams?.dc && !discount) await handleGetDiscount(queryParams?.dc)
-  
-        const saved_locale = localStorage.getItem(NEXT_LOCALE)
-  
-        if (locale === queryParams?.lang) return
-  
-        if (queryParams?.lang && locales.includes(queryParams?.lang as any)) {
-          await handleChangeLocale(queryParams?.lang)
-        } else if (saved_locale && saved_locale.includes('-') && locales.includes(saved_locale.split('-')[0] as any)) {
-          await handleChangeLocale(saved_locale.split('-')[0])
-        } else if (saved_locale && locales.includes(saved_locale as any)) {
-          await handleChangeLocale(saved_locale)
-        } else if (
-          typeof navigator !== 'undefined' &&
-          navigator.language &&
-          locales.includes(navigator.language.split('-')[0] as any)
-        ) {
-          await handleChangeLocale(navigator.language.split('-')[0])
-        } else {
-          await handleChangeLocale('pt')
-        }
-      } catch (error: any) {
-        console.error(error)
-      } finally {
-        set_loading_application(false)
+    set_loading_application(true)
+    set_client(true)
+
+    try {
+      if (queryParams?.dc && !discount) await handleGetDiscount(queryParams?.dc)
+
+      const saved_locale = localStorage.getItem(NEXT_LOCALE)
+
+      if (locale === queryParams?.lang) return
+
+      if (queryParams?.lang && locales.includes(queryParams?.lang as any)) {
+        await handleChangeLocale(queryParams?.lang)
+      } else if (saved_locale && saved_locale.includes('-') && locales.includes(saved_locale.split('-')[0] as any)) {
+        await handleChangeLocale(saved_locale.split('-')[0])
+      } else if (saved_locale && locales.includes(saved_locale as any)) {
+        await handleChangeLocale(saved_locale)
+      } else if (
+        typeof navigator !== 'undefined' &&
+        navigator.language &&
+        locales.includes(navigator.language.split('-')[0] as any)
+      ) {
+        await handleChangeLocale(navigator.language.split('-')[0])
+      } else {
+        await handleChangeLocale('pt')
       }
+    } catch (error: any) {
+      console.error(error)
+    } finally {
+      set_loading_application(false)
     }
+  }
 
   useEffect(() => {
     const root = document.documentElement
@@ -164,18 +164,17 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }, [])
 
   useEffect(() => {
-      initLocale()
+    initLocale()
   }, [queryParams?.lang])
 
   useEffect(() => {
     const saved_currency = localStorage.getItem(NEXT_CURRENCY)
-  
+
     if (queryParams?.currency) handleChangeCurrency(queryParams?.currency, true)
     else if (locale.includes('pt')) handleChangeCurrency('brl')
     else if (saved_currency) handleChangeCurrency(saved_currency)
     else handleChangeCurrency('usd')
   }, [locale, queryParams?.currency])
-  
 
   return (
     <ApplicationContext.Provider

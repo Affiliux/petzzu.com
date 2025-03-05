@@ -22,9 +22,7 @@ const Testimonials = dynamic(() => import('@/components/testimonials').then(mod 
 const Spotlight = dynamic(() => import('@/components/ui/spotlight-new').then(mod => mod.Spotlight), { ssr: false })
 
 export default function Home() {
-  const {
-    loading_application,
-  } = useApplication()
+  const { loading_application } = useApplication()
 
   return (
     <>
