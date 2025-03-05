@@ -37,7 +37,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
   const [child, set_child] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
   const [media_show_type, set_media_show_type] = useState<PhotosSliderEnum>(PhotosSliderEnum.COVERFLOW)
   const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
-  const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.DEFAULT)
+  const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.YELLOW)
   const [song, set_song] = useState<YouTubeVideoProps | undefined>()
   const [plan, set_plan] = useState<PlanProps | undefined>()
   const [payment, set_payment] = useState<PaymentProps | null>(null)
@@ -129,12 +129,12 @@ export default function CreateProvider({ children }: CreateProviderProps) {
           timeLine: response.timeLine,
           imageShowType: response.imageShowType ?? PhotosSliderEnum.COVERFLOW,
           dateShowType: response.dateShowType ?? DateShowTypeEnum.DEFAULT,
-          themeShowType: response.themeShowType ?? ThemeShowTypeEnum.DEFAULT,
+          themeShowType: response.themeShowType ?? ThemeShowTypeEnum.YELLOW,
         })
 
         set_media_show_type(response.imageShowType ?? PhotosSliderEnum.COVERFLOW)
         set_date_show_type(response.dateShowType ?? DateShowTypeEnum.DEFAULT)
-        set_theme_show_type(response.themeShowType ?? ThemeShowTypeEnum.DEFAULT)
+        set_theme_show_type(response.themeShowType ?? ThemeShowTypeEnum.YELLOW)
 
         set_pre_medias(response.media)
 

@@ -86,17 +86,11 @@ export const Step7 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
 
                       {plan.sku.includes('pro') ? (
                         <>
-                          <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.music`)} />
-                          <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.background`)} />
-                          <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.animations`)} />
                           <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.url`)} />
                           <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.support`)} />
                         </>
                       ) : (
                         <>
-                          <StepUnCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.music`)} />
-                          <StepUnCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.background`)} />
-                          <StepUnCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.animations`)} />
                           <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.url`)} />
                           <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.support`)} />
                         </>

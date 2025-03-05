@@ -164,7 +164,7 @@ export const Steps = ({
             />
           )}
 
-          {step === 4 && (
+          {/* {step === 4 && (
             <Step5
               theme={theme}
               child={child}
@@ -176,16 +176,16 @@ export const Steps = ({
                 setStep(6)
               }}
             />
-          )}
+          )} */}
 
-          {step === 5 && (
+          {step === 4 && (
             <Step7
               plans={plans}
               discount={discount}
               selected={plan}
               setPlan={setPlan}
               onBack={() => {
-                setStep(4)
+                setStep(3)
               }}
               onNext={async () => {
                 await onUpdate()

@@ -25,7 +25,7 @@ export default function Page() {
   const router = useRouter()
   const queryParams = useQueryParams()
 
-  const { theme, locale, plans, discount, currency } = useApplication()
+  const { theme, locale, plans, discount, currency , handleGetPlans} = useApplication()
   const {
     pre,
     child,
@@ -86,18 +86,27 @@ export default function Page() {
         ),
       skip: false,
     },
+    // {
+    //   id: 4,
+    //   title: t('steps.step5.title'),
+    //   description: t('steps.step5.description'),
+    //   checked: !!song,
+    //   skip: true,
+    // },
     {
       id: 4,
-      title: t('steps.step5.title'),
-      description: t('steps.step5.description'),
-      checked: !!song,
-      skip: true,
-    },
-    {
-      id: 5,
       title: t('steps.step7.title'),
       description: t('steps.step7.description'),
-      checked: !!plan,
+      checked: !!plan && Array.isArray(child.timeLine) &&
+        child.timeLine.length > 0 &&
+        child.timeLine.every(
+          entry =>
+            !!entry.title.trim() &&
+            !!entry.description.trim() &&
+            !!entry.date &&
+            Array.isArray(entry.media) &&
+            entry.media.length > 0,
+        ),
       skip: false,
     },
   ]
@@ -125,7 +134,7 @@ export default function Page() {
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
-      else set_theme_show_type(ThemeShowTypeEnum.DEFAULT)
+      else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
       set_song(undefined)
@@ -206,7 +215,7 @@ export default function Page() {
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
-      else set_theme_show_type(ThemeShowTypeEnum.DEFAULT)
+      else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
       set_song(undefined)
@@ -228,7 +237,7 @@ export default function Page() {
       if (!pre) throw new Error('Pre ID not found')
       if (!plan) throw new Error('Please select a plan')
 
-      const yt_song = plan.sku.includes('pro') && song ? song.url : ''
+      // const yt_song = plan.sku.includes('pro') && song ? song.url : ''
       await handleUpdatePre({
         id: pre,
         child_name: child.child_name,
@@ -240,7 +249,7 @@ export default function Page() {
         // yt_song,
         imageShowType: media_show_type,
         dateShowType: date_show_type,
-        themeShowType: theme_show_type ?? ThemeShowTypeEnum.DEFAULT,
+        themeShowType: theme_show_type ?? ThemeShowTypeEnum.YELLOW,
       })
     } catch (error: any) {
       console.error(error)
@@ -248,6 +257,8 @@ export default function Page() {
   }
 
   useEffect(() => {
+    console.log('plans', plans)
+    console.log('currency', currency)
     if (!!plans.length) {
       if (plan && plan.sku.includes('basic')) {
         const find = plans.find(plan => plan.sku.includes(`plan_basic_${currency}`))
@@ -258,6 +269,10 @@ export default function Page() {
       }
     }
   }, [locale, plans])
+
+  useEffect(() => {
+    handleGetPlans()
+  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -280,7 +295,7 @@ export default function Page() {
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
-      else set_theme_show_type(ThemeShowTypeEnum.DEFAULT)
+      else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
       set_song(undefined)

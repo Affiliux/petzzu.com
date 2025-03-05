@@ -47,7 +47,7 @@ export function HeaderStep({ theme, activeStep, steps, setStep }: HeaderStepProp
                   <IconCircleDashed size={26} className='text-neutral-500' />
                 )}
 
-                {index + 1 >= 1 && index + 1 < 6 && (
+                {index + 1 >= 1 && index + 1 < steps.length && (
                   <div className='w-2 lg:w-14 lg:px-1 rounded-full block'>
                     {theme !== ThemeShowTypeEnum.DEFAULT && index + 1 === 5 ? null : index + 1 < activeStep ||
                       (step.checked && !step.skip) ? (
