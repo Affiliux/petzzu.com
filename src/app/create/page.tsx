@@ -259,8 +259,6 @@ export default function Page() {
   }
 
   useEffect(() => {
-    console.log('plans', plans)
-    console.log('currency', currency)
     if (!!plans.length) {
       if (plan && plan.sku.includes('basic')) {
         const find = plans.find(plan => plan.sku.includes(`plan_basic_${currency}`))
