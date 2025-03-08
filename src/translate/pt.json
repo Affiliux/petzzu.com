@@ -295,18 +295,26 @@
         "title": "Vários Recursos",
         "description": "Veja os recursos que você pode adicionar à sua página personalizada",
         "1": {
-          "title": "Contador de tempo",
-          "description": "Mostre há quanto tempo vocês estão juntos nessa jornada."
+          "title": "Contador de Tempo",
+          "description": "Acompanhe em tempo real o desenvolvimento de cada etapa."
         },
         "2": {
-          "title": "Animações de fundo",
-          "description": "Escolha entre várias animações de fundo para personalizar a página."
+          "title": "Linha do Tempo",
+          "description": "Uma linha do tempo exclusivamente feita para o crescimento do bebê."
         },
         "3": {
           "title": "Música dedicada",
           "description": "Dedique uma música especial. A música será reproduzida automaticamente na página."
         },
         "4": {
+          "title": "Em todo lugar",
+          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
+        },
+        "5": {
+          "title": "Em todo lugar",
+          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
+        },
+        "6": {
           "title": "Em todo lugar",
           "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
         }
