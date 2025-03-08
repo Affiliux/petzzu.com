@@ -1,8 +1,8 @@
 'use client'
-import { ArrowRight, Globe,Layers, RefreshCw, Shield, Zap } from 'lucide-react'
+import { ArrowRight, Globe, Layers, RefreshCw, Shield, Zap } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-export  function Features() {
+export function Features() {
   const t = useTranslations('pages.home.features')
   const features = [
     {
@@ -63,6 +63,3 @@ export  function Features() {
     </section>
   )
 }
-
-
-
