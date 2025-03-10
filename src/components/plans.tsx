@@ -23,7 +23,7 @@ export function Plans() {
       </div>
 
       <div className='grid gap-6 md:grid-cols-3'>
-        {/* One-time Acquisition Plan */}
+      
         <Card className='flex flex-col'>
           <CardHeader>
             <CardTitle>{t('pages.home.plans.purchase.title')}</CardTitle>
@@ -57,83 +57,7 @@ export function Plans() {
             <Button className='w-full'>{t('pages.home.plans.purchase.buy')}</Button>
           </CardFooter>
         </Card>
-
-        {/* Monthly Subscription Plan */}
-        <Card className='flex flex-col border-primary'>
-          <CardHeader>
-            <CardTitle>{t('pages.home.plans.monthly.title')}</CardTitle>
-            <CardDescription>{t('pages.home.plans.monthly.counter')}</CardDescription>
-            <div className='mt-4'>
-              <span className='text-3xl font-bold'>13</span>
-              <span className='text-muted-foreground ml-1'>{t('pages.home.plans.monthly.price_recurrency')}</span>
-            </div>
-          </CardHeader>
-          <CardContent className='flex-grow'>
-            <ul className='space-y-2'>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.monthly.text')}</span>
-              </li>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.monthly.text')}</span>
-              </li>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.monthly.text')}</span>
-              </li>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.monthly.text')}</span>
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <Button className='w-full' variant='default'>
-              {t('pages.home.plans.monthly.buy')}
-            </Button>
-          </CardFooter>
-        </Card>
-
-        {/* Annual Subscription Plan */}
-        <Card className='flex flex-col'>
-          <CardHeader>
-            <CardTitle>{t('pages.home.plans.annual.title')}</CardTitle>
-            <CardDescription>{t('pages.home.plans.annual.counter')}</CardDescription>
-            <div className='mt-4'>
-              <span className='text-3xl font-bold'>99</span>
-              <span className='text-muted-foreground ml-1'>{t('pages.home.plans.annual.price_recurrency')}</span>
-            </div>
-            <span className='inline-block mt-1 text-sm bg-primary/10 text-primary px-2 py-0.5 rounded-full'>
-              {t('pages.home.plans.annual.discount')}
-            </span>
-          </CardHeader>
-          <CardContent className='flex-grow'>
-            <ul className='space-y-2'>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.annual.text')}</span>
-              </li>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.annual.text')}</span>
-              </li>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.annual.text')}</span>
-              </li>
-              <li className='flex items-center'>
-                <Check className='h-4 w-4 mr-2 text-primary' />
-                <span>{t('pages.home.plans.annual.text')}</span>
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <Button className='w-full' variant='outline'>
-              {t('pages.home.plans.annual.buy')}
-            </Button>
-          </CardFooter>
-        </Card>
+        
       </div>
     </div>
   )
