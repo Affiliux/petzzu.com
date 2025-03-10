@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useApplication } from '../contexts/ApplicationContext'
 
 export function Plans() {
-  const t = useTranslations('pages.home.plans')
+  const t = useTranslations()
 
   const { plans, discount, currency } = useApplication()
   const format_intl_currency = currency ?? 'brl'
