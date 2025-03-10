@@ -258,10 +258,11 @@
           "animations": "Sem animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/por ano"
+          "price_recurrency": "/uma vez",
+          "buy": "Compre Agora"
         },
         "monthly": {
-          "title": "Monthly",
+          "title": "Mensal",
           "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
@@ -272,10 +273,11 @@
           "animations": "Sem animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/por ano"
+          "price_recurrency": "/por mes",
+          "buy": "Compre Agora"
         },
         "annual": {
-          "title": "Annual",
+          "title": "Anual",
           "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
@@ -286,7 +288,9 @@
           "animations": "Com animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/uma vez"
+          "price_recurrency": "/por ano",
+          "discount": "Desconto de 20%",
+          "buy": "Compre Agora"
         },
         "recommended": "Recomendado",
         "button": "Surpreenda agora"
