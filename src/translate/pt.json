@@ -299,28 +299,28 @@
         "title": "Vários Recursos",
         "description": "Veja os recursos que você pode adicionar à sua página personalizada",
         "1": {
-          "title": "Contador de Tempo",
-          "description": "Acompanhe em tempo real o desenvolvimento de cada etapa."
-        },
-        "2": {
           "title": "Linha do Tempo",
           "description": "Uma linha do tempo exclusivamente feita para o crescimento do bebê."
         },
+        "2": {
+          "title": "Contador de Tempo",
+          "description": "Acompanhe em tempo real o desenvolvimento de cada etapa."
+        },
         "3": {
-          "title": "Música dedicada",
-          "description": "Dedique uma música especial. A música será reproduzida automaticamente na página."
+          "title": "QRCode Exclusivo",
+          "description": "Crie seu QR Code exclusivo e torne cada interação única, prática e memorável."
         },
         "4": {
-          "title": "Em todo lugar",
-          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
+          "title": "Imagens para cada Mês",
+          "description": "Eternize cada momento único do mês com imagens especiais que capturam memórias inesquecíveis!"
         },
         "5": {
-          "title": "Em todo lugar",
-          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
+          "title": "URL Personalizada",
+          "description": "Transforme sua presença online com uma URL personalizada."
         },
         "6": {
-          "title": "Em todo lugar",
-          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
+          "title": "Fundo Colorido",
+          "description": "Destaque sua página com um fundo colorido vibrante e cativante, criando uma experiência visual única e envolvente!"
         }
       }
     },

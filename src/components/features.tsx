@@ -1,37 +1,37 @@
 'use client'
-import { ArrowRight, Globe, Layers, RefreshCw, Shield, Zap } from 'lucide-react'
+import { CalendarHeart,Images, Link , Pipette, QrCode, Timer } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export function Features() {
   const t = useTranslations('pages.home.features')
   const features = [
     {
-      icon: <Zap className='h-6 w-6 text-primary' />,
+      icon: <CalendarHeart className='h-6 w-6 text-primary' />,
       title: t('1.title'),
       description: t('1.description'),
     },
     {
-      icon: <Shield className='h-6 w-6 text-primary' />,
+      icon: <Timer className='h-6 w-6 text-primary' />,
       title: t('2.title'),
       description: t('2.description'),
     },
     {
-      icon: <RefreshCw className='h-6 w-6 text-primary' />,
+      icon: <QrCode className='h-6 w-6 text-primary' />,
       title: t('3.title'),
       description: t('3.description'),
     },
     {
-      icon: <Globe className='h-6 w-6 text-primary' />,
+      icon: <Images className='h-6 w-6 text-primary' />,
       title: t('4.title'),
       description: t('4.description'),
     },
     {
-      icon: <Layers className='h-6 w-6 text-primary' />,
+      icon: <Link  className='h-6 w-6 text-primary' />,
       title: t('5.title'),
       description: t('5.description'),
     },
     {
-      icon: <ArrowRight className='h-6 w-6 text-primary' />,
+      icon: <Pipette className='h-6 w-6 text-primary' />,
       title: t('6.title'),
       description: t('6.description'),
     },
