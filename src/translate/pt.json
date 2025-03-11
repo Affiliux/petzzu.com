@@ -409,7 +409,7 @@
       "title": "Qual nome do seu Filho(a)?",
       "description": "Insira o nome do seu filho(a) para personalizar a página.",
       "input": {
-        "placeholder": "Ex: João Pedro",
+        "placeholder": "Ex: Caio Castro",
         "errors": {
           "min": "Mínimo de 3 caracteres",
           "max": "Máximo de 100 caracteres"
