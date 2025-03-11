@@ -5,7 +5,7 @@ import { ChildResponseProps } from '@/typings/child'
 import type { ChildContextType, ChildProviderProps } from './types'
 import { useApplication } from '../ApplicationContext'
 
-import { get_child_id, get_child_slug } from '@/infrastructure/http/services/couple'
+import { get_child_id, get_child_slug } from '@/infrastructure/http/services/child'
 
 export const ChildContext = createContext<ChildContextType>({} as ChildContextType)
 
@@ -56,7 +56,7 @@ export default function ChildProvider({ children }: ChildProviderProps) {
   )
 }
 
-export const useCouple = () => {
+export const useChild = () => {
   const context = useContext(ChildContext)
   return context
 }

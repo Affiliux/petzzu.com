@@ -3,7 +3,7 @@
 import { ReactNode } from 'react'
 
 import ApplicationProvider from './ApplicationContext'
-import ChildProvider from './CoupleContext'
+import ChildProvider from './ChildContext'
 import CreateProvider from './CreateContext'
 import TimelineProvider from './TimelineContext'
 

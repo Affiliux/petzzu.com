@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { IconCheck, IconCopy, IconLoader } from '@tabler/icons-react'
 
-import { PaymentProps } from '@/typings/couple'
+import { PaymentProps } from '@/typings/child'
 
 interface PixPaymentProps {
   payment: PaymentProps
