@@ -9,7 +9,7 @@ import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
-import { CoupleResponseProps, DefaultThemeProps } from '@/typings/couple'
+import { ChildResponseProps, DefaultThemeProps } from '@/typings/child'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 import { CarouselPhotos } from '@/components/carousel'
@@ -37,7 +37,7 @@ const dancing = Dancing_Script({
   subsets: ['latin'],
 })
 
-export const DefaultTheme = ({ couple }: DefaultThemeProps) => {
+export const DefaultTheme = ({ child }: DefaultThemeProps) => {
   const t = useTranslations()
 
   const { locale } = useApplication()
@@ -48,32 +48,32 @@ export const DefaultTheme = ({ couple }: DefaultThemeProps) => {
     <>
       <div className='h-full min-h-screen w-full bg-transparent overflow-hidden'>
         <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-blue-300 lg:bg-blue-300 w-full rounded-lg container py-8'>
-          <div className={!!couple?.media.length ? 'w-full lg:w-1/2 mt-8' : 'w-full'}>
+          <div className={!!child?.media.length ? 'w-full lg:w-1/2 mt-8' : 'w-full'}>
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
-              {!!couple?.media.length && (
+              {!!child?.media.length && (
                 <div className='w-full lg:w-3/4 mb-10'>
-                  <CarouselPhotos type={couple.imageShowType as PhotosSliderEnum} images={couple.media} />
+                  <CarouselPhotos type={child.imageShowType as PhotosSliderEnum} images={child.media} />
                 </div>
               )}
 
               <h1 className={`${dancing.className} text-4xl md:text-5xl text-[#FF0000] font-bold text-center`}>
-                {couple?.coupleName}
+                {child?.child_name}
               </h1>
               <p
                 className={`${lora.className} text-gray-300 text-md text-center mt-2 mb-16`}
-                dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
+                dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
               />
 
-              {!!couple?.startDate && <DateCount type={DateShowTypeEnum.DEFAULT} date={couple.startDate} />}
-              {!!couple?.startDate && <BabyTimeline />}
+              {!!child?.birth_date && <DateCount type={DateShowTypeEnum.DEFAULT} date={child.birth_date} />}
+              {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
             </div>
           </div>
         </div>
       </div>
 
-      {couple && !!couple?.yt_song && (
+      {child && !!child?.yt_song && (
         <div className='sticky bottom-0 left-0 z-50'>
-          <Music url={couple?.yt_song} />
+          <Music url={child?.yt_song} />
         </div>
       )}
     </>
