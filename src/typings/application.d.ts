@@ -20,6 +20,12 @@ export interface GetDiscountResponseProps extends DiscountProps {}
 // Plan props with the following properties:
 export type PlanProps = {
   id: string
+  title: string
+  subTitle: string
+  isSignature: boolean
+  recurrence: string
+  fileLimit: number | null
+  description: string
   sku: string
   price: number
   currency: string
