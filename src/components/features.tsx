@@ -1,123 +1,65 @@
 'use client'
-
-import React from 'react'
-
+import { CalendarHeart, Images, Link, Pipette, QrCode, Timer } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { cn } from '@/lib/utils'
-
 export function Features() {
-  const t = useTranslations()
-
+  const t = useTranslations('pages.home.features')
   const features = [
     {
-      title: t('pages.home.features.1.title'),
-      description: t('pages.home.features.1.description'),
-      skeleton: <SkeletonOne />,
-      className: 'col-span-1 lg:col-span-4 border-b lg:border-r border-neutral-300',
+      icon: <CalendarHeart className='h-6 w-6 text-primary' />,
+      title: t('1.title'),
+      description: t('1.description'),
     },
     {
-      title: t('pages.home.features.3.title'),
-      description: t('pages.home.features.3.description'),
-      skeleton: <SkeletonThree />,
-      className: 'col-span-1 lg:col-span-2 border-b border-neutral-300',
+      icon: <Timer className='h-6 w-6 text-primary' />,
+      title: t('2.title'),
+      description: t('2.description'),
+    },
+    {
+      icon: <QrCode className='h-6 w-6 text-primary' />,
+      title: t('3.title'),
+      description: t('3.description'),
+    },
+    {
+      icon: <Images className='h-6 w-6 text-primary' />,
+      title: t('4.title'),
+      description: t('4.description'),
+    },
+    {
+      icon: <Link className='h-6 w-6 text-primary' />,
+      title: t('5.title'),
+      description: t('5.description'),
+    },
+    {
+      icon: <Pipette className='h-6 w-6 text-primary' />,
+      title: t('6.title'),
+      description: t('6.description'),
     },
   ]
-
   return (
-    <div className='relative z-20 py-32 max-w-7xl mx-auto'>
-      <div className='px-8'>
-        <h2 className='mx-auto text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-5xl font-sans py-2 relative z-20 font-bold tracking-tight'>
-          {t('pages.home.features.title')}
-        </h2>
-        <p className='max-w-xl mx-auto text-center text-base md:text-lg text-neutral-500'>
-          {t('pages.home.features.description')}
-        </p>
-      </div>
-
-      <div className='relative mt-4'>
-        <div className='grid grid-cols-1 lg:grid-cols-6 mt-14 xl:border rounded-md border-neutral-300'>
+    <section className='w-full py-24 md:py-32'>
+      <div className='container px-4 md:px-6'>
+        <div className='flex flex-col items-center justify-center space-y-4 text-center'>
+          <div className='space-y-2'>
+            <h2 className='text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl'>{t('title')}</h2>
+            <p className='mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed'> {t('description')}</p>
+          </div>
+        </div>
+        <div className='mx-auto grid max-w-5xl grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3 pt-12 md:pt-16'>
           {features.map(feature => (
-            <FeatureCard key={feature.title} className={feature.className}>
-              <FeatureTitle>{feature.title}</FeatureTitle>
-              <FeatureDescription>{feature.description}</FeatureDescription>
-              <div className='h-full w-full'>{feature.skeleton}</div>
-            </FeatureCard>
+            <div
+              key={feature.title}
+              className='flex flex-col items-center gap-2 rounded-lg border p-6 transition-all hover:shadow-md'
+            >
+              <div className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>
+                {feature.icon}
+              </div>
+              <h3 className='text-xl font-bold'>{feature.title}</h3>
+              <p className='text-center text-muted-foreground'>{feature.description}</p>
+            </div>
           ))}
         </div>
       </div>
-    </div>
-  )
-}
-
-const FeatureCard = ({ children, className }: { children?: React.ReactNode; className?: string }) => {
-  return <div className={cn(`px-4 py-4 sm:py-8 sm:px-8 relative overflow-hidden`, className)}>{children}</div>
-}
-
-const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p className='max-w-5xl mx-auto text-left tracking-tight text-black text-xl md:text-2xl md:leading-snug'>
-      {children}
-    </p>
-  )
-}
-
-const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p
-      className={cn(
-        'text-sm md:text-base  max-w-4xl text-left mx-auto',
-        'text-center font-normal text-neutral-400',
-        'text-left max-w-sm mx-0 md:text-sm my-2',
-      )}
-    >
-      {children}
-    </p>
-  )
-}
-
-export const SkeletonOne = () => {
-  const t = useTranslations()
-
-  return (
-    <div className='relative w-full mx-auto bg-transparent p-8 group h-full'>
-      <div className='mx-auto shadow-2xl group h-full'></div>
-
-      <div className='absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white via-white to-transparent w-full pointer-events-none' />
-      <div className='absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-white via-transparent to-transparent w-full pointer-events-none' />
-    </div>
-  )
-}
-
-export const SkeletonTwo = () => {
-  return (
-    <div className='relative w-full mx-auto bg-transparent p-8 group h-full'>
-      <div className='flex flex-1 w-full h-full flex-col space-y-2 -mt-2 relative'></div>
-
-      <div className='absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white via-white to-transparent w-full pointer-events-none' />
-      <div className='absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-white via-transparent to-transparent w-full pointer-events-none' />
-    </div>
-  )
-}
-
-export const SkeletonThree = () => {
-  return (
-    <div className='relative w-full mx-auto bg-transparent p-8 group h-full'>
-      <div className='flex flex-1 w-full h-full flex-col space-y-2 -mt-2 relative'></div>
-
-      <div className='absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white via-white to-transparent w-full pointer-events-none' />
-      <div className='absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-white via-transparent to-transparent w-full pointer-events-none' />
-    </div>
-  )
-}
-
-export const SkeletonFour = () => {
-  return (
-    <div className='relative w-full mx-auto bg-transparent p-8 group h-full'>
-      <div className='flex flex-1 w-full h-full flex-col space-y-2 -mt-2 relative'></div>
-
-      <div className='absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white via-white to-transparent w-full pointer-events-none' />
-      <div className='absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-white via-transparent to-transparent w-full pointer-events-none' />
-    </div>
+    </section>
   )
 }

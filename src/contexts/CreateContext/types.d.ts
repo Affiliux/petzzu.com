@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { BackgroundAnimationProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
-import { CoupleResponseProps, PaymentProps } from '@/typings/couple'
+import { ChildResponseProps, PaymentProps } from '@/typings/child'
 import {
   CreateFromPrePayloadProps,
   CreatePrePayloadProps,
@@ -45,6 +45,6 @@ export type CreateContextType = {
   handleNewMedia: (payload: NewMediaPayloadProps) => Promise<void>
   handleRemoveMedia: (payload: RemoveMediaPayloadProps) => Promise<void>
   handleCreateFromPre: (payload: CreateFromPrePayloadProps) => Promise<void>
-  handleCheckPayment: (id: string) => Promise<CoupleResponseProps>
+  handleCheckPayment: (id: string) => Promise<ChildResponseProps>
   handleGetPre: (id: string) => Promise<void>
 }

@@ -6,7 +6,7 @@ import { LoaderIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { useCouple } from '@/contexts/CoupleContext'
+import { useChild } from '@/contexts/ChildContext'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
@@ -24,7 +24,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const router = useRouter()
   const t = useTranslations()
 
-  const { child, handleGetChildBySlug } = useCouple()
+  const { child, handleGetChildBySlug } = useChild()
 
   const [view, set_view] = useState<boolean>(false)
   const [payment, set_payment] = useState<boolean>(false)
@@ -74,7 +74,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
       )}
 
-      {child && !loading && <>{child.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme couple={child} />}</>}
+      {child && !loading && <>{child.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme child={child} />}</>}
 
       {child && (success || payment || (!view && child.themeShowType === ThemeShowTypeEnum.DEFAULT)) && (
         <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>

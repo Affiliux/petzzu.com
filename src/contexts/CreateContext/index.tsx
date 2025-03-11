@@ -17,7 +17,7 @@ import { CreateContextType, CreateProviderProps } from './types'
 
 import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 import { get_search_yt } from '@/infrastructure/http/services/application'
-import { get_child_id } from '@/infrastructure/http/services/couple'
+import { get_child_id } from '@/infrastructure/http/services/child'
 import {
   create_from_pre,
   create_pre,

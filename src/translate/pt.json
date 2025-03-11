@@ -258,10 +258,11 @@
           "animations": "Sem animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/por ano"
+          "price_recurrency": "/uma vez",
+          "buy": "Compre Agora"
         },
         "monthly": {
-          "title": "Monthly",
+          "title": "Mensal",
           "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
@@ -272,10 +273,11 @@
           "animations": "Sem animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/por ano"
+          "price_recurrency": "/por mes",
+          "buy": "Compre Agora"
         },
         "annual": {
-          "title": "Annual",
+          "title": "Anual",
           "counter": "Contador em tempo real",
           "text": "Texto dedicado",
           "date": "Data de início",
@@ -286,7 +288,9 @@
           "animations": "Com animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/uma vez"
+          "price_recurrency": "/por ano",
+          "discount": "Desconto de 20%",
+          "buy": "Compre Agora"
         },
         "recommended": "Recomendado",
         "button": "Surpreenda agora"
@@ -295,20 +299,28 @@
         "title": "Vários Recursos",
         "description": "Veja os recursos que você pode adicionar à sua página personalizada",
         "1": {
-          "title": "Contador de tempo",
-          "description": "Mostre há quanto tempo vocês estão juntos nessa jornada."
+          "title": "Linha do Tempo",
+          "description": "Uma linha do tempo exclusivamente feita para o crescimento do bebê."
         },
         "2": {
-          "title": "Animações de fundo",
-          "description": "Escolha entre várias animações de fundo para personalizar a página."
+          "title": "Contador de Tempo",
+          "description": "Acompanhe em tempo real o desenvolvimento de cada etapa."
         },
         "3": {
-          "title": "Música dedicada",
-          "description": "Dedique uma música especial. A música será reproduzida automaticamente na página."
+          "title": "QRCode Exclusivo",
+          "description": "Crie seu QR Code exclusivo e torne cada interação única, prática e memorável."
         },
         "4": {
-          "title": "Em todo lugar",
-          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
+          "title": "Imagens para cada Mês",
+          "description": "Eternize cada momento único do mês com imagens especiais que capturam memórias inesquecíveis!"
+        },
+        "5": {
+          "title": "URL Personalizada",
+          "description": "Transforme sua presença online com uma URL personalizada."
+        },
+        "6": {
+          "title": "Fundo Colorido",
+          "description": "Destaque sua página com um fundo colorido vibrante e cativante, criando uma experiência visual única e envolvente!"
         }
       }
     },

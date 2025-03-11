@@ -46,7 +46,7 @@ export type ChildProps = {
 }
 
 interface DefaultThemeProps {
-  Child: ChildResponseProps
+  child: ChildResponseProps
 }
 
 // Get Child
