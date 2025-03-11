@@ -1,5 +1,5 @@
 'use client'
-import { CalendarHeart,Images, Link , Pipette, QrCode, Timer } from 'lucide-react'
+import { CalendarHeart, Images, Link, Pipette, QrCode, Timer } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export function Features() {
@@ -26,7 +26,7 @@ export function Features() {
       description: t('4.description'),
     },
     {
-      icon: <Link  className='h-6 w-6 text-primary' />,
+      icon: <Link className='h-6 w-6 text-primary' />,
       title: t('5.title'),
       description: t('5.description'),
     },
