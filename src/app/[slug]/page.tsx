@@ -25,6 +25,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const t = useTranslations()
 
   const { child, handleGetChildBySlug } = useChild()
+  console.log('child', child)
 
   const [view, set_view] = useState<boolean>(false)
   const [payment, set_payment] = useState<boolean>(false)
@@ -69,14 +70,13 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
     <div className='relative bg-blue-300 h-full min-h-screen'>
       {loading && (
         <div className='h-screen w-full flex flex-col items-center justify-center text-center py-8'>
-          {/* <Animation src={'lotties/loading.lottie'} style={{ width: 200, height: 100 }} /> */}
           <LoaderIcon className='w-16 h-16 text-red-400 animate-spin' />
         </div>
       )}
 
-      {child && !loading && <>{child.themeShowType === ThemeShowTypeEnum.DEFAULT && <DefaultTheme child={child} />}</>}
+      {child && !loading && <>{child.themeShowType === ThemeShowTypeEnum.YELLOW && <DefaultTheme child={child} />}</>}
 
-      {child && (success || payment || (!view && child.themeShowType === ThemeShowTypeEnum.DEFAULT)) && (
+      {child && (success || payment || (!view && child.themeShowType === ThemeShowTypeEnum.YELLOW)) && (
         <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
           <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-black bg-opacity-95 backdrop-blur-lg transition-opacity duration-300'>
             <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg shadow-sm'>
@@ -90,11 +90,11 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 <SuccessModal
                   child={child}
                   onClose={() => {
-                    if (child.themeShowType === ThemeShowTypeEnum.DEFAULT) set_view(true)
+                    if (child.themeShowType === ThemeShowTypeEnum.YELLOW) set_view(true)
                     set_success(false)
                   }}
                 />
-              ) : !view && child.themeShowType === ThemeShowTypeEnum.DEFAULT ? (
+              ) : !view && child.themeShowType === ThemeShowTypeEnum.YELLOW ? (
                 <div className='animate-bounce'>
                   <button
                     onClick={() => set_view(true)}
