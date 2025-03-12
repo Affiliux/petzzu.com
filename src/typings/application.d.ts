@@ -25,7 +25,7 @@ export type PlanProps = {
   isSignature: boolean
   recurrence: string
   fileLimit: number | null
-  description: string
+  // description: string
   sku: string
   price: number
   currency: string
