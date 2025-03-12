@@ -129,7 +129,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
         toast({
           variant: 'destructive',
           title: 'Image Error!!',
-          description: t('steps.step2.input.errors.maxFiles'),
+          description: t('steps.step3.input.errors.maxFiles'),
         })
 
         return

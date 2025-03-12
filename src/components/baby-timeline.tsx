@@ -9,10 +9,12 @@ import { PhotosSliderEnum } from '@/enums'
 
 export function BabyTimeline({ timeline }) {
   if (!timeline || timeline.length === 0) {
-    return <p className='text-center text-neutral-500'>Nenhuma lembrança disponível.</p>
+    return null
   }
 
-  const data = timeline.map(entry => {
+  const sortedTimeline = timeline.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+  const data = sortedTimeline.map(entry => {
     const [day, month, year] = formatDate(entry.date).split('/')
     return {
       title: { day, month, year },
