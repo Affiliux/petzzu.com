@@ -424,7 +424,7 @@
       "input": {
         "picture": {
           "title": "PNG, JPG, JPEG, GIF (máximo 1 foto)",
-          "label": "Foto de capa do seu Album"
+          "label": "Foto principal da linha do tempo"
         },
         "label": "Mensagem",
         "errors": {
