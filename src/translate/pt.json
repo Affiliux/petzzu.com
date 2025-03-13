@@ -273,7 +273,7 @@
           "animations": "Sem animações exclusivas",
           "url": "URL personalizada",
           "support": "Suporte 24 horas",
-          "price_recurrency": "/por mes",
+          "price_recurrence": "/por mes",
           "buy": "Compre Agora"
         },
         "annual": {

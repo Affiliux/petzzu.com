@@ -23,7 +23,7 @@ export function Plans() {
             <CardDescription>{t('purchase.counter')}</CardDescription>
             <div className='mt-4'>
               <span className='text-3xl font-bold'>12</span>
-              <span className='text-muted-foreground ml-1'>{t('purchase.price_recurrency')}</span>
+              <span className='text-muted-foreground ml-1'>{t('purchase.price_recurrence')}</span>
             </div>
           </CardHeader>
           <CardContent className='flex-grow'>
@@ -58,7 +58,7 @@ export function Plans() {
             <CardDescription>{t('monthly.counter')}</CardDescription>
             <div className='mt-4'>
               <span className='text-3xl font-bold'>13</span>
-              <span className='text-muted-foreground ml-1'>{t('monthly.price_recurrency')}</span>
+              <span className='text-muted-foreground ml-1'>{t('monthly.price_recurrence')}</span>
             </div>
           </CardHeader>
           <CardContent className='flex-grow'>
@@ -95,7 +95,7 @@ export function Plans() {
             <CardDescription>{t('annual.counter')}</CardDescription>
             <div className='mt-4'>
               <span className='text-3xl font-bold'>99</span>
-              <span className='text-muted-foreground ml-1'>{t('annual.price_recurrency')}</span>
+              <span className='text-muted-foreground ml-1'>{t('annual.price_recurrence')}</span>
             </div>
             <span className='inline-block mt-1 text-sm bg-primary/10 text-primary px-2 py-0.5 rounded-full'>
               {t('annual.discount')}
