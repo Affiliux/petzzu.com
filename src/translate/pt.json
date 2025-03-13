@@ -564,9 +564,9 @@
   },
   "slug": {
     "birth_date": {
-      "day" : "Dia",
-      "month" : "Mês",
-      "year" : "Ano"
+      "day": "Dia",
+      "month": "Mês",
+      "year": "Ano"
     }
   },
   "checkout": {
