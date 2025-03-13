@@ -117,6 +117,7 @@
 //   )
 // }
 
+
 'use client'
 
 import React, { use, useEffect, useState } from 'react'
@@ -129,6 +130,7 @@ import { useChild } from '@/contexts/ChildContext'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
+import { DateCount } from '@/components/date-count'
 import { PixPayment } from '@/components/pix'
 import { SuccessModal } from '@/components/success'
 
@@ -141,6 +143,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const queryParams = useQueryParams()
   const router = useRouter()
   const t = useTranslations()
+
   const { child, handleGetChildBySlug } = useChild()
 
   const [view, set_view] = useState<boolean>(false)
@@ -156,7 +159,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       const differenceInTime = today.getTime() - birthDate.getTime()
       const daysOld = Math.floor(differenceInTime / (1000 * 60 * 60 * 24))
 
-      // Formatação da idade diretamente no useEffect
       if (daysOld < 30) {
         setFormattedAge(`${daysOld} day${daysOld !== 1 ? 's' : ''}`)
       } else if (daysOld < 365) {
@@ -171,10 +173,12 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
   async function onGetBySlug(slug: string) {
     set_loading(true)
+
     try {
       await handleGetChildBySlug(slug)
     } catch (error: any) {
       console.error(error)
+
       if (error.message === 'Website not found') {
         router.replace('/')
       }
@@ -185,9 +189,9 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
   useEffect(() => {
     if (child && child.inactiveReason === 'Awaiting payment') {
-      if (child.urlPayment?.includes('https')) {
+      if (child.urlPayment && child.urlPayment.includes('https')) {
         router.replace(child.urlPayment)
-      } else if (child.urlPayment) {
+      } else if (child.urlPayment && !child.urlPayment.includes('https')) {
         set_payment(true)
       }
     }
@@ -198,7 +202,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }, [slug])
 
   useEffect(() => {
-    if (queryParams?.afterPayment === 'true') set_success(true)
+    if (queryParams && queryParams?.afterPayment === 'true') set_success(true)
   }, [queryParams])
 
   return (
