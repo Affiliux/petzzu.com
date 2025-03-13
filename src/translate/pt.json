@@ -562,6 +562,13 @@
       "button": "Finalizar"
     }
   },
+  "slug": {
+    "birth_date": {
+      "day" : "Dia",
+      "month" : "Mês",
+      "year" : "Ano"
+    }
+  },
   "checkout": {
     "payment": {
       "select-method": "Método de pagamento",
