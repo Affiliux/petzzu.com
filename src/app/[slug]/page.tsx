@@ -77,7 +77,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       {child && !loading && (
         <>
           {child.themeShowType === ThemeShowTypeEnum.YELLOW && <DefaultTheme child={child} />}
-          <div className='p-4 text-center text-xl font-bold'>Idade do fdp: {getFormattedAge(t, child?.birth_date)}</div>
+          
         </>
       )}
 

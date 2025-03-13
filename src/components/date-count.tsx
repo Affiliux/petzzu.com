@@ -132,13 +132,7 @@ export const DateCount = ({ date, type }: { date: string; type: DateShowTypeEnum
             </div>
           </div>
 
-          {date && (
-            <p className='text-sm font-semibold text-center text-black my-8 opacity-60'>
-              {t('themes.default.since')} {format(new Date(date), 'dd')} {t('themes.default.of')}{' '}
-              {format(new Date(date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
-              {format(new Date(date), 'yyy', { locale: ptBR })}
-            </p>
-          )}
+          
         </div>
       )}
     </>
@@ -162,13 +156,7 @@ export const DateCount = ({ date, type }: { date: string; type: DateShowTypeEnum
             {seconds} {t('themes.default.seconds')} ❤️‍🔥
           </p>
 
-          {date && (
-            <p className='text-sm font-semibold text-center text-black my-8 opacity-60'>
-              {t('themes.default.since')} {format(new Date(date), 'dd')} {t('themes.default.of')}{' '}
-              {format(new Date(date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
-              {format(new Date(date), 'yyy', { locale: ptBR })}
-            </p>
-          )}
+          
         </div>
       )}
     </>

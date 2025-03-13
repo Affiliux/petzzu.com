@@ -22,6 +22,7 @@ import { ShootingStars } from '@/components/ui/shooting-stars'
 import { StarsBackground } from '@/components/ui/stars-background'
 import { Vortex } from '@/components/ui/vortex'
 
+import PicturesGrid from './pictures-grid'
 import { BabyTimeline } from '../../../components/baby-timeline'
 
 import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
@@ -52,20 +53,23 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
               {!!child?.media.length && (
                 <div className='w-full lg:w-3/4 mb-10'>
-                  <CarouselPhotos type={child.imageShowType as PhotosSliderEnum} images={child.media} />
+
+                  <PicturesGrid child={child} />
+
+                  {child?.birth_date && (
+                    <p className='text-sm font-semibold text-center text-black my-8 opacity-60'>
+                      {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
+                      {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
+                      {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
+                    </p>
+                  )}
+
                 </div>
               )}
 
-              <h1 className={`${dancing.className} text-4xl md:text-5xl text-[#FF0000] font-bold text-center`}>
-                {child?.child_name}
-              </h1>
-              <p
-                className={`${lora.className} text-gray-300 text-md text-center mt-2 mb-16`}
-                dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
-              />
+              {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
 
               {!!child?.birth_date && <DateCount type={DateShowTypeEnum.DEFAULT} date={child.birth_date} />}
-              {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
             </div>
           </div>
         </div>

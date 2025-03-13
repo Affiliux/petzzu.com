@@ -154,6 +154,7 @@ module.exports = {
       },
       screens: {
         '2xl': '1400px',
+        'xs': { max: '320px' }, 
       },
     },
   },
