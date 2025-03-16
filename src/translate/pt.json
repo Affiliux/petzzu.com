@@ -420,17 +420,17 @@
     },
     "step2": {
       "title": "Quando ele Nasceu?",
-      "description": "Insira a data de nascimento, uma foto bem bonita e seu gênero.",
+      "description": "Insira a data de nascimento, algumas fotos de capa e o gênero da criança.",
       "input": {
         "picture": {
-          "title": "PNG, JPG, JPEG, GIF (máximo 1 foto)",
-          "label": "Foto principal da linha do tempo"
+          "title": "PNG, JPG, JPEG, GIF (máximo 6 fotos)",
+          "label": "Adicione fotos para a capa do Album"
         },
         "label": "Mensagem",
         "errors": {
           "min": "Mínimo de 2 caracteres",
           "max": "Máximo de {limit} caracteres",
-          "maxFiles": "Máximo de 1 foto permitida"
+          "maxFiles": "Máximo de 6 foto permitidas"
         }
       },
       "back": "Voltar etapa",
