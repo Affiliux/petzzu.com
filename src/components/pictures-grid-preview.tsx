@@ -1,10 +1,7 @@
-import { Dancing_Script } from 'next/font/google'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
 import { CarouselPhotos } from './carousel'
 import { PhotosSliderEnum } from '../enums'
-import { getFormattedAge } from '../lib/helpers/formatters/birth_date_formatter'
 import { MediaProps } from '../typings/child'
 import { CreatePrePayloadProps } from '../typings/create'
 
@@ -13,15 +10,7 @@ interface PicturesGridProps {
   images?: MediaProps[]
 }
 
-const dancing = Dancing_Script({
-  weight: '700',
-  subsets: ['latin'],
-})
-
-export default function PicturesGridPreview({ child, images}: PicturesGridProps) {
-  const t = useTranslations()
-
-
+export default function PicturesGridPreview({ images }: PicturesGridProps) {
   return (
     <div className='relative w-full max-w-2xl mx-auto p-6'>
       {images.length == 1 && (
@@ -252,4 +241,3 @@ export default function PicturesGridPreview({ child, images}: PicturesGridProps)
     </div>
   )
 }
-
