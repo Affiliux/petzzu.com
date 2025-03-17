@@ -26,6 +26,7 @@ import { EmojiRain } from './emoji-rain'
 import { Music } from './music'
 import PicturesGridPreview from './pictures-grid-preview'
 import PicturesGrid from '../app/[slug]/components/pictures-grid'
+import { getFormattedAge } from '../lib/helpers/formatters/birth_date_formatter'
 
 import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
 
@@ -55,6 +56,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
   const { locale } = useApplication()
 
   const [showPro, setShowPro] = useState<boolean>(true)
+  const { value, unit } = getFormattedAge(t, child?.birth_date)
 
   const removeEmojis = (str: string) => {
     return str
@@ -96,17 +98,39 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
 
       <div className='relative container h-full mt-14 bg-white lg:bg-white z-40'>
         <div className='rounded-lg h-full'>
-          {!!medias.length && (
-            <div className='flex items-center justify-center w-full'>
-              <PicturesGridPreview child={child} images={medias}/>
-            </div>
-          )}
+          <div className='flex justify-center items-center mb-8'>
+            {child?.child_name &&
+              (child.child_name.length > 8 ? (
+                <div className='flex flex-col items-center text-center'>
+                  <div className='flex flex-row items-baseline gap-2'>
+                    {child.birth_date && (
+                      <>
+                        <span className='text-8xl font-bold text-blue-800'>{value}</span>
+                        <div className={`${dancing.className} text-3xl italic text-blue-700 leading-none`}>{unit}</div>
+                      </>
+                    )}
+                  </div>
+                  <div>
+                    <div className='flex flex-col ml-3 mt-3'>
+                      <div className='text-4xl font-medium text-blue-800 leading-tight mt-1'>{child.child_name}</div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className='flex items-center'>
+                  {child.birth_date && <span className='text-8xl font-bold text-blue-800'>{value}</span>}
+                  <div className='flex flex-col ml-3 mt-3'>
+                    <div className={`${dancing.className} text-3xl italic text-blue-700 leading-none`}>{unit}</div>
+                    <div className='text-4xl font-medium text-blue-800 leading-tight mt-1'>{child.child_name}</div>
+                  </div>
+                </div>
+              ))}
+          </div>
 
-          <h1
-            className={`${lora.className} text-3xl text-[#FF0000] font-bold text-center ${!!medias.length && 'mt-12'}`}
-          >
-            {child?.child_name}
-          </h1>
+            <div className='flex items-center justify-center w-full'>
+              <PicturesGridPreview child={child} images={medias} />
+            </div>
+
           <p
             className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
             dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}

@@ -7,7 +7,7 @@ export function getFormattedAge(t: (key: string) => string, birthDate?: string):
   if (daysOld < 365)
     return {
       value: Math.floor(daysOld / 30),
-      unit: `${t('slug.birth_date.month')}${Math.floor(daysOld / 30) !== 1 ? 's' : ''}`,
+      unit: `${t('slug.birth_date.month')}${Math.floor(daysOld / 30) !== 1 ? 'es' : ''}`,
     }
   return {
     value: Math.floor(daysOld / 365),
