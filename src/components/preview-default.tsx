@@ -24,6 +24,8 @@ import { CarouselPhotos } from './carousel'
 import { DateCount } from './date-count'
 import { EmojiRain } from './emoji-rain'
 import { Music } from './music'
+import PicturesGridPreview from './pictures-grid-preview'
+import PicturesGrid from '../app/[slug]/components/pictures-grid'
 
 import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
 
@@ -78,6 +80,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
     if (plan?.sku.includes('pro')) setShowPro(true)
     else setShowPro(false)
   }, [plan, song])
+  console.log(child)
 
   return (
     <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-white shadow-lg shadow-neutral-500'>
@@ -95,7 +98,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
         <div className='rounded-lg h-full'>
           {!!medias.length && (
             <div className='flex items-center justify-center w-full'>
-              <CarouselPhotos type={mediaShowType} images={medias} />
+              <PicturesGridPreview child={child} />
             </div>
           )}
 
