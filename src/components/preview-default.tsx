@@ -98,7 +98,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
         <div className='rounded-lg h-full'>
           {!!medias.length && (
             <div className='flex items-center justify-center w-full'>
-              <PicturesGridPreview child={child} />
+              <PicturesGridPreview child={child} images={medias}/>
             </div>
           )}
 
