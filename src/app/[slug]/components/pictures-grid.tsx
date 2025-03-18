@@ -23,7 +23,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
   const images = child.media || []
 
   return (
-    <div className='relative w-full max-w-2xl mx-auto p-6'>
+    <div className='relative w-full max-w-2xl mx-auto px-6'>
       <div className='flex justify-center items-center mb-8'>
         {child?.child_name &&
           (child.child_name.length > 8 ? (

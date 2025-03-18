@@ -13,7 +13,7 @@ interface PicturesGridProps {
 export default function PicturesGridPreview({ child, images }: PicturesGridProps) {
   
   return (
-    <div className='relative w-full max-w-2xl mx-auto p-6'>
+    <div className='relative w-full max-w-2xl mx-auto px-6'>
       {images.length == 1 && (
         <div>
           <CarouselPhotos images={images} type={PhotosSliderEnum.CARDS} />

@@ -109,13 +109,13 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
                   <div className='flex flex-row items-baseline gap-2'>
                     {child.birth_date && (
                       <>
-                        <span className='text-8xl font-bold text-theme-600'>{value}</span>
+                        <span className='text-7xl font-bold text-theme-600'>{value}</span>
                         <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
                       </>
                     )}
                   </div>
                   <div>
-                    <div className='flex flex-col ml-3 mt-3'>
+                    <div className='flex flex-col ml-3'>
                       <div className='text-4xl font-medium text-theme-600 leading-tight mt-1'>{child.child_name}</div>
                     </div>
                   </div>
