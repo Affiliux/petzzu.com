@@ -52,5 +52,7 @@ interface DefaultThemeProps {
 // Get Child
 export interface ChildPayloadProps {}
 export interface ChildResponseProps extends ChildProps, PaymentProps {
+  description: ReactNode
+  name: ReactNode
   media: MediaProps[]
 }

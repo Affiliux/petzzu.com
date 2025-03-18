@@ -567,6 +567,9 @@
       "day": "Dia",
       "month": "Mês",
       "year": "Ano"
+    },
+    "facts":{
+      "title": "Conheça um pouco sobre mim:"
     }
   },
   "checkout": {

@@ -20,10 +20,10 @@ export function BabyTimeline({ timeline }) {
       title: { day, month, year },
       content: (
         <div>
-          <h3 className='text-lg font-bold text-neutral-900'>{entry.title}</h3>
+          <h3 className='relative text-center text-2xl texto-blue-700 font-bold text-neutral-900'>{entry.title}</h3>
           <p
             dangerouslySetInnerHTML={entry?.description ? { __html: entry.description } : undefined}
-            className='text-neutral-700 text-sm md:text-base mt-2'
+            className='relative font-medium item-center text-neutral-700 text-base md:text-base mt-2'
           />
           <div className='mt-4'>
             {entry?.media?.length > 0 ? (

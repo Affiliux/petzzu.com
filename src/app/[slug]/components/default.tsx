@@ -26,6 +26,7 @@ import PicturesGrid from './pictures-grid'
 import { BabyTimeline } from '../../../components/baby-timeline'
 
 import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
+import { get_child_slug } from '@/infrastructure/http/services/child'
 
 const lora = Lora({
   weight: ['400', '700'],
@@ -53,19 +54,20 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
               {!!child?.media.length && (
                 <div className='w-full lg:w-3/4 mb-10'>
-
                   <PicturesGrid child={child} />
 
                   {child?.birth_date && (
-                    <p className='text-sm font-semibold text-center text-black my-8 opacity-60'>
+                    <p className='text-sm font-extrabold text-center text-black my-6 opacity-70'>
                       {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
                       {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
                       {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
                     </p>
                   )}
-
                 </div>
               )}
+              <div className='text-center p-6'>
+                <h2 className='text-2xl font-bold text-black'>{t("slug.facts.title")}</h2>                
+              </div>
 
               {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
 
