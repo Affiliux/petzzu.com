@@ -67,7 +67,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }, [queryParams])
 
   return (
-    <div className='relative bg-blue-300 h-full min-h-screen'>
+    <div className='relative bg-theme-100 h-full min-h-screen'>
       {loading && (
         <div className='h-screen w-full flex flex-col items-center justify-center text-center py-8'>
           <LoaderIcon className='w-16 h-16 text-red-400 animate-spin' />
