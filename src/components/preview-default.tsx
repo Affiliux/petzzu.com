@@ -79,6 +79,9 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
 
   const formatFNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
 
+  const childNameParts = child?.child_name?.split(' ')
+  const displayName = childNameParts?.length > 2 ? `${childNameParts[0]} ${childNameParts[1]}` : child.child_name
+
   useEffect(() => {
     if (plan?.sku.includes('pro')) setShowPro(true)
     else setShowPro(false)
@@ -116,7 +119,9 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
                   </div>
                   <div>
                     <div className='flex flex-col ml-3'>
-                      <div className='text-4xl font-medium text-theme-600 leading-tight mt-1'>{child.child_name}</div>
+                      <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
+                        {displayName}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -125,7 +130,9 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
                   {child.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
                   <div className='flex flex-col ml-3 mt-3'>
                     <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
-                    <div className='text-4xl font-medium text-theme-600 leading-tight mt-1'>{child.child_name}</div>
+                    <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
+                      {displayName}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -140,11 +147,11 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
             dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
           />
 
+          {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
+
           {!!child?.birth_date && !!(child?.timeLine.length > 0) && (
             <DateCount type={dateShowType} date={child.birth_date} />
           )}
-
-          {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
         </div>
       </div>
 

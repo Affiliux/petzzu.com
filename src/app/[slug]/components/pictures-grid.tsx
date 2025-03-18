@@ -22,6 +22,9 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
 
   const images = child.media || []
 
+  const childNameParts = child?.child_name?.split(' ')
+  const displayName = childNameParts?.length > 2 ? `${childNameParts[0]} ${childNameParts[1]}` : child.child_name
+
   return (
     <div className='relative w-full max-w-2xl mx-auto px-6'>
       <div className='flex justify-center items-center mb-8'>
@@ -31,14 +34,14 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
               <div className='flex flex-row items-baseline gap-2'>
                 {child.birth_date && (
                   <>
-                    <span className='text-8xl font-bold text-theme-600'>{value}</span>
-                    <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
+                    <span className='text-7xl font-bold text-theme-600'>{value}</span>
+                    <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none `}>{unit}</div>
                   </>
                 )}
               </div>
               <div>
                 <div className='flex flex-col ml-3 mt-3'>
-                  <div className='text-4xl font-medium text-theme-600 leading-tight mt-1'>{child.child_name}</div>
+                  <div className='text-4xl text-theme-600 leading-tight mt-1 font-happy-school'>{displayName}</div>
                 </div>
               </div>
             </div>
@@ -47,7 +50,9 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
               {child.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
               <div className='flex flex-col ml-3 mt-3'>
                 <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
-                <div className='text-4xl font-medium text-theme-600 leading-tight mt-1'>{child.child_name}</div>
+                <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
+                  {displayName}
+                </div>
               </div>
             </div>
           ))}
@@ -59,7 +64,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
       )}
       {images.length == 2 && (
         <div className='flex flex-col justify-center items-center'>
-          <div className='relative right-20 mb-12 transform rotate-[-2deg] left-10'>
+          <div className='relative right-20 transform rotate-[-2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -76,7 +81,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
             </div>
           </div>
 
-          <div className='relative right-10 mb-12 transform rotate-[-2deg]'>
+          <div className='relative right-10 transform rotate-[-2deg]'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -96,7 +101,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
       )}
       {images.length == 3 && (
         <div className='flex flex-col justify-center items-center'>
-          <div className='relative  mb-12 transform rotate-[-2deg] left-10'>
+          <div className='relative transform rotate-[-2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -113,7 +118,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
             </div>
           </div>
 
-          <div className='relative mb-12 transform rotate-[2deg] right-10'>
+          <div className='relative transform rotate-[2deg] right-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -130,7 +135,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
             </div>
           </div>
 
-          <div className='relative mb-12 transform rotate-[-2deg] left-10'>
+          <div className='relative transform rotate-[-2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
