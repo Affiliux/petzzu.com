@@ -4,8 +4,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 interface TimelineEntry {
-  title: string
+  date: string
   content: React.ReactNode
+  pictures?: React.ReactNode
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
@@ -28,6 +29,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height])
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1])
 
+  console.log(data)
+
   return (
     <div className='w-full font-sans px-0' ref={containerRef}>
       <div ref={ref} className='relative max-w-7xl mx-auto pb-20'>
@@ -37,14 +40,15 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <div className='h-8 absolute left-4 md:left-4 w-8 rounded-full bg-white dark:bg-black flex items-center justify-center'>
                 <div className='h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2' />
               </div>
-              <h3 className='font-sans text-2xl text-center tracking-tight leading-none pl-20 md:pl-20'>
-                <span className='block font-bold text-neutral-800 dark:text-neutral-200'>
-                  {item.title}
-                </span>
-              </h3>
             </div>
 
-            <div className='relative pl-20 pr-4 md:pl-4 w-full mt-4 md:mt-0'>{item.content}</div>
+            <h3 className='font-sans text-2xl text-center tracking-tight leading-none pl-20 md:pl-20'>
+              <span className='block font-bold text-neutral-800 dark:text-neutral-200'>{item.date}</span>
+            </h3>
+
+            <div className='relative text-center pl-20 pr-4 md:pl-4 w-full mt-4 md:mt-0'>{item.content}</div>
+
+            <div className='relative flex justify-center items-center w-full mt-4 md:mt-0'>{item.pictures}</div>
           </div>
         ))}
         <div

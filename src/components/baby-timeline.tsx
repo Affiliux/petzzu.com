@@ -16,7 +16,7 @@ export function BabyTimeline({ timeline }) {
   const data = sortedTimeline?.map(entry => {
     const formattedDate = formatDate(entry.date).split(' ').join(' / ')
     return {
-      title: formattedDate,
+      date: formattedDate,
       content: (
         <div>
           <h3 className='text-lg font-bold text-neutral-900'>{entry.title}</h3>
