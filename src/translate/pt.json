@@ -278,7 +278,7 @@
         },
         "annual": {
           "title": "Anual",
-          "counter": "Contador em tempo real",
+          "counter": "Assinatura anual",
           "text": "Texto dedicado",
           "date": "Data de início",
           "qr-code": "QR Code exclusivo",
