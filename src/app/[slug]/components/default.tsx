@@ -53,20 +53,20 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
           <div className={!!child?.media.length ? 'w-full lg:w-1/2 mt-8' : 'w-full'}>
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
               {!!child?.media.length && (
-                <div className='w-full lg:w-3/4 mb-10'>
+                <div className='w-full lg:w-3/4 mb-8'>
                   <div className='flex justify-end'>
                     <ThemeSwitcher />
                   </div>
                   <PicturesGrid child={child} />
-
-                  {child?.birth_date && (
-                    <p className='text-sm font-semibold text-center text-theme-600 my-8 '>
-                      {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
-                      {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
-                      {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
-                    </p>
-                  )}
                 </div>
+              )}
+
+              {child?.birth_date && (
+                <p className='text-sm font-semibold text-center text-theme-700'>
+                  {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
+                  {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
+                  {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
+                </p>
               )}
 
               {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}

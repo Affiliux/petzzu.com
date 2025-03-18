@@ -138,9 +138,17 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
               ))}
           </div>
 
-          <div className='flex items-center justify-center w-full'>
+          <div className='flex items-center justify-center w-full mb-8'>
             <PicturesGridPreview child={child} images={medias} />
           </div>
+
+          {child?.birth_date && (
+            <p className='text-sm font-semibold text-center text-theme-700'>
+              {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
+              {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
+              {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
+            </p>
+          )}
 
           <p
             className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}

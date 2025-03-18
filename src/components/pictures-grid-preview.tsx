@@ -21,7 +21,7 @@ export default function PicturesGridPreview({ child, images }: PicturesGridProps
       )}
       {images.length == 2 && (
         <div className='flex flex-col justify-center items-center'>
-          <div className='relative right-20 transform rotate-[-2deg] left-10'>
+          <div className='relative right-20 transform rotate-[2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -38,7 +38,7 @@ export default function PicturesGridPreview({ child, images }: PicturesGridProps
             </div>
           </div>
 
-          <div className='relative right-10 transform rotate-[-2deg]'>
+          <div className='relative right-10 transform rotate-[-2deg] bottom-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -58,7 +58,7 @@ export default function PicturesGridPreview({ child, images }: PicturesGridProps
       )}
       {images.length == 3 && (
         <div className='flex flex-col justify-center items-center'>
-          <div className='relative transform rotate-[-2deg] left-10'>
+          <div className='relative transform rotate-[2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -75,7 +75,7 @@ export default function PicturesGridPreview({ child, images }: PicturesGridProps
             </div>
           </div>
 
-          <div className='relative transform rotate-[2deg] right-10'>
+          <div className='relative right-10 transform rotate-[-2deg] bottom-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
@@ -92,7 +92,7 @@ export default function PicturesGridPreview({ child, images }: PicturesGridProps
             </div>
           </div>
 
-          <div className='relative transform rotate-[-2deg] left-10'>
+          <div className='relative transform rotate-[2deg] left-10 bottom-20'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
