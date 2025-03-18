@@ -66,7 +66,7 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
                 </div>
               )}
               <div className='text-center p-6'>
-                <h2 className='text-2xl font-bold text-black'>{t("slug.facts.title")}</h2>                
+                <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
               </div>
 
               {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}

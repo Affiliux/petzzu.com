@@ -74,12 +74,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
       )}
 
-      {child && !loading && (
-        <>
-          {child.themeShowType === ThemeShowTypeEnum.YELLOW && <DefaultTheme child={child} />}
-          
-        </>
-      )}
+      {child && !loading && <>{child.themeShowType === ThemeShowTypeEnum.YELLOW && <DefaultTheme child={child} />}</>}
 
       {child && (success || payment || (!view && child.themeShowType === ThemeShowTypeEnum.YELLOW)) && (
         <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>

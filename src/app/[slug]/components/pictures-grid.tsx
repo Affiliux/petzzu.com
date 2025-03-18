@@ -25,23 +25,27 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
   return (
     <div className='relative w-full max-w-2xl mx-auto p-6'>
       <div className='flex justify-center items-center mb-8'>
-      {child?.child_name.length > 8 ? (
-        <>
-          <span className='text-8xl font-bold text-blue-800'>{value}</span>
-          <div className='flex flex-col ml-3 mt-3'>
-            <div className={`${dancing.className} text-3xl italic text-blue-700 leading-none`}>{unit}</div>
-            <div className='text-4xl font-medium text-blue-800 leading-tight mt-1'>{child?.child_name.split(' ')[0]}</div>
-          </div>
-        </>
-      ) : (
-        <>
-        <span className='text-8xl font-bold text-blue-800'>{value}</span>
-          <div className='flex flex-col ml-3 mt-3'>
-            <div className={`${dancing.className} text-3xl italic text-blue-700 leading-none`}>{unit}</div>
-            <div className='text-4xl font-medium text-blue-800 leading-tight mt-1'>{child?.child_name.split(' ')[0]}</div>
-          </div>
-        </>
-      )}
+        {child?.child_name.length > 8 ? (
+          <>
+            <span className='text-8xl font-bold text-blue-800'>{value}</span>
+            <div className='flex flex-col ml-3 mt-3'>
+              <div className={`${dancing.className} text-3xl italic text-blue-700 leading-none`}>{unit}</div>
+              <div className='text-4xl font-medium text-blue-800 leading-tight mt-1'>
+                {child?.child_name.split(' ')[0]}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <span className='text-8xl font-bold text-blue-800'>{value}</span>
+            <div className='flex flex-col ml-3 mt-3'>
+              <div className={`${dancing.className} text-3xl italic text-blue-700 leading-none`}>{unit}</div>
+              <div className='text-4xl font-medium text-blue-800 leading-tight mt-1'>
+                {child?.child_name.split(' ')[0]}
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Photo Grid */}
@@ -116,4 +120,3 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
     </div>
   )
 }
-
