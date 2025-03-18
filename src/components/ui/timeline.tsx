@@ -42,13 +42,13 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               </div>
             </div>
 
-            <h3 className='font-sans text-2xl text-center tracking-tight leading-none pl-20 md:pl-20'>
+            <h3 className='font-sans text-2xl text-center md:text-start tracking-tight leading-none pl-20 md:pl-20'>
               <span className='block font-bold text-neutral-800 dark:text-neutral-200'>{item.date}</span>
             </h3>
 
-            <div className='relative text-center pl-20 pr-4 md:pl-4 w-full mt-4 md:mt-0'>{item.content}</div>
-
-            <div className='relative flex justify-center items-center w-full mt-4 md:mt-0'>{item.pictures}</div>
+            <div className='relative text-center md:text-start pl-20 pr-4 md:pl-4 w-full mt-4 md:mt-0'>
+              {item.content}
+            </div>
           </div>
         ))}
         <div
