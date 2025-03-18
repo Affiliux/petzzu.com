@@ -83,8 +83,8 @@ const Carousel = ({ type, images }: CarouselProps) => {
           }}
           style={
             {
-              '--swiper-pagination-color': '#ff0808',
-              '--swiper-pagination-bullet-inactive-color': '#999999',
+              '--swiper-pagination-color': 'var(--theme-600)',
+              '--swiper-pagination-bullet-inactive-color': 'var(--theme-200)',
               '--swiper-pagination-bullet-inactive-opacity': '1',
             } as React.CSSProperties
           }

@@ -13,20 +13,22 @@ export function BabyTimeline({ timeline }) {
   }
 
   const sortedTimeline = timeline?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
   const data = sortedTimeline?.map(entry => {
-    const formattedDate = formatDate(entry.date).split(' ').join(' / ')
+        const { day, month, year } = formatDate(entry.date)
+
     return {
-      date: formattedDate,
+      title: { day, month, year },
       content: (
         <div>
-          <h3 className='text-lg font-bold text-neutral-900'>{entry.title}</h3>
+          <h3 className='text-lg text-theme-600 text-center font-happy-school'>{entry.title}</h3>
           <p
             dangerouslySetInnerHTML={entry?.description ? { __html: entry.description } : undefined}
             className='text-neutral-700 text-sm md:text-base mt-2'
           />
           <div className='mt-4'>
             {entry?.media?.length > 0 ? (
-              <CarouselPhotos type={PhotosSliderEnum.CARDS} images={entry.media} />
+              <CarouselPhotos type={PhotosSliderEnum.COVERFLOW} images={entry.media} />
             ) : null}
           </div>
         </div>
