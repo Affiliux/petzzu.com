@@ -424,7 +424,8 @@
       "input": {
         "picture": {
           "title": "PNG, JPG, JPEG, GIF (máximo 6 fotos)",
-          "label": "Adicione fotos para a capa do Album"
+          "label": "Adicione fotos para a capa do Album",
+          "placeholder": "A quantidade de fotos altera o estilo de apresentação"
         },
         "label": "Mensagem",
         "errors": {
