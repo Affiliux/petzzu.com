@@ -4,11 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 interface TimelineEntry {
-  title: {
-    day: string
-    month: string
-    year: string
-  }
+  title: string
   content: React.ReactNode
 }
 
@@ -41,15 +37,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <div className='h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center'>
                 <div className='h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2' />
               </div>
-              <h3 className='font-sans tracking-tight leading-none pl-20 md:pl-20'>
-                <span className='block text-5xl md:text-6xl font-extrabold text-neutral-800 dark:text-neutral-200'>
-                  {item.title.day}
-                </span>
-                <span className='block text-xl md:text-4xl font-bold text-neutral-600 dark:text-neutral-400 mt-1'>
-                  {item.title.month}
-                </span>
-                <span className='block text-lg md:text-2xl font-medium text-neutral-500 dark:text-neutral-500 mt-1'>
-                  {item.title.year}
+              <h3 className='font-sans text-2xl text-center tracking-tight leading-none pl-20 md:pl-20'>
+                <span className='block font-bold text-neutral-800 dark:text-neutral-200'>
+                  {item.title}
                 </span>
               </h3>
             </div>

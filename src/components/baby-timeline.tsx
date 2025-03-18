@@ -13,11 +13,10 @@ export function BabyTimeline({ timeline }) {
   }
 
   const sortedTimeline = timeline?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-
   const data = sortedTimeline?.map(entry => {
-    const [day, month, year] = formatDate(entry.date).split('/')
+    const formattedDate = formatDate(entry.date).split(' ').join(' / ')
     return {
-      title: { day, month, year },
+      title: formattedDate,
       content: (
         <div>
           <h3 className='text-lg font-bold text-neutral-900'>{entry.title}</h3>
@@ -27,7 +26,7 @@ export function BabyTimeline({ timeline }) {
           />
           <div className='mt-4'>
             {entry?.media?.length > 0 ? (
-              <CarouselPhotos type={PhotosSliderEnum.COVERFLOW} images={entry.media} />
+              <CarouselPhotos type={PhotosSliderEnum.CARDS} images={entry.media} />
             ) : null}
           </div>
         </div>
