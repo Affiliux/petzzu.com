@@ -18,7 +18,8 @@ import { BabyTimeline } from '../../../components/baby-timeline'
 import { CloudsBackground } from '../../../components/clouds-background'
 import { ThemeSwitcher } from '../../../components/theme-switcher'
 
-import { DateShowTypeEnum } from '@/enums'
+import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
+import { get_child_slug } from '@/infrastructure/http/services/child'
 
 const lora = Lora({
   weight: ['400', '700'],
@@ -54,6 +55,9 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
                   <PicturesGrid child={child} />
                 </div>
               )}
+              <div className='text-center p-6'>
+                <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+              </div>
 
               {child?.birth_date && (
                 <p className='text-sm font-semibold text-center text-theme-700'>

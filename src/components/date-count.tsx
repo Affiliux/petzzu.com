@@ -131,8 +131,6 @@ export const DateCount = ({ date, type }: { date: string; type: DateShowTypeEnum
               <p className={`${lora.className} text-sm text-center text-neutral-300`}>{t('themes.default.seconds')}</p>
             </div>
           </div>
-
-          
         </div>
       )}
     </>
@@ -155,8 +153,6 @@ export const DateCount = ({ date, type }: { date: string; type: DateShowTypeEnum
             {minutes} {t('themes.default.minutes')} {seconds < 10 ? 0 : ''}
             {seconds} {t('themes.default.seconds')} ❤️‍🔥
           </p>
-
-          
         </div>
       )}
     </>
