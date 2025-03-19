@@ -26,7 +26,7 @@ export function CloudsBackground() {
           }}
           initial={{
             y: '100vh',
-            opacity: 0.8,
+            opacity: 0.5,
           }}
           animate={{
             y: '-100vh',
