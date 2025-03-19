@@ -21,7 +21,7 @@ export function BabyTimeline({ timeline }) {
       title: { day, month, year },
       content: (
         <div>
-          <h3 className='text-lg text-theme-600 text-center font-happy-school'>{entry.title}</h3>
+          <h3 className='text-lg text-theme-600 font-happy-school'>{entry.title}</h3>
           <p
             dangerouslySetInnerHTML={entry?.description ? { __html: entry.description } : undefined}
             className='text-neutral-700 text-sm md:text-base mt-2'
