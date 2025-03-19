@@ -22,29 +22,29 @@ export function Plans() {
     const descriptions = t(`pages.home.plans.${planSku.split('_')[1]}.description`).split('|')
 
     const itemsWithX = {
-      unique: ["Possui vídeo", "Edição de página já criada"],
-      month: ["Possui vídeo"],
-      annual: []
-    };
+      unique: ['Possui vídeo', 'Edição de página já criada'],
+      month: ['Possui vídeo'],
+      annual: [],
+    }
 
     return (
-      <ul className="space-y-2">
+      <ul className='space-y-2'>
         {descriptions.map((item, index) => {
-          const isNegative = itemsWithX[planSku.split('_')[1]].includes(item.trim());
-          
+          const isNegative = itemsWithX[planSku.split('_')[1]].includes(item.trim())
+
           return (
-            <li key={index} className="flex items-center">
+            <li key={index} className='flex items-center'>
               {isNegative ? (
-                <X className="h-4 w-4 mr-2 text-red-500" />
+                <X className='h-4 w-4 mr-2 text-red-500' />
               ) : (
-                <Check className="h-4 w-4 mr-2 text-primary" />
+                <Check className='h-4 w-4 mr-2 text-primary' />
               )}
               <span>{item}</span>
             </li>
-          );
+          )
         })}
       </ul>
-    );
+    )
   }
 
   return (
@@ -78,9 +78,7 @@ export function Plans() {
                     </span>
                   </div>
                 </CardHeader>
-                <CardContent className='flex-grow'>
-                  {getDescription(plan.sku)}
-                </CardContent>
+                <CardContent className='flex-grow'>{getDescription(plan.sku)}</CardContent>
                 <CardFooter>
                   <Button className='w-full'>{t('pages.home.plans.button')}</Button>
                 </CardFooter>
