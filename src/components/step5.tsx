@@ -30,7 +30,7 @@ interface Step5Props {
 export const Step5 = ({ theme, child, selected, setSong, onNext, onBack }: Step5Props) => {
   const t = useTranslations()
 
-  const { yt_search_list, set_yt_search_list, handleGetYtVideos } = useApplication()
+  const { yt_search_list, set_yt_search_list, onGetYtVideos } = useApplication()
 
   const [value, setValue] = useState<string | undefined>(child.yt_song)
   const [loading, setLoading] = useState<boolean>(false)
@@ -41,7 +41,7 @@ export const Step5 = ({ theme, child, selected, setSong, onNext, onBack }: Step5
     setLoading(true)
 
     try {
-      await handleGetYtVideos(name)
+      await onGetYtVideos(name)
     } catch (error: any) {
       console.error(error)
     } finally {
@@ -105,7 +105,7 @@ export const Step5 = ({ theme, child, selected, setSong, onNext, onBack }: Step5
               setSong(undefined)
               setValue('')
             }}
-            className='p-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black'
+            className='p-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900'
           >
             <IconX size={16} />
           </motion.button>
@@ -165,7 +165,7 @@ export const Step5 = ({ theme, child, selected, setSong, onNext, onBack }: Step5
                   set_yt_search_list([])
                   setSong(video)
                 }}
-                className='p-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black'
+                className='p-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900'
               >
                 <IconPlayerPlayFilled size={16} />
               </motion.button>

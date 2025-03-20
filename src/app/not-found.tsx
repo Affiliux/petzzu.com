@@ -2,6 +2,8 @@
 
 import Error from 'next/error'
 
+export const runtime = 'edge'
+
 export default function NotFound() {
   return (
     <html>

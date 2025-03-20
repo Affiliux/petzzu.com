@@ -3,9 +3,8 @@ import React from 'react'
 import { Timeline } from '@/components/ui/timeline'
 
 import { CarouselPhotos } from './carousel'
-import { formatDate } from '../lib/helpers/formatters/date_formatter'
 
-import { PhotosSliderEnum } from '@/enums'
+import { formatDate } from '@/lib/helpers/formatters'
 
 export function BabyTimeline({ timeline }) {
   if (!timeline || timeline.length === 0) {
@@ -15,7 +14,7 @@ export function BabyTimeline({ timeline }) {
   const sortedTimeline = timeline?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   const data = sortedTimeline?.map(entry => {
-        const { day, month, year } = formatDate(entry.date)
+    const { day, month, year } = formatDate(entry.date)
 
     return {
       title: { day, month, year },
@@ -26,11 +25,7 @@ export function BabyTimeline({ timeline }) {
             dangerouslySetInnerHTML={entry?.description ? { __html: entry.description } : undefined}
             className='text-neutral-700 text-sm md:text-base mt-2 text-justify'
           />
-          <div className='mt-4'>
-            {entry?.media?.length > 0 ? (
-              <CarouselPhotos type={PhotosSliderEnum.COVERFLOW} images={entry.media} />
-            ) : null}
-          </div>
+          <div className='mt-4'>{entry?.media?.length > 0 ? <CarouselPhotos images={entry.media} /> : null}</div>
         </div>
       ),
     }

@@ -185,14 +185,14 @@ export const PreviewNetflix = ({ couple, song, medias }: PreviewNetflixProps) =>
                 {playerDetails.state === PlayerState.PLAYING ? (
                   <button
                     onClick={actions.pauseVideo}
-                    className='bg-white text-black px-6 py-2 rounded font-semibold flex items-center gap-2'
+                    className='bg-white text-neutral-900 px-6 py-2 rounded font-semibold flex items-center gap-2'
                   >
                     <IconPlayerPauseFilled size={20} /> {t('themes.netflix.pause')}
                   </button>
                 ) : (
                   <button
                     onClick={actions.playVideo}
-                    className='bg-white text-black px-6 py-2 rounded font-semibold flex items-center gap-2'
+                    className='bg-white text-neutral-900 px-6 py-2 rounded font-semibold flex items-center gap-2'
                   >
                     <IconPlayerPlayFilled size={20} /> {t('themes.netflix.play')}
                   </button>

@@ -35,7 +35,7 @@ interface Step3Props {
 }
 
 export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveMedia, onRemoveMedia }: Step3Props) => {
-  const { createTimeline, updateTimeline, deleteTimeline } = useTimeline()
+  const { onCreateTimeline, onUpdateTimeline, onDeleteTimeline } = useTimeline()
   const [timelineEntries, setTimelineEntries] = useState(child.timeLine || [])
   const { pre } = useCreate()
   const [loading, setLoading] = useState(false)
@@ -86,7 +86,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
       updatedAt: new Date().toISOString(),
     }
     try {
-      const response = await createTimeline(pre, newEntry)
+      const response = await onCreateTimeline(pre, newEntry)
       const updatedEntry = { ...newEntry, id: response.id }
       setTimelineEntries(prev => [...prev, updatedEntry])
     } catch (error) {
@@ -97,7 +97,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
   const handleRemoveTimelineEntry = async (id: string) => {
     setTimelineEntries(prev => prev.filter(entry => entry.id !== id))
     try {
-      await deleteTimeline(id)
+      await onDeleteTimeline(id)
     } catch (error) {
       toast({ variant: 'destructive', title: 'Error deleting timeline entry', description: error.message })
     }
@@ -105,7 +105,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
 
   const handleUpdateTimelineEntry = async (id: string, updatedEntry: any) => {
     try {
-      const response = await updateTimeline(id, updatedEntry)
+      const response = await onUpdateTimeline(id, updatedEntry)
       const updatedTimelineEntry = {
         ...updatedEntry,
         ...response,
@@ -305,7 +305,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
                         <button
                           onClick={() => onRemove(entry.id, file.id)}
                           disabled={loading}
-                          className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                          className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
                         >
                           <IconX size={14} />
                         </button>
@@ -317,7 +317,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
                   <button
                     type='button'
                     onClick={() => handleRemoveTimelineEntry(entry.id)}
-                    className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
+                    className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2'
                   >
                     <IconTrash className='mr-2' />
                     Excluir
@@ -333,7 +333,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
         <button
           type='button'
           onClick={handleAddTimelineEntry}
-          className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
+          className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2'
         >
           <IconPlus className='mr-2' />
           Nova lembrança

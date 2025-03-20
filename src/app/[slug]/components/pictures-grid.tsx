@@ -1,11 +1,16 @@
+'use client'
+
+import React from 'react'
+
 import { Dancing_Script } from 'next/font/google'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { CarouselPhotos } from '../../../components/carousel'
-import { PhotosSliderEnum } from '../../../enums'
-import { getFormattedAge } from '../../../lib/helpers/formatters/birth_date_formatter'
-import { ChildProps, MediaProps } from '../../../typings/child'
+import { ChildProps } from '@/typings/child'
+
+import { CarouselPhotos } from '@/components/carousel'
+
+import { formatAge } from '@/lib/helpers/formatters'
 
 interface PicturesGridProps {
   child: ChildProps
@@ -18,7 +23,7 @@ const dancing = Dancing_Script({
 
 export default function PicturesGrid({ child }: PicturesGridProps) {
   const t = useTranslations()
-  const { value, unit } = getFormattedAge(t, child?.birth_date)
+  const { value, unit } = formatAge(t, child?.birth_date)
 
   const images = child.media || []
 
@@ -59,103 +64,103 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
       </div>
       {images.length == 1 && (
         <div>
-          <CarouselPhotos images={images} type={PhotosSliderEnum.CARDS} />
+          <CarouselPhotos images={images} />
         </div>
       )}
       {images.length == 2 && (
-              <div className='flex flex-col justify-center items-center'>
-                <div className='relative right-20 transform rotate-[2deg] left-10'>
-                  <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
-                    <div className='relative border-1 bg-white shadow-inner'>
-                      <div className='relative w-[200px] h-[200px] overflow-hidden'>
-                        <Image
-                          alt={images[0]?.id}
-                          src={images[0]?.url}
-                          width={200}
-                          height={200}
-                          className='object-cover object-center w-full h-full'
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className='relative right-10 transform rotate-[-2deg] bottom-10'>
-                  <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
-                    <div className='relative border-1 bg-white shadow-inner'>
-                      <div className='relative w-[200px] h-[200px] overflow-hidden'>
-                        <Image
-                          alt={images[1]?.id}
-                          src={images[1]?.url}
-                          width={200}
-                          height={200}
-                          className='object-cover object-center w-full h-full'
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
+        <div className='flex flex-col justify-center items-center'>
+          <div className='relative right-20 transform rotate-[2deg] left-10'>
+            <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
+              <div className='relative border-1 bg-white shadow-inner'>
+                <div className='relative w-[200px] h-[200px] overflow-hidden'>
+                  <Image
+                    alt={images[0]?.id}
+                    src={images[0]?.url}
+                    width={200}
+                    height={200}
+                    className='object-cover object-center w-full h-full'
+                    priority
+                  />
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className='relative right-10 transform rotate-[-2deg] bottom-10'>
+            <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
+              <div className='relative border-1 bg-white shadow-inner'>
+                <div className='relative w-[200px] h-[200px] overflow-hidden'>
+                  <Image
+                    alt={images[1]?.id}
+                    src={images[1]?.url}
+                    width={200}
+                    height={200}
+                    className='object-cover object-center w-full h-full'
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
       {images.length == 3 && (
-              <div className='flex flex-col justify-center items-center'>
-                <div className='relative transform rotate-[2deg] left-10'>
-                  <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
-                    <div className='relative border-1 bg-white shadow-inner'>
-                      <div className='relative w-[200px] h-[200px] overflow-hidden'>
-                        <Image
-                          alt={images[0]?.id}
-                          src={images[0]?.url}
-                          width={200}
-                          height={200}
-                          className='object-cover object-center w-full h-full'
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className='relative right-10 transform rotate-[-2deg] bottom-10'>
-                  <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
-                    <div className='relative border-1 bg-white shadow-inner'>
-                      <div className='relative w-[200px] h-[200px] overflow-hidden'>
-                        <Image
-                          alt={images[1]?.id}
-                          src={images[1]?.url}
-                          width={200}
-                          height={200}
-                          className='object-cover object-center w-full h-full'
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className='relative transform rotate-[2deg] left-10 bottom-20'>
-                  <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
-                    <div className='relative border-1 bg-white shadow-inner'>
-                      <div className='relative w-[200px] h-[200px] overflow-hidden'>
-                        <Image
-                          alt={images[2]?.id}
-                          src={images[2]?.url}
-                          width={200}
-                          height={200}
-                          className='object-cover object-center w-full h-full'
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
+        <div className='flex flex-col justify-center items-center'>
+          <div className='relative transform rotate-[2deg] left-10'>
+            <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
+              <div className='relative border-1 bg-white shadow-inner'>
+                <div className='relative w-[200px] h-[200px] overflow-hidden'>
+                  <Image
+                    alt={images[0]?.id}
+                    src={images[0]?.url}
+                    width={200}
+                    height={200}
+                    className='object-cover object-center w-full h-full'
+                    priority
+                  />
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className='relative right-10 transform rotate-[-2deg] bottom-10'>
+            <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
+              <div className='relative border-1 bg-white shadow-inner'>
+                <div className='relative w-[200px] h-[200px] overflow-hidden'>
+                  <Image
+                    alt={images[1]?.id}
+                    src={images[1]?.url}
+                    width={200}
+                    height={200}
+                    className='object-cover object-center w-full h-full'
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='relative transform rotate-[2deg] left-10 bottom-20'>
+            <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
+              <div className='relative border-1 bg-white shadow-inner'>
+                <div className='relative w-[200px] h-[200px] overflow-hidden'>
+                  <Image
+                    alt={images[2]?.id}
+                    src={images[2]?.url}
+                    width={200}
+                    height={200}
+                    className='object-cover object-center w-full h-full'
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
       {images.length == 4 && (
         <div>
-          <CarouselPhotos images={images} type={PhotosSliderEnum.COVERFLOW} />
+          <CarouselPhotos images={images} />
         </div>
       )}
       {images.length == 5 && (

@@ -1,9 +1,13 @@
 'use client'
+
 import { CalendarHeart, Images, Link, Pipette, QrCode, Timer } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export function Features() {
+  // hooks
   const t = useTranslations('pages.home.features')
+
+  // variables
   const features = [
     {
       icon: <CalendarHeart className='h-6 w-6 text-primary' />,
@@ -36,6 +40,7 @@ export function Features() {
       description: t('6.description'),
     },
   ]
+
   return (
     <section className='w-full py-24 md:py-32'>
       <div className='container px-4 md:px-6'>

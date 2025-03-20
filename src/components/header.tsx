@@ -1,169 +1,260 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
-import React from 'react'
+import { useState } from 'react'
 
-import { MenuIcon } from 'lucide-react'
-import Image from 'next/image'
+import { ChevronDown, Globe, Layers, LogOut, Menu, User, X } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
+import { useAccount } from '@/contexts/AccountContext'
 import { useApplication } from '@/contexts/ApplicationContext'
 
-import { Language } from './language'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+
 import { ThemeSwitcher } from './theme-switcher'
 
-export function Header() {
-  const t = useTranslations()
+import { locales } from '@/i18n'
 
-  const { theme } = useApplication()
+export function Header() {
+  // hooks
+  const t = useTranslations()
+  const router = useRouter()
+
+  // contexts
+  const { locale, theme, onChangeLocale } = useApplication()
+  const { account, onSignOut } = useAccount()
+
+  // states
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileAccountOpen, setMobileAccountOpen] = useState(false)
+
+  // variables
+  const SELECTED = locales.find(language => language === locale) ?? 'pt'
 
   return (
-    <div className='absolute top-0 left-0 w-full bg-white border-b border-neutral-200/60 z-50'>
+    <nav className='absolute top-0 left-0 w-full bg-white border-b border-neutral-200/60 z-50'>
       <div className='py-1.5 px-4 text-left md:text-center font-medium font-sans tracking-tight text-xs md:text-sm bg-gradient-to-r text-white from-theme-600 via-theme-700 to-theme-300'>
         <p className='text-center text-white'>
           <b>{t('config.offer.title')}</b> - {t('config.offer.description1')}{' '}
           <b className='text-sm md:text-base'>50%</b> {t('config.offer.description2')}
         </p>
       </div>
-      <div className='container max-w-screen-xl mx-auto flex flex-row items-center justify-between py-[10px] px-4 sm:px-6'>
-        <div className='flex flex-row items-center gap-4 sm:gap-12'>
-          <Link href='/' className='cursor-pointer'>
-            <Image
-              src={`/logos/${theme}/logo+name.png`}
-              className='h-8 sm:h-12 w-auto max-w-[140px] sm:max-w-[200px]'
-              alt='Babyzzu logo'
-              width={200}
-              height={56}
-            />
+
+      <div className='container flex items-center justify-between py-3'>
+        {/* Logo */}
+        <img
+          src={`/logos/${theme}/logo+name.png`}
+          className='h-8 sm:h-12 w-auto max-w-[140px] sm:max-w-[200px]'
+          alt='Babyzzu logo'
+          width={200}
+          height={56}
+        />
+
+        {/* Desktop Navigation */}
+        <div style={{ display: 'none' }} className='md:!flex md:items-center md:space-x-8'>
+          <Link href='/' className='font-medium hover:text-neutral-700 transition-colors'>
+            {t('config.header.nav.home')}
           </Link>
-
-          <div className='hidden lg:flex flex-row items-center gap-4 sm:gap-6'>
-            <Link
-              href='/#plans'
-              className='text-neutral-800 text-xs sm:text-sm hover:text-neutral-700 hover:underline cursor-pointer'
-              scroll
-            >
-              {t('config.header.nav.plans')}
-            </Link>
-
-            <div className='flex flex-row items-center gap-2 opacity-55'>
-              <Link href='https://affiliux.com' className='text-neutral-800 text-xs sm:text-sm cursor-pointer'>
-                {t('config.header.nav.affiliate')}
-              </Link>
-              <div className='bg-yellow-500 flex items-center rounded-sm px-2 py-[2px]'>
-                <p className='text-xs text-black font-bold'>{t('config.header.nav.badge')}</p>
-              </div>
-            </div>
-          </div>
+          <Link href='/#plans' className='font-medium hover:text-neutral-700 transition-colors'>
+            {t('config.header.nav.plans')}
+          </Link>
+          <Link href='/#faq' className='font-medium hover:text-neutral-700 transition-colors'>
+            {t('config.header.nav.faq')}
+          </Link>
+          <Link
+            href='https://affiliux.com'
+            target='_blank'
+            className='font-medium hover:text-neutral-700 transition-colors'
+          >
+            {t('config.header.nav.affiliate')}
+          </Link>
         </div>
 
-        <div className='relative flex items-center gap-2'>
-          <Language />
+        {/* Desktop Right Icons */}
+        <div style={{ display: 'none' }} className='md:!flex md:items-center md:space-x-4'>
+          {/* Theme Switcher */}
           <ThemeSwitcher />
 
-          {/* <div className='flex lg:hidden'>
-            <button
-              type='button'
-              className='relative h-10 flex items-center justify-center rounded-full p-[1px] focus:outline-none focus:ring-0'
-            >
-              <span className='flex h-full cursor-pointer items-center justify-center gap-2 px-3 py-1 text-xs sm:text-sm font-medium text-black backdrop-blur-3xl'>
-                <MenuIcon />
-              </span>
-            </button>
-
-            <div className='absolute right-0 top-12 z-[99999] border border-neutral-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5 min-w-[240px]'>
-              <div className='py-1 grid grid-cols-1 gap-2' role='none'>
-                <Link
-                  href='#plans'
-                  className='text-neutral-800 px-6 py-2 text-start items-center inline-flex hover:bg-neutral-200 rounded-l'
+          {/* Language Switcher */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='ghost' size='icon'>
+                <Globe className='h-5 w-5' />
+                <span className='sr-only'>{t('config.header.languages.title')}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              {locales.map(lang => (
+                <DropdownMenuItem
+                  key={lang}
+                  onClick={() => onChangeLocale(lang)}
+                  className={SELECTED === lang ? 'bg-accent' : ''}
                 >
-                  <span className='truncate text-xs font-bold'>{t('config.header.nav.plans')}</span>
+                  {t(`config.header.languages.${lang}`)}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* User Profile */}
+          {account?.email ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant='ghost' className='flex items-center gap-2'>
+                  <User className='h-5 w-5' />
+                  <span className='hidden lg:inline'>{t('config.header.account.title')}</span>
+                  <ChevronDown className='h-4 w-4' />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end'>
+                <DropdownMenuItem onClick={() => router.push('/account/pages')}>
+                  <Layers className='mr-2 h-4 w-4' />
+                  <span>{t('config.header.account.my-pages')}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onSignOut}>
+                  <LogOut className='mr-2 h-4 w-4' />
+                  <span>{t('config.header.account.logout')}</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button variant='ghost' className='flex items-center gap-2' onClick={() => router.push('/auth')}>
+              <User className='h-5 w-5' />
+              <span className='hidden lg:inline'>{t('config.header.account.title')}</span>
+            </Button>
+          )}
+        </div>
+
+        {/* Mobile Navigation */}
+        <div style={{ display: 'flex' }} className='md:!hidden items-center space-x-2'>
+          {/* User Profile Mobile */}
+          {account ? (
+            <Sheet open={mobileAccountOpen} onOpenChange={setMobileAccountOpen}>
+              <SheetTrigger asChild>
+                <Button variant='ghost' size='icon'>
+                  <User className='h-5 w-5' />
+                  <span className='sr-only'>{t('config.header.account.title')}</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side='left' className='flex flex-col'>
+                <div className='flex items-center justify-between border-b pb-4'>
+                  <SheetTitle>{t('config.header.nav.title')}</SheetTitle>
+                </div>
+
+                <nav className='flex flex-col gap-4 py-6 flex-1'>
+                  <Link
+                    href='/account/pages'
+                    className='flex items-center gap-2 text-lg font-medium hover:text-primary transition-colors'
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Layers className='mr-2 h-4 w-4' />
+                    <span>{t('config.header.account.my-pages')}</span>
+                  </Link>
+                  <Link
+                    href='/'
+                    className='flex items-center gap-2 text-lg font-medium hover:text-primary transition-colors'
+                    onClick={() => {
+                      onSignOut()
+                      setMobileMenuOpen(false)
+                    }}
+                  >
+                    <LogOut className='mr-2 h-4 w-4' />
+                    <span>{t('config.header.account.logout')}</span>
+                  </Link>
+                </nav>
+
+                <div className='border-t pt-4'>
+                  <div className='text-sm text-muted-foreground mb-2'>{t('config.header.languages.title')}</div>
+                  <Select value={SELECTED} onValueChange={onChangeLocale}>
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder={t('config.header.languages.title')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {locales.map(lang => (
+                        <SelectItem key={lang} value={lang}>
+                          {t(`config.header.languages.${lang}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </SheetContent>
+            </Sheet>
+          ) : (
+            <Button variant='ghost' size='icon' onClick={() => router.push('/auth')}>
+              <User className='h-5 w-5' />
+              <span className='sr-only'>{t('config.header.account.title')}</span>
+            </Button>
+          )}
+
+          {/* Mobile Menu */}
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant='ghost' size='icon'>
+                <Menu className='h-5 w-5' />
+                <span className='sr-only'>{t('config.header.nav.title')}</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side='left' className='flex flex-col'>
+              <div className='flex items-center justify-between border-b pb-4'>
+                <SheetTitle>{t('config.header.nav.title')}</SheetTitle>
+              </div>
+
+              <nav className='flex flex-col gap-4 py-6 flex-1'>
+                <Link
+                  href='/'
+                  className='text-lg font-medium hover:text-primary transition-colors'
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t('config.header.nav.home')}
+                </Link>
+                <Link
+                  href='/#plans'
+                  className='text-lg font-medium hover:text-primary transition-colors'
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t('config.header.nav.plans')}
+                </Link>
+                <Link
+                  href='/#faq'
+                  className='text-lg font-medium hover:text-primary transition-colors'
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t('config.header.nav.faq')}
                 </Link>
                 <Link
                   href='https://affiliux.com'
-                  className='text-neutral-800 px-6 py-2 pb-4 text-start items-center opacity-55 inline-flex hover:bg-neutral-200 rounded-l'
+                  target='_blank'
+                  className='text-lg font-medium hover:text-primary transition-colors'
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  <span className='truncate text-xs font-bold mr-2'>{t('config.header.nav.affiliate')}</span>
-                  <div className='bg-yellow-500 flex items-center rounded-sm px-2 py-[2px]'>
-                    <p className='text-xs text-black font-bold'>{t('config.header.nav.badge')}</p>
-                  </div>
+                  {t('config.header.nav.affiliate')}
                 </Link>
+              </nav>
+
+              <div className='border-t pt-4'>
+                <div className='text-sm text-muted-foreground mb-2'>{t('config.header.languages.title')}</div>
+                <Select value={SELECTED} onValueChange={onChangeLocale}>
+                  <SelectTrigger className='w-full'>
+                    <SelectValue placeholder={t('config.header.languages.title')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {locales.map(lang => (
+                      <SelectItem key={lang} value={lang}>
+                        {t(`config.header.languages.${lang}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-            </div>
-          </div> */}
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {/* <div className='container flex flex-row items-center justify-between py-[10px]'>
-        <div className='flex flex-row items-center gap-12'>
-          <Link href='/' className='cursor-pointer'>
-            <Image src={`/logos/${theme}/logo+name.png`} className='h-12' alt='Babyzzu logo' width={200} height={56} />
-          </Link>
-
-          <div className='lg:flex flex-row items-center gap-6 hidden'>
-            <Link
-              href='/#plans'
-              className='text-neutral-800 text-sm hover:text-neutral-700 hover:underline cursor-pointer'
-              scroll
-            >
-              {t('config.header.nav.plans')}
-            </Link>
-
-            <div className='flex flex-row items-center gap-2 opacity-55'>
-              <Link href='https://affiliux.com' className='text-neutral-800 text-sm cursor-pointer'>
-                {t('config.header.nav.affiliate')}
-              </Link>
-
-              <div className='bg-yellow-500 gap-1 flex items-center rounded-sm px-2 py-[2px]'>
-                <p className='text-xs text-black font-bold'> {t('config.header.nav.badge')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='relative flex items-center gap-2'>
-          <Language />
-          <ThemeSwitcher />
-
-          <div className='flex flex-row items-center gap-1 md:gap-4 lg:hidden'>
-            <div className='relative group'>
-              <button
-                type='button'
-                className='relative h-11 overflow-hidden flex items-center justify-center rounded-full p-[1px] focus:outline-none focus:ring-0'
-              >
-                <span className='flex h-full cursor-pointer items-center justify-center gap-2 px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl'>
-                  <MenuIcon />
-                </span>
-              </button>
-
-              <div className='origin-top-left lg:origin-top-right min-w-72 mt-0.5 z-[99999] border border-neutral-200 absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5'>
-                <div className='py-1 grid grid-cols-1 gap-2' role='none'>
-                  <Link
-                    href='#plans'
-                    className={
-                      'text-neutral-800 px-6 py-2 text-start items-center inline-flex hover:bg-neutral-200 rounded-l'
-                    }
-                  >
-                    <span className='truncate text-xs font-bold'>{t('config.header.nav.plans')}</span>
-                  </Link>
-                  <Link
-                    href='https://affiliux.com'
-                    className={
-                      'text-neutral-800 px-6 py-2 pb-4 text-start items-center opacity-55 inline-flex hover:bg-neutral-200 rounded-l'
-                    }
-                  >
-                    <span className='truncate text-xs font-bold mr-2'> {t('config.header.nav.affiliate')}</span>
-                    <div className='bg-yellow-500 gap-1 flex items-center rounded-sm px-2 py-[2px]'>
-                      <p className='text-xs text-black font-bold'> {t('config.header.nav.badge')}</p>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-    </div>
+    </nav>
   )
 }

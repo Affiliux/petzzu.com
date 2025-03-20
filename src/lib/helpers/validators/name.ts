@@ -1,5 +1,6 @@
 /**
- * ? Interface validate for name
+ * @name validateName
+ * @category Helpers - Validators
  *
  * @param  {?string} name - the name to be validated.
  * @return boolean

@@ -114,7 +114,7 @@ export const Step6 = ({ animations, selected, setAnimation, onNext, onBack }: St
 
                       setEmoji1(null)
                     }}
-                    className='absolute -top-2 -right-2 p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                    className='absolute -top-2 -right-2 p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
                   >
                     <IconX size={14} />
                   </button>
@@ -134,7 +134,7 @@ export const Step6 = ({ animations, selected, setAnimation, onNext, onBack }: St
 
                       setEmoji2(null)
                     }}
-                    className='absolute -top-2 -right-2 p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                    className='absolute -top-2 -right-2 p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
                   >
                     <IconX size={14} />
                   </button>
@@ -154,7 +154,7 @@ export const Step6 = ({ animations, selected, setAnimation, onNext, onBack }: St
 
                       setEmoji3(null)
                     }}
-                    className='absolute -top-2 -right-2 p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                    className='absolute -top-2 -right-2 p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
                   >
                     <IconX size={14} />
                   </button>

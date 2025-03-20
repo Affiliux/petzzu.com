@@ -1,14 +1,11 @@
 type MaskCPFProps = string | undefined
 
 /**
- * Mask a cpf.
- *
- * @category Helpers - Masks - Cpf
- * @version 0.0.1
+ * @name maskCPF
+ * @category Helpers - Masks
  *
  * @interface MaskCPFProps - the cpf to be masked.
  * @return string
- *
  */
 
 function maskCPF(cpf: MaskCPFProps): string {

@@ -168,7 +168,7 @@ export const Step4 = ({
               <button
                 onClick={() => onRemove(file.id)}
                 disabled={loading}
-                className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
               >
                 <IconX size={14} />
               </button>

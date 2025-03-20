@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-import { useTranslations } from 'next-intl'
-
+import { ButtonToTop } from '@/components/button-to-top'
+import { Cookies } from '@/components/cookies'
 import { CTA } from '@/components/cta'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
@@ -13,18 +13,21 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const t = useTranslations()
-
   return (
-    <div>
-      <Header />
+    <div className='w-full dark min-h-screen'>
+      <div className='relative py-2 border-b border-neutral-800'>
+        <Header />
+      </div>
 
-      <div className='w-full bg-transparent bg-dot-blue-300/40 relative flex items-center justify-center'>
+      <div className='w-full bg-transparent bg-dot-neutral-700/10 relative flex items-center justify-center'>
         {children}
       </div>
 
       <CTA />
       <Footer />
+
+      <Cookies />
+      <ButtonToTop />
     </div>
   )
 }

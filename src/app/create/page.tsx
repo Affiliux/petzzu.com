@@ -18,41 +18,35 @@ import { Steps } from '@/components/steps'
 
 import { useTimeline } from '../../contexts/TimelineContext'
 
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { ThemeShowTypeEnum } from '@/enums'
 
 export default function Page() {
   const t = useTranslations()
   const router = useRouter()
   const queryParams = useQueryParams()
 
-  const { theme, locale, plans, discount, currency, handleGetPlans } = useApplication()
+  const { theme, locale, plans, discount, currency, onGetPlans } = useApplication()
   const {
     pre,
     child,
-    song,
     pre_medias,
     plan,
     payment,
-    media_show_type,
-    date_show_type,
     theme_show_type,
     set_pre,
     set_child,
-    set_song,
     set_pre_medias,
     set_plan,
     set_payment,
-    set_media_show_type,
-    set_date_show_type,
     set_theme_show_type,
-    handleCreatePre,
-    handleUpdatePre,
-    handleGetPre,
-    handleNewMedia,
-    handleRemoveMedia,
+    onCreatePre,
+    onUpdatePre,
+    onGetPre,
+    onNewMedia,
+    onRemoveMedia,
   } = useCreate()
 
-  const { uploadTimelineFile, deleteTimelineFile, set_timeline_medias, timeline_medias } = useTimeline()
+  const { onUploadTimelineFile, onDeleteTimelineFile, set_timeline_medias, timeline_medias } = useTimeline()
 
   const steps = [
     {
@@ -86,13 +80,6 @@ export default function Page() {
         ),
       skip: false,
     },
-    // {
-    //   id: 4,
-    //   title: t('steps.step5.title'),
-    //   description: t('steps.step5.description'),
-    //   checked: !!song,
-    //   skip: true,
-    // },
     {
       id: 4,
       title: t('steps.step7.title'),
@@ -132,14 +119,10 @@ export default function Page() {
 
       set_child({} as CreatePrePayloadProps)
 
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
-      set_date_show_type(DateShowTypeEnum.DEFAULT)
-
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
-      set_song(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
       set_plan(find)
@@ -173,11 +156,11 @@ export default function Page() {
     }
   }
 
-  async function onGetPre(pre: string) {
+  async function handleGetPre(pre: string) {
     set_loading(true)
 
     try {
-      await handleGetPre(pre)
+      await onGetPre(pre)
     } catch (error: any) {
       console.error(error)
 
@@ -189,11 +172,7 @@ export default function Page() {
 
       set_child({} as CreatePrePayloadProps)
 
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
-      set_date_show_type(DateShowTypeEnum.DEFAULT)
-
       set_plan(undefined)
-      set_song(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
       set_plan(find)
@@ -202,7 +181,7 @@ export default function Page() {
     }
   }
 
-  async function onCreatePre(child_name: string) {
+  async function handleCreatePre(child_name: string) {
     set_loading(true)
 
     try {
@@ -213,19 +192,15 @@ export default function Page() {
 
       set_child({ ...child, child_name })
 
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
-      set_date_show_type(DateShowTypeEnum.DEFAULT)
-
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
-      set_song(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
       set_plan(find)
 
-      await handleCreatePre({ ...child, child_name: child_name })
+      await onCreatePre({ ...child, child_name: child_name })
     } catch (error: any) {
       console.error(error)
       router.replace('/')
@@ -234,13 +209,13 @@ export default function Page() {
     }
   }
 
-  async function onUpdatePre() {
+  async function handleUpdatePre() {
     try {
       if (!pre) throw new Error('Pre ID not found')
       if (!plan) throw new Error('Please select a plan')
 
       // const yt_song = plan.sku.includes('pro') && song ? song.url : ''
-      await handleUpdatePre({
+      await onUpdatePre({
         id: pre,
         child_name: child.child_name,
         message: child.message,
@@ -249,8 +224,6 @@ export default function Page() {
         sex: child.sex,
         lang: t('config.defaults.country'),
         // yt_song,
-        imageShowType: media_show_type,
-        dateShowType: date_show_type,
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.YELLOW,
       })
     } catch (error: any) {
@@ -271,7 +244,7 @@ export default function Page() {
   }, [locale, plans])
 
   useEffect(() => {
-    handleGetPlans()
+    onGetPlans()
   }, [])
 
   useEffect(() => {
@@ -291,14 +264,10 @@ export default function Page() {
 
       set_child({ ...child })
 
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
-      set_date_show_type(DateShowTypeEnum.DEFAULT)
-
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
-      set_song(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
       set_plan(find)
@@ -318,9 +287,6 @@ export default function Page() {
         payment={payment}
         medias={pre_medias}
         timelineMedias={timeline_medias}
-        song={song}
-        mediaShowType={media_show_type}
-        dateShowType={date_show_type}
         themeShowType={theme_show_type}
         plan={plan}
         discount={discount}
@@ -328,16 +294,13 @@ export default function Page() {
         setStep={set_step}
         setPlan={set_plan}
         setChild={set_child}
-        setMediaShowType={set_media_show_type}
-        setDateShowType={set_date_show_type}
         setThemeShowType={set_theme_show_type}
-        setSong={set_song}
         //
-        onUpdate={async () => await onUpdatePre()}
-        onNewMedia={async media => await handleNewMedia({ id: pre!, file: media })}
-        onRemoveMedia={async id => await handleRemoveMedia({ idPreWebsite: pre!, idFile: id })}
-        onNewMediaTimeline={async (idPreTimeline, media) => await uploadTimelineFile(idPreTimeline, media)}
-        onRemoveMediaTimeline={async (idPreTimeline, id) => await deleteTimelineFile(idPreTimeline, id)}
+        onUpdate={async () => await handleUpdatePre()}
+        onNewMedia={async media => await onNewMedia({ id: pre!, file: media })}
+        onRemoveMedia={async id => await onRemoveMedia({ idPreWebsite: pre!, idFile: id })}
+        onNewMediaTimeline={async (idPreTimeline, media) => await onUploadTimelineFile(idPreTimeline, media)}
+        onRemoveMediaTimeline={async (idPreTimeline, id) => await onDeleteTimelineFile(idPreTimeline, id)}
         onClose={() => {
           set_pre(null)
           set_payment(null)
@@ -345,11 +308,10 @@ export default function Page() {
           set_timeline_medias([])
 
           set_child({} as CreatePrePayloadProps)
-          set_song(undefined)
 
           router.replace('/')
         }}
-        onCreatePre={onCreatePre}
+        onCreatePre={handleCreatePre}
       />
 
       {loading && (

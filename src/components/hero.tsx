@@ -112,12 +112,12 @@ export const Hero = () => {
         <HoverBorderGradient
           containerClassName='rounded-full'
           as='button'
-          className='bg-white text-black text-xs flex items-center space-x-2'
+          className='bg-white text-neutral-900 text-xs flex items-center space-x-2'
         >
           <span> {t('pages.home.hero.sub-title')}</span>
         </HoverBorderGradient>
 
-        <h1 className='text-black text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
+        <h1 className='text-neutral-900 text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
           {t('pages.home.hero.title.1')}
         </h1>
         <h2 className='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-theme-400 pb-8 z-20'>
@@ -151,7 +151,7 @@ export const Hero = () => {
           }`}
         >
           <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,var(--theme-200),var(--theme-500),var(--theme-300))]' />
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white px-3 py-1 text-sm font-semibold text-black backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
             {loading ? (
               <IconLoader size={20} className='animate-spin' />
             ) : (

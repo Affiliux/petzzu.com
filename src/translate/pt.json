@@ -6,15 +6,29 @@
     "skip": "Pular etapa",
     "header": {
       "nav": {
+        "title": "Menu",
+        "home": "Início",
         "plans": "Planos",
-        "affiliate": "Programa de afiliados",
-        "badge": "Em breve"
+        "faq": "F.A.Q",
+        "affiliate": "Programa de afiliados"
+      },
+      "account": {
+        "title": "Minha conta",
+        "my-pages": "Minhas páginas",
+        "logout": "Sair"
       },
       "languages": {
+        "title": "Selecionar Idioma",
         "pt": "Português",
-        "en": "Inglês",
-        "es": "Espanhol",
-        "de": "Alemão"
+        "en": "English",
+        "es": "Español",
+        "de": "Deutsch"
+      },
+      "themes": {
+        "title": "Selecionar Tema",
+        "blue": "Azul",
+        "pink": "Rosa",
+        "yellow": "Amarelo"
       }
     },
     "footer": {
@@ -164,6 +178,7 @@
       },
       "faq": {
         "title": "Perguntas Frequentes",
+        "contact": "Dúvidas? Entre em contato por aqui",
         "description": "Aqui estão algumas perguntas frequentes para ajudar você a entender melhor a Babyzzu. Caso tenha alguma dúvida, entre em contato conosco.",
         "1": {
           "question": "O que é a Babyzzu?",
@@ -368,6 +383,106 @@
         "contact_title": "10. Contato",
         "contact": "Se tiver dúvidas sobre os Termos de Uso, entre em contato conosco pelo email: contact@babyzzu.com"
       }
+    },
+    "auth": {
+      "request": {
+        "title": "Acessar sua conta",
+        "description": "Digite seu e-mail para receber um código de validação e acessar sua conta.",
+        "form": {
+          "email": {
+            "label": "E-mail",
+            "placeholder": "seu@email.com",
+            "validation": {
+              "invalid": "E-mail inválido",
+              "required": "E-mail é obrigatório"
+            }
+          },
+          "toast": {
+            "title": {
+              "success": "Sucesso Uhuul!",
+              "error": "Ocorreu um erro!"
+            },
+            "codes": {
+              "500": "Erro interno do servidor, tente novamente mais tarde",
+              "400": "Essa ação não é permitida",
+              "404": "Não encontramos nenhuma conta com esse e-mail"
+            }
+          },
+          "submit": "Enviar código"
+        }
+      },
+      "confirm": {
+        "title": "Código de validação",
+        "description": "Digite o código de validação enviado para o seu e-mail ou",
+        "form": {
+          "code": {
+            "label": "Código de verificação",
+            "placeholder": "000000",
+            "validation": {
+              "invalid": "Código inválido",
+              "required": "Código é obrigatório"
+            }
+          },
+          "toast": {
+            "title": {
+              "success": "Sucesso Uhuul!",
+              "error": "Ocorreu um erro!"
+            },
+            "codes": {
+              "500": "Erro interno do servidor, tente novamente mais tarde",
+              "400": "Essa ação não é permitida",
+              "404": "Código inválido ou não existe"
+            }
+          },
+
+          "request": "clique aqui para voltar",
+          "resend": "Reenviar código",
+          "submit": "Validar código"
+        }
+      }
+    },
+    "account": {
+      "pages": {
+        "title": "Minhas Páginas",
+        "description": "Aqui estão todas as páginas personalizadas que você criou. Você pode visualizar, editar ou desativar.",
+        "page-card": {
+          "created-at": "Criado em",
+          "status": {
+            "active": "Ativo",
+            "inactive": "Inativo",
+            "pending": "Aguardando pagamento"
+          },
+          "actions": {
+            "edit": "Editar",
+            "view": "Visualizar",
+            "disable": "Desativar",
+            "enable": "Ativar",
+            "close": "Fechar",
+            "pay": "Realizar pagamento"
+          }
+        },
+        "edit": {
+          "title": "Editar Página",
+          "description": "Edite as informações da página personalizada. Você pode alterar o título, mensagem, data de início, fotos, música, animação de fundo e plano.",
+          "images-attention": "Atenção: Ao alterar as imagens elas já refletem instantaneamente na página.",
+          "save-info": "Atenção: Vá até o final dos passos e clique em salvar para confirmar as alterações.",
+          "toast": {
+            "error": {
+              "title": "Erro ao salvar",
+              "description": "Ocorreu um erro ao salvar a página. Tente novamente."
+            },
+            "success": {
+              "title": "Sucesso!",
+              "description": "Página salva com sucesso."
+            }
+          },
+          "actions": {
+            "back": "Voltar",
+            "next": "Próximo",
+            "save": "Salvar"
+          }
+        }
+      }
     }
   },
   "steps": {
@@ -546,13 +661,40 @@
     }
   },
   "checkout": {
+    "order": {
+      "title": "Resumo do pedido",
+      "description": "Revise seus itens antes do pagamento",
+      "plans": {
+        "basic": {
+          "title": "Plano Anual",
+          "description": "Plano ideal para quem deseja uma página personalizada por 1 ano."
+        },
+        "pro": {
+          "title": "Plano Para Sempre",
+          "description": "Plano ideal para quem deseja uma página personalizada vitalícia."
+        }
+      },
+      "order-bumps": {
+        "title": "Oferta por tempo limitado",
+        "save": "Economize 50%"
+      },
+      "total": "Total"
+    },
     "payment": {
-      "select-method": "Método de pagamento",
-      "footer": {
-        "accept": "Realizando o pagamento você aceita os",
-        "terms-of-policy": "Termos de uso",
-        "and": "e",
-        "privacy-policy": "Política de privacidade"
+      "title": "Método de pagamento",
+      "description": "Escolha o método de pagamento ideal para você",
+      "secure": "Pagamento seguro por Pagar.me",
+      "methods": {
+        "card": { "title": "Cartão de Crédito", "description": "Pague com Cartão de Crédito" },
+        "pix": { "title": "Pix", "description": "Pague com Pix" },
+        "paypal": {
+          "title": "PayPal",
+          "description": "Clique no botão acima para concluir seu pagamento com o PayPal. Você será redirecionado para o site seguro do PayPal."
+        },
+        "stripe": {
+          "title": "Stripe",
+          "description": "Clique no botão acima para concluir seu pagamento com o Stripe. Você será redirecionado para o site seguro do Stripe."
+        }
       },
       "inputs": {
         "title": "Informações",
@@ -609,9 +751,11 @@
           "required": "Campo obrigatório"
         }
       },
-      "go-to": "Ir para pagamento",
-      "create-pix": "Criar QR Code Pix",
-      "submit": "Realizar pagamento",
+      "buttons": {
+        "go-to": "Ir para pagamento",
+        "create-pix": "Criar QR Code Pix",
+        "submit": "Realizar pagamento"
+      },
       "toast": {
         "error-create": {
           "title": "Ocorreu um erro!",
@@ -623,17 +767,18 @@
         }
       }
     },
+    "footer": {
+      "accept": "Realizando o pagamento você aceita os",
+      "terms-of-use": "Termos de uso",
+      "and": "e",
+      "privacy-policy": "Política de privacidade"
+    },
     "pix": {
-      "title": "Pagamento via Pix",
-      "description": "Escanei o QR Code com seu aplicativo de banco ou copie a chave Pix abaixo.",
+      "description": "Escaneie o código QR com seu aplicativo bancário para concluir o pagamento. O código irá expirar em 30 minutos.",
       "tooltip": {
         "copy": "Copiar",
         "copied": "Copiado!"
-      },
-      "button": "Já paguei"
-    },
-    "stone-card": {
-      "loading": "Um momento, estamos processando seu pagamento."
+      }
     },
     "success": {
       "title": "Pagamento confirmado!",

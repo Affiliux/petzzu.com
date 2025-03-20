@@ -139,7 +139,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
         toYear={new Date().getFullYear()}
       />
 
-      <h2 className='font-semibold text-black'>{t('steps.step2.input.picture.label')}</h2>
+      <h2 className='font-semibold text-neutral-900'>{t('steps.step2.input.picture.label')}</h2>
       <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
         <input
           type='file'
@@ -176,7 +176,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
               <button
                 onClick={() => onRemove(file.id)}
                 disabled={loading}
-                className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
               >
                 <IconX size={14} />
               </button>
@@ -185,7 +185,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
         </div>
       </div>
 
-      <h2 className='font-semibold text-black'>{t('steps.step2.gender.title')}</h2>
+      <h2 className='font-semibold text-neutral-900'>{t('steps.step2.gender.title')}</h2>
       <div className='w-full space-y-6'>
         <div className='flex flex-col md:flex-row gap-4'>
           {sexOptions.map(sex => (

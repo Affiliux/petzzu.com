@@ -1,13 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useEffect } from 'react'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { IconDownload } from '@tabler/icons-react'
 
-import { ChildProps } from '@/typings/child'
+import type { ChildProps } from '@/typings/child'
 
 import { Animation } from './animation'
 
@@ -17,6 +15,7 @@ interface SuccessModalProps {
 }
 
 export const SuccessModal = ({ child, onClose }: SuccessModalProps) => {
+  // hooks
   const t = useTranslations('checkout.success')
 
   useEffect(() => {

@@ -1,10 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/no-children-prop */
 'use client'
 
 import { format } from 'date-fns'
 import { enUS, es, ptBR } from 'date-fns/locale'
-import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
 import type { DefaultThemeProps } from '@/typings/child'
@@ -17,20 +14,6 @@ import PicturesGrid from './pictures-grid'
 import { BabyTimeline } from '../../../components/baby-timeline'
 import { CloudsBackground } from '../../../components/clouds-background'
 import { ThemeSwitcher } from '../../../components/theme-switcher'
-
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
-import { get_child_slug } from '@/infrastructure/http/services/child'
-
-const lora = Lora({
-  weight: ['400', '700'],
-  style: 'italic',
-  subsets: ['latin'],
-})
-
-const dancing = Dancing_Script({
-  weight: '700',
-  subsets: ['latin'],
-})
 
 export const DefaultTheme = ({ child }: DefaultThemeProps) => {
   const t = useTranslations()
@@ -56,7 +39,7 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
                 </div>
               )}
               <div className='text-center p-6'>
-                <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+                <h2 className='text-2xl font-bold text-neutral-900'>{t('slug.facts.title')}</h2>
               </div>
 
               {child?.birth_date && (
@@ -69,7 +52,7 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
 
               <div className='mt-16 md:mt-8'>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
 
-              {!!child?.birth_date && <DateCount type={DateShowTypeEnum.DEFAULT} date={child.birth_date} />}
+              {!!child?.birth_date && <DateCount date={child.birth_date} />}
             </div>
           </div>
         </div>

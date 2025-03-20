@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/no-children-prop */
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -9,27 +7,16 @@ import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
-import { BackgroundAnimationProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
+import { PlanProps } from '@/typings/application'
 import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
-import { AuroraBackground } from './ui/aurora-background'
-import { Meteors } from './ui/meteors'
-import { ShootingStars } from './ui/shooting-stars'
-import { StarsBackground } from './ui/stars-background'
-import { Timeline } from './ui/timeline'
-import { Vortex } from './ui/vortex'
 import { BabyTimeline } from './baby-timeline'
-import { CarouselPhotos } from './carousel'
 import { DateCount } from './date-count'
-import { EmojiRain } from './emoji-rain'
-import { Music } from './music'
 import PicturesGridPreview from './pictures-grid-preview'
 import { ThemeSwitcher } from './theme-switcher'
-import PicturesGrid from '../app/[slug]/components/pictures-grid'
-import { getFormattedAge } from '../lib/helpers/formatters/birth_date_formatter'
 
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
+import { formatAge } from '@/lib/helpers/formatters'
 
 const dancing = Dancing_Script({
   weight: '700',
@@ -44,20 +31,22 @@ const lora = Lora({
 
 interface PreviewDefaultProps {
   child: CreatePrePayloadProps
-  mediaShowType: PhotosSliderEnum
-  dateShowType: DateShowTypeEnum
   medias: MediaPreProps[]
-  song: YouTubeVideoProps | undefined
   plan: PlanProps | undefined
 }
 
-export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowType, plan }: PreviewDefaultProps) => {
+export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => {
+  // hooks
   const t = useTranslations()
 
+  // contexts
   const { locale } = useApplication()
 
+  // states
   const [showPro, setShowPro] = useState<boolean>(true)
-  const { value, unit } = getFormattedAge(t, child?.birth_date)
+
+  // variables
+  const { value, unit } = formatAge(t, child?.birth_date)
 
   const removeEmojis = (str: string) => {
     return str
@@ -85,8 +74,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
   useEffect(() => {
     if (plan?.sku.includes('pro')) setShowPro(true)
     else setShowPro(false)
-  }, [plan, song])
-  console.log(child)
+  }, [plan])
 
   return (
     <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-500'>
@@ -157,9 +145,7 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
 
           {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
 
-          {!!child?.birth_date && !!(child?.timeLine.length > 0) && (
-            <DateCount type={dateShowType} date={child.birth_date} />
-          )}
+          {!!child?.birth_date && !!(child?.timeLine.length > 0) && <DateCount date={child.birth_date} />}
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import { MediaProps, PaymentProps } from './child'
 import { TimelineEntry } from './timeline'
 
-import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { ThemeShowTypeEnum } from '@/enums'
 
 // Create pre with the following properties:
 export type CreatePreProps = {
@@ -10,11 +10,8 @@ export type CreatePreProps = {
   birth_date: string
   parent_name: string
   sex: string
-  yt_song?: string
   lang?: string
-  imageShowType: PhotosSliderEnum
-  dateShowType: DateShowTypeEnum
-  themeShowType: ThemeShowTypeEnum
+  themeShowType?: ThemeShowTypeEnum
 }
 // Create Pre
 export interface CreatePrePayloadProps extends CreatePreProps {
@@ -81,6 +78,7 @@ export type CreateFromPreProps = {
   utm_term: string | null
   xcod: string | null
   gclid: string | null
+  orderBumps: string[]
 }
 
 // Create From Pre
@@ -99,13 +97,25 @@ export type PreProps = {
   birth_date: string
   sex: string
   media: MediaProps[]
-  timeLine: TimelineEntry[]
-  yt_song: string
-  imageShowType: PhotosSliderEnum
-  dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum
+  timeLine: TimelineEntry[]
   createdAt: string
   updatedAt: string
 }
 
 export interface PreResponseProps extends PreProps {}
+
+export type UpdatePaymentProps = {
+  gateway: string
+  name?: string
+  cardToken?: string
+  ddd: string
+  phoneNumber: string
+  cpf: string
+  email: string
+}
+
+export interface UpdatePaymentPayloadProps extends UpdatePaymentProps {}
+export interface UpdatePaymentResponseProps extends PaymentProps {
+  success: boolean
+}

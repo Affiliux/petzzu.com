@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 import { HoverBorderGradient } from './ui/hover-border-gradient'
 
 export function Faq() {
+  // hooks
   const t = useTranslations('pages.home')
 
   return (
@@ -15,7 +16,7 @@ export function Faq() {
       <div className='w-full md:w-1/2 mb-12 md:mb-0'>
         <HoverBorderGradient
           containerClassName='rounded-full'
-          className='bg-white text-black text-xs flex items-center space-x-2'
+          className='bg-white text-neutral-900 text-xs flex items-center space-x-2'
         >
           <span>F.A.Q</span>
         </HoverBorderGradient>
@@ -24,8 +25,11 @@ export function Faq() {
           {t('faq.title')}
         </h2>
         <p className='max-w-xl text-left text-base md:text-lg text-neutral-600 mt-2 mb-8'>{t('faq.description')}</p>
-        <a className='text-left text-sm md:text-lg text-neutral-500 mt-8 underline' href='mailto:contact@babyzzu.com'>
-          contact@babyzzu.com
+        <a
+          className='text-left text-sm md:text-lg text-neutral-500 mt-8 underline'
+          href='https://www.instagram.com/direct/t/17843072010081129'
+        >
+          {t('faq.contact')}
         </a>
       </div>
 
@@ -46,7 +50,7 @@ function FaqItem(props: { title: string; description: string }) {
     <Accordion type='single' collapsible>
       <AccordionItem value={props.title}>
         <AccordionTrigger>{props.title}</AccordionTrigger>
-        <AccordionContent>{props.description}</AccordionContent>
+        <AccordionContent className='text-muted-foreground'>{props.description}</AccordionContent>
       </AccordionItem>
     </Accordion>
   )

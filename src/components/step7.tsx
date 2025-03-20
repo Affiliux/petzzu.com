@@ -2,16 +2,13 @@
 
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { IconCheck, IconChevronLeft, IconChevronRight, IconLoader, IconStarFilled, IconX } from '@tabler/icons-react'
 
-import { DiscountProps, PlanProps } from '@/typings/application'
+import type { DiscountProps, PlanProps } from '@/typings/application'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 import { HoverBorderGradient } from './ui/hover-border-gradient'
-
-import { locales } from '@/i18n'
 
 interface Step7Props {
   plans: PlanProps[]
@@ -23,10 +20,13 @@ interface Step7Props {
 }
 
 export const Step7 = ({ plans, discount, selected, setPlan, onNext, onBack }: Step7Props) => {
+  // hooks
   const t = useTranslations()
 
+  // contexts
   const { currency } = useApplication()
 
+  // states
   const [loading, setLoading] = useState(false)
 
   const format_intl_locale = t('config.defaults.country')
