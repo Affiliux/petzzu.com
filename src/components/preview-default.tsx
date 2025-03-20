@@ -86,7 +86,6 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
     if (plan?.sku.includes('pro')) setShowPro(true)
     else setShowPro(false)
   }, [plan, song])
-  console.log(child)
 
   return (
     <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-500'>
@@ -107,10 +106,10 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
         <div className='rounded-lg h-full'>
           <div className='flex justify-center items-center mb-8'>
             {child?.child_name &&
-              (child.child_name.length > 8 ? (
+              (child?.child_name?.length > 8 ? (
                 <div className='flex flex-col items-center text-center'>
                   <div className='flex flex-row items-baseline gap-2'>
-                    {child.birth_date && (
+                    {child?.birth_date && (
                       <>
                         <span className='text-7xl font-bold text-theme-600'>{value}</span>
                         <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
