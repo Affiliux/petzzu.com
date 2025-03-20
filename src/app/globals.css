@@ -4,7 +4,6 @@
 
 @import url('https://fonts.cdnfonts.com/css/happy-school');
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -89,7 +88,7 @@
   .has-tooltip:hover .tooltip {
     @apply visible z-50;
   }
-  
+
   @font-face {
     font-family: 'Happy School';
     src: url('/fonts/HappySchool.otf') format('woff');
@@ -100,5 +99,4 @@
   .font-happy-school {
     font-family: 'Happy School', sans-serif;
   }
-
 }
