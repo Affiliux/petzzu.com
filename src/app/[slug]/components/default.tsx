@@ -28,9 +28,9 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
 
       <div className='h-full min-h-screen w-full bg-transparent overflow-hidden'>
         <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-theme-100/40 lg:bg-theme-100/40 w-full rounded-lg container pb-8'>
-          <div className={!!child?.media.length ? 'w-full lg:w-1/2 mt-4' : 'w-full'}>
+          <div className={!!child?.media?.length ? 'w-full lg:w-1/2 mt-4' : 'w-full'}>
             <div className='rounded-lg h-full flex flex-col items-center justify-center'>
-              {!!child?.media.length && (
+              {!!child?.media?.length && (
                 <div className='w-full lg:w-3/4 mb-8'>
                   <div className='flex justify-end'>
                     <ThemeSwitcher />

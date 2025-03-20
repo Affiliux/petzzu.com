@@ -8,7 +8,8 @@ import { IconCheck, IconChevronLeft, IconChevronRight, IconLoader, IconStarFille
 import type { DiscountProps, PlanProps } from '@/typings/application'
 import { useApplication } from '@/contexts/ApplicationContext'
 
-import { HoverBorderGradient } from './ui/hover-border-gradient'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface Step7Props {
   plans: PlanProps[]
@@ -30,11 +31,10 @@ export const Step7 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
   const [loading, setLoading] = useState(false)
 
   const format_intl_locale = t('config.defaults.country')
-  const format_intl_currency = currency ?? 'brl'
+  const format_intl_currency = currency ?? 'BRL'
 
   async function onSubmit() {
     setLoading(true)
-
     try {
       await onNext()
     } catch (error) {
@@ -44,153 +44,90 @@ export const Step7 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
     }
   }
 
-  useEffect(() => {
-    const find = plans.find(plan => plan.sku.includes(`plan_pro_${t('config.defaults.currency')}`))
+  function getDescription(planSku: string) {
+    const descriptions = t(`pages.home.plans.${planSku.split('_')[1]}.description`).split('|')
 
-    if (!selected) setPlan(find)
-    if (selected && !selected.sku.includes(`plan_pro_${t('config.defaults.currency')}`)) setPlan(find)
-  }, [])
+    const itemsWithX = {
+      unique: ['Possui vídeo', 'Edição de página já criada'],
+      month: ['Possui vídeo'],
+      annual: [],
+    }
+
+    return (
+      <ul className='space-y-1'>
+        {descriptions.map((item, index) => {
+          const isNegative = itemsWithX[planSku.split('_')[1]].includes(item.trim())
+
+          return (
+            <li key={index} className='flex items-center'>
+              {isNegative ? (
+                <IconX className='h-3 w-3 mr-1 text-red-500' />
+              ) : (
+                <IconCheck className='h-3 w-3 mr-1 text-primary' />
+              )}
+              <span className='text-sm'>{item}</span>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
 
   return (
-    <div className='relative flex flex-col gap-8 z-50 w-full mt-8'>
-      <div className='flex flex-col lg:flex-row justify-between gap-4'>
+    <div className='container mx-auto py-8 px-3'>
+      <div className='text-center mb-8'>
+        <h2 className='text-3xl font-bold tracking-tight'>{t('pages.home.plans.title')}</h2>
+        <p className='text-base text-muted-foreground mt-3'>{t('pages.home.plans.description')}</p>
+      </div>
+
+      <div className='flex flex-col gap-4'>
         {plans.map(plan =>
-          plan.sku.includes(format_intl_currency) && format_intl_locale.includes('-') && format_intl_currency ? (
-            <div
+          plan.currency.includes(format_intl_currency) ? (
+            <Card
               key={plan.sku}
-              onClick={() => {
-                if (plan.sku !== selected?.sku) setPlan(plan)
-                else onSubmit()
-              }}
-              className='w-full'
+              className={`flex flex-col min-w-[220px] p-4 shadow-md rounded-lg border ${plan.sku === selected?.sku ? 'border-2 border-primary' : 'border-gray-200'}`}
             >
-              <HoverBorderGradient
-                containerClassName={`rounded-xl w-full transform duration-200 bg-neutral-800 ${
-                  plan.sku === selected?.sku ? 'scale-105' : 'opacity-50'
-                }`}
-                as='button'
-                className={`relative p-5 w-full text-left cursor-pointer bg-neutral-800 transform duration-200`}
-              >
-                <div className='w-full'>
-                  <p className='text-2xl font-bold relative z-20 text-left text-white mt-4'>
-                    {t(`steps.step7.plans.${plan.sku.split('_')[1]}.title`)}
-                  </p>
-
-                  <div className='text-neutral-200 relative z-20'>
-                    <ul className='list-none mt-4'>
-                      <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.text`)} />
-                      <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.counter`)} />
-                      <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.date`)} />
-                      <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.qr-code`)} />
-                      <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.images`)} />
-
-                      {plan.sku.includes('pro') ? (
-                        <>
-                          <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.url`)} />
-                          <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.support`)} />
-                        </>
-                      ) : (
-                        <>
-                          <StepCheck title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.url`)} />
-                          <StepCheck bold title={t(`steps.step7.plans.${plan.sku.split('_')[1]}.support`)} />
-                        </>
-                      )}
-                    </ul>
-                  </div>
+              <CardHeader>
+                <CardTitle className='text-lg font-semibold'>
+                  {t(`pages.home.plans.${plan.sku.split('_')[1]}.title`)}
+                </CardTitle>
+                <CardDescription className='text-sm mt-1'>
+                  {t(`pages.home.plans.${plan.sku.split('_')[1]}.counter`)}
+                </CardDescription>
+                <div className='mt-4 text-xl font-bold text-primary'>
+                  {new Intl.NumberFormat(format_intl_locale, {
+                    style: 'currency',
+                    currency: format_intl_currency,
+                  }).format(
+                    discount
+                      ? plan.price - (plan.sku.includes('basic') ? discount.discount_basic : discount.discount_pro)
+                      : plan.price,
+                  )}
+                  <span className='text-sm text-muted-foreground ml-1 font-medium'>
+                    {t(`pages.home.plans.${plan.sku.split('_')[1]}.price_recurrence`)}
+                  </span>
                 </div>
-
-                {plan.sku.includes('pro') && (
-                  <div className='bg-black text-yellow-500 text-sm gap-1 font-semibold flex items-center rounded-full px-2 py-[2px] z-50 absolute -top-3'>
-                    <IconStarFilled size={12} />
-                    <p>{t('steps.step7.recommended')}</p>
-                  </div>
-                )}
-
-                <div className='mt-8'>
-                  <p className='text-lg font-black text-red-600 line-through'>
-                    {Intl.NumberFormat(format_intl_locale, {
-                      style: 'currency',
-                      currency: plan.currency,
-                    }).format(plan.price + plan.price)}
-                  </p>
-
-                  <p className='text-2xl font-black text-white'>
-                    {Intl.NumberFormat(format_intl_locale, {
-                      style: 'currency',
-                      currency: plan.currency,
-                    }).format(
-                      discount
-                        ? plan.price - (plan.sku.includes('basic') ? discount.discount_basic : discount.discount_pro)
-                        : plan.price,
-                    )}{' '}
-                    <span className='font-light text-xs text-neutral-300'>
-                      {t(`steps.step7.plans.${plan.sku.split('_')[1]}.price_recurrency`)}
-                    </span>
-                  </p>
-                </div>
-              </HoverBorderGradient>
-            </div>
+              </CardHeader>
+              <CardContent className='text-sm mt-4 flex-grow'>{getDescription(plan.sku)}</CardContent>
+              <CardFooter>
+                <Button onClick={() => setPlan(plan)} className='w-full text-sm py-2 font-medium'>
+                  {plan.sku === selected?.sku ? t('steps.step7.button') : t('pages.home.plans.button')}
+                </Button>
+              </CardFooter>
+            </Card>
           ) : null,
         )}
       </div>
 
-      <div className='flex items-center justify-between gap-4 mt-4'>
-        <button
-          type='button'
-          onClick={onBack}
-          disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            loading ? 'opacity-50' : ''
-          }`}
-        >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
-            <>
-              <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step7.back')}
-            </>
-          </span>
-        </button>
-        <button
-          onClick={onSubmit}
-          disabled={!selected || loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            loading || !selected ? 'opacity-50' : ''
-          }`}
-        >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
-            {loading ? (
-              <IconLoader size={20} className='animate-spin' />
-            ) : (
-              <>
-                {t('steps.step6.button')}
-                <IconChevronRight size={20} className='ml-4' />
-              </>
-            )}
-          </span>
-        </button>
+      <div className='flex items-center justify-between gap-4 mt-10'>
+        <Button onClick={onBack} disabled={loading} className='text-sm py-2 px-4'>
+          <IconChevronLeft size={20} className='mr-1' /> {t('steps.step7.back')}
+        </Button>
+        <Button onClick={onSubmit} disabled={!selected || loading} className='text-sm py-2 px-4'>
+          {loading ? <IconLoader size={20} className='animate-spin' /> : t('steps.step6.button')}
+          <IconChevronRight size={20} className='ml-1' />
+        </Button>
       </div>
     </div>
-  )
-}
-
-const StepCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-green-600 rounded-full p-0.5'>
-        <IconCheck size={12} />
-      </div>
-      <p className={`text-neutral-300 text-sm ${bold && 'font-bold'}`}>{title}</p>
-    </li>
-  )
-}
-
-const StepUnCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-red-600 rounded-full p-0.5'>
-        <IconX size={12} />
-      </div>
-      <p className={`text-neutral-300 text-sm ${bold && 'font-bold'}`}>{title}</p>
-    </li>
   )
 }
