@@ -17,12 +17,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(0)
 
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect()
-      setHeight(rect.height)
-    }
-  }, [ref])
+   useEffect(() => {
+     if (ref.current) {
+       const rect = ref.current.getBoundingClientRect()
+       setHeight(rect.height)
+     }
+   }, [data, ref])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -36,20 +36,14 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     <div className='w-full font-sans px-0' ref={containerRef}>
       <div ref={ref} className='relative max-w-7xl mx-auto pb-20'>
         {data.map((item, index) => (
-          <div key={index} className='flex flex-col md:flex-row justify-start pt-10 md:pt-40 md:gap-10'>
-            <div className='sticky flex flex-col z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full'>
-              <div className='h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center'>
-                <div className='h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2' />
+          <div key={index} className={`flex flex-col md:flex-row justify-start ${index !== 0 ? 'pt-28' : 'pt-14 lg:pt-24'} md:gap-10`}>
+            <div className='sticky flex flex-col z-40 items-center top-40 self-start w-[95%] lg:max-w-sm md:w-full'>
+              <div className='h-8 absolute left-4 md:left-4 w-8 rounded-full bg-theme-300 dark:bg-black flex items-center justify-center'>
+                <div className='h-2 w-2 rounded-full bg-theme-600 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2' />
               </div>
               <h3 className='font-sans tracking-tight leading-none pl-20 md:pl-20'>
-                <span className='block text-5xl md:text-6xl font-extrabold text-neutral-800 dark:text-neutral-200'>
-                  {item.title.day}
-                </span>
-                <span className='block text-xl md:text-4xl font-bold text-neutral-600 dark:text-neutral-400 mt-1'>
-                  {item.title.month}
-                </span>
-                <span className='block text-lg md:text-2xl font-medium text-neutral-500 dark:text-neutral-500 mt-1'>
-                  {item.title.year}
+                <span className='relative text-2xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200'>
+                  {item.title.day} / {item.title.month} / {item.title.year}
                 </span>
               </h3>
             </div>
@@ -68,7 +62,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className='absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-purple-500 via-blue-500 to-transparent rounded-full'
+            className='absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-theme-900 via-theme-600 to-transparent rounded-full'
           />
         </div>
       </div>

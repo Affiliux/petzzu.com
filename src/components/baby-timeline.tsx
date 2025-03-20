@@ -15,15 +15,16 @@ export function BabyTimeline({ timeline }) {
   const sortedTimeline = timeline?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   const data = sortedTimeline?.map(entry => {
-    const [day, month, year] = formatDate(entry.date).split('/')
+        const { day, month, year } = formatDate(entry.date)
+
     return {
       title: { day, month, year },
       content: (
         <div>
-          <h3 className='text-lg font-bold text-neutral-900'>{entry.title}</h3>
+          <h3 className='text-lg text-theme-600 text-center font-happy-school'>{entry.title}</h3>
           <p
             dangerouslySetInnerHTML={entry?.description ? { __html: entry.description } : undefined}
-            className='text-neutral-700 text-sm md:text-base mt-2'
+            className='text-neutral-700 text-sm md:text-base mt-2 text-justify'
           />
           <div className='mt-4'>
             {entry?.media?.length > 0 ? (

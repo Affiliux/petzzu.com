@@ -45,7 +45,7 @@
   "themes": {
     "default": {
       "awaiting": "Esperando o grande dia!",
-      "together": "Nasceu há",
+      "together": "Em nossas vidas há",
       "surprise": "Surpresaa!",
       "years": "anos",
       "months": "meses",
@@ -246,51 +246,23 @@
       "plans": {
         "title": "Nossos Planos",
         "description": "Escolha o plano ideal para sua página personalizada. Você pode escolher entre os planos abaixo.",
-        "purchase": {
-          "title": "Aquisição Única",
-          "counter": "Contador em tempo real",
-          "text": "Texto dedicado",
-          "date": "Data de início",
-          "qr-code": "QR Code exclusivo",
-          "images": "Máximo de 4 imagens",
-          "music": "Sem música",
-          "background": "Sem fundo dinâmico",
-          "animations": "Sem animações exclusivas",
-          "url": "URL personalizada",
-          "support": "Suporte 24 horas",
-          "price_recurrency": "/uma vez",
-          "buy": "Compre Agora"
+        "unique": {
+          "title": "Plano Básico",
+          "counter": "Compra somente uma vez",
+          "price_recurrence": "/uma vez",
+          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 2 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Duração de 1 ano | Edições limitadas para manter tudo atualizado | Edição de página já criada | Possui vídeo | Curiosidades sobre o bebê"
         },
-        "monthly": {
+        "month": {
           "title": "Mensal",
           "counter": "Assinatura mensal",
-          "text": "Pode adicionar ou remover fotos quando quiser",
-          "date": "Ediçoes limitadas para manter tudo atualizado",
-          "qr-code": "QR Code exclusivo",
-          "images": "4 Imagens por mês para cada fase",
-          "music": "Vídeos para eternizar momentos especiais",
-          "background": "Sem fundo dinâmico",
-          "animations": "Sem animações exclusivas",
-          "url": "URL personalizada",
-          "support": "Suporte 24 horas",
           "price_recurrence": "/por mes",
-          "buy": "Compre Agora"
+          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração de 1 ano | Curiosidades sobre o bebê"
         },
         "annual": {
           "title": "Anual",
           "counter": "Contador em tempo real",
-          "text": "Texto dedicado",
-          "date": "Data de início",
-          "qr-code": "QR Code exclusivo",
-          "images": "Máximo de 4 imagens",
-          "music": "Com música",
-          "background": "Fundo dinâmico",
-          "animations": "Com animações exclusivas",
-          "url": "URL personalizada",
-          "support": "Suporte 24 horas",
-          "price_recurrency": "/por ano",
-          "discount": "Desconto de 20%",
-          "buy": "Compre Agora"
+          "price_recurrence": "/por ano",
+          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração eterna | Curiosidades sobre o bebê | Link VIP Compartilhável (Em Breve) | Linha do Tempo Animada (Em Breve) | Memórias Destacadas (Em Breve) | Temas e Personalizações Avançadas (Em Breve)   "
         },
         "recommended": "Recomendado",
         "button": "Surpreenda agora"
@@ -420,17 +392,18 @@
     },
     "step2": {
       "title": "Quando ele Nasceu?",
-      "description": "Insira a data de nascimento, uma foto bem bonita e seu gênero.",
+      "description": "Insira a data de nascimento, algumas fotos de capa e o gênero da criança.",
       "input": {
         "picture": {
-          "title": "PNG, JPG, JPEG, GIF (máximo 1 foto)",
-          "label": "Foto principal da linha do tempo"
+          "title": "PNG, JPG, JPEG, GIF (máximo 6 fotos)",
+          "label": "Adicione fotos para a capa do Album",
+          "placeholder": "A quantidade de fotos altera o estilo de apresentação"
         },
         "label": "Mensagem",
         "errors": {
           "min": "Mínimo de 2 caracteres",
           "max": "Máximo de {limit} caracteres",
-          "maxFiles": "Máximo de 1 foto permitida"
+          "maxFiles": "Máximo de 6 foto permitidas"
         }
       },
       "back": "Voltar etapa",
@@ -567,6 +540,9 @@
       "day": "Dia",
       "month": "Mês",
       "year": "Ano"
+    },
+    "facts": {
+      "title": "Conheça um pouco sobre mim:"
     }
   },
   "checkout": {

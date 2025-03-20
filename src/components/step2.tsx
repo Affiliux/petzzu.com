@@ -43,7 +43,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
       if (!event.target.files) return
       const new_files = Array.from(event.target.files)
 
-      if (medias?.length + new_files.length > 1) {
+      if (medias?.length + new_files.length > 6) {
         toast({
           variant: 'destructive',
           title: 'Image Error!!',
@@ -156,6 +156,7 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
             </label>
           </h3>
           <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
+          <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.placeholder')} </p>
         </div>
 
         <div className='grid grid-cols-4 gap-4 mt-8'>
