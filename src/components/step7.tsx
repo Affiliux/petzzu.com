@@ -106,7 +106,7 @@ export const Step7 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
               <CardContent className='text-sm mt-4 flex-grow'>{getDescription(plan.sku)}</CardContent>
               <CardFooter>
                 <Button onClick={() => setPlan(plan)} className='w-full text-sm py-2 font-medium'>
-                  {plan.sku === selected?.sku ? t('steps.step7.selected') : t('pages.home.plans.button')}
+                  {plan.sku === selected?.sku ? t('steps.step7.button') : t('pages.home.plans.button')}
                 </Button>
               </CardFooter>
             </Card>
