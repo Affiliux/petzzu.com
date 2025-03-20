@@ -218,8 +218,8 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
   }
 
   const isNextButtonDisabled =
-    timelineEntries.length === 0 ||
-    timelineEntries.some(entry => !entry.title.trim() || !entry.date || entry.media.length === 0)
+    timelineEntries?.length === 0 ||
+    timelineEntries?.some(entry => !entry?.title?.trim() || !entry?.date || entry?.media?.length === 0)
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
