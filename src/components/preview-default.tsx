@@ -154,9 +154,9 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
             dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
           />
 
-          {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
+          {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} />}
 
-          {!!child?.birth_date && !!(child?.timeLine.length > 0) && (
+          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && (
             <DateCount type={dateShowType} date={child.birth_date} />
           )}
         </div>
