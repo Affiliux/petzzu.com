@@ -154,6 +154,12 @@ export const PreviewDefault = ({ child, song, medias, mediaShowType, dateShowTyp
             dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
           />
 
+          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && (
+            <div className='mt-16 md:mt-8 text-center p-6'>
+              <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+            </div>
+          )}
+
           {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} />}
 
           {!!child?.birth_date && !!(child?.timeLine?.length > 0) && (

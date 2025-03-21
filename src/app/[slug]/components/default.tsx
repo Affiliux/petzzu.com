@@ -55,9 +55,6 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
                   <PicturesGrid child={child} />
                 </div>
               )}
-              <div className='text-center p-6'>
-                <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
-              </div>
 
               {child?.birth_date && (
                 <p className='text-sm font-semibold text-center text-theme-700'>
@@ -67,7 +64,11 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
                 </p>
               )}
 
-              <div className='mt-16 md:mt-8'>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
+              <div className='mt-16 md:mt-8 text-center p-6'>
+                <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+              </div>
+
+              <div className=''>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
 
               {!!child?.birth_date && <DateCount type={DateShowTypeEnum.DEFAULT} date={child.birth_date} />}
             </div>
