@@ -7,20 +7,22 @@ import { useTranslations } from 'next-intl'
 import type { DefaultThemeProps } from '@/typings/child'
 import { useApplication } from '@/contexts/ApplicationContext'
 
+import { BabyTimeline } from '@/components/baby-timeline'
+import { CloudsBackground } from '@/components/clouds-background'
 import { DateCount } from '@/components/date-count'
-import { Music } from '@/components/music'
+import { ThemeSwitcher } from '@/components/theme-switcher'
 
 import PicturesGrid from './pictures-grid'
-import { BabyTimeline } from '../../../components/baby-timeline'
-import { CloudsBackground } from '../../../components/clouds-background'
-import { ThemeSwitcher } from '../../../components/theme-switcher'
 
 export const DefaultTheme = ({ child }: DefaultThemeProps) => {
+  // hooks
   const t = useTranslations()
 
+  // contexts
   const { locale } = useApplication()
 
-  const formatFNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
+  // variables
+  const FORMAT_FNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
 
   return (
     <>
@@ -45,24 +47,22 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
               {child?.birth_date && (
                 <p className='text-sm font-semibold text-center text-theme-700'>
                   {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
-                  {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
+                  {format(new Date(child?.birth_date), 'MMMM', { locale: FORMAT_FNS })} {t('themes.default.of')}{' '}
                   {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
                 </p>
               )}
 
-              <div className='mt-16 md:mt-8'>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
+              <div className='mt-16 md:mt-8 text-center p-6'>
+                <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+              </div>
+
+              <div className=''>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
 
               {!!child?.birth_date && <DateCount date={child.birth_date} />}
             </div>
           </div>
         </div>
       </div>
-
-      {child && !!child?.yt_song && (
-        <div className='sticky bottom-0 left-0 z-50'>
-          <Music url={child?.yt_song} />
-        </div>
-      )}
     </>
   )
 }

@@ -1,14 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React from 'react'
 
 import { format } from 'date-fns'
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
-import { PlanProps } from '@/typings/application'
-import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
+import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 import { BabyTimeline } from './baby-timeline'
@@ -32,23 +31,24 @@ const lora = Lora({
 interface PreviewDefaultProps {
   child: CreatePrePayloadProps
   medias: MediaPreProps[]
-  plan: PlanProps | undefined
 }
 
-export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => {
+export const PreviewDefault = ({ child, medias }: PreviewDefaultProps) => {
   // hooks
   const t = useTranslations()
 
   // contexts
   const { locale } = useApplication()
 
-  // states
-  const [showPro, setShowPro] = useState<boolean>(true)
-
   // variables
   const { value, unit } = formatAge(t, child?.birth_date)
 
-  const removeEmojis = (str: string) => {
+  // variables
+  const FORMAT_FNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
+  const CHILD_NAME_PARTS = child?.child_name?.split(' ')
+  const DISPLAY_NAME = CHILD_NAME_PARTS?.length > 2 ? `${CHILD_NAME_PARTS[0]} ${CHILD_NAME_PARTS[1]}` : child.child_name
+
+  function removeEmojis(str: string) {
     return str
       .replace(/[\u{1F600}-\u{1F64F}]/gu, '') // Removes face emojis
       .replace(/[\u{1F300}-\u{1F5FF}]/gu, '') // Removes symbols and icon emojis
@@ -57,31 +57,23 @@ export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => 
       .replace(/[\u{2700}-\u{27BF}]/gu, '') // Removes various symbol emojis
   }
 
-  const baseSlug = removeEmojis(child?.child_name ?? '')
-    .normalize('NFD') // Normalize to separate accent from letters
-    .replace(/[\u0300-\u036f]/g, '') // Remove accent marks
-    .replace(/[^a-zA-Z0-9 ]/g, '') // Removes special characters
-    .replace(/\s+/g, '-') // Replaces spaces with hyphens
-    .replace(/^-+|-+$/g, '') // Removes extra hyphens at the start or end
-    .toLowerCase()
-    .replace(/&/g, 'e') // Replaces '&' with 'e'
-
-  const formatFNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
-
-  const childNameParts = child?.child_name?.split(' ')
-  const displayName = childNameParts?.length > 2 ? `${childNameParts[0]} ${childNameParts[1]}` : child.child_name
-
-  useEffect(() => {
-    if (plan?.sku.includes('pro')) setShowPro(true)
-    else setShowPro(false)
-  }, [plan])
+  function baseSlug() {
+    return removeEmojis(child?.child_name ?? '')
+      .normalize('NFD') // Normalize to separate accent from letters
+      .replace(/[\u0300-\u036f]/g, '') // Remove accent marks
+      .replace(/[^a-zA-Z0-9 ]/g, '') // Removes special characters
+      .replace(/\s+/g, '-') // Replaces spaces with hyphens
+      .replace(/^-+|-+$/g, '') // Removes extra hyphens at the start or end
+      .toLowerCase()
+      .replace(/&/g, 'e') // Replaces '&' with 'e'
+  }
 
   return (
     <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-500'>
       <div className='bg-transparent'></div>
 
       <div className='absolute z-50 w-full items-center justify-center lg:text-center text-right bg-gray-300 rounded-t-lg p-3'>
-        <p className='text-xs text-neutral-900 mt-[1.5px]'>https://babyzzu.com/{baseSlug}</p>
+        <p className='text-xs text-neutral-900 mt-[1.5px]'>https://babyzzu.com/{baseSlug()}</p>
 
         <div className='absolute top-4 left-4 w-3 h-3 rounded-full bg-red-500' />
         <div className='absolute top-4 left-8 w-3 h-3 rounded-full bg-yellow-500' />
@@ -95,10 +87,10 @@ export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => 
         <div className='rounded-lg h-full'>
           <div className='flex justify-center items-center mb-8'>
             {child?.child_name &&
-              (child.child_name.length > 8 ? (
+              (child?.child_name?.length > 8 ? (
                 <div className='flex flex-col items-center text-center'>
                   <div className='flex flex-row items-baseline gap-2'>
-                    {child.birth_date && (
+                    {child?.birth_date && (
                       <>
                         <span className='text-7xl font-bold text-theme-600'>{value}</span>
                         <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
@@ -108,7 +100,7 @@ export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => 
                   <div>
                     <div className='flex flex-col ml-3'>
                       <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
-                        {displayName}
+                        {DISPLAY_NAME}
                       </div>
                     </div>
                   </div>
@@ -119,7 +111,7 @@ export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => 
                   <div className='flex flex-col ml-3 mt-3'>
                     <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
                     <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
-                      {displayName}
+                      {DISPLAY_NAME}
                     </div>
                   </div>
                 </div>
@@ -133,7 +125,7 @@ export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => 
           {child?.birth_date && (
             <p className='text-sm font-semibold text-center text-theme-700'>
               {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
-              {format(new Date(child?.birth_date), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
+              {format(new Date(child?.birth_date), 'MMMM', { locale: FORMAT_FNS })} {t('themes.default.of')}{' '}
               {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
             </p>
           )}
@@ -143,19 +135,18 @@ export const PreviewDefault = ({ child, medias, plan }: PreviewDefaultProps) => 
             dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
           />
 
-          {!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}
+          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && (
+            <div className='mt-16 md:mt-8 text-center p-6'>
+              <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+            </div>
+          )}
 
-          {!!child?.birth_date && !!(child?.timeLine.length > 0) && <DateCount date={child.birth_date} />}
+          {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} />}
+          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && <DateCount date={child.birth_date} />}
         </div>
       </div>
 
       <div className='h-72' />
-
-      {/* {!!song && song.url && showPro && (
-        <div className='sticky bottom-0 left-0 z-50'>
-          <Music url={song.url} />
-        </div>
-      )} */}
     </div>
   )
 }

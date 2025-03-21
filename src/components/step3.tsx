@@ -78,7 +78,7 @@ export const Step3 = ({ child, setChild, onNext, onBack, timelineMedias, onSaveM
   const handleAddTimelineEntry = async () => {
     const newEntry = {
       id: uuidv4(),
-      date: new Date().toISOString(),
+      date: timelineEntries.length === 0 ? child?.birth_date : new Date().toISOString(),
       title: '',
       description: '',
       media: [],
