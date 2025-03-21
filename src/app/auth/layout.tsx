@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { useApplication } from '@/contexts/ApplicationContext'
@@ -17,6 +18,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className='flex min-h-svh flex-col items-center justify-center bg-white p-6 md:p-10'>
       <div className='w-full max-w-sm md:max-w-3xl'>
         <div className='flex flex-col gap-6'>
+          <Link href='/' className='md:hidden w-2/3'>
+            <img src='/logo+name.png' alt='Image' />
+          </Link>
+
           <Card className='overflow-hidden bg-white border-theme-300'>
             <CardContent className='grid p-0 md:grid-cols-2'>
               {children}

@@ -8,8 +8,6 @@ import { useApplication } from '@/contexts/ApplicationContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { CardSpotlight } from './ui/card-spotlight'
-
 export function Plans() {
   const t = useTranslations('')
 
@@ -54,7 +52,7 @@ export function Plans() {
         <p className='text-muted-foreground mt-2'>{t('pages.home.plans.description')}</p>
       </div>
 
-      <div className='grid gap-6 md:grid-cols-3'>
+      <div id='plans' className='grid gap-6 md:grid-cols-3'>
         {plans &&
           plans.map(plan =>
             plan.currency.includes(format_intl_currency) ? (

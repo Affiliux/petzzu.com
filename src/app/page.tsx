@@ -14,6 +14,7 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { Hero } from '@/components/hero'
 import { HowWork } from '@/components/how-work'
+import { Plans } from '@/components/plans'
 import { Testimonials } from '@/components/testimonials'
 import { Spotlight } from '@/components/ui/spotlight-new'
 

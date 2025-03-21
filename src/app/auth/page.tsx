@@ -2,7 +2,11 @@
 
 import React, { useState } from 'react'
 
+import { ChevronLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+
+import { Button } from '@/components/ui/button'
 
 import { ConfirmForm } from './components/confirm'
 import { RequestForm } from './components/request'
@@ -12,6 +16,7 @@ export const runtime = 'edge'
 export default function Page() {
   // hooks
   const t = useTranslations('pages.auth')
+  const router = useRouter()
 
   // states
   const [email, set_email] = useState<string | null>(null)
@@ -30,7 +35,12 @@ export default function Page() {
         </div>
       ) : (
         <div className='space-y-2'>
-          <h1 className='text-2xl lg:text-3xl font-bold text-neutral-900'>{t('request.title')}</h1>
+          <div className='flex items-center gap-2 -ml-2'>
+            <Button asChild variant='ghost' className='p-0 cursor-pointer' onClick={() => router.back()}>
+              <ChevronLeft size={28} color='#ffffff' />
+            </Button>
+            <h1 className='text-2xl lg:text-3xl font-bold text-white'>{t('request.title')}</h1>
+          </div>
           <p className='text-md lg:text-md text-muted-foreground'>{t('request.description')}</p>
         </div>
       )}

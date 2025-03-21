@@ -50,11 +50,19 @@ export function RequestForm({ set_email }: { set_email: (email: string | null) =
       await onRequestEmail({ email: values.email })
       set_email(values.email)
     } catch (error: any) {
-      toast({
-        title: t('form.toast.title.error'),
-        description: t(error.message),
-        variant: 'destructive',
-      })
+      if (error.message === 'User not found') {
+        toast({
+          title: t('toast.error.title'),
+          description: t('toast.error.user-not-found'),
+          variant: 'destructive',
+        })
+      } else {
+        toast({
+          title: t('toast.error.title'),
+          description: t('toast.error.default'),
+          variant: 'destructive',
+        })
+      }
     } finally {
       setLoading(false)
     }

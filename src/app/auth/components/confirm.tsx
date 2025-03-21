@@ -72,8 +72,8 @@ export function ConfirmForm({ email }: { email: string | null }) {
       router.push(`/account/pages`)
     } catch (error: any) {
       toast({
-        title: t('form.toast.title.error'),
-        description: t(error.message),
+        title: t('toast.error.title'),
+        description: t('toast.error.default'),
         variant: 'destructive',
       })
     } finally {

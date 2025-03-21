@@ -15,7 +15,7 @@ export default function Layout({
 }>) {
   return (
     <div className='w-full dark min-h-screen'>
-      <div className='relative py-2 border-b border-neutral-800'>
+      <div className='relative py-2'>
         <Header />
       </div>
 
