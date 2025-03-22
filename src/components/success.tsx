@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useTranslations } from 'next-intl'
 import { IconDownload } from '@tabler/icons-react'
@@ -56,7 +56,7 @@ export const SuccessModal = ({ child, onClose }: SuccessModalProps) => {
         onClick={onClose}
         className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0`}
       >
-        <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+        <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
           {t('buttons.go')}
         </span>
       </button>

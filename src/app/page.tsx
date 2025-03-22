@@ -53,7 +53,7 @@ export default function Page() {
             <Features />
 
             <Testimonials />
-            {/* <Plans /> */}
+            <Plans />
             <Faq />
 
             <Footer />

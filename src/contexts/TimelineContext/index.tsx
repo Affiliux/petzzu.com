@@ -2,7 +2,11 @@
 
 import React, { createContext, useContext, useState } from 'react'
 
-import type { CreateTimelinePayloadProps, UpdateTimelinePayloadProps, UploadFileResponse } from '@/typings/timeline'
+import type {
+  CreateTimelinePayloadProps,
+  UpdateTimelinePayloadProps,
+  UploadFileResponseProps,
+} from '@/typings/timeline'
 
 import type { TimelineContextProps } from './types'
 import type { MediaPreProps, NewMediaPayloadProps } from '../../typings/create'
@@ -37,7 +41,7 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
     }
   }
 
-  async function onUploadTimelineFile(idPreWebsiteTimeLine: string, file: FormData): Promise<UploadFileResponse> {
+  async function onUploadTimelineFile(idPreWebsiteTimeLine: string, file: FormData): Promise<UploadFileResponseProps> {
     try {
       const payload: NewMediaPayloadProps = { id: idPreWebsiteTimeLine, file }
 

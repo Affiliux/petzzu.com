@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import { useTranslations } from 'next-intl'
 
 import { useApplication } from '@/contexts/ApplicationContext'
@@ -23,6 +25,7 @@ export function ThemeSwitcher() {
           {theme === ThemeShowTypeEnum.BLUE && <span className='w-6 h-6 rounded-md bg-[#7DA2FF]' />}
           {theme === ThemeShowTypeEnum.PINK && <span className='w-6 h-6 rounded-md bg-[#F997CD]' />}
           {theme === ThemeShowTypeEnum.YELLOW && <span className='w-6 h-6 rounded-md bg-[#FFF2B3]' />}
+          {theme === ThemeShowTypeEnum.GREEN && <span className='w-6 h-6 rounded-md bg-[#95BA7C]' />}
           <span className='sr-only'>{t('config.header.themes.title')}</span>
         </Button>
       </DropdownMenuTrigger>
@@ -38,6 +41,10 @@ export function ThemeSwitcher() {
         <DropdownMenuItem onClick={() => set_theme(ThemeShowTypeEnum.YELLOW)}>
           <span className='w-6 h-6 rounded-md bg-[#FFF2B3]' />
           <span>{t('config.header.themes.yellow')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => set_theme(ThemeShowTypeEnum.GREEN)}>
+          <span className='w-6 h-6 rounded-md bg-[#95BA7C]' />
+          <span>verde</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

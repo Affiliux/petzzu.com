@@ -1,28 +1,28 @@
-export interface BaseEntity {
+export interface BaseEntityProps {
   id: string
   createdAt: string
   updatedAt: string
 }
 
-export interface Media extends BaseEntity {
+export interface MediaProps extends BaseEntityProps {
   key: string
   url: string
 }
 
-export interface TimelineEntry extends BaseEntity {
+export interface TimelineEntryProps extends BaseEntityProps {
   date: string
   title: string
   description: string
-  media: Media[]
+  media: MediaProps[]
 }
 
-export interface PreWebsite extends BaseEntity {
+export interface PreWebsiteProps extends BaseEntityProps {
   id: string
   child_name: string
   sex: string
   birth_date: string
-  media: Media[]
-  timeLine: TimelineEntry[]
+  media: MediaProps[]
+  timeLine: TimelineEntryProps[]
   imageShowType: string
   dateShowType: string
   themeShowType: string
@@ -34,20 +34,20 @@ export interface CreateTimelinePayloadProps {
   description: string
 }
 
-export interface CreateTimelineResponse {
+export interface CreateTimelineResponseProps {
   success: boolean
   id: string
 }
 
-export interface UploadFileResponse {
+export interface UploadFileResponseProps {
   success: boolean
   id: string
   url: string
 }
 
-export interface DeleteFileResponse extends PreWebsite {}
+export interface DeleteFileResponseProps extends PreWebsiteProps {}
 
-export interface FindOneTimelineResponse extends TimelineEntry {}
+export interface FindOneTimelineResponseProps extends TimelineEntryProps {}
 
 export interface UpdateTimelinePayloadProps {
   date: string
@@ -55,7 +55,7 @@ export interface UpdateTimelinePayloadProps {
   description: string
 }
 
-export interface UpdateTimelineResponse {
+export interface UpdateTimelineResponseProps {
   success: boolean
   id: string
 }

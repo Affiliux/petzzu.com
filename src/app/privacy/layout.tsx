@@ -14,7 +14,7 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <div className='w-full dark min-h-screen'>
+    <div className='w-full min-h-screen'>
       <div className='relative py-2'>
         <Header />
       </div>

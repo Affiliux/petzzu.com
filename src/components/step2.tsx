@@ -1,99 +1,47 @@
 'use client'
 
-import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
-import { IconChevronLeft, IconChevronRight, IconLoader, IconX } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
 
-import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
-
-import { toast } from '@/hooks/use-toast'
+import type { CreatePrePayloadProps } from '@/typings/create'
+import { useApplication } from '@/contexts/ApplicationContext'
 
 import { Calendar } from './ui/calendar'
-import { RenderImage } from './render-image'
-import { useApplication } from '../contexts/ApplicationContext'
 
-import { MAX_FILE_SIZE } from '@/constants'
-import { Sex } from '@/enums'
+import { DateShowTypeEnum } from '@/enums'
 
 interface Step2Props {
+  isEdit?: boolean
   child: CreatePrePayloadProps
   setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  dateShowType: DateShowTypeEnum
+  setDateShowType: Dispatch<SetStateAction<DateShowTypeEnum>>
   onNext: () => Promise<void>
   onBack: () => void
-  onSaveMedia: (media: FormData) => Promise<void>
-  onRemoveMedia: (id: string) => Promise<void>
-  medias: MediaPreProps[]
 }
 
-export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMedia, medias }: Step2Props) => {
+export const Step2 = ({ isEdit, child, dateShowType, setChild, setDateShowType, onNext, onBack }: Step2Props) => {
+  // hooks
   const t = useTranslations()
 
-  const [loading, setLoading] = useState<boolean>(false)
-
+  // contexts
   const { locale } = useApplication()
+
+  // states
+  const [loading, setLoading] = useState<boolean>(false)
   const [date, setDate] = useState<Date | undefined>(child?.birth_date ? new Date(child?.birth_date) : undefined)
 
-  async function onSelectFiles(event: ChangeEvent<HTMLInputElement>) {
-    event.preventDefault()
-    setLoading(true)
+  // variables
+  const types = [
+    { id: 1, name: t('steps.step2.show-types.default'), data: DateShowTypeEnum.DEFAULT },
+    { id: 2, name: t('steps.step2.show-types.classic'), data: DateShowTypeEnum.CLASSIC },
+    { id: 3, name: t('steps.step2.show-types.simple'), data: DateShowTypeEnum.SIMPLE },
+  ]
 
-    try {
-      if (!event.target.files) return
-      const new_files = Array.from(event.target.files)
-
-      if (medias?.length + new_files.length > 6) {
-        toast({
-          variant: 'destructive',
-          title: 'Image Error!!',
-          description: t('steps.step2.input.errors.maxFiles'),
-        })
-
-        return
-      }
-
-      await Promise.all(
-        new_files.map(async file => {
-          if (file.size === 0) {
-            toast({
-              variant: 'destructive',
-              title: 'Image Error!!',
-              description: t('steps.step4.input.errors.empty'),
-            })
-          } else if (file.size > MAX_FILE_SIZE) {
-            toast({
-              variant: 'destructive',
-              title: 'Image Error!!',
-              description: t('steps.step4.input.errors.big-size'),
-            })
-          } else if (!file.type.startsWith('image/')) {
-            toast({
-              variant: 'destructive',
-              title: 'Image Error!!',
-              description: t('steps.step4.input.errors.not-image'),
-            })
-          } else {
-            const formData = new FormData()
-            formData.append('file', file)
-            await onSaveMedia(formData)
-          }
-        }),
-      )
-    } catch (error: any) {
-      console.error(error)
-
-      toast({
-        title: t('steps.step4.toast.error-save.title'),
-        description: t('steps.step4.toast.error-save.description'),
-        variant: 'destructive',
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  async function onSubmit() {
+  async function handleSubmit() {
     setLoading(true)
 
     try {
@@ -105,107 +53,46 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
     }
   }
 
-  async function onRemove(id: string) {
-    setLoading(true)
-
-    try {
-      await onRemoveMedia(id)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const sexOptions = [
-    { id: 1, name: t('steps.step2.gender.male'), data: Sex.MALE },
-    { id: 2, name: t('steps.step2.gender.female'), data: Sex.FEMALE },
-  ]
-
   useEffect(() => {
     if (date) setChild({ ...child, birth_date: date.toISOString() })
   }, [date])
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
-      <Calendar
-        mode='single'
-        locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
-        captionLayout='dropdown'
-        className={'rounded-md border border-neutral-300 flex items-center justify-center relative z-50'}
-        selected={date}
-        onSelect={setDate}
-        fromYear={2010}
-        toYear={new Date().getFullYear()}
-      />
-
-      <h2 className='font-semibold text-neutral-900'>{t('steps.step2.input.picture.label')}</h2>
-      <div className='relative border-2 border-neutral-800 border-dashed rounded-lg px-8 py-8' id='dropzone'>
-        <input
-          type='file'
-          accept='image/*'
-          size={100 * 1024 * 1024}
-          className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
-          onChange={onSelectFiles}
-        />
-
-        <div className='text-center'>
-          <h3 className='mt-2 text-sm font-medium text-white'>
-            <label htmlFor='file-upload' className='relative cursor-pointer'>
-              <span>{t('steps.step2.input.picture.title')}</span>
-            </label>
-          </h3>
-          <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.title')}</p>
-          <p className='mt-1 text-xs text-gray-500'>{t('steps.step2.input.picture.placeholder')} </p>
+      <div className='flex flex-col lg:flex-row lg:gap-4 gap-8'>
+        <div className='w-full lg:w-2/3'>
+          <Calendar
+            mode='single'
+            locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
+            captionLayout='dropdown'
+            className={'rounded-md border border-neutral-200/60 flex items-center justify-center relative z-50'}
+            selected={date}
+            onSelect={setDate}
+            fromYear={1950}
+            toYear={new Date().getFullYear()}
+          />
         </div>
 
-        <div className='grid grid-cols-4 gap-4 mt-8'>
-          {medias?.map(file => (
-            <div
-              key={file.id}
-              className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
-            >
-              <RenderImage
-                src={file.url}
-                alt={file.id}
-                className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
-                height={65}
-                width={65}
-              />
-
-              <button
-                onClick={() => onRemove(file.id)}
-                disabled={loading}
-                className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
+        <div className='w-full lg:w-1/3'>
+          <h2 className='font-semibold text-neutral-900'>{t('steps.step2.show-types.title')}</h2>
+          <div className='flex flex-col gap-2 mt-4'>
+            {types.map(type => (
+              <div
+                key={type.id}
+                className={`flex items-center space-x-3 space-y-0 rounded-lg border p-4 cursor-pointer hover:bg-neutral-100/20 border-neutral-200/60 w-full`}
+                onClick={() => setDateShowType(type.data)}
               >
-                <IconX size={14} />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <h2 className='font-semibold text-neutral-900'>{t('steps.step2.gender.title')}</h2>
-      <div className='w-full space-y-6'>
-        <div className='flex flex-col md:flex-row gap-4'>
-          {sexOptions.map(sex => (
-            <label
-              key={sex.id}
-              className='flex items-center space-x-3 space-y-0 rounded-lg border p-4 cursor-pointer hover:bg-accent [&:has([data-state=checked])]:border-primary w-full'
-            >
-              <input
-                type='radio'
-                name='gender'
-                value={sex.data}
-                checked={child.sex === sex.data}
-                onChange={() => setChild({ ...child, sex: sex.data })}
-                className='form-radio data-[state=checked]:border-primary data-[state=checked]:bg-primary'
-              />
-              <div className='space-y-1'>
-                <p className='text-sm font-medium leading-none'>{sex.name}</p>
+                {type.data === dateShowType ? (
+                  <div className='border border-theme-300 rounded-full h-4 w-4 flex items-center justify-center'>
+                    <div className='bg-theme-800 rounded-full h-2.5 w-2.5' />
+                  </div>
+                ) : (
+                  <div className='border border-neutral-200/60 rounded-full h-4 w-4' />
+                )}
+                <h2 className='text-sm font-medium leading-none text-neutral-800'>{type.name}</h2>
               </div>
-            </label>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -213,31 +100,30 @@ export const Step2 = ({ child, setChild, onNext, onBack, onSaveMedia, onRemoveMe
         <button
           type='button'
           onClick={onBack}
-          disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
+          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
             loading ? 'opacity-50' : ''
           }`}
         >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
             <>
               <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step2.back')}
+              {isEdit ? t('pages.account.pages.edit.actions.back') : t('steps.step2.back')}
             </>
           </span>
         </button>
         <button
-          onClick={onSubmit}
-          disabled={loading || medias?.length === 0 || !child.sex || !date}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            loading || medias?.length === 0 || !child.sex || !date ? 'opacity-50' : ''
+          onClick={handleSubmit}
+          disabled={loading || !date}
+          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+            loading || !date ? 'opacity-50' : ''
           }`}
         >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
             {loading ? (
               <IconLoader size={20} className='animate-spin' />
             ) : (
               <>
-                {medias?.length ? t('steps.step4.button') : t('config.skip')}
+                {isEdit ? t('pages.account.pages.edit.actions.next') : t('steps.step2.button')}
                 <IconChevronRight size={20} className='ml-4' />
               </>
             )}

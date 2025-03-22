@@ -27,8 +27,8 @@ const nextConfig = {
     NEXT_PUBLIC_ENV: process.env.ENV,
     NEXT_PUBLIC_API_URL: process.env.API_URL,
     NEXT_PUBLIC_TAG_MANAGER_ID: process.env.TAG_MANAGER_ID,
-    NEXT_PUBLIC_AI_API_KEY: process.env.AI_API_KEY,
     NEXT_PUBLIC_STONE_APP_ID: process.env.STONE_APP_ID,
+    NEXT_PUBLIC_CLOUD_FLARE_ANALYTICS_ID: process.env.CLOUD_FLARE_ANALYTICS_ID,
   },
   images: {
     minimumCacheTTL: 60,

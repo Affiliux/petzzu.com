@@ -3,7 +3,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 
 import type { DiscountProps, PlanProps, StepsProps } from '@/typings/application'
 import type { PaymentProps } from '@/typings/child'
@@ -14,10 +13,11 @@ import { PreviewDefault } from './preview-default'
 import { Step1 } from './step1'
 import { Step2 } from './step2'
 import { Step3 } from './step3'
-import { Step7 } from './step7'
-import { UploadFileResponse } from '../typings/timeline'
+import { Step4 } from './step4'
+import { Step5 } from './step5'
+import { UploadFileResponseProps } from '../typings/timeline'
 
-import { ThemeShowTypeEnum } from '@/enums'
+import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 interface StepsComponentProps {
   theme: ThemeShowTypeEnum
@@ -30,20 +30,21 @@ interface StepsComponentProps {
   child: CreatePrePayloadProps
   payment: PaymentProps | null
   medias: MediaPreProps[]
-  timelineMedias: MediaPreProps[]
   themeShowType: ThemeShowTypeEnum
+  dateShowType: DateShowTypeEnum
   plan?: PlanProps
   discount: DiscountProps | null
   //
   setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   setThemeShowType: Dispatch<SetStateAction<ThemeShowTypeEnum>>
+  setDateShowType: Dispatch<SetStateAction<DateShowTypeEnum>>
   setPlan: Dispatch<SetStateAction<PlanProps | undefined>>
   setStep: Dispatch<SetStateAction<number>>
   //
   onClose: () => void
   onNewMedia: (media: FormData) => Promise<void>
   onRemoveMedia: (id: string) => Promise<void>
-  onNewMediaTimeline: (idPreTimeline: string, media: FormData) => Promise<UploadFileResponse>
+  onNewMediaTimeline: (idPreTimeline: string, media: FormData) => Promise<UploadFileResponseProps>
   onRemoveMediaTimeline: (idPreTimeline: string, id: string) => Promise<void>
   onUpdate: () => Promise<void>
   onCreatePre: (child_name: string) => Promise<void>
@@ -58,12 +59,13 @@ export const Steps = ({
   plans,
   //
   child,
+  dateShowType,
   medias,
-  timelineMedias,
   plan,
   discount,
   //
   setChild,
+  setDateShowType,
   setPlan,
   setStep,
   //
@@ -76,14 +78,13 @@ export const Steps = ({
   onCreatePre,
 }: StepsComponentProps) => {
   // hooks
-  const t = useTranslations()
   const router = useRouter()
 
   return (
     <div className='relative w-full h-full z-50' id='startSteps'>
-      <div className='container py-4 lg:pt-8 flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full'>
+      <div className='py-4 lg:pt-8 flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full'>
         <div className='w-full lg:w-1/2'>
-          <HeaderStep theme={theme} steps={steps} activeStep={step} setStep={setStep} />
+          <HeaderStep steps={steps} activeStep={step} setStep={setStep} />
 
           {step === 1 && (
             <Step1
@@ -110,9 +111,8 @@ export const Steps = ({
             <Step2
               child={child}
               setChild={setChild}
-              medias={medias}
-              onSaveMedia={onNewMedia}
-              onRemoveMedia={onRemoveMedia}
+              dateShowType={dateShowType}
+              setDateShowType={setDateShowType}
               onBack={() => setStep(1)}
               onNext={async () => {
                 await onUpdate()
@@ -123,11 +123,9 @@ export const Steps = ({
 
           {step === 3 && (
             <Step3
-              child={child}
-              setChild={setChild}
-              timelineMedias={timelineMedias}
-              onSaveMedia={onNewMediaTimeline}
-              onRemoveMedia={onRemoveMediaTimeline}
+              medias={medias}
+              onSaveMedia={onNewMedia}
+              onRemoveMedia={onRemoveMedia}
               onBack={() => setStep(2)}
               onNext={async () => {
                 await onUpdate()
@@ -137,14 +135,26 @@ export const Steps = ({
           )}
 
           {step === 4 && (
-            <Step7
+            <Step4
+              child={child}
+              setChild={setChild}
+              onSaveMedia={onNewMediaTimeline}
+              onRemoveMedia={onRemoveMediaTimeline}
+              onBack={() => setStep(3)}
+              onNext={async () => {
+                await onUpdate()
+                setStep(5)
+              }}
+            />
+          )}
+
+          {step === 5 && (
+            <Step5
               plans={plans}
               discount={discount}
               selected={plan}
               setPlan={setPlan}
-              onBack={() => {
-                setStep(3)
-              }}
+              onBack={() => setStep(4)}
               onNext={async () => {
                 await onUpdate()
                 router.push('/checkout')
@@ -154,7 +164,7 @@ export const Steps = ({
         </div>
 
         <div className='w-full lg:w-1/2 h-full'>
-          <PreviewDefault child={child} medias={medias} plan={plan} />
+          <PreviewDefault child={child} dateShowType={dateShowType} medias={medias} />
         </div>
       </div>
     </div>

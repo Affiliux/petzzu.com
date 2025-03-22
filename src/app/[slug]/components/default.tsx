@@ -8,11 +8,12 @@ import type { DefaultThemeProps } from '@/typings/child'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 import { BabyTimeline } from '@/components/baby-timeline'
-import { CloudsBackground } from '@/components/clouds-background'
 import { DateCount } from '@/components/date-count'
 import { ThemeSwitcher } from '@/components/theme-switcher'
 
 import PicturesGrid from './pictures-grid'
+import { CloudBackground } from '@/components/clouds-background'
+import { DateShowTypeEnum } from '@/enums'
 
 export const DefaultTheme = ({ child }: DefaultThemeProps) => {
   // hooks
@@ -26,7 +27,7 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
 
   return (
     <>
-      <CloudsBackground />
+      <CloudBackground />
 
       <div className='h-full min-h-screen w-full bg-transparent overflow-hidden'>
         <div className='relative flex flex-col-reverse items-center gap-8 z-50 bg-theme-100/40 lg:bg-theme-100/40 w-full rounded-lg container pb-8'>
@@ -58,7 +59,9 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
 
               <div className=''>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
 
-              {!!child?.birth_date && <DateCount date={child.birth_date} />}
+              {!!child?.birth_date && (
+                <DateCount date={child.birth_date} type={child.dateShowType ?? DateShowTypeEnum.DEFAULT} />
+              )}
             </div>
           </div>
         </div>

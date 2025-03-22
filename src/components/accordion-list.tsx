@@ -1,3 +1,5 @@
+'use client'
+
 import React, { ChangeEvent, useState } from 'react'
 
 import { enUS, es, ptBR } from 'date-fns/locale'
@@ -19,14 +21,14 @@ import { RenderImage } from './render-image'
 import { MAX_FILE_SIZE } from '../constants'
 import { useApplication } from '../contexts/ApplicationContext'
 import { useCreate } from '../contexts/CreateContext'
-import { CreateTimelinePayloadProps, PreWebsite, TimelineEntry } from '../typings/timeline'
+import type { CreateTimelinePayloadProps, PreWebsiteProps, TimelineEntryProps } from '../typings/timeline'
 
-import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
+import { ThemeShowTypeEnum } from '@/enums'
 
 interface AccordionListProps {
   theme: ThemeShowTypeEnum
-  child: PreWebsite
-  setChild: React.Dispatch<React.SetStateAction<PreWebsite>>
+  child: PreWebsiteProps
+  setChild: React.Dispatch<React.SetStateAction<PreWebsiteProps>>
   onSaveMedia: (timelineId: string, media: FormData) => Promise<void>
   onRemoveMedia: (timelineId: string, mediaId: string) => Promise<void>
 }
@@ -37,7 +39,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
   const { pre } = useCreate()
 
   const { onCreateTimeline, onUpdateTimeline, onDeleteTimelineFile, onDeleteTimeline } = useTimeline()
-  const [accordions, setAccordions] = useState<TimelineEntry[]>(child.timeLine || [])
+  const [accordions, setAccordions] = useState<TimelineEntryProps[]>(child.timeLine || [])
   const [loading, setLoading] = useState(false)
 
   const addAccordion = async () => {
@@ -50,7 +52,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
 
       const response = await onCreateTimeline(pre, newTimeline)
 
-      const newEntry = response as unknown as TimelineEntry
+      const newEntry = response as unknown as TimelineEntryProps
       setAccordions([...accordions, newEntry])
       setChild(prev => ({
         ...prev,

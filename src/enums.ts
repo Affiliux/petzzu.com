@@ -9,10 +9,16 @@ export enum ThemeShowTypeEnum {
   BLUE = 'blue',
   PINK = 'pink',
   YELLOW = 'yellow',
-  DEFAULT = 'default',
+  GREEN = 'green',
 }
 
-export enum Sex {
+export enum SexEnum {
   MALE = 'male',
   FEMALE = 'female',
+}
+
+export enum DateShowTypeEnum {
+  DEFAULT = 'default',
+  SIMPLE = 'simple',
+  CLASSIC = 'classic',
 }

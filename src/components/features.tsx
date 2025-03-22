@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import { CalendarHeart, Images, Link, Pipette, QrCode, Timer } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 

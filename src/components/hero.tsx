@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -11,13 +11,14 @@ import { useQueryParams } from '@/hooks/use-query-params'
 
 import { AnimatedTooltip } from './ui/animated-tooltip'
 import { HoverBorderGradient } from './ui/hover-border-gradient'
-import { LazyLoadVideo } from './lazy-video'
 
 export const Hero = () => {
+  // hooks
   const t = useTranslations()
   const queryParams = useQueryParams()
   const router = useRouter()
 
+  // states
   const [loading, setLoading] = useState<boolean>(false)
 
   async function onSubmit() {

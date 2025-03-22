@@ -6,9 +6,9 @@
  *
  */
 
-import { MediaPreProps } from './create'
+import type { MediaPreProps } from './create'
 
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { BackgroundAnimationEnum, DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 export interface RefreshTokenProps {
   access_token: string

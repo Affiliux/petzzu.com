@@ -68,6 +68,17 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
       '--theme-800': ' #FFCF2C',
       '--theme-900': ' #FFC812',
     },
+    green: {
+      '--theme-100': '#D7E5CA',
+      '--theme-200': '#C1D8B0',
+      '--theme-300': '#ABC996',
+      '--theme-400': '#95BA7C',
+      '--theme-500': '#7FAC62',
+      '--theme-600': '#699E48',
+      '--theme-700': '#53802E',
+      '--theme-800': '#3D6214',
+      '--theme-900': '#274400',
+    },
   }
 
   async function onChangeLocale(new_locale: string): Promise<void> {

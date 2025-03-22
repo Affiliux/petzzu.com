@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -8,24 +7,37 @@ import { useTranslations } from 'next-intl'
 import { get_cookie, set_cookie } from '@/infrastructure/cache/cookies'
 
 export const Cookies = () => {
+  // hooks
   const t = useTranslations('config.cookies')
 
+  // states
   const [show, setShow] = useState(false)
 
-  const handleAccept = async () => {
-    await set_cookie('cookies', 'accepted')
-    setShow(false)
+  async function handleAccept() {
+    try {
+      await set_cookie('cookies', 'accepted')
+      setShow(false)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const handleDecline = async () => {
-    await set_cookie('cookies', 'declined')
-    setShow(false)
+  async function handleDecline() {
+    try {
+      await set_cookie('cookies', 'declined')
+      setShow(false)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const handleGet = async () => {
-    const cookie = await get_cookie('cookies')
-
-    if (cookie !== 'accepted') setShow(true)
+  async function handleGet() {
+    try {
+      const cookie = await get_cookie('cookies')
+      if (cookie !== 'accepted') setShow(true)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   useEffect(() => {

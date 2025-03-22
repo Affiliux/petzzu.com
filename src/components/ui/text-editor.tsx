@@ -23,7 +23,7 @@ const RichTextEditor = ({
   const editor = useEditor({
     editorProps: {
       attributes: {
-        class: `min-h-[150px] ${step3 ? '2xl:min-h-[282px]' : ''} max-h-[150px] w-full rounded-md rounded-br-none rounded-bl-none border border-input bg-transparent px-3 py-2 border-b-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto`,
+        class: `min-h-[150px] ${step3 ? '2xl:min-h-[282px]' : ''} max-h-[150px] w-full rounded-md rounded-br-none rounded-bl-none border border-neutral-200/60 bg-transparent px-3 py-2 border-b-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto`,
       },
       handleDOMEvents: {
         blur: () => {
@@ -64,7 +64,7 @@ const RichTextEditor = ({
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
-    <div className='border border-input bg-transparent rounded-br-md rounded-bl-md p-1 flex flex-row items-center gap-1'>
+    <div className='border border-neutral-200/60 bg-transparent rounded-br-md rounded-bl-md p-1 flex flex-row items-center gap-1'>
       <Toggle
         size='sm'
         pressed={editor.isActive('bold')}

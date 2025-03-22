@@ -215,9 +215,9 @@ export default function Page() {
     }
   }, [payment])
 
-  useEffect(() => {
-    if (!pre || !plan || !currency) router.push('/')
-  }, [pre, plan, currency])
+  // useEffect(() => {
+  //   if (!pre || !plan || !currency) router.push('/')
+  // }, [pre, plan, currency])
 
   return (
     <>
@@ -225,7 +225,7 @@ export default function Page() {
         <>
           {/* Product Information */}
           <div className='space-y-6'>
-            <Card className='border-border'>
+            <Card className='border-neutral-200/60'>
               <CardHeader>
                 <CardTitle>{t('checkout.order.title')}</CardTitle>
                 <CardDescription>{t('checkout.order.description')}</CardDescription>
@@ -236,19 +236,19 @@ export default function Page() {
                   <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between lg:space-x-2'>
                     <div className='flex items-start lg:items-center space-x-4'>
                       <div className='w-14'>
-                        <div className='h-14 w-14 rounded-md bg-muted flex items-center justify-center'>
-                          <ShoppingCart className='h-6 w-6 text-muted-foreground' />
+                        <div className='h-14 w-14 rounded-md bg-theme-100 flex items-center justify-center'>
+                          <ShoppingCart className='h-6 w-6 text-theme-800' />
                         </div>
                       </div>
                       <div className='w-auto'>
-                        <p className='font-medium text-foreground text-base'>
+                        <p className='font-medium text-neutral-900 text-base'>
                           {t(`checkout.order.plans.${plan?.sku.split('_')[1]}.title`)}
                         </p>
                         <p className='text-sm text-muted-foreground'>
                           {t(`checkout.order.plans.${plan?.sku.split('_')[1]}.description`)}
                         </p>
 
-                        <div className='lg:hidden block font-medium text-foreground mt-4'>
+                        <div className='lg:hidden block font-medium text-neutral-900 mt-4'>
                           {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                             style: 'currency',
                             currency: plan?.currency,
@@ -262,7 +262,7 @@ export default function Page() {
                       </div>
                     </div>
 
-                    <div className='hidden lg:block font-medium text-foreground'>
+                    <div className='hidden lg:block font-medium text-neutral-900'>
                       {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                         style: 'currency',
                         currency: plan?.currency,
@@ -279,19 +279,19 @@ export default function Page() {
                 {selected_bumps.map(selected => (
                   <div
                     key={selected.id}
-                    className='flex flex-col lg:flex-row lg:items-center lg:justify-between lg:space-x-2 pt-4 border-t border-border'
+                    className='flex flex-col lg:flex-row lg:items-center lg:justify-between lg:space-x-2 pt-4 border-t border-neutral-200/60'
                   >
                     <div className='flex items-start lg:items-center space-x-4'>
                       <div className='w-14'>
-                        <div className='h-14 w-14 rounded-md bg-primary/10 flex items-center justify-center'>
-                          <Check className='h-6 w-6 text-muted-foreground' />
+                        <div className='h-14 w-14 rounded-md bg-theme-100 flex items-center justify-center'>
+                          <Check className='h-6 w-6 text-theme-800' />
                         </div>
                       </div>
                       <div className='w-auto'>
-                        <p className='font-medium text-foreground text-base'>{selected?.title}</p>
+                        <p className='font-medium text-neutral-900 text-base'>{selected?.title}</p>
                         <p className='text-sm text-muted-foreground max-w-sm'>{selected?.description}</p>
 
-                        <div className='lg:hidden block font-medium text-foreground mt-4'>
+                        <div className='lg:hidden block font-medium text-neutral-900 mt-4'>
                           {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                             style: 'currency',
                             currency: plan.currency,
@@ -300,7 +300,7 @@ export default function Page() {
                       </div>
                     </div>
 
-                    <div className='hidden lg:block font-medium text-foreground'>
+                    <div className='hidden lg:block font-medium text-neutral-900'>
                       {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                         style: 'currency',
                         currency: plan.currency,
@@ -310,10 +310,10 @@ export default function Page() {
                 ))}
               </CardContent>
 
-              <CardFooter className='flex justify-between border-t border-border pt-6'>
-                <div className='font-semibold text-lg text-foreground'>{t(`checkout.order.total`)}</div>
+              <CardFooter className='flex justify-between border-t border-neutral-200/60 pt-6'>
+                <div className='font-semibold text-lg text-neutral-900'>{t(`checkout.order.total`)}</div>
                 {!!plan?.id && (
-                  <div className='font-bold text-lg text-foreground'>
+                  <div className='font-bold text-lg text-neutral-900'>
                     {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                       style: 'currency',
                       currency: plan.currency,
@@ -345,11 +345,11 @@ export default function Page() {
                   }
 
                   return (
-                    <Card key={bump.id} className='border-primary/30 overflow-hidden bg-card'>
-                      <div className='flex space-y-2 lg:space-y-0 lg:flex-row items-center justify-between bg-primary/10 p-3 border-b border-primary/20'>
+                    <Card key={bump.id} className='border-neutral-200/60 overflow-hidden bg-card'>
+                      <div className='flex space-y-2 lg:space-y-0 lg:flex-row items-center justify-between bg-primary/10 p-3 border-b border-neutral-200/60'>
                         <div className='flex items-center gap-2'>
-                          <div className='h-6 w-6 rounded-full bg-yellow-700 flex items-center justify-center'>
-                            <Sparkles className='h-3 w-3 text-yellow-200' />
+                          <div className='h-6 w-6 rounded-full bg-theme-700 flex items-center justify-center'>
+                            <Sparkles className='h-3 w-3 text-theme-200' />
                           </div>
                           <span className='font-medium lg:text-base text-white'>
                             {t('checkout.order.order-bumps.title')}
@@ -383,7 +383,7 @@ export default function Page() {
                               </div>
                             </div>
                             <div className='space-y-1 w-auto'>
-                              <p className='font-medium text-md lg:text-lg cursor-pointer text-foreground'>
+                              <p className='font-medium text-md lg:text-lg cursor-pointer text-neutral-900'>
                                 {bump?.title}
                               </p>
                               <p className='text-xs lg:text-sm text-muted-foreground'>{bump?.description}</p>
@@ -401,7 +401,7 @@ export default function Page() {
                         </div>
                       </CardContent>
 
-                      <div className='lg:hidden flex space-y-2 lg:space-y-0 lg:flex-row items-center justify-between bg-primary/5 p-3 border-t border-primary/20'>
+                      <div className='lg:hidden flex space-y-2 lg:space-y-0 lg:flex-row items-center justify-between bg-primary/5 p-3 border-t border-neutral-200/60'>
                         <div className='lg:hidden flex items-center gap-2 mt-1'>
                           <span className='text-sm line-through text-muted-foreground'>
                             {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
@@ -438,10 +438,10 @@ export default function Page() {
 
           {/* Payment Section */}
           <div>
-            <Card className='border-border'>
+            <Card className='border-neutral-200/60'>
               <CardHeader>
-                <CardTitle>{t('checkout.payment.title')}</CardTitle>
-                <CardDescription>{t('checkout.payment.description')}</CardDescription>
+                <CardTitle className='text-neutral-900'>{t('checkout.payment.title')}</CardTitle>
+                <CardDescription className='text-muted-foreground'>{t('checkout.payment.description')}</CardDescription>
               </CardHeader>
 
               <CardContent className='space-y-6'>
@@ -453,7 +453,7 @@ export default function Page() {
                   className='w-full'
                 >
                   {SHOW_PIX && (
-                    <AccordionItem value='pix' className='border rounded-md px-0 mb-3 border-border'>
+                    <AccordionItem value='pix' className='border rounded-md px-0 mb-3 border-neutral-200/60'>
                       <AccordionTrigger className='px-4 py-3 hover:no-underline'>
                         <div className='flex items-center gap-3'>
                           <QrCode className='h-5 w-5' />
@@ -480,7 +480,7 @@ export default function Page() {
                   )}
 
                   {SHOW_STONE_CARD && (
-                    <AccordionItem value='credit-card' className='border rounded-md px-0 mb-3 border-border'>
+                    <AccordionItem value='credit-card' className='border rounded-md px-0 mb-3 border-neutral-200/60'>
                       <AccordionTrigger className='px-4 py-3 hover:no-underline'>
                         <div className='flex items-center gap-3'>
                           <CreditCard className='h-5 w-5' />
@@ -501,7 +501,7 @@ export default function Page() {
                   )}
 
                   {SHOW_PAYPAL && (
-                    <AccordionItem value='paypal' className='border rounded-md px-0 mb-3 border-border'>
+                    <AccordionItem value='paypal' className='border rounded-md px-0 mb-3 border-neutral-200/60'>
                       <AccordionTrigger className='px-4 py-3 hover:no-underline'>
                         <div className='flex items-center gap-3'>
                           <IconBrandPaypal className='h-5 w-5' />
@@ -520,7 +520,7 @@ export default function Page() {
                   )}
 
                   {SHOW_STRIPE && (
-                    <AccordionItem value='stripe' className='border rounded-md px-0 border-border'>
+                    <AccordionItem value='stripe' className='border rounded-md px-0 border-neutral-200/60'>
                       <AccordionTrigger className='px-4 py-3 hover:no-underline'>
                         <div className='flex items-center gap-3'>
                           <IconBrandStripe className='h-5 w-5' />

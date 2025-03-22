@@ -26,6 +26,7 @@ export type CreateContextType = {
   child: CreatePrePayloadProps
   plan: PlanProps | undefined
   theme_show_type: ThemeShowTypeEnum
+  date_show_type: DateShowTypeEnum
   //
   set_pre: Dispatch<SetStateAction<string | null>>
   set_pre_medias: Dispatch<SetStateAction<MediaPreProps[]>>
@@ -33,6 +34,7 @@ export type CreateContextType = {
   set_child: Dispatch<SetStateAction<CreatePrePayloadProps>>
   set_plan: Dispatch<SetStateAction<PlanProps | undefined>>
   set_theme_show_type: Dispatch<SetStateAction<ThemeShowTypeEnum>>
+  set_date_show_type: Dispatch<SetStateAction<DateShowTypeEnum>>
   //
   onCreatePre: (payload: CreatePrePayloadProps) => Promise<void>
   onUpdatePre: (payload: UpdatePrePayloadProps) => Promise<void>

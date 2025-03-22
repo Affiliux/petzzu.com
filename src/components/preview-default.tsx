@@ -2,7 +2,6 @@
 
 import React from 'react'
 
-import { format } from 'date-fns'
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
@@ -11,10 +10,11 @@ import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 import { BabyTimeline } from './baby-timeline'
+import { CloudBackground } from './clouds-background'
 import { DateCount } from './date-count'
 import PicturesGridPreview from './pictures-grid-preview'
-import { ThemeSwitcher } from './theme-switcher'
 
+import { DateShowTypeEnum } from '@/enums'
 import { formatAge } from '@/lib/helpers/formatters'
 
 const dancing = Dancing_Script({
@@ -30,10 +30,11 @@ const lora = Lora({
 
 interface PreviewDefaultProps {
   child: CreatePrePayloadProps
+  dateShowType: DateShowTypeEnum
   medias: MediaPreProps[]
 }
 
-export const PreviewDefault = ({ child, medias }: PreviewDefaultProps) => {
+export const PreviewDefault = ({ child, dateShowType, medias }: PreviewDefaultProps) => {
   // hooks
   const t = useTranslations()
 
@@ -69,22 +70,21 @@ export const PreviewDefault = ({ child, medias }: PreviewDefaultProps) => {
   }
 
   return (
-    <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-500'>
-      <div className='bg-transparent'></div>
+    <div className='relative border border-neutral-200/60 no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-200/50'>
+      <div className='absolute z-50 w-full flex justify-between items-center text-right bg-white rounded-t-lg p-3'>
+        <div className='w-1/6 flex items-center gap-2'>
+          <div className='w-3 h-3 rounded-full bg-red-500' />
+          <div className='left-8 w-3 h-3 rounded-full bg-yellow-500' />
+          <div className='left-12 w-3 h-3 rounded-full bg-green-500' />
+        </div>
 
-      <div className='absolute z-50 w-full items-center justify-center lg:text-center text-right bg-gray-300 rounded-t-lg p-3'>
-        <p className='text-xs text-neutral-900 mt-[1.5px]'>https://babyzzu.com/{baseSlug()}</p>
-
-        <div className='absolute top-4 left-4 w-3 h-3 rounded-full bg-red-500' />
-        <div className='absolute top-4 left-8 w-3 h-3 rounded-full bg-yellow-500' />
-        <div className='absolute top-4 left-12 w-3 h-3 rounded-full bg-green-500' />
+        <div className='w-5/6'>
+          <p className='text-xs text-neutral-900 mt-[1.5px] text-right truncate'>https://babyzzu.com/{baseSlug()}</p>
+        </div>
       </div>
 
       <div className='relative container h-full mt-14 bg-theme-100 lg:bg-theme-100 z-40'>
-        <div className='flex justify-end'>
-          <ThemeSwitcher />
-        </div>
-        <div className='rounded-lg h-full'>
+        <div className='relative rounded-lg h-full z-40'>
           <div className='flex justify-center items-center mb-8'>
             {child?.child_name &&
               (child?.child_name?.length > 8 ? (
@@ -119,16 +119,8 @@ export const PreviewDefault = ({ child, medias }: PreviewDefaultProps) => {
           </div>
 
           <div className='flex items-center justify-center w-full mb-8'>
-            <PicturesGridPreview child={child} images={medias} />
+            <PicturesGridPreview images={medias} />
           </div>
-
-          {child?.birth_date && (
-            <p className='text-sm font-semibold text-center text-theme-700'>
-              {t('themes.default.since')} {format(new Date(child?.birth_date), 'dd')} {t('themes.default.of')}{' '}
-              {format(new Date(child?.birth_date), 'MMMM', { locale: FORMAT_FNS })} {t('themes.default.of')}{' '}
-              {format(new Date(child?.birth_date), 'yyy', { locale: ptBR })}
-            </p>
-          )}
 
           <p
             className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
@@ -142,8 +134,10 @@ export const PreviewDefault = ({ child, medias }: PreviewDefaultProps) => {
           )}
 
           {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} />}
-          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && <DateCount date={child.birth_date} />}
+          {!!child?.birth_date && <DateCount date={child.birth_date} type={dateShowType} />}
         </div>
+
+        <CloudBackground />
       </div>
 
       <div className='h-72' />

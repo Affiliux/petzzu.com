@@ -11,8 +11,10 @@ import { HoverBorderGradient } from './ui/hover-border-gradient'
 import { cn } from '@/lib/utils'
 
 export function HowWork() {
+  // hooks
   const t = useTranslations('pages.home')
 
+  // variables
   const features = [
     {
       title: t('how-work.steps.1.title'),

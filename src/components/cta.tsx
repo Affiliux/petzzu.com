@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import { FloatingBubbles } from './ui/bubbles'
 
 export const CTA = () => {
+  // hooks
   const t = useTranslations('pages.home')
 
   return (

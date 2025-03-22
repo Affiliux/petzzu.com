@@ -16,7 +16,7 @@ import type {
 
 import type { CreateContextType, CreateProviderProps } from './types'
 
-import { ThemeShowTypeEnum } from '@/enums'
+import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 import { get_child_id } from '@/infrastructure/http/services/child'
 import {
   create_from_pre,
@@ -36,6 +36,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
   const [pre_medias, set_pre_medias] = useState<MediaPreProps[]>([])
   const [child, set_child] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
   const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.YELLOW)
+  const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
   const [plan, set_plan] = useState<PlanProps | undefined>()
   const [payment, set_payment] = useState<PaymentProps | null>(null)
 
@@ -116,6 +117,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
           lang: response.lang,
           timeLine: response.timeLine,
           themeShowType: response.themeShowType ?? ThemeShowTypeEnum.YELLOW,
+          dateShowType: response.dateShowType ?? DateShowTypeEnum.DEFAULT,
         })
 
         set_theme_show_type(response.themeShowType ?? ThemeShowTypeEnum.YELLOW)
@@ -146,6 +148,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         child,
         plan,
         theme_show_type,
+        date_show_type,
         //
         set_pre,
         set_pre_medias,
@@ -153,6 +156,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         set_child,
         set_plan,
         set_theme_show_type,
+        set_date_show_type,
         //
         onCreatePre,
         onUpdatePre,

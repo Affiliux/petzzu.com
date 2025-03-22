@@ -17,12 +17,12 @@ export default function Layout({
   const t = useTranslations()
 
   return (
-    <div className='w-full dark min-h-screen bg-background'>
+    <div className='w-full min-h-screen'>
       <div className='relative py-2'>
         <Header />
       </div>
 
-      <div className='container mx-auto py-8 mt-24'>{children}</div>
+      <div className='container py-8 mt-24'>{children}</div>
 
       <Footer />
       <ButtonToTop />

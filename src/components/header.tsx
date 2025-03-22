@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { ChevronDown, Globe, Layers, LogOut, Menu, User, X } from 'lucide-react'
 import Link from 'next/link'
