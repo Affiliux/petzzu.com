@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
-import { ChildResponseProps, PaymentProps } from '@/typings/child'
+import type { ChildResponseProps, PaymentProps } from '@/typings/child'
 
 export type ChildProviderProps = {
   children: ReactNode
@@ -9,8 +9,8 @@ export type ChildProviderProps = {
 export type ChildContextType = {
   child: ChildResponseProps | null
   //
-  set_child: (Child: ChildResponseProps | null) => void
+  set_child: Dispatch<SetStateAction<ChildResponseProps | null>>
   //
-  handleGetChildBySlug: (slug: string) => Promise<void>
-  handleGetChildById: (id: string) => Promise<void>
+  onGetChildBySlug: (slug: string) => Promise<void>
+  onGetChildById: (id: string) => Promise<void>
 }

@@ -6,15 +6,23 @@
     "skip": "Skip step",
     "header": {
       "nav": {
+        "title": "Menu",
+        "home": "Home",
         "plans": "Plans",
-        "affiliate": "Affiliate Program",
-        "badge": "Coming Soon"
+        "faq": "F.A.Q",
+        "affiliate": "Affiliate Program"
+      },
+      "account": {
+        "title": "My Account",
+        "my-pages": "My Pages",
+        "logout": "Logout"
       },
       "languages": {
-        "pt": "Portuguese",
+        "title": "Select Language",
+        "pt": "Português",
         "en": "English",
-        "es": "Spanish",
-        "de": "German"
+        "es": "Español",
+        "de": "Deutsch"
       }
     },
     "footer": {

@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
-import { DiscountProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
+import type { DiscountProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
 
 import { ThemeShowTypeEnum } from '@/enums'
 
@@ -15,21 +15,20 @@ export type ApplicationContextType = {
   currency: string
   theme: ThemeShowTypeEnum
   plans: PlanProps[]
+  order_bumps: OrderBumpProps[]
   discount: DiscountProps | null
-  yt_search_list: YouTubeVideoProps[]
   //
-  set_client: (client: boolean) => void
-  set_loading_application: (loading: boolean) => void
-  set_locale: (locale: string) => void
-  set_currency: (currency: string) => void
-  set_theme: (theme: ThemeShowTypeEnum) => void
-  set_plans: (plans: PlanProps[]) => void
-  set_discount: (discount: DiscountProps | null) => void
-  set_yt_search_list: (videos: YouTubeVideoProps[]) => void
+  set_client: Dispatch<SetStateAction<boolean>>
+  set_loading_application: Dispatch<SetStateAction<boolean>>
+  set_locale: Dispatch<SetStateAction<string>>
+  set_currency: Dispatch<SetStateAction<string>>
+  set_theme: Dispatch<SetStateAction<ThemeShowTypeEnum>>
+  set_plans: Dispatch<SetStateAction<PlanProps[]>>
+  set_order_bumps: Dispatch<SetStateAction<OrderBumpProps[]>>
+  set_discount: Dispatch<SetStateAction<DiscountProps | null>>
   //
-  handleChangeLocale: (locale: string) => Promise<void>
-  handleChangeCurrency: (currency: string, save?: boolean) => Promise<void>
-  handleGetPlans: () => Promise<void>
-  handleGetDiscount: (name: string) => Promise<void>
-  handleGetYtVideos: (name: string) => Promise<void>
+  onChangeLocale: (locale: string) => Promise<void>
+  onChangeCurrency: (currency: string, save?: boolean) => Promise<void>
+  onGetPlans: () => Promise<void>
+  onGetDiscount: (name: string) => Promise<void>
 }

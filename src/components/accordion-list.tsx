@@ -1,3 +1,5 @@
+'use client'
+
 import React, { ChangeEvent, useState } from 'react'
 
 import { enUS, es, ptBR } from 'date-fns/locale'
@@ -19,14 +21,14 @@ import { RenderImage } from './render-image'
 import { MAX_FILE_SIZE } from '../constants'
 import { useApplication } from '../contexts/ApplicationContext'
 import { useCreate } from '../contexts/CreateContext'
-import { CreateTimelinePayloadProps, PreWebsite, TimelineEntry } from '../typings/timeline'
+import type { CreateTimelinePayloadProps, PreWebsiteProps, TimelineEntryProps } from '../typings/timeline'
 
-import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
+import { ThemeShowTypeEnum } from '@/enums'
 
 interface AccordionListProps {
   theme: ThemeShowTypeEnum
-  child: PreWebsite
-  setChild: React.Dispatch<React.SetStateAction<PreWebsite>>
+  child: PreWebsiteProps
+  setChild: React.Dispatch<React.SetStateAction<PreWebsiteProps>>
   onSaveMedia: (timelineId: string, media: FormData) => Promise<void>
   onRemoveMedia: (timelineId: string, mediaId: string) => Promise<void>
 }
@@ -36,8 +38,8 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
   const { locale } = useApplication()
   const { pre } = useCreate()
 
-  const { createTimeline, updateTimeline, deleteTimelineFile, deleteTimeline } = useTimeline()
-  const [accordions, setAccordions] = useState<TimelineEntry[]>(child.timeLine || [])
+  const { onCreateTimeline, onUpdateTimeline, onDeleteTimelineFile, onDeleteTimeline } = useTimeline()
+  const [accordions, setAccordions] = useState<TimelineEntryProps[]>(child.timeLine || [])
   const [loading, setLoading] = useState(false)
 
   const addAccordion = async () => {
@@ -48,9 +50,9 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
         description: '',
       }
 
-      const response = await createTimeline(pre, newTimeline)
+      const response = await onCreateTimeline(pre, newTimeline)
 
-      const newEntry = response as unknown as TimelineEntry
+      const newEntry = response as unknown as TimelineEntryProps
       setAccordions([...accordions, newEntry])
       setChild(prev => ({
         ...prev,
@@ -68,7 +70,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
 
   const removeAccordion = async (id: string) => {
     try {
-      await deleteTimeline(id)
+      await onDeleteTimeline(id)
       setAccordions(prev => prev.filter(entry => entry.id !== id))
       setChild(prev => ({
         ...prev,
@@ -147,7 +149,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
     }
   }
 
-  const handleRemoveMedia = async (timelineId: string, mediaId: string) => {
+  const onRemoveMedia = async (timelineId: string, mediaId: string) => {
     try {
       await onRemoveMedia(timelineId, mediaId)
 
@@ -223,7 +225,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                     }))
 
                     try {
-                      await updateTimeline(accordion.id, {
+                      await onUpdateTimeline(accordion.id, {
                         date: accordion.date,
                         title: newTitle,
                         description: accordion?.description,
@@ -250,7 +252,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                         }))
 
                         try {
-                          await updateTimeline(accordion.id, {
+                          await onUpdateTimeline(accordion.id, {
                             date: accordion.date,
                             title: accordion.title,
                             description: newDescription,
@@ -279,7 +281,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                       }))
 
                       try {
-                        await updateTimeline(accordion.id, {
+                        await onUpdateTimeline(accordion.id, {
                           date: new Date().toISOString(),
                           title: accordion.title,
                           description: accordion.description,
@@ -324,9 +326,9 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                         width={65}
                       />
                       <button
-                        onClick={() => handleRemoveMedia(accordion.id, file.id)}
+                        onClick={() => onRemoveMedia(accordion.id, file.id)}
                         disabled={loading}
-                        className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black flex items-center cursor-pointer justify-center'
+                        className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
                       >
                         <IconX size={14} />
                       </button>
@@ -338,7 +340,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                 <button
                   type='button'
                   onClick={() => removeAccordion(accordion.id)}
-                  className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
+                  className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2'
                 >
                   <IconTrash className='mr-2' />
                   Excluir
@@ -352,7 +354,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
         <button
           type='button'
           onClick={addAccordion}
-          className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-offset-2'
+          className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2'
         >
           <IconPlus className='mr-2' />
           Nova lembrança

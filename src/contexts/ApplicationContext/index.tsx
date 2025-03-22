@@ -1,6 +1,8 @@
+'use client'
+
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-import { DiscountProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
+import { DiscountProps, OrderBumpProps, PlanProps } from '@/typings/application'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
@@ -11,11 +13,15 @@ import { NEXT_CURRENCY, NEXT_LOCALE } from '@/constants'
 import { ThemeShowTypeEnum } from '@/enums'
 import { delete_cookie, set_cookie } from '@/infrastructure/cache/cookies'
 import { delete_storage, set_storage } from '@/infrastructure/cache/storage'
-import { get_discount, get_plans, get_search_yt } from '@/infrastructure/http/services/application'
+import { get_discount, get_order_bump, get_plans } from '@/infrastructure/http/services/application'
 
 export const ApplicationContext = createContext<ApplicationContextType>({} as ApplicationContextType)
 
 export default function ApplicationProvider({ children }: ApplicationProviderProps) {
+  // hooks
+  const queryParams = useQueryParams()
+
+  // states
   const [client, set_client] = useState<boolean>(false)
   const [loading_application, set_loading_application] = useState<boolean>(false)
 
@@ -24,11 +30,10 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   const [theme, set_theme] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.YELLOW)
 
   const [plans, set_plans] = useState<PlanProps[]>([])
+  const [order_bumps, set_order_bumps] = useState<OrderBumpProps[]>([])
   const [discount, set_discount] = useState<DiscountProps | null>(null)
 
-  const [yt_search_list, set_yt_search_list] = useState<YouTubeVideoProps[]>([])
-  const queryParams = useQueryParams()
-
+  // variables
   const themes = {
     blue: {
       '--theme-100': '#D6E2FF',
@@ -63,9 +68,20 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
       '--theme-800': ' #FFCF2C',
       '--theme-900': ' #FFC812',
     },
+    green: {
+      '--theme-100': '#D7E5CA',
+      '--theme-200': '#C1D8B0',
+      '--theme-300': '#ABC996',
+      '--theme-400': '#95BA7C',
+      '--theme-500': '#7FAC62',
+      '--theme-600': '#699E48',
+      '--theme-700': '#53802E',
+      '--theme-800': '#3D6214',
+      '--theme-900': '#274400',
+    },
   }
 
-  async function handleChangeLocale(new_locale: string): Promise<void> {
+  async function onChangeLocale(new_locale: string): Promise<void> {
     try {
       await set_cookie(NEXT_LOCALE, new_locale)
 
@@ -76,7 +92,7 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
     }
   }
 
-  async function handleChangeCurrency(new_currency: string, save?: boolean): Promise<void> {
+  async function onChangeCurrency(new_currency: string, save?: boolean): Promise<void> {
     try {
       if (save) {
         await set_cookie(NEXT_CURRENCY, new_currency)
@@ -92,16 +108,25 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
     }
   }
 
-  async function handleGetPlans(): Promise<void> {
+  async function onGetPlans(): Promise<void> {
     try {
-      const response = await get_plans({})
+      const response = await get_plans()
       if (response) set_plans(response.plans)
     } catch (error: any) {
       console.error(error)
     }
   }
 
-  async function handleGetDiscount(name: string): Promise<void> {
+  async function onGetOrderBump(): Promise<void> {
+    try {
+      const response = await get_order_bump()
+      if (response && response.orderBumps) set_order_bumps(response.orderBumps)
+    } catch (error: any) {
+      console.error(error)
+    }
+  }
+
+  async function onGetDiscount(name: string): Promise<void> {
     try {
       const response = await get_discount({ name })
       if (response && response.isActive) set_discount(response)
@@ -110,40 +135,21 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
     }
   }
 
-  async function handleGetYtVideos(name: string): Promise<void> {
-    try {
-      const response = await get_search_yt(name)
-      if (response) set_yt_search_list(response)
-    } catch (error: any) {
-      console.error(error)
-    }
-  }
-
-  async function initLocale() {
+  async function onInitLocale() {
     set_loading_application(true)
     set_client(true)
 
     try {
-      if (queryParams?.dc && !discount) await handleGetDiscount(queryParams?.dc)
-
       const saved_locale = localStorage.getItem(NEXT_LOCALE)
 
       if (locale === queryParams?.lang) return
 
       if (queryParams?.lang && locales.includes(queryParams?.lang as any)) {
-        await handleChangeLocale(queryParams?.lang)
+        await onChangeLocale(queryParams?.lang)
       } else if (saved_locale && saved_locale.includes('-') && locales.includes(saved_locale.split('-')[0] as any)) {
-        await handleChangeLocale(saved_locale.split('-')[0])
+        await onChangeLocale(saved_locale.split('-')[0])
       } else if (saved_locale && locales.includes(saved_locale as any)) {
-        await handleChangeLocale(saved_locale)
-      } else if (
-        typeof navigator !== 'undefined' &&
-        navigator.language &&
-        locales.includes(navigator.language.split('-')[0] as any)
-      ) {
-        await handleChangeLocale(navigator.language.split('-')[0])
-      } else {
-        await handleChangeLocale('pt')
+        await onChangeLocale(saved_locale)
       }
     } catch (error: any) {
       console.error(error)
@@ -153,6 +159,12 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }
 
   useEffect(() => {
+    if (plans.length === 0) onGetPlans()
+    if (order_bumps.length === 0) onGetOrderBump()
+    if (queryParams?.dc && !discount) onGetDiscount(queryParams?.dc)
+  }, [queryParams?.dc])
+
+  useEffect(() => {
     const root = document.documentElement
     Object.entries(themes[theme]).forEach(([key, value]) => {
       root.style.setProperty(key, value as string)
@@ -160,20 +172,16 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }, [theme])
 
   useEffect(() => {
-    if (plans.length === 0) handleGetPlans()
-  }, [])
-
-  useEffect(() => {
-    initLocale()
+    onInitLocale()
   }, [queryParams?.lang])
 
   useEffect(() => {
     const saved_currency = localStorage.getItem(NEXT_CURRENCY)
 
-    if (queryParams?.currency) handleChangeCurrency(queryParams?.currency, true)
-    else if (locale.includes('pt')) handleChangeCurrency('brl')
-    else if (saved_currency) handleChangeCurrency(saved_currency)
-    else handleChangeCurrency('usd')
+    if (queryParams?.currency) onChangeCurrency(queryParams?.currency, true)
+    else if (saved_currency) onChangeCurrency(saved_currency)
+    else if (locale === 'pt') onChangeCurrency('brl')
+    else if (locale === 'en') onChangeCurrency('usd')
   }, [locale, queryParams?.currency])
 
   return (
@@ -185,8 +193,8 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
         currency,
         theme,
         plans,
+        order_bumps,
         discount,
-        yt_search_list,
 
         set_client,
         set_loading_application,
@@ -194,14 +202,13 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
         set_currency,
         set_theme,
         set_plans,
+        set_order_bumps,
         set_discount,
-        set_yt_search_list,
 
-        handleChangeLocale,
-        handleChangeCurrency,
-        handleGetPlans,
-        handleGetDiscount,
-        handleGetYtVideos,
+        onChangeLocale,
+        onChangeCurrency,
+        onGetPlans,
+        onGetDiscount,
       }}
     >
       {children}

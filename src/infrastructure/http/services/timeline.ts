@@ -1,19 +1,29 @@
-import { NewMediaPayloadProps } from '../../../typings/create'
-import {
+import type { NewMediaPayloadProps } from '@/typings/create'
+import type {
   CreateTimelinePayloadProps,
-  CreateTimelineResponse,
-  DeleteFileResponse,
+  CreateTimelineResponseProps,
+  DeleteFileResponseProps,
   FindOneTimelineResponse,
   UpdateTimelinePayloadProps,
-  UpdateTimelineResponse,
-  UploadFileResponse,
-} from '../../../typings/timeline'
+  UpdateTimelineResponseProps,
+  UploadFileResponseProps,
+} from '@/typings/timeline'
+
 import { api } from '..'
+
+/**
+ * @name create_timeline
+ * @category Infrastructure -  HTTP - Services - Timeline
+ *
+ * @param {string} idPreWebsite - The ID of the pre-website.
+ * @param {CreateTimelinePayloadProps} payload - The payload to create a timeline.
+ * @return {Promise<CreateTimelineResponseProps>} - The response from the server.
+ */
 
 export async function create_timeline(
   idPreWebsite: string,
   payload: CreateTimelinePayloadProps,
-): Promise<CreateTimelineResponse> {
+): Promise<CreateTimelineResponseProps> {
   try {
     const { data: response } = await api.post(`website/pre/timeLine/create/${idPreWebsite}`, payload)
     return response
@@ -21,6 +31,14 @@ export async function create_timeline(
     throw new Error(error.response.data.message ?? '')
   }
 }
+
+/**
+ * @name delete_timeline
+ * @category Infrastructure -  HTTP - Services - Timeline
+ *
+ * @param {string} idPreWebsiteTimeLine - The ID of the pre-website timeline.
+ * @return {Promise<void>} - The response from the server.
+ */
 
 export async function delete_timeline(idPreWebsiteTimeLine: string): Promise<void> {
   try {
@@ -31,10 +49,19 @@ export async function delete_timeline(idPreWebsiteTimeLine: string): Promise<voi
   }
 }
 
+/**
+ * @name upload_timeline_file
+ * @category Infrastructure -  HTTP - Services - Timeline
+ *
+ * @param {string} idPreWebsiteTimeLine - The ID of the pre-website timeline.
+ * @param {NewMediaPayloadProps} payload - The payload to upload a file.
+ * @return {Promise<UploadFileResponseProps>} - The response from the server.
+ */
+
 export async function upload_timeline_file(
   idPreWebsiteTimeLine: string,
   payload: NewMediaPayloadProps,
-): Promise<UploadFileResponse> {
+): Promise<UploadFileResponseProps> {
   try {
     const { data: response } = await api.patch(`website/pre/timeLine/file/${idPreWebsiteTimeLine}`, payload.file)
     return response
@@ -43,7 +70,19 @@ export async function upload_timeline_file(
   }
 }
 
-export async function delete_timeline_file(idPreWebsiteTimeLine: string, idFile: string): Promise<DeleteFileResponse> {
+/**
+ * @name delete_timeline_file
+ * @category Infrastructure -  HTTP - Services - Timeline
+ *
+ * @param {string} idPreWebsiteTimeLine - The ID of the pre-website timeline.
+ * @param {string} idFile - The ID of the file to delete.
+ * @return {Promise<DeleteFileResponseProps>} - The response from the server.
+ */
+
+export async function delete_timeline_file(
+  idPreWebsiteTimeLine: string,
+  idFile: string,
+): Promise<DeleteFileResponseProps> {
   try {
     const { data: response } = await api.delete(`website/pre/timeLine/file/${idPreWebsiteTimeLine}/${idFile}`)
     return response
@@ -51,6 +90,14 @@ export async function delete_timeline_file(idPreWebsiteTimeLine: string, idFile:
     throw new Error(error.response.data.message ?? '')
   }
 }
+
+/**
+ * @name find_one_timeline
+ * @category Infrastructure -  HTTP - Services - Timeline
+ *
+ * @param {string} idPreWebsite - The ID of the pre-website.
+ * @return {Promise<FindOneTimelineResponse>} - The response from the server.
+ */
 
 export async function find_one_timeline(idPreWebsite: string): Promise<FindOneTimelineResponse> {
   try {
@@ -61,10 +108,19 @@ export async function find_one_timeline(idPreWebsite: string): Promise<FindOneTi
   }
 }
 
+/**
+ * @name update_timeline
+ * @category Infrastructure -  HTTP - Services - Timeline
+ *
+ * @param {string} idPreWebsiteTimeLine - The ID of the pre-website timeline.
+ * @param {UpdateTimelinePayloadProps} payload - The payload to update a timeline.
+ * @return {Promise<UpdateTimelineResponseProps>} - The response from the server.
+ */
+
 export async function update_timeline(
   idPreWebsiteTimeLine: string,
   payload: UpdateTimelinePayloadProps,
-): Promise<UpdateTimelineResponse> {
+): Promise<UpdateTimelineResponseProps> {
   try {
     const { data: response } = await api.patch(`website/pre/timeLine/update/${idPreWebsiteTimeLine}`, payload)
     return response

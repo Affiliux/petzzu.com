@@ -1,11 +1,16 @@
+'use client'
+
+import React from 'react'
+
 import { Dancing_Script } from 'next/font/google'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { CarouselPhotos } from '../../../components/carousel'
-import { PhotosSliderEnum } from '../../../enums'
-import { getFormattedAge } from '../../../lib/helpers/formatters/birth_date_formatter'
-import { ChildProps, MediaProps } from '../../../typings/child'
+import { ChildProps } from '@/typings/child'
+
+import { CarouselPhotos } from '@/components/carousel'
+
+import { formatAge } from '@/lib/helpers/formatters'
 
 interface PicturesGridProps {
   child: ChildProps
@@ -18,7 +23,7 @@ const dancing = Dancing_Script({
 
 export default function PicturesGrid({ child }: PicturesGridProps) {
   const t = useTranslations()
-  const { value, unit } = getFormattedAge(t, child?.birth_date)
+  const { value, unit } = formatAge(t, child?.birth_date)
 
   const images = child.media || []
 
@@ -59,7 +64,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
       </div>
       {images.length == 1 && (
         <div>
-          <CarouselPhotos images={images} type={PhotosSliderEnum.CARDS} />
+          <CarouselPhotos images={images} />
         </div>
       )}
       {images.length == 2 && (
@@ -155,7 +160,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
       )}
       {images.length == 4 && (
         <div>
-          <CarouselPhotos images={images} type={PhotosSliderEnum.COVERFLOW} />
+          <CarouselPhotos images={images} />
         </div>
       )}
       {images.length == 5 && (

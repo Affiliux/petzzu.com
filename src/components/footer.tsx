@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React from 'react'
@@ -10,8 +8,10 @@ import { useTranslations } from 'next-intl'
 import { useApplication } from '@/contexts/ApplicationContext'
 
 export function Footer() {
+  // hooks
   const t = useTranslations('config')
 
+  // contexts
   const { theme } = useApplication()
 
   return (
@@ -55,7 +55,7 @@ export function Footer() {
       <div className='container flex flex-col-reverse md:flex-row items-center justify-between mt-12 md:mt-8 gap-4'>
         <p className='text-sm text-neutral-500'>{t('footer.copyright')}</p>
 
-        <img src='./pagarme-extend.png' className='h-8 lg:h-6' />
+        <img src='./pagarme-extend.png' alt='pagarme logo' className='h-8 lg:h-6' />
       </div>
     </div>
   )

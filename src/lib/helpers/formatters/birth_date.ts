@@ -1,4 +1,13 @@
-export function getFormattedAge(t: (key: string) => string, birthDate?: string): { value: number; unit: string } {
+/**
+ * @name formatAge
+ * @category Helpers - Formatters
+ *
+ * @param  {?string} birthDate - the birth date to be formatted.
+ * @param  {?function} t - the translation function to be used.
+ * @return { value: number; unit: string } - the formatted age.
+ */
+
+function formatAge(t: (key: string) => string, birthDate?: string): { value: number; unit: string } {
   if (!birthDate) return { value: 0, unit: '' }
 
   const daysOld = Math.floor((new Date().getTime() - new Date(birthDate).getTime()) / (1000 * 60 * 60 * 24))
@@ -14,3 +23,5 @@ export function getFormattedAge(t: (key: string) => string, birthDate?: string):
     unit: `${t('slug.birth_date.year')}${Math.floor(daysOld / 365) !== 1 ? 's' : ''}`,
   }
 }
+
+export default formatAge

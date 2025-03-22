@@ -6,73 +6,81 @@ import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { CreatePrePayloadProps } from '@/typings/create'
+import type { CreatePrePayloadProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 import { useCreate } from '@/contexts/CreateContext'
+import { useTimeline } from '@/contexts/TimelineContext'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
 import { ButtonToTop } from '@/components/button-to-top'
-import { Cookies } from '@/components/cookies'
 import { Steps } from '@/components/steps'
 
-import { useTimeline } from '../../contexts/TimelineContext'
-
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 export default function Page() {
+  // hooks
   const t = useTranslations()
   const router = useRouter()
   const queryParams = useQueryParams()
 
-  const { theme, locale, plans, discount, currency, handleGetPlans } = useApplication()
+  // contexts
+  const { theme, locale, plans, discount, currency, onGetPlans } = useApplication()
   const {
     pre,
     child,
-    song,
     pre_medias,
+    date_show_type,
     plan,
     payment,
-    media_show_type,
-    date_show_type,
     theme_show_type,
     set_pre,
     set_child,
-    set_song,
     set_pre_medias,
+    set_date_show_type,
     set_plan,
     set_payment,
-    set_media_show_type,
-    set_date_show_type,
     set_theme_show_type,
-    handleCreatePre,
-    handleUpdatePre,
-    handleGetPre,
-    handleNewMedia,
-    handleRemoveMedia,
+    onCreatePre,
+    onUpdatePre,
+    onGetPre,
+    onNewMedia,
+    onRemoveMedia,
   } = useCreate()
+  const { onUploadTimelineFile, onDeleteTimelineFile, set_timeline_medias, timeline_medias } = useTimeline()
 
-  const { uploadTimelineFile, deleteTimelineFile, set_timeline_medias, timeline_medias } = useTimeline()
+  // states
+  const [loading, set_loading] = useState<boolean>(false)
+  const [step, set_step] = useState(2)
+  const [has_save, set_has_save] = useState<string | null>(null)
 
+  // states
   const steps = [
     {
       id: 1,
       title: t('steps.step1.title'),
       description: t('steps.step1.description'),
-      checked: !!child.child_name,
+      checked: !!child.child_name && !!child.sex,
       skip: false,
     },
     {
       id: 2,
       title: t('steps.step2.title'),
       description: t('steps.step2.description'),
-      checked: !!child.birth_date && !!child.sex,
+      checked: !!child.birth_date,
       skip: false,
     },
     {
       id: 3,
       title: t('steps.step3.title'),
       description: t('steps.step3.description'),
+      checked: !!pre_medias.length,
+      skip: false,
+    },
+    {
+      id: 4,
+      title: t('steps.step4.title'),
+      description: t('steps.step4.description'),
       checked:
         Array.isArray(child.timeLine) &&
         child.timeLine.length > 0 &&
@@ -86,38 +94,42 @@ export default function Page() {
         ),
       skip: false,
     },
-    // {
-    //   id: 4,
-    //   title: t('steps.step5.title'),
-    //   description: t('steps.step5.description'),
-    //   checked: !!song,
-    //   skip: true,
-    // },
     {
-      id: 4,
-      title: t('steps.step7.title'),
-      description: t('steps.step7.description'),
-      checked:
-        !!plan &&
-        Array.isArray(child.timeLine) &&
-        child.timeLine.length > 0 &&
-        child.timeLine.every(
-          entry =>
-            !!entry.title.trim() &&
-            !!entry.description.trim() &&
-            !!entry.date &&
-            Array.isArray(entry.media) &&
-            entry.media.length > 0,
-        ),
+      id: 5,
+      title: t('steps.step5.title'),
+      description: t('steps.step5.description'),
+      checked: !!plan,
       skip: false,
     },
   ]
 
-  const [loading, set_loading] = useState<boolean>(false)
-  const [step, set_step] = useState(2)
-  const [has_save, set_has_save] = useState<string | null>(null)
+  async function handleGetPre(pre: string) {
+    set_loading(true)
 
-  async function onCancel() {
+    try {
+      await onGetPre(pre)
+    } catch (error: any) {
+      console.error(error)
+
+      set_step(1)
+      set_pre_medias([])
+      set_timeline_medias([])
+      set_pre(null)
+      set_payment(null)
+
+      set_child({} as CreatePrePayloadProps)
+      set_date_show_type(DateShowTypeEnum.DEFAULT)
+
+      set_plan(undefined)
+
+      const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
+      set_plan(find)
+    } finally {
+      set_loading(false)
+    }
+  }
+
+  async function handleCancel() {
     set_loading(true)
 
     set_has_save(null)
@@ -131,17 +143,14 @@ export default function Page() {
       set_payment(null)
 
       set_child({} as CreatePrePayloadProps)
-
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
-      set_song(undefined)
 
-      const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
+      const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
       set_plan(find)
     } catch (error: any) {
       console.error(error)
@@ -153,12 +162,12 @@ export default function Page() {
     }
   }
 
-  async function onContinue() {
+  async function handleContinue() {
     set_loading(true)
 
     try {
       if (has_save) {
-        await onGetPre(has_save)
+        await handleGetPre(has_save)
 
         set_step(1)
         set_has_save(null)
@@ -173,36 +182,7 @@ export default function Page() {
     }
   }
 
-  async function onGetPre(pre: string) {
-    set_loading(true)
-
-    try {
-      await handleGetPre(pre)
-    } catch (error: any) {
-      console.error(error)
-
-      set_step(1)
-      set_pre_medias([])
-      set_timeline_medias([])
-      set_pre(null)
-      set_payment(null)
-
-      set_child({} as CreatePrePayloadProps)
-
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
-      set_date_show_type(DateShowTypeEnum.DEFAULT)
-
-      set_plan(undefined)
-      set_song(undefined)
-
-      const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
-      set_plan(find)
-    } finally {
-      set_loading(false)
-    }
-  }
-
-  async function onCreatePre(child_name: string) {
+  async function handleCreatePre(child_name: string) {
     set_loading(true)
 
     try {
@@ -212,20 +192,17 @@ export default function Page() {
       set_payment(null)
 
       set_child({ ...child, child_name })
-
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
-      set_song(undefined)
 
-      const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
+      const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
       set_plan(find)
 
-      await handleCreatePre({ ...child, child_name: child_name })
+      await onCreatePre({ ...child, child_name: child_name })
     } catch (error: any) {
       console.error(error)
       router.replace('/')
@@ -234,13 +211,12 @@ export default function Page() {
     }
   }
 
-  async function onUpdatePre() {
+  async function handleUpdatePre() {
     try {
       if (!pre) throw new Error('Pre ID not found')
       if (!plan) throw new Error('Please select a plan')
 
-      // const yt_song = plan.sku.includes('pro') && song ? song.url : ''
-      await handleUpdatePre({
+      await onUpdatePre({
         id: pre,
         child_name: child.child_name,
         message: child.message,
@@ -248,10 +224,8 @@ export default function Page() {
         parent_name: child.parent_name,
         sex: child.sex,
         lang: t('config.defaults.country'),
-        // yt_song,
-        imageShowType: media_show_type,
-        dateShowType: date_show_type,
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.YELLOW,
+        dateShowType: date_show_type,
       })
     } catch (error: any) {
       console.error(error)
@@ -260,18 +234,22 @@ export default function Page() {
 
   useEffect(() => {
     if (!!plans.length) {
-      if (plan && plan.sku.includes('basic')) {
-        const find = plans.find(plan => plan.sku.includes(`plan_basic_${currency}`))
+      if (plan && plan.sku.includes('unique')) {
+        const find = plans.find(plan => plan.sku.includes(`plan_unique_${currency}`))
+        set_plan(find)
+      }
+      if (plan && plan.sku.includes('annual')) {
+        const find = plans.find(plan => plan.sku.includes(`plan_annual_${currency}`))
         set_plan(find)
       } else {
-        const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
+        const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
         set_plan(find)
       }
     }
   }, [locale, plans])
 
   useEffect(() => {
-    handleGetPlans()
+    onGetPlans()
   }, [])
 
   useEffect(() => {
@@ -290,17 +268,14 @@ export default function Page() {
       set_payment(null)
 
       set_child({ ...child })
-
-      set_media_show_type(PhotosSliderEnum.COVERFLOW)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
       else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
-      set_song(undefined)
 
-      const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))
+      const find = plans.find(plan => plan.sku.includes(`plan_annual_${currency}`))
       set_plan(find)
     }
   }, [])
@@ -317,27 +292,22 @@ export default function Page() {
         child={child}
         payment={payment}
         medias={pre_medias}
-        timelineMedias={timeline_medias}
-        song={song}
-        mediaShowType={media_show_type}
-        dateShowType={date_show_type}
         themeShowType={theme_show_type}
+        dateShowType={date_show_type}
         plan={plan}
         discount={discount}
         //
         setStep={set_step}
         setPlan={set_plan}
         setChild={set_child}
-        setMediaShowType={set_media_show_type}
-        setDateShowType={set_date_show_type}
         setThemeShowType={set_theme_show_type}
-        setSong={set_song}
+        setDateShowType={set_date_show_type}
         //
-        onUpdate={async () => await onUpdatePre()}
-        onNewMedia={async media => await handleNewMedia({ id: pre!, file: media })}
-        onRemoveMedia={async id => await handleRemoveMedia({ idPreWebsite: pre!, idFile: id })}
-        onNewMediaTimeline={async (idPreTimeline, media) => await uploadTimelineFile(idPreTimeline, media)}
-        onRemoveMediaTimeline={async (idPreTimeline, id) => await deleteTimelineFile(idPreTimeline, id)}
+        onUpdate={async () => await handleUpdatePre()}
+        onNewMedia={async media => await onNewMedia({ id: pre!, file: media })}
+        onRemoveMedia={async id => await onRemoveMedia({ idPreWebsite: pre!, idFile: id })}
+        onNewMediaTimeline={async (idPreTimeline, media) => await onUploadTimelineFile(idPreTimeline, media)}
+        onRemoveMediaTimeline={async (idPreTimeline, id) => await onDeleteTimelineFile(idPreTimeline, id)}
         onClose={() => {
           set_pre(null)
           set_payment(null)
@@ -345,25 +315,24 @@ export default function Page() {
           set_timeline_medias([])
 
           set_child({} as CreatePrePayloadProps)
-          set_song(undefined)
 
           router.replace('/')
         }}
-        onCreatePre={onCreatePre}
+        onCreatePre={handleCreatePre}
       />
 
       {loading && (
-        <div className='h-screen w-full absolute top-0 left-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[9999]'>
-          <Loader2 size={56} className='animate-spin' />
+        <div className='h-screen w-full fixed top-0 left-0 bg-neutra-900/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
+          <Loader2 size={56} className='animate-spin text-theme-900' />
         </div>
       )}
 
       {!!has_save && !loading && (
-        <div className='h-screen w-full absolute top-0 left-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[9999]'>
+        <div className='h-screen w-full fixed top-0 left-0 bg-neutra-900/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
           <div className='container max-w-lg flex flex-col items-center justify-center gap-8'>
             <div>
-              <h1 className='text-white text-2xl font-bold text-center'>{t('steps.continue.title')}</h1>
-              <p className='text-white text-sm text-center'>{t('steps.continue.description')}</p>
+              <h1 className='text-neutral-900 text-2xl font-bold text-center'>{t('steps.continue.title')}</h1>
+              <p className='text-muted-foreground text-sm text-center'>{t('steps.continue.description')}</p>
             </div>
 
             <div className='flex flex-col lg:flex-row items-center gap-4 w-full'>
@@ -371,14 +340,14 @@ export default function Page() {
                 type='button'
                 onClick={e => {
                   e.preventDefault()
-                  onCancel()
+                  handleCancel()
                 }}
                 disabled={loading}
-                className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
+                className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
                   loading ? 'opacity-50' : ''
                 }`}
               >
-                <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+                <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
                   {t('steps.continue.cancel')}
                 </span>
               </button>
@@ -386,14 +355,14 @@ export default function Page() {
                 type='button'
                 onClick={e => {
                   e.preventDefault()
-                  onContinue()
+                  handleContinue()
                 }}
                 disabled={loading}
-                className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
+                className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
                   loading ? 'opacity-50' : ''
                 }`}
               >
-                <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+                <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
                   {t('steps.continue.continue')}
                 </span>
               </button>
@@ -402,7 +371,6 @@ export default function Page() {
         </div>
       )}
 
-      <Cookies />
       <ButtonToTop />
     </>
   )

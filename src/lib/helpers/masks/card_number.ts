@@ -1,5 +1,6 @@
 /**
- * ? Interface mask for card number
+ * @name maskCardNumber
+ * @category Helpers - Masks
  *
  * @param  {?string} card_number - the card number to be masked.
  * @return string

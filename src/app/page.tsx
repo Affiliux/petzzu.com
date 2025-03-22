@@ -3,25 +3,25 @@
 import React from 'react'
 
 import { Loader2 } from 'lucide-react'
-import dynamic from 'next/dynamic'
 
 import { useApplication } from '@/contexts/ApplicationContext'
 
-import { UtmifyRedirect } from '@/components/utmify'
+import { ButtonToTop } from '@/components/button-to-top'
+import { Cookies } from '@/components/cookies'
+import { Faq } from '@/components/faq'
+import { Features } from '@/components/features'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { Hero } from '@/components/hero'
+import { HowWork } from '@/components/how-work'
+import { Plans } from '@/components/plans'
+import { Testimonials } from '@/components/testimonials'
+import { Spotlight } from '@/components/ui/spotlight-new'
 
-const ButtonToTop = dynamic(() => import('@/components/button-to-top').then(mod => mod.ButtonToTop), { ssr: false })
-const Cookies = dynamic(() => import('@/components/cookies').then(mod => mod.Cookies), { ssr: false })
-const Faq = dynamic(() => import('@/components/faq').then(mod => mod.Faq), { ssr: false })
-const Features = dynamic(() => import('@/components/features').then(mod => mod.Features), { ssr: false })
-const Header = dynamic(() => import('@/components/header').then(mod => mod.Header), { ssr: false })
-const Footer = dynamic(() => import('@/components/footer').then(mod => mod.Footer), { ssr: false })
-const Hero = dynamic(() => import('@/components/hero').then(mod => mod.Hero), { ssr: false })
-const HowWork = dynamic(() => import('@/components/how-work').then(mod => mod.HowWork), { ssr: false })
-const Plans = dynamic(() => import('@/components/plans').then(mod => mod.Plans), { ssr: false })
-const Testimonials = dynamic(() => import('@/components/testimonials').then(mod => mod.Testimonials), { ssr: false })
-const Spotlight = dynamic(() => import('@/components/ui/spotlight-new').then(mod => mod.Spotlight), { ssr: false })
+export const runtime = 'edge'
 
-export default function Home() {
+export default function Page() {
+  // contexts
   const { loading_application } = useApplication()
 
   return (
@@ -33,7 +33,7 @@ export default function Home() {
       ) : (
         <>
           <div className='w-screen h-full overflow-x-hidden' id='start'>
-            <div className='h-[50rem] bg-transparent bg-grid-neutral-200/60 relative flex items-center justify-center'>
+            <div className='h-[50rem] bg-transparent bg-grid-neutral-200/40 relative flex items-center justify-center'>
               {/* Radial gradient for the container to give a faded look */}
               <div className='absolute pointer-events-none inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]'></div>
 
@@ -63,8 +63,6 @@ export default function Home() {
           <ButtonToTop />
         </>
       )}
-
-      <UtmifyRedirect redirectUrl='https://babyzzu.com' />
     </>
   )
 }

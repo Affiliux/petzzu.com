@@ -8,15 +8,13 @@ import { useApplication } from '@/contexts/ApplicationContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { CardSpotlight } from './ui/card-spotlight'
-
 export function Plans() {
   const t = useTranslations('')
 
   const { discount, currency, plans } = useApplication()
 
-  const format_intl_currency = currency ?? 'BRL'
-  const format_intl_locale = t('config.defaults.country')
+  const FORMAT_INTL_CURRENCY = currency ?? 'BRL'
+  const FORMAT_INTL_LOCALE = t('config.defaults.country')
 
   function getDescription(planSku: string) {
     const descriptions = t(`pages.home.plans.${planSku.split('_')[1]}.description`).split('|')
@@ -54,19 +52,19 @@ export function Plans() {
         <p className='text-muted-foreground mt-2'>{t('pages.home.plans.description')}</p>
       </div>
 
-      <div className='grid gap-6 md:grid-cols-3'>
+      <div id='plans' className='grid gap-6 md:grid-cols-3'>
         {plans &&
           plans.map(plan =>
-            plan.currency.includes(format_intl_currency) ? (
+            plan.currency.includes(FORMAT_INTL_CURRENCY) ? (
               <Card key={plan.sku} className='flex flex-col'>
                 <CardHeader>
                   <CardTitle>{t(`pages.home.plans.${plan.sku.split('_')[1]}.title`)}</CardTitle>
                   <CardDescription>{t(`pages.home.plans.${plan.sku.split('_')[1]}.counter`)}</CardDescription>
                   <div className='mt-4'>
                     <span className='text-3xl font-bold'>
-                      {new Intl.NumberFormat(format_intl_locale, {
+                      {new Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                         style: 'currency',
-                        currency: format_intl_currency,
+                        currency: FORMAT_INTL_CURRENCY,
                       }).format(
                         discount
                           ? plan.price - (plan.sku.includes('basic') ? discount.discount_basic : discount.discount_pro)

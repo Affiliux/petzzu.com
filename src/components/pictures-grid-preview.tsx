@@ -1,21 +1,23 @@
+'use client'
+
+import React from 'react'
+
 import Image from 'next/image'
 
+import type { MediaProps } from '@/typings/child'
+
 import { CarouselPhotos } from './carousel'
-import { PhotosSliderEnum } from '../enums'
-import { MediaProps } from '../typings/child'
-import { CreatePrePayloadProps } from '../typings/create'
 
 interface PicturesGridProps {
-  child: CreatePrePayloadProps
   images?: MediaProps[]
 }
 
-export default function PicturesGridPreview({ child, images }: PicturesGridProps) {
+export default function PicturesGridPreview({ images }: PicturesGridProps) {
   return (
     <div className='relative w-full max-w-2xl mx-auto px-6'>
       {images.length == 1 && (
         <div>
-          <CarouselPhotos images={images} type={PhotosSliderEnum.CARDS} />
+          <CarouselPhotos images={images} />
         </div>
       )}
       {images.length == 2 && (
@@ -111,7 +113,7 @@ export default function PicturesGridPreview({ child, images }: PicturesGridProps
       )}
       {images.length == 4 && (
         <div>
-          <CarouselPhotos images={images} type={PhotosSliderEnum.COVERFLOW} />
+          <CarouselPhotos images={images} />
         </div>
       )}
       {images.length == 5 && (

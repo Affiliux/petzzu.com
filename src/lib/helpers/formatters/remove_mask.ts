@@ -1,5 +1,6 @@
 /**
- * ? Interface to remove mask
+ * @name removeMask
+ * @category Helpers - Formatters
  *
  * @param  {?string} text - to use for formatting.
  * @return string

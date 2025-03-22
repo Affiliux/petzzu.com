@@ -11,8 +11,10 @@ import { HoverBorderGradient } from './ui/hover-border-gradient'
 import { cn } from '@/lib/utils'
 
 export function HowWork() {
+  // hooks
   const t = useTranslations('pages.home')
 
+  // variables
   const features = [
     {
       title: t('how-work.steps.1.title'),
@@ -40,7 +42,7 @@ export function HowWork() {
     <div className='pt-40 lg:pt-8 pb-12 flex container flex-col items-center justify-center'>
       <HoverBorderGradient
         containerClassName='rounded-full'
-        className='bg-white text-black text-xs flex items-center space-x-2'
+        className='bg-white text-neutral-900 text-xs flex items-center space-x-2'
       >
         <span> {t('how-work.subtitle')}</span>
       </HoverBorderGradient>
@@ -58,8 +60,8 @@ export function HowWork() {
 
       <div className='flex flex-col lg:flex-row items-center justify-center gap-16 mt-12 lg:mt-0'>
         <div>
-          <p className='text-black font-bold text-3xl lg:text-4xl lg:max-w-md'>
-            {t('how-work.example.title.1')} <span className='text-theme-500'>{t('how-work.example.title.2')}</span>{' '}
+          <p className='text-neutral-900 font-bold text-3xl lg:text-4xl lg:max-w-md'>
+            {t('how-work.example.title.1')} <span className='text-theme-600'>{t('how-work.example.title.2')}</span>{' '}
             {t('how-work.example.title.3')}
           </p>
         </div>
