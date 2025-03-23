@@ -84,11 +84,7 @@ export default function Page() {
         Array.isArray(child.timeLine) &&
         child.timeLine.length > 0 &&
         child.timeLine.every(
-          entry =>
-            !!entry.title.trim() &&
-            !!entry.date &&
-            Array.isArray(entry.media) &&
-            entry.media.length > 0,
+          entry => !!entry.title.trim() && !!entry.date && Array.isArray(entry.media) && entry.media.length > 0,
         ),
       skip: false,
     },

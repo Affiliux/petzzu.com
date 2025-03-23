@@ -1,7 +1,7 @@
 import type { MediaProps, PaymentProps } from './child'
 import type { TimelineEntryProps } from './timeline'
 
-import { DateShowTypeEnum,ThemeShowTypeEnum } from '@/enums'
+import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 // Create pre with the following properties:
 export type CreatePreProps = {

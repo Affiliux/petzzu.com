@@ -15,7 +15,6 @@ interface PicturesGridProps {
 }
 
 export default function PicturesGridPreview({ images = [], selectedPlan }: PicturesGridProps) {
-
   //variables
   const FILTERED_IMAGES = selectedPlan?.sku === 'plan_unique_brl' ? images.slice(0, 3) : images
 
