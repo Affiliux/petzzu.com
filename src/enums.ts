@@ -8,8 +8,11 @@ export enum PaymentMethodsEnum {
 export enum ThemeShowTypeEnum {
   BLUE = 'blue',
   PINK = 'pink',
-  YELLOW = 'yellow',
+  GOLD = 'gold',
   GREEN = 'green',
+  LILAC = 'lilac',
+  RED = 'red',
+  GRAY = 'gray',
 }
 
 export enum SexEnum {

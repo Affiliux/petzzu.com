@@ -11,8 +11,6 @@ import { useApplication } from '@/contexts/ApplicationContext'
 import { useCreate } from '@/contexts/CreateContext'
 import { useTimeline } from '@/contexts/TimelineContext'
 
-import { useQueryParams } from '@/hooks/use-query-params'
-
 import { ButtonToTop } from '@/components/button-to-top'
 import { Steps } from '@/components/steps'
 
@@ -22,7 +20,6 @@ export default function Page() {
   // hooks
   const t = useTranslations()
   const router = useRouter()
-  const queryParams = useQueryParams()
 
   // contexts
   const { theme, locale, plans, discount, currency, onGetPlans } = useApplication()
@@ -145,9 +142,6 @@ export default function Page() {
       set_child({} as CreatePrePayloadProps)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
-      if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
-      else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
-
       set_plan(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
@@ -194,9 +188,6 @@ export default function Page() {
       set_child({ ...child, child_name })
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
-      if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
-      else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
-
       set_plan(undefined)
 
       const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
@@ -224,7 +215,7 @@ export default function Page() {
         parent_name: child.parent_name,
         sex: child.sex,
         lang: t('config.defaults.country'),
-        themeShowType: theme_show_type ?? ThemeShowTypeEnum.YELLOW,
+        themeShowType: theme_show_type ?? ThemeShowTypeEnum.BLUE,
         dateShowType: date_show_type,
       })
     } catch (error: any) {
@@ -269,9 +260,6 @@ export default function Page() {
 
       set_child({ ...child })
       set_date_show_type(DateShowTypeEnum.DEFAULT)
-
-      if (queryParams?.theme) set_theme_show_type(queryParams?.theme as ThemeShowTypeEnum)
-      else set_theme_show_type(ThemeShowTypeEnum.YELLOW)
 
       set_plan(undefined)
 
@@ -322,13 +310,13 @@ export default function Page() {
       />
 
       {loading && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutra-900/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
+        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
           <Loader2 size={56} className='animate-spin text-theme-900' />
         </div>
       )}
 
       {!!has_save && !loading && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutra-900/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
+        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
           <div className='container max-w-lg flex flex-col items-center justify-center gap-8'>
             <div>
               <h1 className='text-neutral-900 text-2xl font-bold text-center'>{t('steps.continue.title')}</h1>

@@ -9,7 +9,7 @@ import { useQueryParams } from '@/hooks/use-query-params'
 import type { ApplicationContextType, ApplicationProviderProps } from './types'
 import { locales } from '../../i18n'
 
-import { NEXT_CURRENCY, NEXT_LOCALE } from '@/constants'
+import { NEXT_CURRENCY, NEXT_LOCALE, NEXT_THEME, THEMES } from '@/constants'
 import { ThemeShowTypeEnum } from '@/enums'
 import { delete_cookie, set_cookie } from '@/infrastructure/cache/cookies'
 import { delete_storage, set_storage } from '@/infrastructure/cache/storage'
@@ -25,61 +25,13 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   const [client, set_client] = useState<boolean>(false)
   const [loading_application, set_loading_application] = useState<boolean>(false)
 
-  const [locale, set_locale] = useState<string>('')
-  const [currency, set_currency] = useState<string>('')
-  const [theme, set_theme] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.YELLOW)
+  const [locale, set_locale] = useState<string>('pt')
+  const [currency, set_currency] = useState<string>('brl')
+  const [theme, set_theme] = useState<ThemeShowTypeEnum>()
 
   const [plans, set_plans] = useState<PlanProps[]>([])
   const [order_bumps, set_order_bumps] = useState<OrderBumpProps[]>([])
   const [discount, set_discount] = useState<DiscountProps | null>(null)
-
-  // variables
-  const themes = {
-    blue: {
-      '--theme-100': '#D6E2FF',
-      '--theme-200': '#B8CDFF',
-      '--theme-300': '#9AB8FF',
-      '--theme-400': '#7DA2FF',
-      '--theme-500': '#5F8DFF',
-      '--theme-600': '#4178FF',
-      '--theme-700': '#2363FF',
-      '--theme-800': '#054EFF',
-      '--theme-900': '#0039E6',
-    },
-    pink: {
-      '--theme-100': '#FDD0E6',
-      '--theme-200': '#FBB8DB',
-      '--theme-300': '#F9A0D0',
-      '--theme-400': '#F789C5',
-      '--theme-500': '#F571BA',
-      '--theme-600': '#F35AAE',
-      '--theme-700': '#F142A3',
-      '--theme-800': '#EF2A98',
-      '--theme-900': '#ED138D',
-    },
-    yellow: {
-      '--theme-100': ' #FFF9DB',
-      '--theme-200': ' #FFF3C2',
-      '--theme-300': ' #FFEDAA',
-      '--theme-400': ' #FFE890',
-      '--theme-500': ' #FFE277',
-      '--theme-600': ' #FFDC5E',
-      '--theme-700': ' #FFD545',
-      '--theme-800': ' #FFCF2C',
-      '--theme-900': ' #FFC812',
-    },
-    green: {
-      '--theme-100': '#D7E5CA',
-      '--theme-200': '#C1D8B0',
-      '--theme-300': '#ABC996',
-      '--theme-400': '#95BA7C',
-      '--theme-500': '#7FAC62',
-      '--theme-600': '#699E48',
-      '--theme-700': '#53802E',
-      '--theme-800': '#3D6214',
-      '--theme-900': '#274400',
-    },
-  }
 
   async function onChangeLocale(new_locale: string): Promise<void> {
     try {
@@ -103,6 +55,17 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
       }
 
       set_currency(new_currency)
+    } catch (error: any) {
+      console.error(error.message)
+    }
+  }
+
+  async function onChangeTheme(new_theme: ThemeShowTypeEnum): Promise<void> {
+    try {
+      await set_cookie(NEXT_THEME, new_theme)
+
+      set_storage(NEXT_THEME, new_theme)
+      set_theme(new_theme)
     } catch (error: any) {
       console.error(error.message)
     }
@@ -165,15 +128,23 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }, [queryParams?.dc])
 
   useEffect(() => {
-    const root = document.documentElement
-    Object.entries(themes[theme]).forEach(([key, value]) => {
-      root.style.setProperty(key, value as string)
-    })
-  }, [theme])
-
-  useEffect(() => {
     onInitLocale()
   }, [queryParams?.lang])
+
+  useEffect(() => {
+    const saved_theme = localStorage.getItem(NEXT_THEME)
+
+    if (theme) {
+      const root = document.documentElement
+      Object.entries(THEMES[theme]).forEach(([key, value]) => {
+        root.style.setProperty(key, value as string)
+      })
+    } else if (saved_theme) {
+      onChangeTheme(saved_theme as ThemeShowTypeEnum)
+    } else {
+      onChangeTheme(ThemeShowTypeEnum.BLUE)
+    }
+  }, [theme])
 
   useEffect(() => {
     const saved_currency = localStorage.getItem(NEXT_CURRENCY)
@@ -207,6 +178,7 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
 
         onChangeLocale,
         onChangeCurrency,
+        onChangeTheme,
         onGetPlans,
         onGetDiscount,
       }}

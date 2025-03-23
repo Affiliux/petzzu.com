@@ -42,7 +42,7 @@ export function FloatingBubbles() {
   }, [])
 
   return (
-    <div className='absolute inset-0 pointer-events-none'>
+    <div className='absolute inset-0 pointer-events-none z-30'>
       <svg className='w-full h-full'>
         <title>Floating Bubbles</title>
         {bubbles.map(bubble => (

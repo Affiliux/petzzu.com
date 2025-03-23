@@ -215,9 +215,9 @@ export default function Page() {
     }
   }, [payment])
 
-  // useEffect(() => {
-  //   if (!pre || !plan || !currency) router.push('/')
-  // }, [pre, plan, currency])
+  useEffect(() => {
+    if (!pre || !plan || !currency) router.push('/')
+  }, [pre, plan, currency])
 
   return (
     <>
@@ -225,7 +225,7 @@ export default function Page() {
         <>
           {/* Product Information */}
           <div className='space-y-6'>
-            <Card className='border-neutral-200/60'>
+            <Card className='border-neutral-200/60 shadow-none hover:shadow-lg hover:shadow-neutral-200/50'>
               <CardHeader>
                 <CardTitle>{t('checkout.order.title')}</CardTitle>
                 <CardDescription>{t('checkout.order.description')}</CardDescription>
@@ -438,7 +438,7 @@ export default function Page() {
 
           {/* Payment Section */}
           <div>
-            <Card className='border-neutral-200/60'>
+            <Card className='border-neutral-200/60 shadow-none hover:shadow-lg hover:shadow-neutral-200/50'>
               <CardHeader>
                 <CardTitle className='text-neutral-900'>{t('checkout.payment.title')}</CardTitle>
                 <CardDescription className='text-muted-foreground'>{t('checkout.payment.description')}</CardDescription>
@@ -558,8 +558,8 @@ export default function Page() {
       )}
 
       {loading && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center z-[9999]'>
-          <Loader2 size={56} className='animate-spin' />
+        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex flex-col items-center justify-center z-[9999]'>
+          <Loader2 size={56} className='animate-spin text-theme-900' />
         </div>
       )}
     </>

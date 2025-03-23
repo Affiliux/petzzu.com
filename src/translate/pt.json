@@ -28,7 +28,11 @@
         "title": "Selecionar Tema",
         "blue": "Azul",
         "pink": "Rosa",
-        "yellow": "Amarelo"
+        "gold": "Dourado",
+        "green": "Verde",
+        "lilac": "Lilás",
+        "red": "Vermelho",
+        "gray": "Cinza"
       }
     },
     "footer": {
@@ -255,22 +259,58 @@
           "title": "Plano Básico",
           "counter": "Compra somente uma vez",
           "price_recurrence": "/uma vez",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 2 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Duração de 1 ano | Edições limitadas para manter tudo atualizado | Edição de página já criada | Possui vídeo | Curiosidades sobre o bebê"
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 3 fotos na capa",
+            "6": "Máximo de 2 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Não possui edições",
+            "10": "Para sempre!|Duração de 1 ano",
+            "11": "Suporte por 12 horas"
+          }
         },
         "month": {
           "title": "Mensal",
           "counter": "Assinatura mensal",
           "price_recurrence": "/por mes",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração de 1 ano | Curiosidades sobre o bebê"
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 6 fotos na capa",
+            "6": "Máximo de 4 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
+            "10": "Para sempre!|Ativo enquanto assinatura ativa",
+            "11": "Suporte por 12 horas"
+          }
         },
         "annual": {
           "title": "Anual",
-          "counter": "Contador em tempo real",
+          "counter": "Assinatura anual",
           "price_recurrence": "/por ano",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração eterna | Curiosidades sobre o bebê | Link VIP Compartilhável (Em Breve) | Linha do Tempo Animada (Em Breve) | Memórias Destacadas (Em Breve) | Temas e Personalizações Avançadas (Em Breve)   "
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 6 fotos na capa",
+            "6": "Máximo de 4 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
+            "10": "Duração para sempre!",
+            "11": "Suporte por 12 horas"
+          }
         },
         "recommended": "Recomendado",
-        "button": "Surpreenda agora"
+        "button": "Eternize agora"
       },
       "features": {
         "title": "Vários Recursos",
@@ -580,6 +620,7 @@
           }
         }
       },
+      "skip": "Pular etapa",
       "back": "Voltar etapa",
       "button": "Próxima etapa"
     },
@@ -600,11 +641,10 @@
             "6": "Máximo de 2 fotos por lembrança",
             "7": "QRCode exclusivo para acesso fácil",
             "8": "URL personalizada",
-            "9": "Edições ilimitadas!",
-            "10": "Para sempre!",
+            "9": "Edições ilimitadas!|Não possui edições",
+            "10": "Para sempre!|Duração de 1 ano",
             "11": "Suporte por 12 horas"
-          },
-          "observation": "Atenção: O plano básico é uma compra única e não possui edições ilimitadas. Você pode editar a página, mas não poderá adicionar novas fotos ou lembranças. O plano básico tem duração de 1 ano."
+          }
         },
         "month": {
           "title": "Mensal",
@@ -622,8 +662,7 @@
             "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
             "10": "Para sempre!|Ativo enquanto assinatura ativa",
             "11": "Suporte por 12 horas"
-          },
-          "observation": "Atenção: O plano mensal é uma assinatura mensal e possui edições ilimitadas enquanto assinatura estiver ativa, podendo editar como quiser."
+          }
         },
         "annual": {
           "title": "Anual",
@@ -638,11 +677,10 @@
             "6": "Máximo de 4 fotos por lembrança",
             "7": "QRCode exclusivo para acesso fácil",
             "8": "URL personalizada",
-            "9": "Edições ilimitadas!",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
             "10": "Duração para sempre!",
             "11": "Suporte por 12 horas"
-          },
-          "observation": "Atenção: O plano anual é uma assinatura anual e possui edições ilimitadas enquanto assinatura estiver ativa, podendo editar como quiser."
+          }
         }
       },
       "recommended": "Recomendado",
@@ -667,15 +705,15 @@
       "plans": {
         "unique": {
           "title": "Plano Básico",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 2 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Duração de 1 ano | Edições limitadas para manter tudo atualizado | Edição de página já criada | Possui vídeo | Curiosidades sobre o bebê"
+          "description": "Plano básico com pagamento único, porem não possui edições e dura 1 ano."
         },
         "month": {
           "title": "Mensal",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração de 1 ano | Curiosidades sobre o bebê"
+          "description": "Plano mensal com pagamento mensal, possui edições ilimitadas e dura enquanto a assinatura estiver ativa."
         },
         "annual": {
           "title": "Anual",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração eterna | Curiosidades sobre o bebê"
+          "description": "Plano anual com pagamento anual, possui edições ilimitadas enquanto a assinatura estiver ativa e dura para sempre."
         }
       },
       "order-bumps": {

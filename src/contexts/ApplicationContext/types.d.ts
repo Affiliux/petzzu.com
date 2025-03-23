@@ -29,6 +29,7 @@ export type ApplicationContextType = {
   //
   onChangeLocale: (locale: string) => Promise<void>
   onChangeCurrency: (currency: string, save?: boolean) => Promise<void>
+  onChangeTheme: (theme: ThemeShowTypeEnum) => Promise<void>
   onGetPlans: () => Promise<void>
   onGetDiscount: (name: string) => Promise<void>
 }
