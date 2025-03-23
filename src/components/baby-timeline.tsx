@@ -15,7 +15,7 @@ export function BabyTimeline({ timeline }) {
   const sortedTimeline = timeline?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   const data = sortedTimeline?.map(entry => {
-        const { day, month, year } = formatDate(entry.date)
+    const { day, month, year } = formatDate(entry.date)
 
     return {
       title: { day, month, year },
