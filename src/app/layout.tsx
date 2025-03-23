@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Metadata, Viewport } from 'next'
 
-import Script from 'next/script'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { GoogleTagManager } from '@next/third-parties/google'
 
 import { Providers } from '@/contexts'
 
+import { CloudflareAnalytics } from '@/components/cloud-flare'
 import { Toaster } from '@/components/ui/toaster'
 
 import './globals.css'
@@ -53,9 +53,13 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages()
 
+  const GTM_ID = process.env.NEXT_PUBLIC_TAG_MANAGER_ID
+  const CLOUD_FLARE_ANALYTICS_ID = process.env.NEXT_PUBLIC_CLOUD_FLARE_ANALYTICS_ID
+
   return (
     <html lang={locale} className='light scroll-smooth' data-color-scheme='light' prefers-color-scheme='light'>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_TAG_MANAGER_ID ?? ''} />
+      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
+      {CLOUD_FLARE_ANALYTICS_ID && <CloudflareAnalytics token={CLOUD_FLARE_ANALYTICS_ID} />}
 
       <NextIntlClientProvider messages={messages}>
         <Providers>
@@ -66,7 +70,6 @@ export default async function RootLayout({
             {children}
 
             <Toaster />
-            {/* <Script src='https://cdn.utmify.com.br/scripts/utms/latest.js' data-utmify-prevent-subids async defer /> */}
           </body>
         </Providers>
       </NextIntlClientProvider>

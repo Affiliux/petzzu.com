@@ -1,8 +1,8 @@
 // Definition: Child types
 
-import { TimelineEntry } from '@/typings/timeline'
+import type { TimelineEntryProps } from '@/typings/timeline'
 
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { BackgroundAnimationEnum, DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 // Payment Props with the following properties:
 export type PaymentProps = {
@@ -30,7 +30,7 @@ export type ChildProps = {
   sex: string
   birth_date: string
   media: MediaProps[]
-  timeLine: TimelineEntry[]
+  timeLine: TimelineEntryProps[]
   isActive: boolean
   inactiveReason: string
   qrCodeUrl: string
@@ -38,7 +38,6 @@ export type ChildProps = {
   lang: string
   backgroundAnimation: BackgroundAnimationEnum
   backgroundEmojis?: string
-  imageShowType: PhotosSliderEnum
   dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum
   createdAt: string

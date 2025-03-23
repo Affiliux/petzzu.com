@@ -49,25 +49,6 @@ export interface StepsProps {
   skip: boolean
 }
 
-// YouTube Props with the following properties:
-export interface YouTubeVideoProps {
-  id: string
-  title: string
-  thumbnail: string
-  likes: string
-  views: string
-  url: string
-  durationFormatted: string
-}
-
-// Background Props with the following properties:
-export interface BackgroundAnimationProps {
-  id: string
-  name: string
-  pro: boolean
-  component: string
-}
-
 // Payment form Props with the following properties:
 export interface PaymentFormProps {
   method: string
@@ -76,4 +57,17 @@ export interface PaymentFormProps {
   name?: string
   document?: string
   cardToken?: string
+}
+
+export type OrderBumpProps = {
+  id: string
+  title: string
+  description: string
+  price: number
+  imageUrl: string
+  imageKey: string
+}
+
+export interface GetOrderBumpResponseProps {
+  orderBumps: OrderBumpProps[]
 }

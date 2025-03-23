@@ -6,15 +6,33 @@
     "skip": "Pular etapa",
     "header": {
       "nav": {
+        "title": "Menu",
+        "home": "Início",
         "plans": "Planos",
-        "affiliate": "Programa de afiliados",
-        "badge": "Em breve"
+        "faq": "F.A.Q",
+        "affiliate": "Programa de afiliados"
+      },
+      "account": {
+        "title": "Minha conta",
+        "my-pages": "Minhas páginas",
+        "logout": "Sair"
       },
       "languages": {
+        "title": "Selecionar Idioma",
         "pt": "Português",
-        "en": "Inglês",
-        "es": "Espanhol",
-        "de": "Alemão"
+        "en": "English",
+        "es": "Español",
+        "de": "Deutsch"
+      },
+      "themes": {
+        "title": "Selecionar Tema",
+        "blue": "Azul",
+        "pink": "Rosa",
+        "gold": "Dourado",
+        "green": "Verde",
+        "lilac": "Lilás",
+        "red": "Vermelho",
+        "gray": "Cinza"
       }
     },
     "footer": {
@@ -46,7 +64,6 @@
     "default": {
       "awaiting": "Esperando o grande dia!",
       "together": "Em nossas vidas há",
-      "surprise": "Surpresaa!",
       "years": "anos",
       "months": "meses",
       "days": "dias",
@@ -56,15 +73,6 @@
       "mili": "milissegundos",
       "of": "de",
       "since": "Nasceu dia"
-    },
-    "netflix": {
-      "since": "Estreou em",
-      "of": "de",
-      "top-10": "Em alta no momento",
-      "play": "Reproduzir",
-      "pause": "Pausar",
-      "favorite": "Favorito",
-      "ep-title": "Melhores episódios"
     }
   },
   "pages": {
@@ -164,6 +172,7 @@
       },
       "faq": {
         "title": "Perguntas Frequentes",
+        "contact": "Dúvidas? Entre em contato por aqui",
         "description": "Aqui estão algumas perguntas frequentes para ajudar você a entender melhor a Babyzzu. Caso tenha alguma dúvida, entre em contato conosco.",
         "1": {
           "question": "O que é a Babyzzu?",
@@ -250,22 +259,58 @@
           "title": "Plano Básico",
           "counter": "Compra somente uma vez",
           "price_recurrence": "/uma vez",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 2 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Duração de 1 ano | Edições limitadas para manter tudo atualizado | Edição de página já criada | Possui vídeo | Curiosidades sobre o bebê"
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 3 fotos na capa",
+            "6": "Máximo de 2 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Não possui edições",
+            "10": "Para sempre!|Duração de 1 ano",
+            "11": "Suporte por 12 horas"
+          }
         },
         "month": {
           "title": "Mensal",
           "counter": "Assinatura mensal",
           "price_recurrence": "/por mes",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração de 1 ano | Curiosidades sobre o bebê"
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 6 fotos na capa",
+            "6": "Máximo de 4 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
+            "10": "Para sempre!|Ativo enquanto assinatura ativa",
+            "11": "Suporte por 12 horas"
+          }
         },
         "annual": {
           "title": "Anual",
-          "counter": "Contador em tempo real",
+          "counter": "Assinatura anual",
           "price_recurrence": "/por ano",
-          "description": "Linha do tempo do crescimento do bebê | Contador em tempo real do desenvolvimento | Data de nascimento personalizada | QRCode exclusivo para acesso fácil | Imagens para cada Mês | Máximo de 4 imagens para cada fase | URL personalizada | Fundo Colorido | Suporte por 12 horas para qualquer dúvida | Edições limitadas para manter tudo atualizado | Adicionar ou remover fotos quando quiser | Painel de edição para personalizar cada detalhe | Possui vídeo | Duração eterna | Curiosidades sobre o bebê | Link VIP Compartilhável (Em Breve) | Linha do Tempo Animada (Em Breve) | Memórias Destacadas (Em Breve) | Temas e Personalizações Avançadas (Em Breve)   "
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 6 fotos na capa",
+            "6": "Máximo de 4 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
+            "10": "Duração para sempre!",
+            "11": "Suporte por 12 horas"
+          }
         },
         "recommended": "Recomendado",
-        "button": "Surpreenda agora"
+        "button": "Eternize agora"
       },
       "features": {
         "title": "Vários Recursos",
@@ -368,6 +413,106 @@
         "contact_title": "10. Contato",
         "contact": "Se tiver dúvidas sobre os Termos de Uso, entre em contato conosco pelo email: contact@babyzzu.com"
       }
+    },
+    "auth": {
+      "request": {
+        "title": "Acessar sua conta",
+        "description": "Digite seu e-mail para receber um código de validação e acessar sua conta.",
+        "form": {
+          "email": {
+            "label": "E-mail",
+            "placeholder": "seu@email.com",
+            "validation": {
+              "invalid": "E-mail inválido",
+              "required": "E-mail é obrigatório"
+            }
+          },
+          "toast": {
+            "title": {
+              "success": "Sucesso Uhuul!",
+              "error": "Ocorreu um erro!"
+            },
+            "codes": {
+              "500": "Erro interno do servidor, tente novamente mais tarde",
+              "400": "Essa ação não é permitida",
+              "404": "Não encontramos nenhuma conta com esse e-mail"
+            }
+          },
+          "submit": "Enviar código"
+        }
+      },
+      "confirm": {
+        "title": "Código de validação",
+        "description": "Digite o código de validação enviado para o seu e-mail ou",
+        "form": {
+          "code": {
+            "label": "Código de verificação",
+            "placeholder": "000000",
+            "validation": {
+              "invalid": "Código inválido",
+              "required": "Código é obrigatório"
+            }
+          },
+          "toast": {
+            "title": {
+              "success": "Sucesso Uhuul!",
+              "error": "Ocorreu um erro!"
+            },
+            "codes": {
+              "500": "Erro interno do servidor, tente novamente mais tarde",
+              "400": "Essa ação não é permitida",
+              "404": "Código inválido ou não existe"
+            }
+          },
+
+          "request": "clique aqui para voltar",
+          "resend": "Reenviar código",
+          "submit": "Validar código"
+        }
+      }
+    },
+    "account": {
+      "pages": {
+        "title": "Minhas Páginas",
+        "description": "Aqui estão todas as páginas personalizadas que você criou. Você pode visualizar, editar ou desativar.",
+        "page-card": {
+          "created-at": "Criado em",
+          "status": {
+            "active": "Ativo",
+            "inactive": "Inativo",
+            "pending": "Aguardando pagamento"
+          },
+          "actions": {
+            "edit": "Editar",
+            "view": "Visualizar",
+            "disable": "Desativar",
+            "enable": "Ativar",
+            "close": "Fechar",
+            "pay": "Realizar pagamento"
+          }
+        },
+        "edit": {
+          "title": "Editar Página",
+          "description": "Edite as informações da página personalizada. Você pode alterar o título, mensagem, data de início, fotos, música, animação de fundo e plano.",
+          "images-attention": "Atenção: Ao alterar as imagens elas já refletem instantaneamente na página.",
+          "save-info": "Atenção: Vá até o final dos passos e clique em salvar para confirmar as alterações.",
+          "toast": {
+            "error": {
+              "title": "Erro ao salvar",
+              "description": "Ocorreu um erro ao salvar a página. Tente novamente."
+            },
+            "success": {
+              "title": "Sucesso!",
+              "description": "Página salva com sucesso."
+            }
+          },
+          "actions": {
+            "back": "Voltar",
+            "next": "Próximo",
+            "save": "Salvar"
+          }
+        }
+      }
     }
   },
   "steps": {
@@ -379,7 +524,7 @@
     },
     "step1": {
       "title": "Qual nome do seu Filho(a)?",
-      "description": "Insira o nome do seu filho(a) para personalizar a página.",
+      "description": "Insira o nome do seu filho(a) e o gênero para personalizar a página.",
       "input": {
         "placeholder": "Ex: Caio Castro",
         "errors": {
@@ -387,53 +532,21 @@
           "max": "Máximo de 100 caracteres"
         }
       },
+      "gender": {
+        "options": {
+          "male": "Masculino",
+          "female": "Feminino"
+        },
+        "errors": {
+          "required": "Selecione o gênero"
+        }
+      },
       "back": "Voltar etapa",
       "button": "Próxima etapa"
     },
     "step2": {
-      "title": "Quando ele Nasceu?",
-      "description": "Insira a data de nascimento, algumas fotos de capa e o gênero da criança.",
-      "input": {
-        "picture": {
-          "title": "PNG, JPG, JPEG, GIF (máximo 6 fotos)",
-          "label": "Adicione fotos para a capa do Album",
-          "placeholder": "A quantidade de fotos altera o estilo de apresentação"
-        },
-        "label": "Mensagem",
-        "errors": {
-          "min": "Mínimo de 2 caracteres",
-          "max": "Máximo de {limit} caracteres",
-          "maxFiles": "Máximo de 6 foto permitidas"
-        }
-      },
-      "back": "Voltar etapa",
-      "button": "Próxima etapa",
-      "gender": {
-        "title": "Gênero do seu Filho(a)",
-        "male": "Masculino",
-        "female": "Feminino"
-      }
-    },
-    "step3": {
-      "title": "Adicione Lembranças Especiais",
-      "description": "Acrescente quantas lembranças quiser. Por exemplo: Primeiro banho, Primeiro sorriso.",
-      "input": {
-        "label": "Clique para adicionar fotos",
-        "placeholder": "PNG, JPG, JPEG, GIF (máx. 4 fotos)",
-        "errors": {
-          "maxFiles": "Máximo de 4 fotos permitidas",
-          "not-image": "O arquivo deve ser uma imagem",
-          "big-size": "O arquivo é muito grande. Máximo de 100MB",
-          "empty": "Imagem está corrompida",
-          "not-supported": "Formato de arquivo não suportado"
-        }
-      },
-      "toast": {
-        "error-save": {
-          "title": "Erro ao salvar",
-          "description": "Ocorreu um erro ao salvar a imagem. Tente novamente."
-        }
-      },
+      "title": "Quando ele nasceu?",
+      "description": "Insira a data de nascimento da criança.",
       "show-types": {
         "title": "Modo de mostrar",
         "default": "Padrão",
@@ -443,19 +556,13 @@
       "back": "Voltar etapa",
       "button": "Próxima etapa"
     },
-    "step4": {
-      "title": "Fotos",
-      "description": "Anexe fotos e escolha o modo de mostrar para personalizar a página. Você pode adicionar até 4 fotos.",
+    "step3": {
+      "title": "Fotos da Capa do Álbum",
+      "description": "Adicione fotos para a capa do álbum. Você pode adicionar até 6 fotos.",
       "input": {
-        "label": "Clique para adicionar fotos",
-        "placeholder": "PNG, JPG, JPEG, GIF (máx. 4 fotos)",
-        "errors": {
-          "maxFiles": "Máximo de 4 fotos permitidas",
-          "not-image": "O arquivo deve ser uma imagem",
-          "big-size": "O arquivo é muito grande. Máximo de 100MB",
-          "empty": "Imagem está corrompida",
-          "not-supported": "Formato de arquivo não suportado"
-        }
+        "title": "PNG, JPG, JPEG, GIF (máximo 6 fotos)",
+        "label": "Adicione fotos para a capa do Album",
+        "placeholder": "A quantidade de fotos altera o estilo de apresentação"
       },
       "toast": {
         "error-save": {
@@ -463,71 +570,117 @@
           "description": "Ocorreu um erro ao salvar a imagem. Tente novamente."
         }
       },
-      "show-types": {
-        "title": "Modo de mostrar",
-        "coverflow": "Coverflow",
-        "cards": "Cards",
-        "flip": "Flip",
-        "cube": "Cube"
+      "back": "Voltar etapa",
+      "button": "Próxima etapa"
+    },
+    "step4": {
+      "title": "Lembranças especiais",
+      "description": "Acrescente quantas lembranças quiser. Por exemplo: Primeiro banho, Primeiro sorriso.",
+      "accordion": {
+        "title": "Lembrança",
+        "actions": {
+          "new": "Nova lembrança",
+          "delete": "Excluir lembrança"
+        }
       },
+      "name": {
+        "label": "Nome da lembrança",
+        "placeholder": "Ex: Primeiro banho",
+        "errors": {
+          "min": "Mínimo de 3 caracteres",
+          "max": "Máximo de 100 caracteres"
+        }
+      },
+      "message": {
+        "label": "Mensagem",
+        "placeholder": "Ex: O primeiro banho foi incrível!",
+        "errors": {
+          "min": "Mínimo de 3 caracteres",
+          "max": "Máximo de 1000 caracteres"
+        }
+      },
+      "date": {
+        "label": "Data da lembrança"
+      },
+      "images": {
+        "label": "Fotos da lembranças",
+        "placeholder": "Clique para adicionar fotos",
+        "max": "PNG, JPG, JPEG, GIF (máx. 4 fotos)",
+        "errors": {
+          "maxFiles": "Máximo de 4 fotos permitidas",
+          "not-image": "O arquivo deve ser uma imagem",
+          "big-size": "O arquivo é muito grande. Máximo de 100MB",
+          "empty": "Imagem está corrompida",
+          "not-supported": "Formato de arquivo não suportado"
+        },
+        "toast": {
+          "error-save": {
+            "title": "Erro ao salvar",
+            "description": "Ocorreu um erro ao salvar a imagem. Tente novamente."
+          }
+        }
+      },
+      "skip": "Pular etapa",
       "back": "Voltar etapa",
       "button": "Próxima etapa"
     },
     "step5": {
-      "title": "Música dedicada",
-      "description": "Dedique uma música especial. A música será reproduzida automaticamente na página.",
-      "input": {
-        "label": "Música YouTube",
-        "placeholder": "Ex: Coldplay - Sky full of stars"
-      },
-      "click-select": "Clique para selecionar",
-      "back": "Voltar etapa",
-      "go-payment": "Ir para pagamento",
-      "button": "Próxima etapa"
-    },
-    "step6": {
-      "title": "Animação de fundo",
-      "description": "Escolha uma animação de fundo para a página. Você pode escolher entre as opções abaixo.",
-      "is-pro": "pro plan",
-      "animations": {
-        "none": "Nenhuma",
-        "hearts": "Chuva de corações",
-        "stars": "Céu Estrelado com Cometas",
-        "meteors": "Céu Estrelado com Meteoros",
-        "aurora": "Aurora",
-        "vortex": "Vórtice de cores",
-        "emojis": "ou escolha 3 emojis"
-      },
-      "back": "Voltar etapa",
-      "button": "Próxima etapa"
-    },
-    "step7": {
-      "title": "Plano Ideal",
+      "title": "Plano ideal",
       "description": "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo.",
       "plans": {
-        "basic": {
-          "title": "Mensal",
-          "counter": "Contador em tempo real",
-          "text": "Texto dedicado",
-          "date": "Data de início",
-          "qr-code": "QR Code exclusivo",
-          "images": "Máximo de 4 imagens",
-          "music": "Sem música",
-          "url": "URL personalizada",
-          "support": "Suporte 24 horas",
-          "price_recurrency": "/por mes"
+        "unique": {
+          "title": "Plano Básico",
+          "counter": "Compra somente uma vez",
+          "price_recurrence": "/uma vez",
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 3 fotos na capa",
+            "6": "Máximo de 2 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Não possui edições",
+            "10": "Para sempre!|Duração de 1 ano",
+            "11": "Suporte por 12 horas"
+          }
         },
-        "pro": {
+        "month": {
+          "title": "Mensal",
+          "counter": "Assinatura mensal",
+          "price_recurrence": "/por mes",
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 6 fotos na capa",
+            "6": "Máximo de 4 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
+            "10": "Para sempre!|Ativo enquanto assinatura ativa",
+            "11": "Suporte por 12 horas"
+          }
+        },
+        "annual": {
           "title": "Anual",
-          "counter": "Contador em tempo real",
-          "text": "Texto dedicado",
-          "date": "Data de início",
-          "qr-code": "QR Code exclusivo",
-          "images": "Máximo de 4 imagens",
-          "music": "Com música",
-          "url": "URL personalizada",
-          "support": "Suporte 24 horas",
-          "price_recurrency": "/por ano"
+          "counter": "Assinatura anual",
+          "price_recurrence": "/por ano",
+          "benefits": {
+            "1": "Linha do tempo da criança",
+            "2": "Data de nascimento",
+            "3": "Contator em tempo real de vida",
+            "4": "Album de fotos na capa",
+            "5": "Máximo de 6 fotos na capa",
+            "6": "Máximo de 4 fotos por lembrança",
+            "7": "QRCode exclusivo para acesso fácil",
+            "8": "URL personalizada",
+            "9": "Edições ilimitadas!|Editável enquanto assinatura ativa",
+            "10": "Duração para sempre!",
+            "11": "Suporte por 12 horas"
+          }
         }
       },
       "recommended": "Recomendado",
@@ -546,13 +699,44 @@
     }
   },
   "checkout": {
+    "order": {
+      "title": "Resumo do pedido",
+      "description": "Revise seus itens antes do pagamento",
+      "plans": {
+        "unique": {
+          "title": "Plano Básico",
+          "description": "Plano básico com pagamento único, porem não possui edições e dura 1 ano."
+        },
+        "month": {
+          "title": "Mensal",
+          "description": "Plano mensal com pagamento mensal, possui edições ilimitadas e dura enquanto a assinatura estiver ativa."
+        },
+        "annual": {
+          "title": "Anual",
+          "description": "Plano anual com pagamento anual, possui edições ilimitadas enquanto a assinatura estiver ativa e dura para sempre."
+        }
+      },
+      "order-bumps": {
+        "title": "Oferta por tempo limitado",
+        "save": "Economize 50%"
+      },
+      "total": "Total"
+    },
     "payment": {
-      "select-method": "Método de pagamento",
-      "footer": {
-        "accept": "Realizando o pagamento você aceita os",
-        "terms-of-policy": "Termos de uso",
-        "and": "e",
-        "privacy-policy": "Política de privacidade"
+      "title": "Método de pagamento",
+      "description": "Escolha o método de pagamento ideal para você",
+      "secure": "Pagamento seguro por Pagar.me",
+      "methods": {
+        "card": { "title": "Cartão de Crédito", "description": "Pague com Cartão de Crédito" },
+        "pix": { "title": "Pix", "description": "Pague com Pix" },
+        "paypal": {
+          "title": "PayPal",
+          "description": "Clique no botão acima para concluir seu pagamento com o PayPal. Você será redirecionado para o site seguro do PayPal."
+        },
+        "stripe": {
+          "title": "Stripe",
+          "description": "Clique no botão acima para concluir seu pagamento com o Stripe. Você será redirecionado para o site seguro do Stripe."
+        }
       },
       "inputs": {
         "title": "Informações",
@@ -609,9 +793,11 @@
           "required": "Campo obrigatório"
         }
       },
-      "go-to": "Ir para pagamento",
-      "create-pix": "Criar QR Code Pix",
-      "submit": "Realizar pagamento",
+      "buttons": {
+        "go-to": "Ir para pagamento",
+        "create-pix": "Criar QR Code Pix",
+        "submit": "Realizar pagamento"
+      },
       "toast": {
         "error-create": {
           "title": "Ocorreu um erro!",
@@ -623,17 +809,18 @@
         }
       }
     },
+    "footer": {
+      "accept": "Realizando o pagamento você aceita os",
+      "terms-of-use": "Termos de uso",
+      "and": "e",
+      "privacy-policy": "Política de privacidade"
+    },
     "pix": {
-      "title": "Pagamento via Pix",
-      "description": "Escanei o QR Code com seu aplicativo de banco ou copie a chave Pix abaixo.",
+      "description": "Escaneie o código QR com seu aplicativo bancário para concluir o pagamento. O código irá expirar em 30 minutos.",
       "tooltip": {
         "copy": "Copiar",
         "copied": "Copiado!"
-      },
-      "button": "Já paguei"
-    },
-    "stone-card": {
-      "loading": "Um momento, estamos processando seu pagamento."
+      }
     },
     "success": {
       "title": "Pagamento confirmado!",

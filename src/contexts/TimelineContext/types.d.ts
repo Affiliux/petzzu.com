@@ -1,23 +1,26 @@
-import {
+import type { NewMediaPayloadProps } from '@/typings/create'
+import type {
   CreateTimelinePayloadProps,
-  CreateTimelineResponse,
-  DeleteFileResponse,
+  CreateTimelineResponseProps,
+  DeleteFileResponseProps,
   FindOneTimelineResponse,
   UpdateTimelinePayloadProps,
-  UpdateTimelineResponse,
-  UploadFileResponse,
+  UpdateTimelineResponseProps,
+  UploadFileResponseProps,
 } from '@/typings/timeline'
 
-import { NewMediaPayloadProps } from '../../typings/create'
-
 export interface TimelineContextProps {
-  createTimeline: (idPreWebsite: string, payload: CreateTimelinePayloadProps) => Promise<CreateTimelineResponse>
-  uploadTimelineFile: (idPreWebsiteTimeLine: string, file: FormData) => Promise<UploadFileResponse>
-  deleteTimelineFile: (idPreWebsiteTimeLine: string, idFile: string) => Promise<void>
-  findOneTimeline: (idPreWebsite: string) => Promise<FindOneTimelineResponse>
-  updateTimeline: (idPreWebsiteTimeLine: string, payload: UpdateTimelinePayloadProps) => Promise<UpdateTimelineResponse>
-  deleteTimeline: (idPreWebsiteTimeLine: string) => Promise<void>
-  //
   timeline_medias: MediaPreProps[]
-  set_timeline_medias: (medias: MediaPreProps[]) => void
+  //
+  set_timeline_medias: Dispatch<SetStateAction<MediaPreProps[]>>
+  //
+  onCreateTimeline: (idPreWebsite: string, payload: CreateTimelinePayloadProps) => Promise<CreateTimelineResponseProps>
+  onUploadTimelineFile: (idPreWebsiteTimeLine: string, file: FormData) => Promise<UploadFileResponseProps>
+  onDeleteTimelineFile: (idPreWebsiteTimeLine: string, idFile: string) => Promise<void>
+  onFindOneTimeline: (idPreWebsite: string) => Promise<FindOneTimelineResponse>
+  onUpdateTimeline: (
+    idPreWebsiteTimeLine: string,
+    payload: UpdateTimelinePayloadProps,
+  ) => Promise<UpdateTimelineResponseProps>
+  onDeleteTimeline: (idPreWebsiteTimeLine: string) => Promise<void>
 }

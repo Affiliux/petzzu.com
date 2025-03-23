@@ -1,53 +1,67 @@
 'use client'
 
-import { ChevronDown } from 'lucide-react'
+import React from 'react'
+
+import { useTranslations } from 'next-intl'
 
 import { useApplication } from '@/contexts/ApplicationContext'
+
+import { Button } from './ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 
 import { ThemeShowTypeEnum } from '@/enums'
 
 export function ThemeSwitcher() {
-  const { theme, set_theme } = useApplication()
+  // hooks
+  const t = useTranslations()
+
+  // contexts
+  const { theme, onChangeTheme } = useApplication()
 
   return (
-    <div className='flex flex-row items-center gap-1 md:gap-4'>
-      <div className='relative group'>
-        <button
-          type='button'
-          className='relative h-11 overflow-hidden flex items-center justify-center rounded-full p-[1px] focus:outline-none focus:ring-0'
-        >
-          <span className='flex h-full cursor-pointer items-center justify-center gap-2 px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl'>
-            {theme === ThemeShowTypeEnum.BLUE && <span className='w-6 h-6 rounded-md bg-[#7DA2FF]' />}
-            {theme === ThemeShowTypeEnum.PINK && <span className='w-6 h-6 rounded-md bg-[#F997CD]' />}
-            {theme === ThemeShowTypeEnum.YELLOW && <span className='w-6 h-6 rounded-md bg-[#FFF2B3]' />}
-
-            <ChevronDown size={12} />
-          </span>
-        </button>
-
-        <div className='origin-top-left lg:origin-top-right min-w-12 z-[99999] border border-neutral-200 absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-500 rounded-lg shadow-lg bg-white ring-1 ring-white ring-opacity-5'>
-          <div className='py-1 grid grid-cols-1 gap-2' role='none'>
-            <button
-              onClick={() => set_theme(ThemeShowTypeEnum.BLUE)}
-              className={`px-4 py-1 text-start items-center inline-flex hover:bg-neutral-200`}
-            >
-              <span className='w-6 h-6 rounded-md bg-[#7DA2FF]' />
-            </button>
-            <button
-              onClick={() => set_theme(ThemeShowTypeEnum.PINK)}
-              className={`px-4 py-1 text-start items-center inline-flex hover:bg-neutral-200`}
-            >
-              <span className='w-6 h-6  rounded-md bg-[#F997CD]' />
-            </button>
-            <button
-              onClick={() => set_theme(ThemeShowTypeEnum.YELLOW)}
-              className={`px-4 py-1 text-start items-center inline-flex hover:bg-neutral-200`}
-            >
-              <span className='w-6 h-6  rounded-md bg-[#FFF2B3]' />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='ghost' size='icon'>
+          {theme === ThemeShowTypeEnum.BLUE && <span className='w-6 h-6 rounded-md bg-[#7DA2FF]' />}
+          {theme === ThemeShowTypeEnum.PINK && <span className='w-6 h-6 rounded-md bg-[#F997CD]' />}
+          {theme === ThemeShowTypeEnum.GOLD && <span className='w-6 h-6 rounded-md bg-[#FFF2B3]' />}
+          {theme === ThemeShowTypeEnum.GREEN && <span className='w-6 h-6 rounded-md bg-[#95BA7C]' />}
+          {theme === ThemeShowTypeEnum.LILAC && <span className='w-6 h-6 rounded-md bg-[#E9D8FF]' />}
+          {theme === ThemeShowTypeEnum.RED && <span className='w-6 h-6 rounded-md bg-[#FFB2B2]' />}
+          {theme === ThemeShowTypeEnum.GRAY && <span className='w-6 h-6 rounded-md bg-[#D9D9D9]' />}
+          <span className='sr-only'>{t('config.header.themes.title')}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end'>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.BLUE)}>
+          <span className='w-6 h-6 rounded-md bg-[#7DA2FF]' />
+          <span>{t('config.header.themes.blue')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.PINK)}>
+          <span className='w-6 h-6 rounded-md bg-[#F997CD]' />
+          <span>{t('config.header.themes.pink')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.GOLD)}>
+          <span className='w-6 h-6 rounded-md bg-[#FFF2B3]' />
+          <span>{t('config.header.themes.gold')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.GREEN)}>
+          <span className='w-6 h-6 rounded-md bg-[#95BA7C]' />
+          <span>{t('config.header.themes.green')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.LILAC)}>
+          <span className='w-6 h-6 rounded-md bg-[#E9D8FF]' />
+          <span>{t('config.header.themes.lilac')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.RED)}>
+          <span className='w-6 h-6 rounded-md bg-[#FFB2B2]' />
+          <span>{t('config.header.themes.red')}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onChangeTheme(ThemeShowTypeEnum.GRAY)}>
+          <span className='w-6 h-6 rounded-md bg-[#D9D9D9]' />
+          <span>{t('config.header.themes.gray')}</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

@@ -4,6 +4,27 @@
     "description": "Babyzzu es una plataforma que te permite crear páginas personalizadas para personas especiales.",
     "keywords": "amor, relación, amistades, cumpleaños, regalo, página, dedicatoria, sorpresa",
     "skip": "Saltar etapa",
+    "header": {
+      "nav": {
+        "title": "Menú",
+        "home": "Inicio",
+        "plans": "Planes",
+        "faq": "F.A.Q",
+        "affiliate": "Programa de afiliados"
+      },
+      "account": {
+        "title": "Mi cuenta",
+        "my-pages": "Mis páginas",
+        "logout": "Salir"
+      },
+      "languages": {
+        "title": "Seleccionar Idioma",
+        "pt": "Português",
+        "en": "English",
+        "es": "Español",
+        "de": "Deutsch"
+      }
+    },
     "footer": {
       "copyright": "Copyright © 2024 - Babyzzu.com",
       "terms": "Términos de uso",
@@ -13,19 +34,6 @@
       "youtube": "YouTube",
       "tiktok": "TikTok",
       "twitter": "Twitter"
-    },
-    "header": {
-      "nav": {
-        "plans": "Planes",
-        "affiliate": "Programa de Afiliados",
-        "badge": "Próximamente"
-      },
-      "languages": {
-        "pt": "Portugués",
-        "en": "Inglés",
-        "es": "Español",
-        "de": "Alemán"
-      }
     },
     "offer": {
       "title": "💥 Super Ventas",

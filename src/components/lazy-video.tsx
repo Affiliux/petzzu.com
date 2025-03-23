@@ -9,7 +9,10 @@ interface LazyLoadVideoProps {
 }
 
 export const LazyLoadVideo: React.FC<LazyLoadVideoProps> = ({ src, type, classNames }) => {
+  // hooks
   const videoRef = useRef<HTMLDivElement | null>(null)
+
+  // states
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {

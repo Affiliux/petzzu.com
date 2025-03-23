@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from 'react'
 
-export function useQueryParams() {
+/**
+ *
+ * @name useQueryParams
+ * @category Hooks - useQueryParams
+ *
+ * @return {Record<string, string>} - The query parameters
+ */
+
+export function useQueryParams(): Record<string, string> {
   const [params, setParams] = useState<Record<string, string>>({})
   const [update, setUpdate] = useState<boolean>(false)
 

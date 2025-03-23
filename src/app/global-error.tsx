@@ -1,8 +1,17 @@
 'use client'
 
-import Error from 'next/error'
+import { useEffect } from 'react'
 
-export default function GlobalError() {
+import Error from 'next/error'
+import * as Sentry from '@sentry/nextjs'
+
+export const runtime = 'edge'
+
+export default function GlobalError({ error }: { error: Error }) {
+  useEffect(() => {
+    Sentry.captureException(error)
+  }, [error])
+
   return (
     <html>
       <body>
