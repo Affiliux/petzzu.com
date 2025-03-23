@@ -392,9 +392,9 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
         </button>
         <button
           onClick={handleSubmit}
-          disabled={loading || IS_NEXT_DISABLED}
+          disabled={loading}
           className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-            loading || IS_NEXT_DISABLED ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
           }`}
         >
           <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
@@ -402,7 +402,11 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
               <IconLoader size={20} className='animate-spin' />
             ) : (
               <>
-                {isEdit ? t('pages.account.pages.edit.actions.next') : t('steps.step4.button')}
+                {isEdit
+                  ? t('pages.account.pages.edit.actions.next')
+                  : IS_NEXT_DISABLED
+                    ? t('steps.step4.skip')
+                    : t('steps.step4.button')}
                 <IconChevronRight size={20} className='ml-4' />
               </>
             )}

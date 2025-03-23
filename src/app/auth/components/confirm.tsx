@@ -128,7 +128,7 @@ export function ConfirmForm({ email }: { email: string | null }) {
           type='submit'
           disabled={loading || !form.formState.isValid}
         >
-          {loading && <Loader2 className='h-4 w-4 animate-spin' />}
+          {loading && <Loader2 className='h-4 w-4 animate-spin text-theme-900' />}
           {t('form.submit')}
         </Button>
       </form>

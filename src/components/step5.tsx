@@ -84,24 +84,26 @@ export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
 
                   <div className='md:hidden flex text-neutral-200 relative z-20'>
                     <ul className='list-none mt-4'>
-                      <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
                       <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.2`)} />
-                      <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
                       <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.4`)} />
-                      <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
                       <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.6`)} />
-                      <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
                       <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
 
                       {plan.sku.includes('annual') ? (
                         <>
-                          <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`)} />
+                          <StepPerCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                          />
                           <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
                         </>
                       ) : plan.sku.includes('month') ? (
                         <>
                           <StepPerCheck
-                            bold
                             title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
                             sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
                           />
@@ -112,15 +114,21 @@ export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
                         </>
                       ) : (
                         <>
-                          <StepUnCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`)} />
-                          <StepUnCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
+                          <StepPerUnCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                          />
+                          <StepPerUnCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
+                          />
                         </>
                       )}
                     </ul>
                   </div>
 
                   <div className='mt-8'>
-                    <p className='text-lg font-black text-red-600 line-through'>
+                    <p className='text-lg font-black text-theme-600 line-through'>
                       {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
                         style: 'currency',
                         currency: plan.currency,
@@ -152,24 +160,26 @@ export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
 
                 <div className='hidden md:flex text-neutral-200 relative z-20'>
                   <ul className='list-none mt-4'>
-                    <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
                     <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.2`)} />
-                    <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
                     <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.4`)} />
-                    <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
                     <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.6`)} />
-                    <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
                     <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
 
                     {plan.sku.includes('annual') ? (
                       <>
-                        <StepCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`)} />
+                        <StepPerCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                        />
                         <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
                       </>
                     ) : plan.sku.includes('month') ? (
                       <>
                         <StepPerCheck
-                          bold
                           title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
                           sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
                         />
@@ -180,8 +190,14 @@ export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
                       </>
                     ) : (
                       <>
-                        <StepUnCheck bold title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`)} />
-                        <StepUnCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
+                        <StepPerUnCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                        />
+                        <StepPerUnCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
+                        />
                       </>
                     )}
                   </ul>
@@ -234,8 +250,8 @@ export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
 const StepCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
   return (
     <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-green-600 rounded-full p-0.5'>
-        <IconCheck size={12} />
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconCheck size={14} />
       </div>
       <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
     </li>
@@ -245,12 +261,26 @@ const StepCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
 const StepPerCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?: boolean }) => {
   return (
     <li className='flex gap-2 items-center mb-1 md:mb-0'>
-      <div className='flex items-center justify-center text-yellow-600 rounded-full p-0.5'>
-        <IconCheck size={12} />
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconCheck size={14} />
       </div>
       <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
         <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
-        <p className={`text-yellow-600 text-xs`}>({sub})</p>
+        <p className={`text-theme-600 text-xs`}>({sub})</p>
+      </div>
+    </li>
+  )
+}
+
+const StepPerUnCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?: boolean }) => {
+  return (
+    <li className='flex gap-2 items-center mb-1 md:mb-0'>
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconX size={14} />
+      </div>
+      <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
+        <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
+        <p className={`text-theme-600 text-xs`}>({sub})</p>
       </div>
     </li>
   )
@@ -259,8 +289,8 @@ const StepPerCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?
 const StepUnCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
   return (
     <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-red-600 rounded-full p-0.5'>
-        <IconX size={12} />
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconX size={14} />
       </div>
       <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
     </li>

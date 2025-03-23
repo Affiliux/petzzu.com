@@ -99,7 +99,7 @@ export const PreviewDefault = ({ child, dateShowType, medias }: PreviewDefaultPr
                   </div>
                   <div>
                     <div className='flex flex-col ml-3'>
-                      <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
+                      <div className='text-4xl font-medium text-theme-600 leading-tight font-happy-school'>
                         {DISPLAY_NAME}
                       </div>
                     </div>

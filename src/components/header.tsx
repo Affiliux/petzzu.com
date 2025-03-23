@@ -131,6 +131,9 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <div style={{ display: 'flex' }} className='md:!hidden items-center space-x-2'>
+          {/* Theme Switcher */}
+          <ThemeSwitcher />
+
           {/* User Profile Mobile */}
           {account ? (
             <Sheet open={mobileAccountOpen} onOpenChange={setMobileAccountOpen}>
