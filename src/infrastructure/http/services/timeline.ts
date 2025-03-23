@@ -3,7 +3,7 @@ import type {
   CreateTimelinePayloadProps,
   CreateTimelineResponseProps,
   DeleteFileResponseProps,
-  FindOneTimelineResponse,
+  FindOneTimelineResponseProps,
   UpdateTimelinePayloadProps,
   UpdateTimelineResponseProps,
   UploadFileResponseProps,
@@ -96,10 +96,10 @@ export async function delete_timeline_file(
  * @category Infrastructure -  HTTP - Services - Timeline
  *
  * @param {string} idPreWebsite - The ID of the pre-website.
- * @return {Promise<FindOneTimelineResponse>} - The response from the server.
+ * @return {Promise<FindOneTimelineResponseProps>} - The response from the server.
  */
 
-export async function find_one_timeline(idPreWebsite: string): Promise<FindOneTimelineResponse> {
+export async function find_one_timeline(idPreWebsite: string): Promise<FindOneTimelineResponseProps> {
   try {
     const { data: response } = await api.get(`website/pre/timeLine/findOne-id/${idPreWebsite}`)
     return response

@@ -6,6 +6,7 @@ import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
+import { PlanProps } from '@/typings/application'
 import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
@@ -32,20 +33,17 @@ interface PreviewDefaultProps {
   child: CreatePrePayloadProps
   dateShowType: DateShowTypeEnum
   medias: MediaPreProps[]
+  selected: PlanProps | undefined
 }
 
-export const PreviewDefault = ({ child, dateShowType, medias }: PreviewDefaultProps) => {
+export const PreviewDefault = ({ child, dateShowType, medias, selected }: PreviewDefaultProps) => {
   // hooks
   const t = useTranslations()
-
-  // contexts
-  const { locale } = useApplication()
 
   // variables
   const { value, unit } = formatAge(t, child?.birth_date)
 
   // variables
-  const FORMAT_FNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
   const CHILD_NAME_PARTS = child?.child_name?.split(' ')
   const DISPLAY_NAME = CHILD_NAME_PARTS?.length > 2 ? `${CHILD_NAME_PARTS[0]} ${CHILD_NAME_PARTS[1]}` : child.child_name
 
@@ -119,7 +117,7 @@ export const PreviewDefault = ({ child, dateShowType, medias }: PreviewDefaultPr
           </div>
 
           <div className='flex items-center justify-center w-full mb-8'>
-            <PicturesGridPreview images={medias} />
+            <PicturesGridPreview images={medias} selectedPlan={selected} />
           </div>
 
           <p
@@ -133,7 +131,7 @@ export const PreviewDefault = ({ child, dateShowType, medias }: PreviewDefaultPr
             </div>
           )}
 
-          {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} />}
+          {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} selectedPlan={selected} />}
           {!!child?.birth_date && <DateCount date={child.birth_date} type={dateShowType} />}
         </div>
 

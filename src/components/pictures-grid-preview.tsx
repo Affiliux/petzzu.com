@@ -4,31 +4,37 @@ import React from 'react'
 
 import Image from 'next/image'
 
+import { PlanProps } from '@/typings/application'
 import type { MediaProps } from '@/typings/child'
 
 import { CarouselPhotos } from './carousel'
 
 interface PicturesGridProps {
   images?: MediaProps[]
+  selectedPlan: PlanProps | undefined
 }
 
-export default function PicturesGridPreview({ images }: PicturesGridProps) {
+export default function PicturesGridPreview({ images = [], selectedPlan }: PicturesGridProps) {
+
+  //variables
+  const FILTERED_IMAGES = selectedPlan?.sku === 'plan_unique_brl' ? images.slice(0, 3) : images
+
   return (
     <div className='relative w-full max-w-2xl mx-auto px-6'>
-      {images.length == 1 && (
+      {FILTERED_IMAGES.length === 1 && (
         <div>
-          <CarouselPhotos images={images} />
+          <CarouselPhotos images={FILTERED_IMAGES} />
         </div>
       )}
-      {images.length == 2 && (
+      {FILTERED_IMAGES.length === 2 && (
         <div className='flex flex-col justify-center items-center'>
           <div className='relative right-20 transform rotate-[2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
                   <Image
-                    alt={images[0]?.id}
-                    src={images[0]?.url}
+                    alt={FILTERED_IMAGES[0]?.id}
+                    src={FILTERED_IMAGES[0]?.url}
                     width={200}
                     height={200}
                     className='object-cover object-center w-full h-full'
@@ -44,8 +50,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
                   <Image
-                    alt={images[1]?.id}
-                    src={images[1]?.url}
+                    alt={FILTERED_IMAGES[1]?.id}
+                    src={FILTERED_IMAGES[1]?.url}
                     width={200}
                     height={200}
                     className='object-cover object-center w-full h-full'
@@ -57,15 +63,15 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           </div>
         </div>
       )}
-      {images.length == 3 && (
+      {FILTERED_IMAGES.length === 3 && (
         <div className='flex flex-col justify-center items-center'>
           <div className='relative transform rotate-[2deg] left-10'>
             <div className='bg-white p-4 shadow-[0px_0px_50px_10px_rgba(0,_0,_0,_0.1)] rounded-sm'>
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
                   <Image
-                    alt={images[0]?.id}
-                    src={images[0]?.url}
+                    alt={FILTERED_IMAGES[0]?.id}
+                    src={FILTERED_IMAGES[0]?.url}
                     width={200}
                     height={200}
                     className='object-cover object-center w-full h-full'
@@ -81,8 +87,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
                   <Image
-                    alt={images[1]?.id}
-                    src={images[1]?.url}
+                    alt={FILTERED_IMAGES[1]?.id}
+                    src={FILTERED_IMAGES[1]?.url}
                     width={200}
                     height={200}
                     className='object-cover object-center w-full h-full'
@@ -98,8 +104,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
               <div className='relative border-1 bg-white shadow-inner'>
                 <div className='relative w-[200px] h-[200px] overflow-hidden'>
                   <Image
-                    alt={images[2]?.id}
-                    src={images[2]?.url}
+                    alt={FILTERED_IMAGES[2]?.id}
+                    src={FILTERED_IMAGES[2]?.url}
                     width={200}
                     height={200}
                     className='object-cover object-center w-full h-full'
@@ -111,18 +117,18 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           </div>
         </div>
       )}
-      {images.length == 4 && (
+      {FILTERED_IMAGES.length === 4 && (
         <div>
-          <CarouselPhotos images={images} />
+          <CarouselPhotos images={FILTERED_IMAGES} />
         </div>
       )}
-      {images.length == 5 && (
+      {FILTERED_IMAGES.length === 5 && (
         <div className='grid grid-cols-12 gap-2'>
           <div className='col-span-7 row-span-2'>
             <div className='relative w-full h-full min-h-[250px]'>
               <Image
-                src={images[0]?.url}
-                alt={images[0]?.id}
+                src={FILTERED_IMAGES[0]?.url}
+                alt={FILTERED_IMAGES[0]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 bg-gray-100'
               />
@@ -132,8 +138,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[1]?.url}
-                alt={images[1]?.id}
+                src={FILTERED_IMAGES[1]?.url}
+                alt={FILTERED_IMAGES[1]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />
@@ -143,8 +149,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[2]?.url}
-                alt={images[2]?.id}
+                src={FILTERED_IMAGES[2]?.url}
+                alt={FILTERED_IMAGES[2]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />
@@ -154,8 +160,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[3]?.url}
-                alt={images[3]?.id}
+                src={FILTERED_IMAGES[3]?.url}
+                alt={FILTERED_IMAGES[3]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />
@@ -164,8 +170,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-7 row-span-2'>
             <div className='relative w-full h-full min-h-[250px]'>
               <Image
-                src={images[4]?.url}
-                alt={images[4]?.id}
+                src={FILTERED_IMAGES[4]?.url}
+                alt={FILTERED_IMAGES[4]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 bg-gray-100'
               />
@@ -173,13 +179,13 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           </div>
         </div>
       )}
-      {images.length == 6 && (
+      {FILTERED_IMAGES.length === 6 && (
         <div className='grid grid-cols-12 gap-2'>
           <div className='col-span-7 row-span-2'>
             <div className='relative w-full h-full min-h-[250px]'>
               <Image
-                src={images[0]?.url}
-                alt={images[0]?.id}
+                src={FILTERED_IMAGES[0]?.url}
+                alt={FILTERED_IMAGES[0]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 bg-gray-100'
               />
@@ -189,8 +195,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[1]?.url}
-                alt={images[1]?.id}
+                src={FILTERED_IMAGES[1]?.url}
+                alt={FILTERED_IMAGES[1]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />
@@ -200,8 +206,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[2]?.url}
-                alt={images[2]?.id}
+                src={FILTERED_IMAGES[2]?.url}
+                alt={FILTERED_IMAGES[2]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />
@@ -211,8 +217,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[3]?.url}
-                alt={images[3]?.id}
+                src={FILTERED_IMAGES[3]?.url}
+                alt={FILTERED_IMAGES[3]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />
@@ -221,8 +227,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-7 row-span-2'>
             <div className='relative w-full h-full min-h-[250px]'>
               <Image
-                src={images[4]?.url}
-                alt={images[4]?.id}
+                src={FILTERED_IMAGES[4]?.url}
+                alt={FILTERED_IMAGES[4]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 bg-gray-100'
               />
@@ -231,8 +237,8 @@ export default function PicturesGridPreview({ images }: PicturesGridProps) {
           <div className='col-span-5'>
             <div className='relative w-full h-full min-h-[120px]'>
               <Image
-                src={images[5]?.url}
-                alt={images[5]?.id}
+                src={FILTERED_IMAGES[5]?.url}
+                alt={FILTERED_IMAGES[5]?.id}
                 fill
                 className='object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 bg-gray-100'
               />

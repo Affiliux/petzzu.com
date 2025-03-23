@@ -86,7 +86,6 @@ export default function Page() {
         child.timeLine.every(
           entry =>
             !!entry.title.trim() &&
-            !!entry.description.trim() &&
             !!entry.date &&
             Array.isArray(entry.media) &&
             entry.media.length > 0,
