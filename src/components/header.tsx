@@ -79,8 +79,9 @@ export function Header() {
           {/* Theme Switcher */}
           <ThemeSwitcher />
 
-          {/* Language Switcher */}
-          <DropdownMenu>
+          {/* Language Switcher (commented until we found a international gateway) */}
+
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='ghost' size='icon'>
                 <Globe className='h-5 w-5' />
@@ -98,7 +99,7 @@ export function Header() {
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
 
           {/* User Profile */}
           {account?.email ? (

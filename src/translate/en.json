@@ -19,16 +19,26 @@
       },
       "languages": {
         "title": "Select Language",
-        "pt": "Português",
+        "pt": "Portuguese",
         "en": "English",
-        "es": "Español",
-        "de": "Deutsch"
+        "es": "Spanish",
+        "de": "German"
+      },
+      "themes": {
+        "title": "Select Theme",
+        "blue": "Blue",
+        "pink": "Pink",
+        "gold": "Gold",
+        "green": "Green",
+        "lilac": "Lilac",
+        "red": "Red",
+        "gray": "Gray"
       }
     },
     "footer": {
       "copyright": "Copyright © 2024 - Babyzzu.com",
-      "terms": "Terms of use",
-      "privacy": "Privacy policy",
+      "terms": "Terms of Use",
+      "privacy": "Privacy Policy",
       "instagram": "Instagram",
       "facebook": "Facebook",
       "youtube": "YouTube",
@@ -36,25 +46,24 @@
       "twitter": "Twitter"
     },
     "offer": {
-      "title": "💥 Super Sales",
+      "title": "💥 Super Promotion",
       "description1": "All plans with",
       "description2": "discount, take advantage!"
     },
     "cookies": {
       "title": "Cookie Policy",
-      "description": "We use cookies to ensure the best experience on our site. By continuing to browse, you agree to our Privacy Policy.",
+      "description": "We use cookies to ensure the best experience on our website. By continuing to browse, you agree to our Privacy Policy.",
       "button": "Agree"
     },
     "defaults": {
       "currency": "usd",
-      "country": "en-US"
+      "country": "en-US"  
     }
   },
   "themes": {
     "default": {
-      "awaiting": "Waiting for the big day!",
-      "together": "Sharing moments for",
-      "surprise": "Surprise!",
+      "awaiting": "Awaiting the big day!",
+      "together": "In our lives there are",
       "years": "years",
       "months": "months",
       "days": "days",
@@ -63,16 +72,7 @@
       "seconds": "seconds",
       "mili": "milliseconds",
       "of": "of",
-      "since": "Since"
-    },
-    "netflix": {
-      "since": "Premiered on",
-      "of": "of",
-      "top-10": "Trending now",
-      "play": "Play",
-      "pause": "Pause",
-      "favorite": "Favorite",
-      "ep-title": "Best episodes"
+      "since": "Born on"
     }
   },
   "pages": {
@@ -83,13 +83,12 @@
           "1": "Surprise",
           "2": "someone special",
           "3": "your love",
-          "4": "your friend",
-          "5": "your family",
-          "6": "the birthday person"
+          "4": "your child",
+          "5": "your family"
         },
-        "description": "Small gestures make all the difference. Show your affection in an unexpected way by creating a dedicated page for someone special.",
+        "description": "Small gestures create unforgettable memories. Surprise someone you love by immortalizing each special moment and follow their journey from the first smiles.",
         "input": {
-          "placeholder": "E.g., John & Mary or Happy Birthday or etc.",
+          "placeholder": "Ex: John & Mary or Happy Birthday or etc",
           "errors": {
             "min": "Minimum of 3 characters",
             "max": "Maximum of 100 characters"
@@ -115,7 +114,7 @@
             "image": "https://cdn.babyzzu.com/lp-assets/Michael%20Franca%20Studio.jpg"
           },
           "5": {
-            "name": "Bia & Enrique",
+            "name": "Bia & Henrique",
             "time": "1 year ago"
           },
           "6": {
@@ -123,16 +122,16 @@
             "time": "2 months ago"
           }
         },
-        "rating": "Approved by 34,225 people"
+        "rating": "Approved by 23,628 people"
       },
       "how-work": {
         "subtitle": "How does it work?",
         "title": "Create the page in 4 steps",
-        "description": "Surprise someone special with a personalized page. It's easy and quick.",
+        "description": "Surprise someone special with a personalized page. It's easy and fast.",
         "steps": {
           "1": {
             "title": "1. Creation form",
-            "description": "Follow the steps by completing the form."
+            "description": "Follow the steps by filling out the form."
           },
           "2": {
             "title": "2. Secure payment",
@@ -140,17 +139,17 @@
           },
           "3": {
             "title": "3. QR Code and link",
-            "description": "You will receive a QR code and a link by email to access the personalized page."
+            "description": "You will receive a QR code and a link via email to access the personalized page."
           },
           "4": {
-            "title": "4. Make the surprise",
-            "description": "Surprise someone special by sharing the link or QR code."
+            "title": "4. Create your Album",
+            "description": "Immortalize your Album by sharing the link or QR code with special people."
           }
         },
         "example": {
           "title": {
             "1": "It's",
-            "2": "easy and quick",
+            "2": "easy and fast",
             "3": "to create, see an example page."
           }
         }
@@ -160,7 +159,7 @@
         "description": "Choose the ideal theme for the personalized page. You can choose from the themes below.",
         "1": {
           "title": "Default",
-          "description": "Default theme with time counter and background animations.",
+          "description": "Default theme with a time counter and background animations.",
           "try-now": "Try now",
           "start-now": "Start now"
         },
@@ -173,87 +172,80 @@
       },
       "faq": {
         "title": "Frequently Asked Questions",
-        "description": "Here are some frequently asked questions to help you better understand Babyzzu. If you have any questions, contact us.",
+        "contact": "Questions? Contact us here",
+        "description": "Here are some frequently asked questions to help you better understand Babyzzu. If you have any questions, please contact us.",
         "1": {
           "question": "What is Babyzzu?",
           "answer": "Babyzzu is a platform that allows you to create personalized pages for special people. You can add photos, a message, and also the time of the union."
         },
         "2": {
           "question": "How can I create a personalized page on Babyzzu?",
-          "answer": "To create your personalized page, follow the steps by completing the form with the requested information. After completing it, you will be directed to payment."
+          "answer": "To create your personalized page, follow the steps by filling out the form with the requested information. After filling it out, you will be directed to the payment."
         },
         "3": {
           "question": "What is included in my personalized page?",
-          "answer": "Your personalized page will include everything you complete in the form, depending on the chosen plan."
+          "answer": "Your personalized page will include everything you fill out in the form, depending on the chosen plan."
         },
         "4": {
           "question": "How do I receive my personalized page after payment?",
-          "answer": "After payment confirmation, you will receive a QR code and a link by email to share and access the page."
+          "answer": "After payment confirmation, you will receive a QR code and a link via email to share and access the page."
         },
         "5": {
-          "question": "Does the personalized page have validity?",
+          "question": "Does the personalized page have an expiration date?",
           "answer": "Yes, in the basic plan, the page will be available for 1 year. In the advanced plan, the page will be lifetime."
         },
         "6": {
-          "question": "How long does it take to receive the QR code by email?",
-          "answer": "Payments with Credit Card and PIX are processed immediately."
-        },
-        "7": {
-          "question": "What payment methods are accepted?",
-          "answer": "We accept payments with Credit Card or Pix."
-        },
-        "8": {
-          "question": "How can I contact customer support?",
-          "answer": "You can contact customer support by email: contact@babyzzu.com."
+          "question": "How long does it take to receive the QR Code by email?",
+          "answer": "Payments with Credit Card & PIX are processed immediately."
         }
       },
       "testimonials": {
         "title": "Testimonials",
         "description": "See what our customers are saying about Babyzzu",
         "1": {
-          "name": "Mariana and John",
+          "name": "Mariana and João",
           "time": "1 month ago",
-          "message": "I loved the experience! I was able to create a special page for John with our favorite photos, a personalized playlist, and a text that represents our story. He was very moved when he saw it!"
+          "message": "We loved creating our baby's timeline! We were able to record all the special moments with photos, videos, and messages. It turned out beautiful and emotional!"
         },
         "2": {
           "name": "Ana and Pedro",
           "time": "2 days ago",
-          "message": "With Babyzzu, I was able to express my love in a totally different way. I loved creating a page just for the two of us."
+          "message": "Babyzzu helped us organize and immortalize each phase of our child's growth. It's amazing to be able to relive each moment so easily!"
         },
         "3": {
           "name": "Lucas and Carol",
           "time": "3 months ago",
-          "message": "I made a surprise page for Carol, with our travel photos and a sincere message. She loved it! I will definitely use it again."
+          "message": "We set up our baby's timeline from birth and it turned out perfect! Now we have all the memories gathered in one place, in a special way."
         },
         "4": {
           "name": "Camila and Felipe",
           "time": "4 months ago",
-          "message": "The interface is simple and creating a page with our favorite photos and songs was super special!"
+          "message": "The platform is super intuitive and easy to use! We created the timeline with the most memorable photos of our son and loved the result!"
         },
         "5": {
-          "name": "Bia and Enrique",
+          "name": "Bia and Henrique",
           "time": "1 year ago",
-          "message": "The page turned out amazing and personalized! I didn't expect something so exciting."
+          "message": "It was emotional to create this digital record for our baby! It will surely be a valuable gift for him in the future."
         },
         "6": {
           "name": "Clara and Rafael",
           "time": "2 months ago",
-          "message": "Using Babyzzu was incredible! The platform is very intuitive and easy to use. We were able to create a perfect digital gift with songs that marked our relationship."
+          "message": "Babyzzu made it much easier to save and share our baby's special moments with the family. Everyone loved the idea!"
         },
         "7": {
           "name": "Vanessa and Ricardo",
           "time": "1 week ago",
-          "message": "Babyzzu made our relationship even more special. He loved the surprise full of memories."
+          "message": "We were delighted with the possibility of creating an interactive record of our baby's growth. Every detail makes all the difference!"
         },
         "8": {
           "name": "Carla and Bruno",
           "time": "4 months ago",
-          "message": "We celebrated our first year together in a very special way. The personalized page was the perfect gift!"
+          "message": "Creating this timeline was one of the best decisions we made! Now we have a beautiful and organized record of all our little one's moments."
         },
         "9": {
           "name": "Larissa and Tiago",
           "time": "9 months ago",
-          "message": "I didn't expect such a personalized surprise. It was exciting to create this page with everything we love."
+          "message": "It was amazing to set up this timeline full of memories and special details. A gift for a lifetime!"
         }
       },
       "cta": {
@@ -263,55 +255,89 @@
       "plans": {
         "title": "Our Plans",
         "description": "Choose the ideal plan for your personalized page. You can choose from the plans below.",
-        "basic": {
-          "title": "Annual",
-          "counter": "Real-time counter",
-          "text": "Dedicated text",
-          "date": "Start date",
-          "qr-code": "Exclusive QR code",
-          "images": "Maximum of 4 images",
-          "music": "No music",
-          "background": "No dynamic background",
-          "animations": "No exclusive animations",
-          "url": "Custom URL",
-          "support": "24-hour support",
-          "price_recurrency": "/per year"
+        "unique": {
+          "title": "Basic Plan",
+          "counter": "One-time purchase",
+          "price_recurrence": "/once",
+          "benefits": {
+            "1": "Child's timeline",
+            "2": "Birth date",
+            "3": "Real-time life counter",
+            "4": "Photo album on the cover",
+            "5": "Maximum of 3 photos on the cover",
+            "6": "Maximum of 2 photos per memory",
+            "7": "Exclusive QR Code for easy access",
+            "8": "Custom URL",
+            "9": "Unlimited edits!|No edits",
+            "10": "Forever!|Duration of 1 year",
+            "11": "12-hour support"
+          }
         },
-        "pro": {
-          "title": "Lifetime",
-          "counter": "Real-time counter",
-          "text": "Dedicated text",
-          "date": "Start date",
-          "qr-code": "Exclusive QR code",
-          "images": "Maximum of 8 images",
-          "music": "With music",
-          "background": "Dynamic background",
-          "animations": "With exclusive animations",
-          "url": "Custom URL",
-          "support": "24-hour support",
-          "price_recurrency": "/one time"
+        "month": {
+          "title": "Monthly",
+          "counter": "Monthly subscription",
+          "price_recurrence": "/per month",
+          "benefits": {
+            "1": "Child's timeline",
+            "2": "Birth date",
+            "3": "Real-time life counter",
+            "4": "Photo album on the cover",
+            "5": "Maximum of 6 photos on the cover",
+            "6": "Maximum of 4 photos per memory",
+            "7": "Exclusive QR Code for easy access",
+            "8": "Custom URL",
+            "9": "Unlimited edits!|Editable while subscription is active",
+            "10": "Forever!|Active while subscription is active",
+            "11": "12-hour support"
+          }
+        },
+        "annual": {
+          "title": "Annual",
+          "counter": "Annual subscription",
+          "price_recurrence": "/per year",
+          "benefits": {
+            "1": "Child's timeline",
+            "2": "Birth date",
+            "3": "Real-time life counter",
+            "4": "Photo album on the cover",
+            "5": "Maximum of 6 photos on the cover",
+            "6": "Maximum of 4 photos per memory",
+            "7": "Exclusive QR Code for easy access",
+            "8": "Custom URL",
+            "9": "Unlimited edits!|Editable while subscription is active",
+            "10": "Duration forever!",
+            "11": "12-hour support"
+          }
         },
         "recommended": "Recommended",
-        "button": "Surprise now"
+        "button": "Immortalize now"
       },
       "features": {
         "title": "Various Features",
         "description": "See the features you can add to your personalized page",
         "1": {
-          "title": "Time counter",
-          "description": "Show how long you've been together with a real-time counter."
+          "title": "Timeline",
+          "description": "A timeline exclusively made for the baby's growth."
         },
         "2": {
-          "title": "Background animations",
-          "description": "Choose from various background animations to personalize the page."
+          "title": "Time Counter",
+          "description": "Track in real-time the development of each stage."
         },
         "3": {
-          "title": "Dedicated music",
-          "description": "Dedicate a special song. The song will play automatically on the page."
+          "title": "Exclusive QR Code",
+          "description": "Create your exclusive QR Code and make each interaction unique, practical, and memorable."
         },
         "4": {
-          "title": "Anywhere",
-          "description": "Create your page and share it from anywhere in the world. We accept international payments."
+          "title": "Images for Each Month",
+          "description": "Immortalize each unique moment of the month with special images that capture unforgettable memories!"
+        },
+        "5": {
+          "title": "Custom URL",
+          "description": "Transform your online presence with a custom URL."
+        },
+        "6": {
+          "title": "Colored Background",
+          "description": "Highlight your page with a vibrant and captivating colored background, creating a unique and engaging visual experience!"
         }
       }
     },
@@ -324,17 +350,17 @@
         "information_we_collect_title": "2. Information We Collect",
         "information_we_collect": "We collect the following information when using our platform:",
 
-        "registration_info": "• Registration Information: Name, start date of the relationship, personalized message, couple's photos, and email address.",
-        "payment_info": "• Payment Information: The email registered with Stripe or Pagar.me / Stone to process the payment and send the personalized page link.",
+        "registration_info": "• Registration Information: Name, pregnancy start date, birth date, personalized message, pregnancy photos, child photos, and email address.",
+        "payment_info": "• Payment Information: The email registered with Stripe or Pagar.me / Stone to process the payment and send the link to the personalized page.",
 
         "how_we_use_information_title": "3. How We Use Your Information",
         "how_we_use_information": "We use your information to:",
 
-        "use_payment_process": "• Process the payment and send the personalized page link via email.",
-        "use_personalize_page": "• Personalize and create the couple's page with the provided information.",
+        "use_payment_process": "• Process the payment and send the link to the personalized page via email.",
+        "use_personalize_page": "• Personalize and create the pregnancy page with the provided information.",
         "use_improve_service": "• Improve our services and customer support.",
 
-        "sharing_information_title": "4. Information Sharing",
+        "sharing_information_title": "4. Sharing Information",
         "sharing_information": "We do not share your personal information with third parties, except when necessary to process payments (Stripe and Pagar.me / Stone) or as required by law.",
 
         "security_title": "5. Security",
@@ -344,24 +370,24 @@
         "data_retention_description": "We will retain your personal information only for as long as necessary to fulfill the purposes for which it was collected, or as required by law.",
 
         "your_rights_title": "7. Your Rights",
-        "your_rights_description": "You have the right to access, correct, or delete your personal information. To exercise these rights, please contact us via email: contact@babyzzu.com.",
+        "your_rights_description": "You have the right to access, correct, or delete your personal information. To exercise these rights, contact us at: contact@babyzzu.com.",
 
-        "changes_to_policy_title": "8. Changes to This Privacy Policy",
-        "changes_to_policy_description": "We may update this Privacy Policy periodically. When this occurs, the “last updated” date at the top of this page will be changed. It is your responsibility to review this policy periodically to stay informed about any modifications.",
+        "changes_to_policy_title": "8. Changes to this Privacy Policy",
+        "changes_to_policy_description": "We may update this Privacy Policy periodically. When we do, the “last updated” date at the top of this page will be changed. It is your responsibility to review this policy periodically to stay informed about possible changes.",
 
         "contact_title": "9. Contact",
-        "contact_description": "If you have any questions about this Privacy Policy, please contact us via email: contact@babyzzu.com."
+        "contact_description": "If you have any questions about this Privacy Policy, please contact us at: contact@babyzzu.com."
       }
     },
     "terms": {
       "title": "Terms of Use",
-      "description": "By accessing and using our platform, you agree to comply with and be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the platform. Last updated: 01/09/2024",
+      "description": "By accessing and using our platform, you agree to comply with and be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the platform. Last updated: 09/01/2024",
       "content": {
         "acceptance_of_terms": "1. Acceptance of Terms",
         "acceptance_description": "By accessing and using our platform, you agree to comply with and be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the platform.",
 
         "service_description_title": "2. Service Description",
-        "service_description": "Babyzzu offers a service that allows couples to create a personalized page by filling out a form with their names, the start date of the relationship, a special message, and up to 8 media files. After filling out the form, the couple is directed to payment, and upon completion, they receive a link with a QR Code sent via email.",
+        "service_description": "Babyzzu offers a service that allows couples to create a personalized page by filling out a form with names, birth date, pregnancy start date, a special message, and up to 4 media per category. After filling out the form, the couple is directed to payment and, upon completion, receives a link with a QR Code sent by email.",
 
         "registration_and_security_title": "3. Registration and Security",
         "registration_and_security": "To use our services, you must provide a valid email address. We will not share your email with third parties.",
@@ -370,22 +396,122 @@
         "privacy_policy": "We value your privacy. Your data will not be processed or sold to third parties. The email provided will be used exclusively to send the link to your personalized page.",
 
         "user_content_title": "5. User Content",
-        "user_content": "You are solely responsible for the content you enter on the platform, including photos, messages, and information about the relationship. We are not responsible for inappropriate or illegal content uploaded by users.",
+        "user_content": "You are solely responsible for the content you enter on the platform, including photos, messages, and information about the pregnancy and baby. We are not responsible for inappropriate or illegal content uploaded by users.",
 
         "payments_refund_policy_title": "6. Payments and Refund Policy",
-        "payments_refund_policy": "Payments are processed through Stripe and Pagar.me / Stone. After payment confirmation, the couple will receive a link to access the personalized page via email. Refunds are not offered, except in exceptional cases, at our sole discretion.",
+        "payments_refund_policy": "Payments are processed through Stripe and Pagar.me / Stone. After payment confirmation, the responsible party will receive a link to access the personalized page via email. Refunds are not offered, except in exceptional cases, at our sole discretion.",
 
         "service_changes_title": "7. Service Changes",
-        "service_changes": "We are committed to keeping the service available during the contracted period, according to the chosen plan (1 year in the basic plan or lifetime in the advanced plan). However, in extraordinary situations, such as technical, legal, or financial issues, we reserve the right to modify or discontinue the service. In case of discontinuation, we will notify users in advance and seek to offer suitable alternatives whenever possible. Babyzzu is not responsible for losses resulting from modifications or interruptions in extraordinary circumstances, but we will make efforts to minimize impacts.",
+        "service_changes": "We are committed to keeping the service available during the contracted period, according to the chosen plan (basic or advanced plan). However, in extraordinary situations, such as technical, legal, or financial issues, we reserve the right to modify or discontinue the service. In case of discontinuation, we will notify users in advance and seek to offer suitable alternatives whenever possible. Babyzzu is not responsible for losses resulting from modifications or interruptions in extraordinary circumstances, but we will make efforts to minimize impacts.",
 
         "limitation_of_liability_title": "8. Limitation of Liability",
         "limitation_of_liability": "We will not be liable for indirect, incidental, special, or consequential damages related to the use or inability to use the platform.",
 
         "terms_update_title": "9. Terms Update",
-        "terms_update": "We may revise these Terms of Use periodically. When this occurs, we will update the “last updated” date at the top of this page. It is your responsibility to review the Terms of Use periodically to stay informed about any changes.",
+        "terms_update": "We may revise these Terms of Use periodically. When we do, we will update the “last updated” date at the top of this page. It is your responsibility to review the Terms of Use periodically to stay informed about possible changes.",
 
         "contact_title": "10. Contact",
-        "contact": "If you have any questions about the Terms of Use, please contact us via email: contact@babyzzu.com"
+        "contact": "If you have any questions about the Terms of Use, please contact us at: contact@babyzzu.com"
+      }
+    },
+    "auth": {
+      "request": {
+        "title": "Access your account",
+        "description": "Enter your email to receive a validation code and access your account.",
+        "form": {
+          "email": {
+            "label": "Email",
+            "placeholder": "your@email.com",
+            "validation": {
+              "invalid": "Invalid email",
+              "required": "Email is required"
+            }
+          },
+          "toast": {
+            "title": {
+              "success": "Success Yay!",
+              "error": "An error occurred!"
+            },
+            "codes": {
+              "500": "Internal server error, please try again later",
+              "400": "This action is not allowed",
+              "404": "We did not find any account with this email"
+            }
+          },
+          "submit": "Send code"
+        }
+      },
+      "confirm": {
+        "title": "Validation code",
+        "description": "Enter the validation code sent to your email or",
+        "form": {
+          "code": {
+            "label": "Verification code",
+            "placeholder": "000000",
+            "validation": {
+              "invalid": "Invalid code",
+              "required": "Code is required"
+            }
+          },
+          "toast": {
+            "title": {
+              "success": "Success Yay!",
+              "error": "An error occurred!"
+            },
+            "codes": {
+              "500": "Internal server error, please try again later",
+              "400": "This action is not allowed",
+              "404": "Invalid or non-existent code"
+            }
+          },
+
+          "request": "click here to go back",
+          "resend": "Resend code",
+          "submit": "Validate code"
+        }
+      }
+    },
+    "account": {
+      "pages": {
+        "title": "My Pages",
+        "description": "Here are all the personalized pages you have created. You can view, edit, or deactivate them.",
+        "page-card": {
+          "created-at": "Created at",
+          "status": {
+            "active": "Active",
+            "inactive": "Inactive",
+            "pending": "Awaiting payment"
+          },
+          "actions": {
+            "edit": "Edit",
+            "view": "View",
+            "disable": "Deactivate",
+            "enable": "Activate",
+            "close": "Close",
+            "pay": "Make payment"
+          }
+        },
+        "edit": {
+          "title": "Edit Page",
+          "description": "Edit the information of the personalized page. You can change the title, message, start date, photos, music, background animation, and plan.",
+          "images-attention": "Attention: When changing the images, they will instantly reflect on the page.",
+          "save-info": "Attention: Go to the end of the steps and click save to confirm the changes.",
+          "toast": {
+            "error": {
+              "title": "Error saving",
+              "description": "An error occurred while saving the page. Please try again."
+            },
+            "success": {
+              "title": "Success!",
+              "description": "Page saved successfully."
+            }
+          },
+          "actions": {
+            "back": "Back",
+            "next": "Next",
+            "save": "Save"
+          }
+        }
       }
     }
   },
@@ -397,35 +523,30 @@
       "continue": "Continue page"
     },
     "step1": {
-      "title": "Page Title",
-      "description": "Write the dedicatory title for the page. E.g., John & Mary or Happy Birthday or etc!",
+      "title": "What is your child's name?",
+      "description": "Enter your child's name and gender to personalize the page.",
       "input": {
-        "placeholder": "E.g., John & Mary or Happy Birthday or etc",
+        "placeholder": "Ex: Caio Castro",
         "errors": {
           "min": "Minimum of 3 characters",
           "max": "Maximum of 100 characters"
+        }
+      },
+      "gender": {
+        "options": {
+          "male": "Male",
+          "female": "Female"
+        },
+        "errors": {
+          "required": "Select the gender"
         }
       },
       "back": "Back step",
       "button": "Next step"
     },
     "step2": {
-      "title": "Message",
-      "description": "Write a special message. Be creative and show all your affection.",
-      "input": {
-        "label": "Message",
-        "placeholder": "E.g., John, you are the most amazing person I have ever met. Thank you for everything!",
-        "errors": {
-          "min": "Minimum of 2 characters",
-          "max": "Maximum of {limit} characters"
-        }
-      },
-      "back": "Back step",
-      "button": "Next step"
-    },
-    "step3": {
-      "title": "Start Date",
-      "description": "Enter the start date that symbolizes the beginning of a union, relationship, friendship, etc.",
+      "title": "When was he born?",
+      "description": "Enter the child's birth date.",
       "show-types": {
         "title": "Display mode",
         "default": "Default",
@@ -435,19 +556,13 @@
       "back": "Back step",
       "button": "Next step"
     },
-    "step4": {
-      "title": "Photos",
-      "description": "Attach photos and choose the display mode to personalize the page. You can add up to 8 photos.",
+    "step3": {
+      "title": "Album Cover Photos",
+      "description": "Add photos for the album cover. You can add up to 6 photos.",
       "input": {
-        "label": "Click to add photos",
-        "placeholder": "PNG, JPG, JPEG, GIF (max. 8 photos)",
-        "errors": {
-          "maxFiles": "Maximum of 8 photos allowed",
-          "not-image": "The file must be an image",
-          "big-size": "The file is too large. Maximum of 100MB",
-          "empty": "Image is corrupted",
-          "not-supported": "File format not supported"
-        }
+        "title": "PNG, JPG, JPEG, GIF (maximum 6 photos)",
+        "label": "Add photos for the Album cover",
+        "placeholder": "The number of photos changes the presentation style"
       },
       "toast": {
         "error-save": {
@@ -455,75 +570,117 @@
           "description": "An error occurred while saving the image. Please try again."
         }
       },
-      "show-types": {
-        "title": "Display mode",
-        "coverflow": "Coverflow",
-        "cards": "Cards",
-        "flip": "Flip",
-        "cube": "Cube"
+      "back": "Back step",
+      "button": "Next step"
+    },
+    "step4": {
+      "title": "Special memories",
+      "description": "Add as many memories as you want. For example: First bath, First smile.",
+      "accordion": {
+        "title": "Memory",
+        "actions": {
+          "new": "New memory",
+          "delete": "Delete memory"
+        }
       },
+      "name": {
+        "label": "Memory name",
+        "placeholder": "Ex: First bath",
+        "errors": {
+          "min": "Minimum of 3 characters",
+          "max": "Maximum of 100 characters"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Ex: The first bath was amazing!",
+        "errors": {
+          "min": "Minimum of 3 characters",
+          "max": "Maximum of 1000 characters"
+        }
+      },
+      "date": {
+        "label": "Memory date"
+      },
+      "images": {
+        "label": "Memory photos",
+        "placeholder": "Click to add photos",
+        "max": "PNG, JPG, JPEG, GIF (max. 4 photos)",
+        "errors": {
+          "maxFiles": "Maximum of 4 photos allowed",
+          "not-image": "The file must be an image",
+          "big-size": "The file is too large. Maximum of 100MB",
+          "empty": "Image is corrupted",
+          "not-supported": "File format not supported"
+        },
+        "toast": {
+          "error-save": {
+            "title": "Error saving",
+            "description": "An error occurred while saving the image. Please try again."
+          }
+        }
+      },
+      "skip": "Skip step",
       "back": "Back step",
       "button": "Next step"
     },
     "step5": {
-      "title": "Dedicated Music",
-      "description": "Dedicate a special song. The song will play automatically on the page.",
-      "input": {
-        "label": "YouTube Music",
-        "placeholder": "E.g., Coldplay - Sky full of stars"
-      },
-      "click-select": "Click to select",
-      "back": "Back step",
-      "go-payment": "Go to payment",
-      "button": "Next step"
-    },
-    "step6": {
-      "title": "Background Animation",
-      "description": "Choose a background animation for the page. You can choose from the options below.",
-      "is-pro": "pro plan",
-      "animations": {
-        "none": "None",
-        "hearts": "Heart Rain",
-        "stars": "Starry Sky with Comets",
-        "meteors": "Starry Sky with Meteors",
-        "aurora": "Aurora",
-        "vortex": "Color Vortex",
-        "emojis": "or choose 3 emojis"
-      },
-      "back": "Back step",
-      "button": "Next step"
-    },
-    "step7": {
-      "title": "Ideal Plan",
+      "title": "Ideal plan",
       "description": "Choose the ideal plan for your page. You can choose from the plans below.",
       "plans": {
-        "basic": {
-          "title": "Annual",
-          "counter": "Real-time counter",
-          "text": "Dedicated text",
-          "date": "Start date",
-          "qr-code": "Exclusive QR code",
-          "images": "Maximum of 4 images",
-          "music": "No music",
-          "background": "No dynamic background",
-          "animations": "No exclusive animations",
-          "url": "Custom URL",
-          "support": "24-hour support",
-          "price_recurrency": "/per year"
+        "unique": {
+          "title": "Basic Plan",
+          "counter": "One-time purchase",
+          "price_recurrence": "/once",
+          "benefits": {
+            "1": "Child's timeline",
+            "2": "Birth date",
+            "3": "Real-time life counter",
+            "4": "Photo album on the cover",
+            "5": "Maximum of 3 photos on the cover",
+            "6": "Maximum of 2 photos per memory",
+            "7": "Exclusive QR Code for easy access",
+            "8": "Custom URL",
+            "9": "Unlimited edits!|No edits",
+            "10": "Forever!|Duration of 1 year",
+            "11": "12-hour support"
+          }
         },
-        "pro": {
-          "title": "Lifetime",
-          "counter": "Real-time counter",
-          "text": "Dedicated text",
-          "date": "Start date",
-          "qr-code": "Exclusive QR code",
-          "images": "Maximum of 8 images",
-          "music": "With music",
-          "background": "Dynamic background",
-          "animations": "With exclusive animations",
-          "url": "Custom URL",
-          "support": "24-hour support",
-          "price_recurrency": "/one time"
+        "month": {
+          "title": "Monthly",
+          "counter": "Monthly subscription",
+          "price_recurrence": "/per month",
+          "benefits": {
+            "1": "Child's timeline",
+            "2": "Birth date",
+            "3": "Real-time life counter",
+            "4": "Photo album on the cover",
+            "5": "Maximum of 6 photos on the cover",
+            "6": "Maximum of 4 photos per memory",
+            "7": "Exclusive QR Code for easy access",
+            "8": "Custom URL",
+            "9": "Unlimited edits!|Editable while subscription is active",
+            "10": "Forever!|Active while subscription is active",
+            "11": "12-hour support"
+          }
+        },
+        "annual": {
+          "title": "Annual",
+          "counter": "Annual subscription",
+          "price_recurrence": "/per year",
+          "benefits": {
+            "1": "Child's timeline",
+            "2": "Birth date",
+            "3": "Real-time life counter",
+            "4": "Photo album on the cover",
+            "5": "Maximum of 6 photos on the cover",
+            "6": "Maximum of 4 photos per memory",
+            "7": "Exclusive QR Code for easy access",
+            "8": "Custom URL",
+            "9": "Unlimited edits!|Editable while subscription is active",
+            "10": "Duration forever!",
+            "11": "12-hour support"
+          }
         }
       },
       "recommended": "Recommended",
@@ -531,40 +688,81 @@
       "button": "Finish"
     }
   },
+  "slug": {
+    "birth_date": {
+      "day": "Day",
+      "month": "Month",
+      "year": "Year"
+    },
+    "facts": {
+      "title": "Get to know a little about me:"
+    }
+  },
   "checkout": {
+    "order": {
+      "title": "Order Summary",
+      "description": "Review your items before payment",
+      "plans": {
+        "unique": {
+          "title": "Basic Plan",
+          "description": "Basic plan with one-time payment, but does not include edits and lasts 1 year."
+        },
+        "month": {
+          "title": "Monthly",
+          "description": "Monthly plan with monthly payment, includes unlimited edits and lasts while the subscription is active."
+        },
+        "annual": {
+          "title": "Annual",
+          "description": "Annual plan with annual payment, includes unlimited edits while the subscription is active and lasts forever."
+        }
+      },
+      "order-bumps": {
+        "title": "Limited-time offer",
+        "save": "Save 50%"
+      },
+      "total": "Total"
+    },
     "payment": {
-      "select-method": "Payment method",
-      "footer": {
-        "accept": "By making the payment you accept the",
-        "terms-of-policy": "Terms of use",
-        "and": "and",
-        "privacy-policy": "Privacy policy"
+      "title": "Payment Method",
+      "description": "Choose the ideal payment method for you",
+      "secure": "Secure payment by Pagar.me",
+      "methods": {
+        "card": { "title": "Credit Card", "description": "Pay with Credit Card" },
+        "pix": { "title": "Pix", "description": "Pay with Pix" },
+        "paypal": {
+          "title": "PayPal",
+          "description": "Click the button above to complete your payment with PayPal. You will be redirected to PayPal's secure website."
+        },
+        "stripe": {
+          "title": "Stripe",
+          "description": "Click the button above to complete your payment with Stripe. You will be redirected to Stripe's secure website."
+        }
       },
       "inputs": {
         "title": "Information",
         "name": {
           "label": "Name",
-          "placeholder": "E.g., John Doe",
-          "invalid": "Invalid name",
+          "placeholder": "Ex: João da Silva",
+          "invalid": "Invalid Name",
           "required": "Required field"
         },
         "document": {
           "label": "CPF",
-          "placeholder": "E.g., 999.999.999-99",
+          "placeholder": "Ex: 999.999.999-99",
           "invalid": "Invalid CPF",
           "required": "Required field"
         },
         "email": {
           "label": "Email",
-          "placeholder": "E.g., your.email@gmail.com",
-          "invalid": "Invalid email",
+          "placeholder": "Ex: your.email@gmail.com",
+          "invalid": "Invalid Email",
           "required": "Required field"
         },
         "phone": {
           "label": "Phone",
-          "placeholder": "E.g., (99) 99999-9999",
-          "important": "* You will also receive your product via WhatsApp if you do not receive it by email.",
-          "invalid": "Invalid phone number",
+          "placeholder": "Ex: (99) 99999-9999",
+          "important": "* You will also receive your product via WhatsApp, in case you do not receive it by email.",
+          "invalid": "Invalid Phone",
           "required": "Required field"
         }
       },
@@ -572,54 +770,57 @@
         "title": "Card Information",
         "name": {
           "label": "Name",
-          "placeholder": "E.g., John Doe",
-          "invalid": "Invalid name",
+          "placeholder": "Ex: João da Silva",
+          "invalid": "Invalid Name",
           "required": "Required field"
         },
         "number": {
           "label": "Card Number",
-          "placeholder": "E.g., 1234 5678 1234 5678",
-          "invalid": "Invalid number",
+          "placeholder": "Ex: 1234 5678 123 4567",
+          "invalid": "Invalid Number",
           "required": "Required field"
         },
         "expiry": {
-          "label": "Expiry Date",
+          "label": "Expiry",
           "placeholder": "MM/YY",
-          "invalid": "Invalid date",
+          "invalid": "Invalid Date",
           "required": "Required field"
         },
         "cvv": {
           "label": "CVV",
-          "placeholder": "E.g., 123",
+          "placeholder": "Ex: 123",
           "invalid": "Invalid CVV",
           "required": "Required field"
         }
       },
-      "go-to": "Go to payment",
-      "create-pix": "Create Pix QR Code",
-      "submit": "Make payment",
+      "buttons": {
+        "go-to": "Go to payment",
+        "create-pix": "Create Pix QR Code",
+        "submit": "Make payment"
+      },
       "toast": {
         "error-create": {
           "title": "An error occurred!",
-          "description": "Unable to create the page. Please try again or contact support!"
+          "description": "Could not create the page. Please try again or contact support!"
         },
         "error-card": {
           "title": "An error occurred!",
-          "description": "Payment could not be processed. Please check your card details and try again!"
+          "description": "Could not process the payment. Please check the card details and try again!"
         }
       }
     },
+    "footer": {
+      "accept": "By making the payment you accept the",
+      "terms-of-use": "Terms of Use",
+      "and": "and",
+      "privacy-policy": "Privacy Policy"
+    },
     "pix": {
-      "title": "Payment via Pix",
-      "description": "Scan the QR Code with your banking app or copy the Pix key below.",
+      "description": "Scan the QR code with your banking app to complete the payment. The code will expire in 30 minutes.",
       "tooltip": {
         "copy": "Copy",
         "copied": "Copied!"
-      },
-      "button": "I've already paid"
-    },
-    "stone-card": {
-      "loading": "One moment, we are processing your payment."
+      }
     },
     "success": {
       "title": "Payment confirmed!",
