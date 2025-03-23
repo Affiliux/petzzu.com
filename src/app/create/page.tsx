@@ -16,6 +16,8 @@ import { Steps } from '@/components/steps'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
+export const runtime = 'edge'
+
 export default function Page() {
   // hooks
   const t = useTranslations()
