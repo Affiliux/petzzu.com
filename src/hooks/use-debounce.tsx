@@ -1,15 +1,14 @@
+'use client'
+
 import { useCallback, useEffect, useState } from 'react'
 
 /**
  *
- * useDebounce
- *
+ * @name useDebounce
  * @category Hooks - useDebounce
- * @version 0.0.1
  *
  * @param {any} value - The value to be debounced
  * @param {number} delay - The delay in milliseconds
- *
  * @return {any} - The debounced value
  */
 

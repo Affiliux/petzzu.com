@@ -1,29 +1,21 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/no-children-prop */
 'use client'
 
-import { useEffect, useState } from 'react'
+import React from 'react'
 
-import { format } from 'date-fns'
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
-import { BackgroundAnimationProps, PlanProps, YouTubeVideoProps } from '@/typings/application'
-import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
+import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useApplication } from '@/contexts/ApplicationContext'
 
-import { AuroraBackground } from './ui/aurora-background'
-import { Meteors } from './ui/meteors'
-import { ShootingStars } from './ui/shooting-stars'
-import { StarsBackground } from './ui/stars-background'
-import { Vortex } from './ui/vortex'
-import { CarouselPhotos } from './carousel'
+import { BabyTimeline } from './baby-timeline'
+import { CloudBackground } from './clouds-background'
 import { DateCount } from './date-count'
-import { EmojiRain } from './emoji-rain'
-import { Music } from './music'
+import PicturesGridPreview from './pictures-grid-preview'
 
-import { BackgroundAnimationEnum, DateShowTypeEnum, PhotosSliderEnum } from '@/enums'
+import { DateShowTypeEnum } from '@/enums'
+import { formatAge } from '@/lib/helpers/formatters'
 
 const dancing = Dancing_Script({
   weight: '700',
@@ -37,31 +29,27 @@ const lora = Lora({
 })
 
 interface PreviewDefaultProps {
-  couple: CreatePrePayloadProps
-  mediaShowType: PhotosSliderEnum
+  child: CreatePrePayloadProps
   dateShowType: DateShowTypeEnum
   medias: MediaPreProps[]
-  song: YouTubeVideoProps | undefined
-  animation: BackgroundAnimationProps
-  plan: PlanProps | undefined
 }
 
-export const PreviewDefault = ({
-  couple,
-  song,
-  medias,
-  mediaShowType,
-  dateShowType,
-  animation,
-  plan,
-}: PreviewDefaultProps) => {
+export const PreviewDefault = ({ child, dateShowType, medias }: PreviewDefaultProps) => {
+  // hooks
   const t = useTranslations()
 
+  // contexts
   const { locale } = useApplication()
 
-  const [showPro, setShowPro] = useState<boolean>(true)
+  // variables
+  const { value, unit } = formatAge(t, child?.birth_date)
 
-  const removeEmojis = (str: string) => {
+  // variables
+  const FORMAT_FNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
+  const CHILD_NAME_PARTS = child?.child_name?.split(' ')
+  const DISPLAY_NAME = CHILD_NAME_PARTS?.length > 2 ? `${CHILD_NAME_PARTS[0]} ${CHILD_NAME_PARTS[1]}` : child.child_name
+
+  function removeEmojis(str: string) {
     return str
       .replace(/[\u{1F600}-\u{1F64F}]/gu, '') // Removes face emojis
       .replace(/[\u{1F300}-\u{1F5FF}]/gu, '') // Removes symbols and icon emojis
@@ -70,170 +58,89 @@ export const PreviewDefault = ({
       .replace(/[\u{2700}-\u{27BF}]/gu, '') // Removes various symbol emojis
   }
 
-  const baseSlug = removeEmojis(couple?.coupleName ?? '')
-    .normalize('NFD') // Normalize to separate accent from letters
-    .replace(/[\u0300-\u036f]/g, '') // Remove accent marks
-    .replace(/[^a-zA-Z0-9 ]/g, '') // Removes special characters
-    .replace(/\s+/g, '-') // Replaces spaces with hyphens
-    .replace(/^-+|-+$/g, '') // Removes extra hyphens at the start or end
-    .toLowerCase()
-    .replace(/&/g, 'e') // Replaces '&' with 'e'
-
-  const formatFNS = locale.includes('pt') ? ptBR : locale.includes('es') ? es : enUS
-
-  useEffect(() => {
-    if (plan?.sku.includes('pro')) setShowPro(true)
-    else setShowPro(false)
-  }, [plan, song])
+  function baseSlug() {
+    return removeEmojis(child?.child_name ?? '')
+      .normalize('NFD') // Normalize to separate accent from letters
+      .replace(/[\u0300-\u036f]/g, '') // Remove accent marks
+      .replace(/[^a-zA-Z0-9 ]/g, '') // Removes special characters
+      .replace(/\s+/g, '-') // Replaces spaces with hyphens
+      .replace(/^-+|-+$/g, '') // Removes extra hyphens at the start or end
+      .toLowerCase()
+      .replace(/&/g, 'e') // Replaces '&' with 'e'
+  }
 
   return (
-    <div className='relative no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-neutral-900 shadow-lg shadow-black'>
-      <div className='bg-transparent'>
-        {animation.id === BackgroundAnimationEnum.STARS && showPro && (
-          <>
-            <ShootingStars starHeight={3} starWidth={16} maxDelay={200} />
-            <StarsBackground starDensity={0.001} twinkleProbability={10} minTwinkleSpeed={0.5} maxTwinkleSpeed={1} />
-          </>
-        )}
+    <div className='relative border border-neutral-200/60 no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-200/50'>
+      <div className='absolute z-50 w-full flex justify-between items-center text-right bg-white rounded-t-lg p-3'>
+        <div className='w-1/6 flex items-center gap-2'>
+          <div className='w-3 h-3 rounded-full bg-red-500' />
+          <div className='left-8 w-3 h-3 rounded-full bg-yellow-500' />
+          <div className='left-12 w-3 h-3 rounded-full bg-green-500' />
+        </div>
 
-        {animation.id === BackgroundAnimationEnum.METEORS && showPro && (
-          <>
-            <Meteors number={20} />
-            <StarsBackground starDensity={0.001} twinkleProbability={10} minTwinkleSpeed={0.5} maxTwinkleSpeed={1} />
-          </>
-        )}
+        <div className='w-5/6'>
+          <p className='text-xs text-neutral-900 mt-[1.5px] text-right truncate'>https://babyzzu.com/{baseSlug()}</p>
+        </div>
+      </div>
 
-        {animation.id === BackgroundAnimationEnum.HEARTS && <EmojiRain emojis={['❤️']} quantity={25} />}
-
-        {animation.id === BackgroundAnimationEnum.AURORA && showPro && <AuroraBackground children={<></>} />}
-
-        {animation.id === BackgroundAnimationEnum.VORTEX && showPro && (
-          <div className='min-h-screen h-full w-full absolute top-0 z-20 bg-transparent'>
-            <Vortex
-              backgroundColor='transparent'
-              particleCount={400}
-              baseHue={300}
-              baseSpeed={0.01}
-              rangeSpeed={0.2}
-              rangeY={typeof window !== 'undefined' ? window?.outerHeight : 0}
-            />
+      <div className='relative container h-full mt-14 bg-theme-100 lg:bg-theme-100 z-40'>
+        <div className='relative rounded-lg h-full z-40'>
+          <div className='flex justify-center items-center mb-8'>
+            {child?.child_name &&
+              (child?.child_name?.length > 8 ? (
+                <div className='flex flex-col items-center text-center'>
+                  <div className='flex flex-row items-baseline gap-2'>
+                    {child?.birth_date && (
+                      <>
+                        <span className='text-7xl font-bold text-theme-600'>{value}</span>
+                        <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
+                      </>
+                    )}
+                  </div>
+                  <div>
+                    <div className='flex flex-col ml-3'>
+                      <div className='text-4xl font-medium text-theme-600 leading-tight font-happy-school'>
+                        {DISPLAY_NAME}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className='flex items-center'>
+                  {child.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
+                  <div className='flex flex-col ml-3 mt-3'>
+                    <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
+                    <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
+                      {DISPLAY_NAME}
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
-        )}
 
-        {animation.id === BackgroundAnimationEnum.EMOJIS && (
-          <EmojiRain
-            emojis={[
-              animation.component.split('-')[0],
-              animation.component.split('-')[1],
-              animation.component.split('-')[2],
-            ]}
-            quantity={20}
+          <div className='flex items-center justify-center w-full mb-8'>
+            <PicturesGridPreview images={medias} />
+          </div>
+
+          <p
+            className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
+            dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
           />
-        )}
-      </div>
 
-      <div className='absolute z-50 w-full items-center justify-center lg:text-center text-right bg-white rounded-t-lg p-3'>
-        <p className='text-xs text-neutral-900 mt-[1.5px]'>https://babyzzu.com/{baseSlug}</p>
+          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && (
+            <div className='mt-16 md:mt-8 text-center p-6'>
+              <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
+            </div>
+          )}
 
-        <div className='absolute top-4 left-4 w-3 h-3 rounded-full bg-red-500' />
-        <div className='absolute top-4 left-8 w-3 h-3 rounded-full bg-yellow-500' />
-        <div className='absolute top-4 left-12 w-3 h-3 rounded-full bg-green-500' />
-      </div>
+          {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} />}
+          {!!child?.birth_date && <DateCount date={child.birth_date} type={dateShowType} />}
+        </div>
 
-      <div className='relative container h-full mt-14 bg-neutral-900/70 lg:bg-neutral-900/40 z-40'>
-        {dateShowType === DateShowTypeEnum.DEFAULT && (
-          <div className='rounded-lg h-full'>
-            {!!medias.length && (
-              <div className='flex items-center justify-center w-full'>
-                <CarouselPhotos type={mediaShowType} images={medias} />
-              </div>
-            )}
-
-            <h1
-              className={`${dancing.className} text-3xl text-[#FF0000] font-bold text-center ${
-                !!medias.length && 'mt-12'
-              }`}
-            >
-              {couple?.coupleName}
-            </h1>
-            <p
-              className={`${lora.className} text-gray-300 text-md text-center mt-2 mb-16`}
-              dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
-            />
-
-            {!!couple?.startDate && <DateCount type={dateShowType} date={couple.startDate} />}
-          </div>
-        )}
-
-        {dateShowType === DateShowTypeEnum.CLASSIC && (
-          <div className='rounded-lg h-full'>
-            <h1
-              className={`${dancing.className} text-3xl text-[#FF0000] font-bold text-center ${
-                !!medias.length ? 'mt-12' : 'mb-4'
-              }`}
-            >
-              {couple?.coupleName}
-            </h1>
-
-            {!!medias.length && (
-              <div className='flex items-center justify-center w-full my-10'>
-                <CarouselPhotos type={mediaShowType} images={medias} />
-              </div>
-            )}
-
-            {!!couple?.startDate && <DateCount type={dateShowType} date={couple.startDate} />}
-
-            <p
-              className={`${lora.className} text-gray-300 text-md text-center mt-2`}
-              dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
-            />
-          </div>
-        )}
-
-        {dateShowType === DateShowTypeEnum.SIMPLE && (
-          <div className='rounded-lg h-full'>
-            {!!couple?.startDate && (
-              <div className='my-10'>
-                <DateCount type={dateShowType} date={couple.startDate} />
-              </div>
-            )}
-
-            {!!medias.length && (
-              <div className='flex items-center justify-center w-full'>
-                <CarouselPhotos type={mediaShowType} images={medias} />
-              </div>
-            )}
-
-            {couple.startDate && (
-              <p className='text-sm font-semibold text-center text-white mt-8 mb-14 opacity-60'>
-                {t('themes.default.since')} {format(new Date(couple.startDate), 'dd')} {t('themes.default.of')}{' '}
-                {format(new Date(couple.startDate), 'MMMM', { locale: formatFNS })} {t('themes.default.of')}{' '}
-                {format(new Date(couple.startDate), 'yyy', { locale: ptBR })}
-              </p>
-            )}
-
-            <h1
-              className={`${dancing.className} text-3xl text-[#FF0000] font-bold text-center ${
-                !!medias.length && 'mt-12'
-              }`}
-            >
-              {couple?.coupleName}
-            </h1>
-            <p
-              className={`${lora.className} text-gray-300 text-md text-center mt-3`}
-              dangerouslySetInnerHTML={couple?.message ? { __html: couple.message } : undefined}
-            />
-          </div>
-        )}
+        <CloudBackground />
       </div>
 
       <div className='h-72' />
-
-      {!!song && song.url && showPro && (
-        <div className='sticky bottom-0 left-0 z-50'>
-          <Music url={song.url} />
-        </div>
-      )}
     </div>
   )
 }

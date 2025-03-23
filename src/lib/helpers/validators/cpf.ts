@@ -1,10 +1,8 @@
 type ValidateCPFProps = string | undefined
 
 /**
- * Validate a cpf.
- *
- * @category Helpers - Validators - Cpf
- * @version 0.0.1
+ * @name validateCPF
+ * @category Helpers - Validators
  *
  * @interface ValidateCPFProps - the cpf to be validated.
  * @return boolean

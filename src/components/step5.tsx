@@ -1,56 +1,39 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { IconChevronLeft, IconChevronRight, IconLoader, IconPlayerPlayFilled, IconX } from '@tabler/icons-react'
+import { IconCheck, IconChevronLeft, IconChevronRight, IconLoader, IconStarFilled, IconX } from '@tabler/icons-react'
 
-import { YouTubeVideoProps } from '@/typings/application'
-import { CreatePrePayloadProps } from '@/typings/create'
+import type { DiscountProps, PlanProps } from '@/typings/application'
 import { useApplication } from '@/contexts/ApplicationContext'
 
-import useDebounce from '@/hooks/use-debounce'
-
-import { Input } from './ui/input'
-
-import { ThemeShowTypeEnum } from '@/enums'
+import { HoverBorderGradient } from './ui/hover-border-gradient'
 
 interface Step5Props {
-  theme: ThemeShowTypeEnum
-  couple: CreatePrePayloadProps
-  selected: YouTubeVideoProps | undefined
-  setCouple: Dispatch<SetStateAction<CreatePrePayloadProps>>
-  setSong: Dispatch<SetStateAction<YouTubeVideoProps | undefined>>
+  plans: PlanProps[]
+  discount: DiscountProps | null
+  selected: PlanProps | undefined
+  setPlan: Dispatch<SetStateAction<PlanProps | undefined>>
   onNext: () => Promise<void>
   onBack: () => void
 }
 
-export const Step5 = ({ theme, couple, selected, setSong, onNext, onBack }: Step5Props) => {
+export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: Step5Props) => {
+  // hooks
   const t = useTranslations()
 
-  const { yt_search_list, set_yt_search_list, handleGetYtVideos } = useApplication()
+  // contexts
+  const { currency } = useApplication()
 
-  const [value, setValue] = useState<string | undefined>(couple.yt_song)
-  const [loading, setLoading] = useState<boolean>(false)
+  // states
+  const [loading, setLoading] = useState(false)
 
-  const debouncedInput = useDebounce(value, 500)
+  // variables
+  const FORMAT_INTL_LOCALE = t('config.defaults.country')
+  const FORMAT_INTL_CURRENCY = currency ?? 'BRL'
 
-  async function onSearch(name: string) {
-    setLoading(true)
-
-    try {
-      await handleGetYtVideos(name)
-    } catch (error: any) {
-      console.error(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  async function onSubmit() {
+  async function handleSubmit() {
     setLoading(true)
 
     try {
@@ -63,130 +46,178 @@ export const Step5 = ({ theme, couple, selected, setSong, onNext, onBack }: Step
   }
 
   useEffect(() => {
-    if (debouncedInput && debouncedInput?.length > 3) onSearch(debouncedInput)
-    else set_yt_search_list([])
-  }, [debouncedInput])
+    const find = plans.find(plan => plan.sku.includes(`plan_month_${t('config.defaults.currency')}`))
+
+    if (!selected) setPlan(find)
+    if (selected && !selected.sku.includes(`plan_month_${t('config.defaults.currency')}`)) setPlan(find)
+  }, [])
 
   return (
-    <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
-      {selected ? (
-        <motion.div
-          layoutId={`card`}
-          key={`card`}
-          className='p-4 flex justify-between items-center bg-neutral-800 rounded-xl w-full'
-        >
-          <div className='flex gap-4 items-center justify-center'>
-            <motion.div layoutId={`image`}>
-              <img
-                src={selected.thumbnail ?? ''}
-                alt={selected.title ?? ''}
-                className='h-20 w-20 md:h-14 md:w-14 rounded-lg object-cover object-top'
-                width={80}
-                height={80}
-              />
-            </motion.div>
-            <div className='w-2/3 lg:w-3/4'>
-              <motion.h3
-                layoutId={`title-${selected.id}`}
-                className='font-medium text-neutral-200 text-left max-w-36 lg:max-w-full line-clamp-2 lg:line-clamp-none'
-              >
-                {selected.title}
-              </motion.h3>
-              <motion.p layoutId={`description`} className='text-neutral-400 text-left text-xs'>
-                {selected.durationFormatted}
-              </motion.p>
-            </div>
-          </div>
-          <motion.button
-            layoutId={`button`}
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-
-              setSong(undefined)
-              setValue('')
-            }}
-            className='p-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black'
-          >
-            <IconX size={16} />
-          </motion.button>
-        </motion.div>
-      ) : (
-        <Input
-          id='song'
-          placeholder={t('steps.step5.input.placeholder')}
-          type='text'
-          autoFocus={true}
-          autoComplete='off'
-          className='w-full'
-          onChange={e => setValue(e.target.value)}
-        />
-      )}
-
-      {yt_search_list.length > 0 && !selected && (
-        <div className='flex flex-col items-center gap-4 w-full max-h-72 overflow-y-scroll'>
-          {yt_search_list.map(video => (
-            <motion.div
-              layoutId={`card-${video.id}`}
-              key={`card-${video.id}`}
+    <div className='relative flex flex-col gap-8 z-50 w-full mt-8'>
+      <div className='flex flex-col gap-4'>
+        {plans.map(plan =>
+          plan.sku.includes(FORMAT_INTL_CURRENCY) && FORMAT_INTL_LOCALE.includes('-') && FORMAT_INTL_CURRENCY ? (
+            <div
+              key={plan.sku}
               onClick={() => {
-                setValue('')
-                set_yt_search_list([])
-                setSong(video)
+                if (plan.sku !== selected?.sku) setPlan(plan)
+                else handleSubmit()
               }}
-              className='relative p-4 flex justify-between items-center hover:bg-neutral-800 rounded-xl cursor-pointer w-full'
+              className='w-full'
             >
-              <div className='flex gap-4 items-center justify-center'>
-                <motion.div layoutId={`image-${video.id}`}>
-                  <img
-                    width={80}
-                    height={80}
-                    src={video.thumbnail ?? ''}
-                    alt={video.title ?? ''}
-                    className='h-20 w-20 md:h-14 md:w-14 rounded-lg object-cover object-top'
-                  />
-                </motion.div>
-                <div className='w-2/3 lg:w-3/4'>
-                  <motion.h3
-                    layoutId={`title-${video.id}`}
-                    className='font-medium text-neutral-200 text-left max-w-36 lg:max-w-full line-clamp-2 lg:line-clamp-none'
-                  >
-                    {video.title}
-                  </motion.h3>
-                  <motion.p layoutId={`description-${video.id}`} className='text-neutral-400 text-left text-xs'>
-                    {video.durationFormatted}
-                  </motion.p>
-                </div>
-              </div>
-
-              <motion.button
-                layoutId={`button-${video.id}`}
-                onClick={e => {
-                  setValue('')
-                  set_yt_search_list([])
-                  setSong(video)
-                }}
-                className='p-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-black'
+              <HoverBorderGradient
+                containerClassName={`rounded-xl w-full transform duration-200 bg-white ${
+                  plan.sku === selected?.sku ? 'scale-105 my-2' : 'opacity-50'
+                }`}
+                as='button'
+                className={`relative p-5 w-full flex gap-8 text-left cursor-pointer bg-white transform duration-200`}
               >
-                <IconPlayerPlayFilled size={16} />
-              </motion.button>
+                <div className='flex flex-col justify-between'>
+                  <div className='w-full'>
+                    <p className='text-2xl font-bold relative z-20 text-left text-neutral-900 mt-4'>
+                      {t(`steps.step5.plans.${plan.sku.split('_')[1]}.title`)}
+                    </p>
+                    <p className='text-lg font-light relative z-20 text-left text-muted-foreground'>
+                      {t(`steps.step5.plans.${plan.sku.split('_')[1]}.counter`)}
+                    </p>
+                  </div>
 
-              <p className='text-xs text-gray-600 absolute bottom-1 right-2 z-30'>{t('steps.step5.click-select')}</p>
-            </motion.div>
-          ))}
-        </div>
-      )}
+                  <div className='md:hidden flex text-neutral-200 relative z-20'>
+                    <ul className='list-none mt-4'>
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.2`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.4`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.6`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
+                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
+
+                      {plan.sku.includes('annual') ? (
+                        <>
+                          <StepPerCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                          />
+                          <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
+                        </>
+                      ) : plan.sku.includes('month') ? (
+                        <>
+                          <StepPerCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                          />
+                          <StepPerCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <StepPerUnCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                          />
+                          <StepPerUnCheck
+                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
+                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
+                          />
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  <div className='mt-8'>
+                    <p className='text-lg font-black text-theme-600 line-through'>
+                      {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
+                        style: 'currency',
+                        currency: plan.currency,
+                      }).format(plan.price + plan.price)}
+                    </p>
+
+                    <p className='text-2xl font-black text-neutral-900 -mt-1'>
+                      {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
+                        style: 'currency',
+                        currency: plan.currency,
+                      }).format(
+                        discount
+                          ? plan.price - (plan.sku.includes('basic') ? discount.discount_basic : discount.discount_pro)
+                          : plan.price,
+                      )}{' '}
+                      <span className='font-light text-xs text-neutral-500'>
+                        {t(`steps.step5.plans.${plan.sku.split('_')[1]}.price_recurrence`)}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                {plan.sku.includes('annual') && (
+                  <div className='bg-theme-100 border border-theme-300 text-theme-900 text-sm gap-1 font-semibold flex items-center rounded-full px-2 py-[2px] z-50 absolute -top-3 right-4'>
+                    <IconStarFilled size={12} />
+                    <p>{t('steps.step5.recommended')}</p>
+                  </div>
+                )}
+
+                <div className='hidden md:flex text-neutral-200 relative z-20'>
+                  <ul className='list-none mt-4'>
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.2`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.4`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.6`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
+                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
+
+                    {plan.sku.includes('annual') ? (
+                      <>
+                        <StepPerCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                        />
+                        <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
+                      </>
+                    ) : plan.sku.includes('month') ? (
+                      <>
+                        <StepPerCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                        />
+                        <StepPerCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <StepPerUnCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
+                        />
+                        <StepPerUnCheck
+                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
+                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
+                        />
+                      </>
+                    )}
+                  </ul>
+                </div>
+              </HoverBorderGradient>
+            </div>
+          ) : null,
+        )}
+      </div>
 
       <div className='flex items-center justify-between gap-4 mt-4'>
         <button
           type='button'
           onClick={onBack}
           disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
+          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
             loading ? 'opacity-50' : ''
           }`}
         >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
             <>
               <IconChevronLeft size={20} className='mr-4' />
               {t('steps.step5.back')}
@@ -194,23 +225,18 @@ export const Step5 = ({ theme, couple, selected, setSong, onNext, onBack }: Step
           </span>
         </button>
         <button
-          onClick={onSubmit}
-          disabled={loading || (theme !== ThemeShowTypeEnum.DEFAULT && !selected)}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-800 focus:outline-none focus:ring-0 ${
-            loading || (theme !== ThemeShowTypeEnum.DEFAULT && !selected) ? 'opacity-50' : ''
+          onClick={handleSubmit}
+          disabled={loading || !selected}
+          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+            loading || !selected ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
           }`}
         >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
             {loading ? (
               <IconLoader size={20} className='animate-spin' />
-            ) : theme === ThemeShowTypeEnum.DEFAULT ? (
-              <>
-                {selected ? t('steps.step5.button') : t('config.skip')}
-                <IconChevronRight size={20} className='ml-4' />
-              </>
             ) : (
               <>
-                {t('steps.step5.go-payment')}
+                {t('steps.step5.button')}
                 <IconChevronRight size={20} className='ml-4' />
               </>
             )}
@@ -218,5 +244,55 @@ export const Step5 = ({ theme, couple, selected, setSong, onNext, onBack }: Step
         </button>
       </div>
     </div>
+  )
+}
+
+const StepCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
+  return (
+    <li className='flex gap-2 items-center'>
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconCheck size={14} />
+      </div>
+      <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
+    </li>
+  )
+}
+
+const StepPerCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?: boolean }) => {
+  return (
+    <li className='flex gap-2 items-center mb-1 md:mb-0'>
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconCheck size={14} />
+      </div>
+      <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
+        <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
+        <p className={`text-theme-600 text-xs`}>({sub})</p>
+      </div>
+    </li>
+  )
+}
+
+const StepPerUnCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?: boolean }) => {
+  return (
+    <li className='flex gap-2 items-center mb-1 md:mb-0'>
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconX size={14} />
+      </div>
+      <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
+        <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
+        <p className={`text-theme-600 text-xs`}>({sub})</p>
+      </div>
+    </li>
+  )
+}
+
+const StepUnCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
+  return (
+    <li className='flex gap-2 items-center'>
+      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
+        <IconX size={14} />
+      </div>
+      <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
+    </li>
   )
 }

@@ -6,15 +6,23 @@
     "skip": "Skip step",
     "header": {
       "nav": {
+        "title": "Menu",
+        "home": "Home",
         "plans": "Plans",
-        "affiliate": "Affiliate Program",
-        "badge": "Coming Soon"
+        "faq": "F.A.Q",
+        "affiliate": "Affiliate Program"
+      },
+      "account": {
+        "title": "My Account",
+        "my-pages": "My Pages",
+        "logout": "Logout"
       },
       "languages": {
-        "pt": "Portuguese",
+        "title": "Select Language",
+        "pt": "Português",
         "en": "English",
-        "es": "Spanish",
-        "de": "German"
+        "es": "Español",
+        "de": "Deutsch"
       }
     },
     "footer": {
@@ -603,12 +611,12 @@
     },
     "pix": {
       "title": "Payment via Pix",
-      "description": "Scan the QR Code with your bank app or copy the Pix key below.",
+      "description": "Scan the QR Code with your banking app or copy the Pix key below.",
       "tooltip": {
         "copy": "Copy",
         "copied": "Copied!"
       },
-      "button": "I have paid"
+      "button": "I've already paid"
     },
     "stone-card": {
       "loading": "One moment, we are processing your payment."

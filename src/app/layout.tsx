@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Metadata, Viewport } from 'next'
 
-import Script from 'next/script'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { GoogleTagManager } from '@next/third-parties/google'
 
 import { Providers } from '@/contexts'
 
+import { CloudflareAnalytics } from '@/components/cloud-flare'
 import { Toaster } from '@/components/ui/toaster'
 
 import './globals.css'
@@ -18,8 +18,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  colorScheme: 'dark',
-  themeColor: 'black',
+  colorScheme: 'light',
+  themeColor: 'white',
 }
 
 export const metadata: Metadata = {
@@ -53,17 +53,23 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages()
 
+  const GTM_ID = process.env.NEXT_PUBLIC_TAG_MANAGER_ID
+  const CLOUD_FLARE_ANALYTICS_ID = process.env.NEXT_PUBLIC_CLOUD_FLARE_ANALYTICS_ID
+
   return (
-    <html lang={locale} className='dark scroll-smooth' data-color-scheme='dark' prefers-color-scheme='dark'>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_TAG_MANAGER_ID ?? ''} />
+    <html lang={locale} className='light scroll-smooth' data-color-scheme='light' prefers-color-scheme='light'>
+      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
+      {CLOUD_FLARE_ANALYTICS_ID && <CloudflareAnalytics token={CLOUD_FLARE_ANALYTICS_ID} />}
 
       <NextIntlClientProvider messages={messages}>
         <Providers>
-          <body className={`antialiased overflow-x-hidden bg-black w-screen min-h-screen h-full`}>
+          <body
+            className={`antialiased overflow-x-hidden bg-white w-screen min-h-screen h-full`}
+            suppressHydrationWarning
+          >
             {children}
 
             <Toaster />
-            <Script src='https://cdn.utmify.com.br/scripts/utms/latest.js' data-utmify-prevent-subids async defer />
           </body>
         </Providers>
       </NextIntlClientProvider>

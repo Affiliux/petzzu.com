@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React, { useState } from 'react'
@@ -11,7 +10,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconLoader } from '@tabler/icons-react'
 
-import { PaymentFormProps } from '@/typings/application'
+import type { PaymentFormProps } from '@/typings/application'
 
 import { toast } from '@/hooks/use-toast'
 
@@ -22,7 +21,7 @@ import { PhoneInput } from './ui/phone-input'
 import { PaymentMethodsEnum } from '@/enums'
 import { removeMask } from '@/lib/helpers/formatters'
 import { maskCardNumber, maskCPF } from '@/lib/helpers/masks'
-import { validateCPF, validateName } from '@/lib/helpers/validators'
+import { validateCPF } from '@/lib/helpers/validators'
 
 interface CardFormProps {
   onCreate: (payment_info: PaymentFormProps) => Promise<void>
@@ -32,12 +31,12 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
   const t = useTranslations()
 
   const formSchema = z.object({
-    email: z.string().nonempty(t('checkout.payment.inputs-card.email.required')),
-    phone: z.string().nonempty(t('checkout.payment.inputs-card.phone.required')),
+    email: z.string().nonempty(t('checkout.payment.inputs.email.required')),
+    phone: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
     name: z.string().nonempty(t('checkout.payment.inputs-card.name.required')),
     document: z
       .string()
-      .nonempty(t('checkout.payment.inputs-card.document.required'))
+      .nonempty(t('checkout.payment.inputs.document.required'))
       .refine(value => validateCPF(value), {
         message: t('checkout.payment.inputs.document.invalid'),
       }),
@@ -45,19 +44,19 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
       .string()
       .nonempty(t('checkout.payment.inputs-card.cvv.required'))
       .refine(value => cvv(value), {
-        message: t('checkout.payment.inputs.cvv.invalid'),
+        message: t('checkout.payment.inputs-card.cvv.invalid'),
       }),
     number: z
       .string()
       .nonempty(t('checkout.payment.inputs-card.number.required'))
       .refine(value => number(value), {
-        message: t('checkout.payment.inputs.number.invalid'),
+        message: t('checkout.payment.inputs-card.number.invalid'),
       }),
     expiry: z
       .string()
       .nonempty(t('checkout.payment.inputs-card.expiry.required'))
       .refine(value => expirationDate(value), {
-        message: t('checkout.payment.inputs.expiry.invalid'),
+        message: t('checkout.payment.inputs-card.expiry.invalid'),
       }),
   })
 
@@ -144,197 +143,189 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className='flex flex-col gap-4'>
-            <div>
-              <p className='font-semibold text-lg text-white mb-1'>{t('checkout.payment.inputs.title')}</p>
+            <div className='flex flex-col gap-2 rounded-lg'>
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='document'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('checkout.payment.inputs.document.label')}</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t('checkout.payment.inputs.document.placeholder')}
+                          className='w-full'
+                          {...field}
+                          onChange={e => field.onChange(maskCPF(e.target.value))}
+                        />
+                      </FormControl>
 
-              <div className='flex flex-col gap-2 border border-neutral-800 rounded-lg p-4'>
-                <div className='w-full'>
-                  <FormField
-                    control={form.control}
-                    name='document'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t('checkout.payment.inputs.document.label')}</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder={t('checkout.payment.inputs.document.placeholder')}
-                            className='w-full'
-                            {...field}
-                            onChange={e => field.onChange(maskCPF(e.target.value))}
-                          />
-                        </FormControl>
+                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                        {form.formState.errors.document?.message}
+                      </FormMessage>
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-                        <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                          {form.formState.errors.document?.message}
-                        </FormMessage>
-                      </FormItem>
-                    )}
-                  />
-                </div>
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='email'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('checkout.payment.inputs.email.label')}</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t('checkout.payment.inputs.email.placeholder')}
+                          type='email'
+                          className='w-full'
+                          {...field}
+                        />
+                      </FormControl>
 
-                <div className='w-full'>
-                  <FormField
-                    control={form.control}
-                    name='email'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t('checkout.payment.inputs.email.label')}</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder={t('checkout.payment.inputs.email.placeholder')}
-                            type='email'
-                            className='w-full'
-                            {...field}
-                          />
-                        </FormControl>
+                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                        {form.formState.errors.email?.message}
+                      </FormMessage>
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-                        <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                          {form.formState.errors.email?.message}
-                        </FormMessage>
-                      </FormItem>
-                    )}
-                  />
-                </div>
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='phone'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
+                      <FormControl>
+                        <PhoneInput
+                          placeholder={t('checkout.payment.inputs.phone.placeholder')}
+                          className='w-full'
+                          onChange={e => field.onChange(e)}
+                        />
+                      </FormControl>
 
-                <div className='w-full'>
-                  <FormField
-                    control={form.control}
-                    name='phone'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
-                        <FormControl>
-                          <PhoneInput
-                            placeholder={t('checkout.payment.inputs.phone.placeholder')}
-                            className='w-full'
-                            onChange={e => field.onChange(e)}
-                          />
-                        </FormControl>
+                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                        {form.formState.errors.phone?.message}
+                      </FormMessage>
 
-                        <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                          {form.formState.errors.phone?.message}
-                        </FormMessage>
-
-                        <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                      <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
+                    </FormItem>
+                  )}
+                />
               </div>
             </div>
 
-            <div>
-              <p className='font-semibold text-lg text-white mb-1'>{t('checkout.payment.inputs-card.title')}</p>
+            <div className='flex flex-col gap-2 rounded-lg'>
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='name'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('checkout.payment.inputs-card.name.label')}</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t('checkout.payment.inputs-card.name.placeholder')}
+                          autoCapitalize='words'
+                          className='w-full'
+                          {...field}
+                          onChange={e => field.onChange(e.target.value.replace(/[^a-zA-ZÀ-ÿ\s`'"]/gu, ''))}
+                        />
+                      </FormControl>
 
-              <div className='flex flex-col gap-2 border border-neutral-800 rounded-lg p-4'>
+                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                        {form.formState.errors.name?.message}
+                      </FormMessage>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='number'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('checkout.payment.inputs-card.number.label')}</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t('checkout.payment.inputs-card.number.placeholder')}
+                          autoCapitalize='words'
+                          className='w-full'
+                          {...field}
+                          onChange={e => field.onChange(maskCardNumber(e.target.value))}
+                        />
+                      </FormControl>
+
+                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                        {form.formState.errors.number?.message}
+                      </FormMessage>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className='grid grid-cols-2 gap-2'>
                 <div className='w-full'>
                   <FormField
                     control={form.control}
-                    name='name'
+                    name='expiry'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.payment.inputs-card.name.label')}</FormLabel>
+                        <FormLabel>{t('checkout.payment.inputs-card.expiry.label')}</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder={t('checkout.payment.inputs-card.name.placeholder')}
+                            placeholder={t('checkout.payment.inputs-card.expiry.placeholder')}
                             autoCapitalize='words'
                             className='w-full'
                             {...field}
-                            onChange={e => field.onChange(e.target.value.replace(/[^a-zA-ZÀ-ÿ\s`'"]/gu, ''))}
+                            onChange={e => {
+                              let value = e.target.value
+
+                              value = e.target.value.replace(/\D/g, '')
+
+                              if (value.length > 2) value = value.replace(/(\d{2})(\d{0,2})/, '$1/$2')
+                              if (value.length > 5) value = value.slice(0, 5)
+
+                              field.onChange(value)
+                            }}
                           />
                         </FormControl>
 
                         <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                          {form.formState.errors.name?.message}
+                          {form.formState.errors.expiry?.message}
                         </FormMessage>
                       </FormItem>
                     )}
                   />
                 </div>
-
                 <div className='w-full'>
                   <FormField
                     control={form.control}
-                    name='number'
+                    name='cvv'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.payment.inputs-card.number.label')}</FormLabel>
+                        <FormLabel>{t('checkout.payment.inputs-card.cvv.label')}</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder={t('checkout.payment.inputs-card.number.placeholder')}
+                            placeholder={t('checkout.payment.inputs-card.cvv.placeholder')}
                             autoCapitalize='words'
                             className='w-full'
                             {...field}
-                            onChange={e => field.onChange(maskCardNumber(e.target.value))}
+                            onChange={e => field.onChange(e.target.value.replace(/\D/g, '').slice(0, 4))}
                           />
                         </FormControl>
 
                         <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                          {form.formState.errors.number?.message}
+                          {form.formState.errors.cvv?.message}
                         </FormMessage>
                       </FormItem>
                     )}
                   />
-                </div>
-
-                <div className='grid grid-cols-2 gap-2'>
-                  <div className='w-full'>
-                    <FormField
-                      control={form.control}
-                      name='expiry'
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t('checkout.payment.inputs-card.expiry.label')}</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder={t('checkout.payment.inputs-card.expiry.placeholder')}
-                              autoCapitalize='words'
-                              className='w-full'
-                              {...field}
-                              onChange={e => {
-                                let value = e.target.value
-
-                                value = e.target.value.replace(/\D/g, '')
-
-                                if (value.length > 2) value = value.replace(/(\d{2})(\d{0,2})/, '$1/$2')
-                                if (value.length > 5) value = value.slice(0, 5)
-
-                                field.onChange(value)
-                              }}
-                            />
-                          </FormControl>
-
-                          <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                            {form.formState.errors.expiry?.message}
-                          </FormMessage>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className='w-full'>
-                    <FormField
-                      control={form.control}
-                      name='cvv'
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t('checkout.payment.inputs-card.cvv.label')}</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder={t('checkout.payment.inputs-card.cvv.placeholder')}
-                              autoCapitalize='words'
-                              className='w-full'
-                              {...field}
-                              onChange={e => field.onChange(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                            />
-                          </FormControl>
-
-                          <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                            {form.formState.errors.cvv?.message}
-                          </FormMessage>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
@@ -349,7 +340,7 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
               }`}
             >
               <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-green-600 px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
-                {loading ? <IconLoader size={20} className='animate-spin' /> : t('checkout.payment.submit')}
+                {loading ? <IconLoader size={20} className='animate-spin' /> : t('checkout.payment.buttons.submit')}
               </span>
             </button>
           </div>

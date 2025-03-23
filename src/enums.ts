@@ -1,13 +1,3 @@
-export enum BackgroundAnimationEnum {
-  NONE = 'none',
-  HEARTS = 'hearts',
-  STARS = 'stars',
-  METEORS = 'meteors',
-  AURORA = 'aurora',
-  VORTEX = 'vortex',
-  EMOJIS = 'emoji',
-}
-
 export enum PaymentMethodsEnum {
   PIX = 'pix',
   STRIPE = 'stripe',
@@ -15,22 +5,23 @@ export enum PaymentMethodsEnum {
   PAYPAL = 'paypal',
 }
 
-export enum PhotosSliderEnum {
-  CARDS = 'cards',
-  CUBE = 'cube',
-  COVERFLOW = 'coverflow',
-  FLIP = 'flip',
+export enum ThemeShowTypeEnum {
+  BLUE = 'blue',
+  PINK = 'pink',
+  GOLD = 'gold',
+  GREEN = 'green',
+  LILAC = 'lilac',
+  RED = 'red',
+  GRAY = 'gray',
+}
+
+export enum SexEnum {
+  MALE = 'male',
+  FEMALE = 'female',
 }
 
 export enum DateShowTypeEnum {
   DEFAULT = 'default',
   SIMPLE = 'simple',
   CLASSIC = 'classic',
-}
-
-export enum ThemeShowTypeEnum {
-  DEFAULT = 'default',
-  NETFLIX = 'netflix',
-  CHRISTMAS = 'christmas',
-  ENVELOPE = 'envelope',
 }

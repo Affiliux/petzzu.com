@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React, { useState } from 'react'
@@ -7,13 +6,15 @@ import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconChevronLeft, IconLoader } from '@tabler/icons-react'
+import { IconLoader } from '@tabler/icons-react'
 
-import { PaymentFormProps } from '@/typings/application'
+import type { PaymentFormProps } from '@/typings/application'
+import type { PaymentProps } from '@/typings/child'
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { PhoneInput } from './ui/phone-input'
+import { PixPayment } from './pix'
 
 import { PaymentMethodsEnum } from '@/enums'
 import { removeMask } from '@/lib/helpers/formatters'
@@ -22,9 +23,12 @@ import { validateCPF, validateName } from '@/lib/helpers/validators'
 
 interface PixFormProps {
   onCreate: (payment_info: PaymentFormProps) => Promise<void>
+  onCheckPayment: () => Promise<void>
+  payment: PaymentProps
 }
 
-export const PixForm = ({ onCreate }: PixFormProps) => {
+export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => {
+  // hooks
   const t = useTranslations()
 
   const formSchema = z.object({
@@ -57,8 +61,10 @@ export const PixForm = ({ onCreate }: PixFormProps) => {
     },
   })
 
+  // states
   const [loading, set_loading] = useState<boolean>(false)
 
+  // variables
   const DISABLED =
     loading ||
     !form.formState.isDirty ||
@@ -67,7 +73,7 @@ export const PixForm = ({ onCreate }: PixFormProps) => {
     !!form.formState.errors.name ||
     !!form.formState.errors.phone
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function handleSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)
 
     try {
@@ -93,15 +99,15 @@ export const PixForm = ({ onCreate }: PixFormProps) => {
 
   return (
     <div className='relative flex flex-col gap-4 z-50 w-full'>
-      <Form {...form}>
-        <form
-          className='relative flex flex-col justify-between gap-2 z-50 mt-4 w-full lg:h-full'
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <div>
-            <p className='font-semibold text-lg text-white mb-1'>{t('checkout.payment.inputs.title')}</p>
-
-            <div className='flex flex-col gap-2 border border-neutral-800 rounded-lg p-4'>
+      {payment ? (
+        <PixPayment payment={payment} onCheckPayment={onCheckPayment} />
+      ) : (
+        <Form {...form}>
+          <form
+            className='relative flex flex-col justify-between gap-2 z-50 mt-4 w-full lg:h-full'
+            onSubmit={form.handleSubmit(handleSubmit)}
+          >
+            <div className='flex flex-col gap-2 rounded-lg'>
               <div className='w-full'>
                 <FormField
                   control={form.control}
@@ -200,23 +206,27 @@ export const PixForm = ({ onCreate }: PixFormProps) => {
                 />
               </div>
             </div>
-          </div>
 
-          <div className='flex items-center justify-between gap-4 mt-4'>
-            <button
-              type='submit'
-              disabled={DISABLED}
-              className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-green-700 focus:outline-none focus:ring-0 ${
-                DISABLED ? 'opacity-50' : ''
-              }`}
-            >
-              <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-green-600 px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
-                {loading ? <IconLoader size={20} className='animate-spin' /> : t('checkout.payment.create-pix')}
-              </span>
-            </button>
-          </div>
-        </form>
-      </Form>
+            <div className='flex items-center justify-between gap-4 mt-4'>
+              <button
+                type='submit'
+                disabled={DISABLED}
+                className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-green-700 focus:outline-none focus:ring-0 ${
+                  DISABLED ? 'opacity-50' : ''
+                }`}
+              >
+                <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-green-600 px-3 py-1 text-sm font-semibold text-white backdrop-blur-3xl'>
+                  {loading ? (
+                    <IconLoader size={20} className='animate-spin' />
+                  ) : (
+                    t('checkout.payment.buttons.create-pix')
+                  )}
+                </span>
+              </button>
+            </div>
+          </form>
+        </Form>
+      )}
     </div>
   )
 }

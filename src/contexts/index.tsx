@@ -2,16 +2,22 @@
 
 import { ReactNode } from 'react'
 
+import AccountProvider from './AccountContext'
 import ApplicationProvider from './ApplicationContext'
-import CoupleProvider from './CoupleContext'
+import ChildProvider from './ChildContext'
 import CreateProvider from './CreateContext'
+import TimelineProvider from './TimelineContext'
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ApplicationProvider>
-      <CreateProvider>
-        <CoupleProvider>{children}</CoupleProvider>
-      </CreateProvider>
+      <TimelineProvider>
+        <CreateProvider>
+          <AccountProvider>
+            <ChildProvider>{children}</ChildProvider>
+          </AccountProvider>
+        </CreateProvider>
+      </TimelineProvider>
     </ApplicationProvider>
   )
 }

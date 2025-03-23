@@ -1,23 +1,23 @@
-import { MediaProps, PaymentProps } from './couple'
+import type { MediaProps, PaymentProps } from './child'
+import type { TimelineEntryProps } from './timeline'
 
-import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
+import { ThemeShowTypeEnum, DateShowTypeEnum } from '@/enums'
 
 // Create pre with the following properties:
 export type CreatePreProps = {
-  coupleName: string
-  message?: string
-  startDate?: string
-  yt_song?: string
+  child_name: string
+  message: string
+  birth_date: string
+  parent_name: string
+  sex: string
   lang?: string
-  backgroundAnimation?: string
-  backgroundEmojis?: string[]
-  imageShowType: PhotosSliderEnum
+  themeShowType?: ThemeShowTypeEnum
   dateShowType: DateShowTypeEnum
-  themeShowType: ThemeShowTypeEnum
 }
-
 // Create Pre
-export interface CreatePrePayloadProps extends CreatePreProps {}
+export interface CreatePrePayloadProps extends CreatePreProps {
+  timeLine: TimelineEntryProps[]
+}
 export interface CreatePreResponseProps {
   success: boolean
   id: string
@@ -79,6 +79,7 @@ export type CreateFromPreProps = {
   utm_term: string | null
   xcod: string | null
   gclid: string | null
+  orderBumps: string[]
 }
 
 // Create From Pre
@@ -90,18 +91,33 @@ export interface CreateFromPreResponseProps extends PaymentProps {
 // Get pre with the following properties:
 export type PreProps = {
   id: string
-  coupleName: string
+  child_name: string
   message: string
-  startDate: string
+  parent_name: string
+  lang: string
+  birth_date: string
+  sex: string
   media: MediaProps[]
-  yt_song: string
-  backgroundAnimation: string
-  backgroundEmojis: string
-  imageShowType: PhotosSliderEnum
-  dateShowType: DateShowTypeEnum
   themeShowType: ThemeShowTypeEnum
+  dateShowType: DateShowTypeEnum
+  timeLine: TimelineEntryProps[]
   createdAt: string
   updatedAt: string
 }
 
 export interface PreResponseProps extends PreProps {}
+
+export type UpdatePaymentProps = {
+  gateway: string
+  name?: string
+  cardToken?: string
+  ddd: string
+  phoneNumber: string
+  cpf: string
+  email: string
+}
+
+export interface UpdatePaymentPayloadProps extends UpdatePaymentProps {}
+export interface UpdatePaymentResponseProps extends PaymentProps {
+  success: boolean
+}

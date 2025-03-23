@@ -20,6 +20,17 @@ module.exports = {
     },
     extend: {
       colors: {
+        theme: {
+          100: 'var(--theme-100)',
+          200: 'var(--theme-200)',
+          300: 'var(--theme-300)',
+          400: 'var(--theme-400)',
+          500: 'var(--theme-500)',
+          600: 'var(--theme-600)',
+          700: 'var(--theme-700)',
+          800: 'var(--theme-800)',
+          900: 'var(--theme-900)',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -67,6 +78,10 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        'caret-blink': {
+          '0%,70%,100%': { opacity: '1' },
+          '20%,50%': { opacity: '0' },
+        },
         'accordion-down': {
           from: {
             height: '0',
@@ -129,6 +144,7 @@ module.exports = {
         },
       },
       animation: {
+        'caret-blink': 'caret-blink 1.25s ease-out infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'spotlight': 'spotlight 2s ease .75s 1 forwards',
@@ -140,6 +156,10 @@ module.exports = {
       boxShadow: {
         input:
           '`0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`',
+      },
+      screens: {
+        '2xl': '1400px',
+        'xs': { max: '320px' },
       },
     },
   },
