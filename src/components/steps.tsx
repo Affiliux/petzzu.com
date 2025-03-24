@@ -164,7 +164,7 @@ export const Steps = ({
         </div>
 
         <div className='w-full lg:w-1/2 h-full'>
-          <PreviewDefault child={child} dateShowType={dateShowType} medias={medias} />
+          <PreviewDefault child={child} dateShowType={dateShowType} medias={medias} selected={plan} />
         </div>
       </div>
     </div>

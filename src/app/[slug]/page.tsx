@@ -2,7 +2,7 @@
 
 import React, { use, useEffect, useState } from 'react'
 
-import { LoaderIcon } from 'lucide-react'
+import { Loader2, LoaderIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
@@ -28,7 +28,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const t = useTranslations()
 
   // contexts
-  const { onChangeTheme } = useApplication()
+  const { theme, onChangeTheme } = useApplication()
   const { child, onGetChildBySlug } = useChild()
 
   // states
@@ -73,34 +73,36 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }, [queryParams])
 
   return (
-    <div className='relative bg-theme-100 h-full min-h-screen'>
-      {loading && (
-        <div className='h-screen w-full flex flex-col items-center justify-center text-center py-8'>
-          <LoaderIcon className='w-16 h-16 text-red-400 animate-spin' />
+    <>
+      {(loading || !theme) && (
+        <div className='h-screen w-full absolute top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
+          <Loader2 size={56} className='animate-spin text-neutral-900' />
         </div>
       )}
 
-      {child && !loading && <DefaultTheme child={child} />}
+      <div className='relative bg-theme-100 h-full min-h-screen'>
+        {child && !loading && <DefaultTheme child={child} />}
 
-      {child && (success || payment) && (
-        <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
-          <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-neutral-200/30 backdrop-blur-xl transition-opacity duration-300'>
-            <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg shadow-sm'>
-              {payment ? (
-                <>
-                  {child.qrCode64 && !child.qrCodeUrl && (
-                    <PixPayment payment={child} onCheckPayment={handleGetBySlug} />
-                  )}
-                </>
-              ) : success ? (
-                <SuccessModal child={child} onClose={() => set_success(false)} />
-              ) : (
-                <></>
-              )}
+        {child && (success || payment) && (
+          <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
+            <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-white/60 backdrop-blur-2xl transition-opacity duration-300'>
+              <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg'>
+                {payment ? (
+                  <>
+                    {child.qrCode64 && !child.qrCodeUrl && (
+                      <PixPayment payment={child} onCheckPayment={handleGetBySlug} />
+                    )}
+                  </>
+                ) : success ? (
+                  <SuccessModal child={child} onClose={() => set_success(false)} />
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   )
 }

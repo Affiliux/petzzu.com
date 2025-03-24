@@ -6,7 +6,7 @@ import { Dancing_Script } from 'next/font/google'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { ChildProps } from '@/typings/child'
+import type { ChildProps } from '@/typings/child'
 
 import { CarouselPhotos } from '@/components/carousel'
 
@@ -22,11 +22,12 @@ const dancing = Dancing_Script({
 })
 
 export default function PicturesGrid({ child }: PicturesGridProps) {
+  // hooks
   const t = useTranslations()
+
+  // variables
   const { value, unit } = formatAge(t, child?.birth_date)
-
   const images = child.media || []
-
   const childNameParts = child?.child_name?.split(' ')
   const displayName = childNameParts?.length > 2 ? `${childNameParts[0]} ${childNameParts[1]}` : child.child_name
 
@@ -55,9 +56,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
               {child.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
               <div className='flex flex-col ml-3 mt-3'>
                 <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
-                <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
-                  {displayName}
-                </div>
+                <div className='text-4xl font-medium text-theme-600 leading-tight font-happy-school'>{displayName}</div>
               </div>
             </div>
           ))}

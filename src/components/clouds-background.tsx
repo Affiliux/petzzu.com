@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 // Highly optimized cloud animation using CSS only
-export const CloudBackground = () => {
+export const CloudBackground = ({ quantity }: { quantity: number }) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -154,7 +154,7 @@ export const CloudBackground = () => {
     // Add new cloud every second
     const interval = setInterval(() => {
       // Limit maximum clouds to prevent performance issues
-      if (cloudCount < 15) {
+      if (cloudCount < quantity) {
         createCloudElement()
       }
     }, 1000)

@@ -35,7 +35,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
   const [pre, set_pre] = useState<string | null>(null)
   const [pre_medias, set_pre_medias] = useState<MediaPreProps[]>([])
   const [child, set_child] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
-  const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.YELLOW)
+  const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.BLUE)
   const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
   const [plan, set_plan] = useState<PlanProps | undefined>()
   const [payment, set_payment] = useState<PaymentProps | null>(null)
@@ -116,11 +116,11 @@ export default function CreateProvider({ children }: CreateProviderProps) {
           sex: response.sex,
           lang: response.lang,
           timeLine: response.timeLine,
-          themeShowType: response.themeShowType ?? ThemeShowTypeEnum.YELLOW,
+          themeShowType: response.themeShowType ?? ThemeShowTypeEnum.BLUE,
           dateShowType: response.dateShowType ?? DateShowTypeEnum.DEFAULT,
         })
 
-        set_theme_show_type(response.themeShowType ?? ThemeShowTypeEnum.YELLOW)
+        set_theme_show_type(response.themeShowType ?? ThemeShowTypeEnum.BLUE)
         set_pre_medias(response.media)
       }
     } catch (error: any) {

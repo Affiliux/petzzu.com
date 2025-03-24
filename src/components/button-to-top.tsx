@@ -22,7 +22,7 @@ export const ButtonToTop = () => {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className={
         scrollY > 300
-          ? 'fixed bottom-4 right-4 z-[49] bg-theme-800 rounded-full p-2 cursor-pointer text-theme-100'
+          ? 'fixed bottom-4 right-4 z-[200] bg-theme-800 rounded-full p-2 cursor-pointer text-theme-100'
           : 'hidden'
       }
     >
