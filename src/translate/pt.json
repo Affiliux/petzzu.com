@@ -562,7 +562,14 @@
       "input": {
         "title": "PNG, JPG, JPEG, GIF (máximo 6 fotos)",
         "label": "Adicione fotos para a capa do Album",
-        "placeholder": "A quantidade de fotos altera o estilo de apresentação"
+        "placeholder": "A quantidade de fotos altera o estilo de apresentação",
+         "errors": {
+          "maxFiles": "Máximo de 6 fotos permitidas",
+          "not-image": "O arquivo deve ser uma imagem",
+          "big-size": "O arquivo é muito grande. Máximo de 100MB",
+          "empty": "Imagem está corrompida",
+          "not-supported": "Formato de arquivo não suportado"
+        }
       },
       "toast": {
         "error-save": {
