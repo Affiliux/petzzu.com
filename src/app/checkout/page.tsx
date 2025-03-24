@@ -33,7 +33,7 @@ export default function Page() {
   const router = useRouter()
 
   // contexts
-  const { discount, plans, currency, order_bumps } = useApplication()
+  const { theme, discount, plans, currency, order_bumps } = useApplication()
   const {
     pre,
     payment,
@@ -234,7 +234,7 @@ export default function Page() {
               <CardContent className='space-y-4'>
                 {!!plan?.id && (
                   <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between lg:space-x-2'>
-                    <div className='flex items-start lg:items-center space-x-4'>
+                    <div className='flex items-start lg:items-center space-x-4 lg:space-x-8'>
                       <div className='w-14'>
                         <div className='h-14 w-14 rounded-md bg-theme-100 flex items-center justify-center'>
                           <ShoppingCart className='h-6 w-6 text-theme-800' />
@@ -557,7 +557,7 @@ export default function Page() {
         </>
       )}
 
-      {loading && (
+      {(loading || !theme) && (
         <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex flex-col items-center justify-center z-[9999]'>
           <Loader2 size={56} className='animate-spin text-theme-900' />
         </div>

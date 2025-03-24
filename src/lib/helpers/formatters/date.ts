@@ -9,7 +9,7 @@ import { format } from 'date-fns'
  */
 
 function formatDate(date: string | Date): { day: string; month: string; year: string } {
-  const formattedDate = format(new Date(date), 'dd MMM yyyy')
+  const formattedDate = format(new Date(date), 'dd MM yyyy')
   const [day, month, year] = formattedDate.split(' ')
   return { day, month, year }
 }

@@ -2,13 +2,11 @@
 
 import React from 'react'
 
-import { enUS, es, ptBR } from 'date-fns/locale'
 import { Dancing_Script, Lora } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 
 import { PlanProps } from '@/typings/application'
 import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
-import { useApplication } from '@/contexts/ApplicationContext'
 
 import { BabyTimeline } from './baby-timeline'
 import { CloudBackground } from './clouds-background'
@@ -120,22 +118,11 @@ export const PreviewDefault = ({ child, dateShowType, medias, selected }: Previe
             <PicturesGridPreview images={medias} selectedPlan={selected} />
           </div>
 
-          <p
-            className={`${lora.className} text-neutral-900 text-md text-center mt-2 mb-16`}
-            dangerouslySetInnerHTML={child?.message ? { __html: child.message } : undefined}
-          />
-
-          {!!child?.birth_date && !!(child?.timeLine?.length > 0) && (
-            <div className='mt-16 md:mt-8 text-center p-6'>
-              <h2 className='text-2xl font-bold text-black'>{t('slug.facts.title')}</h2>
-            </div>
-          )}
-
           {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} selectedPlan={selected} />}
           {!!child?.birth_date && <DateCount date={child.birth_date} type={dateShowType} />}
         </div>
 
-        <CloudBackground />
+        <CloudBackground quantity={20} />
       </div>
 
       <div className='h-72' />

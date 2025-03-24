@@ -137,14 +137,6 @@ export const DateCount = ({ date, type }: { date: string; type: DateShowTypeEnum
               <p className={`${lora.className} text-sm text-center text-theme-500`}>{t('themes.default.seconds')}</p>
             </div>
           </div>
-
-          {date && (
-            <p className='text-sm font-semibold text-center text-white my-8'>
-              {t('themes.default.since')} {format(new Date(date), 'dd')} {t('themes.default.of')}{' '}
-              {format(new Date(date), 'MMMM', { locale: FORMAT_FNS })} {t('themes.default.of')}{' '}
-              {format(new Date(date), 'yyy', { locale: ptBR })}
-            </p>
-          )}
         </div>
       )}
     </>

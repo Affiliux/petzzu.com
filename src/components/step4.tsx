@@ -230,7 +230,7 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
             loading ? 'opacity-50' : ''
           }`}
         >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-green-100 px-3 py-1 text-sm font-semibold text-green-600 backdrop-blur-3xl'>
+          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white-100 px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
             <>
               <IconPlus size={20} className='mr-4' />
               {t('steps.step4.accordion.actions.new')}
@@ -244,7 +244,7 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
           <AccordionItem
             key={entry.id}
             value={entry.id}
-            className='border border-b-neutral-200/60 border-neutral-200/60 w-full shadow-lg shadow-neutral-200/50 rounded-lg mb-2'
+            className='border border-b-neutral-200/60 border-neutral-200/60 w-full shadow-lg shadow-neutral-200/30 rounded-lg mb-2'
           >
             <AccordionTrigger className='p-4' noUnderline>
               {entry.title.length ? entry.title : `${index + 1}° ${t('steps.step4.accordion.title')}`}
@@ -360,7 +360,7 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
                       loading ? 'opacity-50' : ''
                     }`}
                   >
-                    <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-red-100 px-3 py-1 text-sm font-semibold text-red-600 backdrop-blur-3xl'>
+                    <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white-100 px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
                       <>
                         <IconTrash size={20} className='mr-4' />
                         {t('steps.step4.accordion.actions.delete')}

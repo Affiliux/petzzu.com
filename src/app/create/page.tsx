@@ -306,7 +306,7 @@ export default function Page() {
         onCreatePre={handleCreatePre}
       />
 
-      {loading && (
+      {(loading || !theme) && (
         <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
           <Loader2 size={56} className='animate-spin text-theme-900' />
         </div>
