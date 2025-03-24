@@ -29,17 +29,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.babyzzu.com',
-    title: 'Babyzzu - Sua nova forma de amar',
+    title: 'Babyzzu - Sua nova forma de eternizar lembranças',
     description:
-      'Babyzzu é uma plataforma que permite criar páginas personalizadas de relacionamento para casais. Você pode adicionar fotos, uma mensagem e o tempo da união.',
+      'A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e criar uma linha do tempo com todas as suas lembranças.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Babyzzu - Sua nova forma de amar',
+    title: 'Babyzzu - Sua nova forma de eternizar lembranças',
     description:
-      'Babyzzu é uma plataforma que permite criar páginas personalizadas de relacionamento para casais. Você pode adicionar fotos, uma mensagem e o tempo da união.',
+      'A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e criar uma linha do tempo com todas as suas lembranças.',
   },
-  authors: { name: 'DustInc' },
+  authors: { name: 'Affiliux' },
 }
 
 export default async function RootLayout({
