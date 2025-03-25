@@ -292,11 +292,9 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
                     locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
                     selected={new Date(entry.date)}
                     onSelect={selectedDate => {
-                      if (selectedDate) {
-                        const updatedEntry = { ...entry, date: selectedDate.toISOString() }
-                        setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                        handleUpdateTimelineEntry(entry.id, updatedEntry)
-                      }
+                      const updatedEntry = { ...entry, date: selectedDate?.toISOString() }
+                      setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                      handleUpdateTimelineEntry(entry.id, updatedEntry)
                     }}
                     fromYear={1950}
                     toYear={new Date().getFullYear()}
