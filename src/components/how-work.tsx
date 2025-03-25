@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { IconCoin, IconHearts, IconListNumbers, IconQrcode } from '@tabler/icons-react'
 
+import { useApplication } from '@/contexts/ApplicationContext'
+
 import { HoverBorderGradient } from './ui/hover-border-gradient'
 
 import { cn } from '@/lib/utils'
@@ -13,6 +15,9 @@ import { cn } from '@/lib/utils'
 export function HowWork() {
   // hooks
   const t = useTranslations('pages.home')
+
+  // contexts
+  const { theme } = useApplication()
 
   // variables
   const features = [
@@ -58,7 +63,7 @@ export function HowWork() {
         ))}
       </div>
 
-      <div className='flex flex-col lg:flex-row items-center justify-center gap-16 mt-12 lg:mt-0'>
+      <div className='flex flex-col lg:flex-row items-center justify-center gap-16 mt-12 lg:mt-14'>
         <div>
           <p className='text-neutral-900 font-bold text-3xl lg:text-4xl lg:max-w-md'>
             {t('how-work.example.title.1')} <span className='text-theme-600'>{t('how-work.example.title.2')}</span>{' '}
@@ -66,7 +71,7 @@ export function HowWork() {
           </p>
         </div>
 
-        <Image src='/images/example.png' alt={'example image'} className='lg:mt-14' width={540} height={520} />
+        <Image src={`/images/examples/${theme}.png`} alt={'example image'} width={450} height={450} />
       </div>
     </div>
   )
