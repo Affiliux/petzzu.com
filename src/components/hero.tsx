@@ -74,37 +74,37 @@ export const Hero = () => {
       id: 1,
       name: t('pages.home.hero.people.1.name'),
       designation: t('pages.home.hero.people.1.time'),
-      image: '/images/approved/1.jpg',
+      image: '/images/approved/1.webp',
     },
     {
       id: 2,
       name: t('pages.home.hero.people.2.name'),
       designation: t('pages.home.hero.people.2.time'),
-      image: '/images/approved/2.jpg',
+      image: '/images/approved/2.webp',
     },
     {
       id: 3,
       name: t('pages.home.hero.people.3.name'),
       designation: t('pages.home.hero.people.3.time'),
-      image: '/images/approved/3.jpg',
+      image: '/images/approved/3.webp',
     },
     {
       id: 4,
       name: t('pages.home.hero.people.4.name'),
       designation: t('pages.home.hero.people.4.time'),
-      image: '/images/approved/4.jpg',
+      image: '/images/approved/4.webp',
     },
     {
       id: 5,
       name: t('pages.home.hero.people.5.name'),
       designation: t('pages.home.hero.people.5.time'),
-      image: '/images/approved/5.jpg',
+      image: '/images/approved/5.webp',
     },
     {
       id: 6,
       name: t('pages.home.hero.people.6.name'),
       designation: t('pages.home.hero.people.6.time'),
-      image: '/images/approved/6.jpg',
+      image: '/images/approved/6.webp',
     },
   ]
 
@@ -189,7 +189,7 @@ export const Hero = () => {
             zIndex: 3,
           }}
         >
-          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
           <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/1.webm'
@@ -204,7 +204,7 @@ export const Hero = () => {
             zIndex: 2,
           }}
         >
-          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
           <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/2.webm'
@@ -219,7 +219,7 @@ export const Hero = () => {
             zIndex: 1,
           }}
         >
-          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
           <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/3.webm'

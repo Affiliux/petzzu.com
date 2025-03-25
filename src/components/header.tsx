@@ -51,7 +51,7 @@ export function Header() {
       <div className='container flex items-center justify-between py-3'>
         {/* Logo */}
         <img
-          src={`/logos/${theme}/logo+name.png`}
+          src={`/logos/${theme}/logo+name.webp`}
           className='h-8 sm:h-12 w-auto max-w-[140px] sm:max-w-[200px]'
           alt='Babyzzu logo'
           width={200}

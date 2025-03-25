@@ -108,7 +108,7 @@ export function PageCard({ page }: { page: PageProps }) {
               <div className='border-2 border-neutral-800 rounded-lg flex items-center justify-center w-[130px] h-[130px]'>
                 <Link href={page?.qrCodeUrl} target='_blank'>
                   <img
-                    src={page.isActive ? page?.qrCodeUrl : '/images/qr-code.png'}
+                    src={page.isActive ? page?.qrCodeUrl : '/images/qr-code.webp'}
                     className={
                       !page.isActive ? 'rounded-md w-[120px] h-[120px] blur-sm' : 'rounded-md w-[120px] h-[120px]'
                     }

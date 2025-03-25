@@ -71,7 +71,7 @@ export function HowWork() {
           </p>
         </div>
 
-        <Image src={`/images/examples/${theme}.png`} alt={'example image'} width={450} height={450} />
+        <Image src={`/images/examples/${theme}.webp`} alt={'example image'} width={450} height={450} />
       </div>
     </div>
   )
