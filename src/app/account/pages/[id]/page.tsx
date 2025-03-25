@@ -64,11 +64,13 @@ export default function Page() {
       <div className='border-b border-neutral-800 pb-12'>
         <div className='flex items-center gap-2 -ml-2'>
           <ChevronLeft className='w-10 h-10 cursor-pointer' onClick={() => router.push('/account/pages')} />
-          <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+          <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
             {t('pages.account.pages.edit.title')}
           </h1>
         </div>
-        <p className='max-w-2xl text-base md:text-lg text-neutral-400'>{t('pages.account.pages.edit.description')}</p>
+        <p className='max-w-2xl text-base md:text-lg text-muted-foreground'>
+          {t('pages.account.pages.edit.description')}
+        </p>
       </div>
 
       {selected && (

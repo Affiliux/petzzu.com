@@ -61,7 +61,7 @@ export function Footer() {
       <div className='container flex flex-col-reverse md:flex-row items-center justify-between mt-12 md:mt-8 gap-4'>
         <p className='text-sm text-neutral-500'>{t('footer.copyright')}</p>
 
-        <img src='./pagarme-extend.webp' alt='pagarme logo' className='h-8 lg:h-6' />
+        <img src='/images/pagarme-extend.webp' alt='pagarme logo' className='h-8 lg:h-6' />
       </div>
     </div>
   )

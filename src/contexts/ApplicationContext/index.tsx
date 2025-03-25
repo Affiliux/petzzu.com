@@ -12,7 +12,7 @@ import { locales } from '../../i18n'
 import { NEXT_CURRENCY, NEXT_LOCALE, NEXT_THEME, THEMES } from '@/constants'
 import { ThemeShowTypeEnum } from '@/enums'
 import { delete_cookie, set_cookie } from '@/infrastructure/cache/cookies'
-import { delete_storage, set_storage } from '@/infrastructure/cache/storage'
+import { delete_storage, get_storage, set_storage } from '@/infrastructure/cache/storage'
 import { get_discount, get_order_bump, get_plans } from '@/infrastructure/http/services/application'
 
 export const ApplicationContext = createContext<ApplicationContextType>({} as ApplicationContextType)
@@ -25,9 +25,11 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   const [client, set_client] = useState<boolean>(false)
   const [loading_application, set_loading_application] = useState<boolean>(false)
 
-  const [locale, set_locale] = useState<string>('pt')
-  const [currency, set_currency] = useState<string>('brl')
-  const [theme, set_theme] = useState<ThemeShowTypeEnum>()
+  const [locale, set_locale] = useState<string>(get_storage(NEXT_LOCALE) ?? 'pt')
+  const [currency, set_currency] = useState<string>(get_storage(NEXT_LOCALE) ?? 'brl')
+  const [theme, set_theme] = useState<ThemeShowTypeEnum>(
+    (get_storage(NEXT_THEME) as ThemeShowTypeEnum) ?? ThemeShowTypeEnum.BLUE,
+  )
 
   const [plans, set_plans] = useState<PlanProps[]>([])
   const [order_bumps, set_order_bumps] = useState<OrderBumpProps[]>([])
