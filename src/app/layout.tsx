@@ -57,7 +57,7 @@ export default async function RootLayout({
   const CLOUD_FLARE_ANALYTICS_ID = process.env.NEXT_PUBLIC_CLOUD_FLARE_ANALYTICS_ID
 
   return (
-    <html lang={locale} className='light scroll-smooth' data-color-scheme='light' prefers-color-scheme='light'>
+    <html lang={locale} className='light scroll-smooth'>
       {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       {CLOUD_FLARE_ANALYTICS_ID && <CloudflareAnalytics token={CLOUD_FLARE_ANALYTICS_ID} />}
 

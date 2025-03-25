@@ -190,11 +190,11 @@ export const Hero = () => {
           }}
         >
           <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/1.webm'
               type='video/webm'
-              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
+              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
             />
           </div>
         </div>
@@ -205,11 +205,11 @@ export const Hero = () => {
           }}
         >
           <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/2.webm'
               type='video/webm'
-              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
+              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
             />
           </div>
         </div>
@@ -220,11 +220,11 @@ export const Hero = () => {
           }}
         >
           <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/3.webm'
               type='video/webm'
-              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
+              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
             />
           </div>
         </div>
