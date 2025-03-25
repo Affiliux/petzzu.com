@@ -163,8 +163,8 @@ export const Hero = () => {
           </span>
         </button>
 
-        <div className='flex flex-row items-center mt-6 w-full'>
-          {/* <AnimatedTooltip items={people} /> */}
+        {/* <div className='flex flex-row items-center mt-6 w-full'>
+          <AnimatedTooltip items={people} />
 
           <div className='relative ml-8 md:ml-12'>
             <div className='flex flex-row items-center gap-2'>
@@ -177,7 +177,7 @@ export const Hero = () => {
 
             <div className='text-neutral-700 text-xs mt-2'>{t('pages.home.hero.rating')}</div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
