@@ -24,10 +24,10 @@ export default function Page() {
 
   return (
     <div className='w-full'>
-      <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+      <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
         {t('title')}
       </h1>
-      <p className='max-w-2xl text-base md:text-lg text-neutral-400 mb-8'>{t('description')}</p>
+      <p className='max-w-2xl text-base md:text-lg text-muted-foreground mb-8'>{t('description')}</p>
 
       <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12'>
         {pages.length > 0 ? (
