@@ -69,44 +69,44 @@ export const Hero = () => {
   }
 
   // list people rating
-  // const people = [
-  //   {
-  //     id: 1,
-  //     name: t('pages.home.hero.people.1.name'),
-  //     designation: t('pages.home.hero.people.1.time'),
-  //     image: '/images/approved/1.webp',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: t('pages.home.hero.people.2.name'),
-  //     designation: t('pages.home.hero.people.2.time'),
-  //     image: '/images/approved/2.webp',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: t('pages.home.hero.people.3.name'),
-  //     designation: t('pages.home.hero.people.3.time'),
-  //     image: '/images/approved/3.webp',
-  //   },
-  //   {
-  //     id: 4,
-  //     name: t('pages.home.hero.people.4.name'),
-  //     designation: t('pages.home.hero.people.4.time'),
-  //     image: '/images/approved/4.webp',
-  //   },
-  //   {
-  //     id: 5,
-  //     name: t('pages.home.hero.people.5.name'),
-  //     designation: t('pages.home.hero.people.5.time'),
-  //     image: '/images/approved/5.webp',
-  //   },
-  //   {
-  //     id: 6,
-  //     name: t('pages.home.hero.people.6.name'),
-  //     designation: t('pages.home.hero.people.6.time'),
-  //     image: '/images/approved/6.webp',
-  //   },
-  // ]
+  const people = [
+    {
+      id: 1,
+      name: t('pages.home.hero.people.1.name'),
+      designation: t('pages.home.hero.people.1.time'),
+      image: '/images/approved/1.webp',
+    },
+    {
+      id: 2,
+      name: t('pages.home.hero.people.2.name'),
+      designation: t('pages.home.hero.people.2.time'),
+      image: '/images/approved/2.webp',
+    },
+    {
+      id: 3,
+      name: t('pages.home.hero.people.3.name'),
+      designation: t('pages.home.hero.people.3.time'),
+      image: '/images/approved/3.webp',
+    },
+    {
+      id: 4,
+      name: t('pages.home.hero.people.4.name'),
+      designation: t('pages.home.hero.people.4.time'),
+      image: '/images/approved/4.webp',
+    },
+    {
+      id: 5,
+      name: t('pages.home.hero.people.5.name'),
+      designation: t('pages.home.hero.people.5.time'),
+      image: '/images/approved/5.webp',
+    },
+    {
+      id: 6,
+      name: t('pages.home.hero.people.6.name'),
+      designation: t('pages.home.hero.people.6.time'),
+      image: '/images/approved/6.webp',
+    },
+  ]
 
   return (
     <div className='flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-36 relative z-40'>
@@ -163,7 +163,7 @@ export const Hero = () => {
           </span>
         </button>
 
-        {/* <div className='flex flex-row items-center mt-6 w-full'>
+        <div className='flex flex-row items-center mt-6 w-full'>
           <AnimatedTooltip items={people} />
 
           <div className='relative ml-8 md:ml-12'>
@@ -177,7 +177,7 @@ export const Hero = () => {
 
             <div className='text-neutral-700 text-xs mt-2'>{t('pages.home.hero.rating')}</div>
           </div>
-        </div> */}
+        </div>
       </div>
 
       <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
