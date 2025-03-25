@@ -20,7 +20,7 @@ export const Globe = ({ className }: { className?: string }) => {
       diffuse: 1.2,
       mapSamples: 16000,
       mapBrightness: 3,
-      baseColor: [0.3, 0.3, 0.3],
+      baseColor: [5.3, 5.3, 5.3],
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
       markers: [],

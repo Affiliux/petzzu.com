@@ -39,6 +39,12 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
 
       set_storage(NEXT_LOCALE, new_locale)
       set_locale(new_locale)
+
+      const saved_currency = localStorage.getItem(NEXT_CURRENCY)
+
+      if (saved_currency) onChangeCurrency(saved_currency)
+      else if (locale === 'pt') onChangeCurrency('brl')
+      else onChangeCurrency('usd')
     } catch (error: any) {
       console.error(error.message)
     }
@@ -147,13 +153,8 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }, [theme])
 
   useEffect(() => {
-    const saved_currency = localStorage.getItem(NEXT_CURRENCY)
-
     if (queryParams?.currency) onChangeCurrency(queryParams?.currency, true)
-    else if (saved_currency) onChangeCurrency(saved_currency)
-    else if (locale === 'pt') onChangeCurrency('brl')
-    else if (locale === 'en') onChangeCurrency('usd')
-  }, [locale, queryParams?.currency])
+  }, [queryParams?.currency])
 
   return (
     <ApplicationContext.Provider

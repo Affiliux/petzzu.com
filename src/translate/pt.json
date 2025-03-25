@@ -116,8 +116,7 @@
           },
           "4": {
             "name": "Camila & Felipe",
-            "time": "4 meses atrás",
-            "image": "https://cdn.babyzzu.com/lp-assets/Michael%20Franca%20Studio.jpg"
+            "time": "4 meses atrás"
           },
           "5": {
             "name": "Bia & Henrique",
@@ -322,28 +321,28 @@
         "title": "Vários Recursos",
         "description": "Veja os recursos que você pode adicionar à sua página personalizada",
         "1": {
-          "title": "Linha do Tempo",
-          "description": "Uma linha do tempo exclusivamente feita para o crescimento do bebê."
+          "title": "Contador de Tempo",
+          "description": "Acompanhe em tempo real a idade e o desenvolvimento de cada etapa."
         },
         "2": {
-          "title": "Contador de Tempo",
-          "description": "Acompanhe em tempo real o desenvolvimento de cada etapa."
-        },
-        "3": {
-          "title": "QRCode Exclusivo",
-          "description": "Crie seu QR Code exclusivo e torne cada interação única, prática e memorável."
-        },
-        "4": {
-          "title": "Imagens para cada Mês",
-          "description": "Eternize cada momento único do mês com imagens especiais que capturam memórias inesquecíveis!"
-        },
-        "5": {
-          "title": "URL Personalizada",
-          "description": "Transforme sua presença online com uma URL personalizada."
-        },
-        "6": {
           "title": "Fundo Colorido",
           "description": "Destaque sua página com um fundo colorido vibrante e cativante, criando uma experiência visual única e envolvente!"
+        },
+        "3": {
+          "title": "Timeline de lembranças",
+          "description": "Crie uma linha do tempo com fotos e mensagens para cada lembrança especial.",
+          "1": {
+            "title": "Primeiro respiro",
+            "description": "O dia em que nasceu foi mágico!"
+          },
+          "2": {
+            "title": "Primeiro Banho",
+            "description": "O primeiro banho foi incrível!"
+          }
+        },
+        "4": {
+          "title": "Em todo lugar",
+          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
         }
       }
     },

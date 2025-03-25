@@ -11,6 +11,7 @@ import { useQueryParams } from '@/hooks/use-query-params'
 
 import { AnimatedTooltip } from './ui/animated-tooltip'
 import { HoverBorderGradient } from './ui/hover-border-gradient'
+import { LazyLoadVideo } from './lazy-video'
 
 export const Hero = () => {
   // hooks
@@ -73,37 +74,37 @@ export const Hero = () => {
       id: 1,
       name: t('pages.home.hero.people.1.name'),
       designation: t('pages.home.hero.people.1.time'),
-      image: '/images/approved/1.webp',
+      image: '/images/approved/1.jpg',
     },
     {
       id: 2,
       name: t('pages.home.hero.people.2.name'),
       designation: t('pages.home.hero.people.2.time'),
-      image: '/images/approved/2.webp',
+      image: '/images/approved/2.jpg',
     },
     {
       id: 3,
       name: t('pages.home.hero.people.3.name'),
       designation: t('pages.home.hero.people.3.time'),
-      image: '/images/approved/3.webp',
+      image: '/images/approved/3.jpg',
     },
     {
       id: 4,
       name: t('pages.home.hero.people.4.name'),
       designation: t('pages.home.hero.people.4.time'),
-      image: '/images/approved/4.webp',
+      image: '/images/approved/4.jpg',
     },
     {
       id: 5,
       name: t('pages.home.hero.people.5.name'),
       designation: t('pages.home.hero.people.5.time'),
-      image: '/images/approved/5.webp',
+      image: '/images/approved/5.jpg',
     },
     {
       id: 6,
       name: t('pages.home.hero.people.6.name'),
       designation: t('pages.home.hero.people.6.time'),
-      image: '/images/approved/6.webp',
+      image: '/images/approved/6.jpg',
     },
   ]
 
@@ -181,19 +182,19 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
+      <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
         <div
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[0deg] lg:translate-x-[-200px] aspect-[9/16] transition-all duration-300 hover:z-50 hover:scale-110'
           style={{
             zIndex: 3,
-            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
           }}
         >
-          <div className='relative w-full h-full rounded-2xl overflow-hidden'>
+          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/1.webm'
               type='video/webm'
-              classNames='absolute inset-0 w-full h-full object-cover'
+              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
             />
           </div>
         </div>
@@ -201,14 +202,14 @@ export const Hero = () => {
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[10deg] aspect-[9/16] lg:mt-8 transition-all translate-x-[120px] lg:translate-x-[0px] duration-300 hover:z-50 hover:scale-110'
           style={{
             zIndex: 2,
-            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
           }}
         >
-          <div className='relative w-full h-full rounded-2xl overflow-hidden'>
+          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/2.webm'
               type='video/webm'
-              classNames='absolute inset-0 w-full h-full object-cover'
+              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
             />
           </div>
         </div>
@@ -216,18 +217,18 @@ export const Hero = () => {
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[20deg] aspect-[9/16] lg:mt-32 translate-x-[240px] lg:translate-x-[200px] transition-all duration-300 hover:z-50 hover:scale-110'
           style={{
             zIndex: 1,
-            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
           }}
         >
-          <div className='relative w-full h-full rounded-2xl overflow-hidden'>
+          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/3.webm'
               type='video/webm'
-              classNames='absolute inset-0 w-full h-full object-cover'
+              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
             />
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }
