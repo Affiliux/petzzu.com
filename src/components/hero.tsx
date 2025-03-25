@@ -119,10 +119,10 @@ export const Hero = () => {
           <span> {t('pages.home.hero.sub-title')}</span>
         </HoverBorderGradient>
 
-        <h1 className='text-neutral-900 text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
+        <h1 className='text-neutral-900 text-4xl lg:text-5xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
           {t('pages.home.hero.title.1')}
         </h1>
-        <h2 className='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-theme-400 pb-8 z-20'>
+        <h2 className='relative font-bold tracking-tight text-4xl lg:text-5xl font-sans text-theme-400 pb-8 z-20'>
           <TypeAnimation
             sequence={[
               t('pages.home.hero.title.2'),
@@ -140,9 +140,7 @@ export const Hero = () => {
           />
         </h2>
 
-        <p className='max-w-xl text-left text-base relative md:text-lg text-neutral-500'>
-          {t('pages.home.hero.description')}
-        </p>
+        <p className='max-w-xl text-sm md:text-lg text-neutral-500'>{t('pages.home.hero.description')}</p>
 
         <button
           type='button'

@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className='w-full max-w-sm md:max-w-3xl'>
         <div className='flex flex-col gap-6'>
           <Link href='/' className='md:hidden w-2/3'>
-            <img src={`/logos/${theme}/logo+name.webp`} alt='Image' />
+            <img src={`/images/logos/${theme}/logo+name.webp`} alt='Image' />
           </Link>
 
           <Card className='overflow-hidden bg-white border-neutral-200/60 shadow-none hover:shadow-lg hover:shadow-neutral-200/50'>
@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
               <div className='relative hidden md:flex items-center justify-center bg-white/10 bg-grid-small-neutral-300/[0.5]'>
                 <img
-                  src={`/logos/${theme}/logo+name.webp`}
+                  src={`/images/logos/${theme}/logo+name.webp`}
                   alt='Image'
                   className='absolute object-contain inset-0 w-full h-full p-12'
                 />
