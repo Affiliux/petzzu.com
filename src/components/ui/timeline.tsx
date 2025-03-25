@@ -42,9 +42,12 @@ export const Timeline = ({ data }: { data: TimelineEntryProps[] }) => {
                 <div className='h-2 w-2 rounded-full bg-theme-600 border border-theme-300 p-2' />
               </div>
 
-              <h3 className='tracking-tight leading-none pl-20 md:pl-20 mt-2 lg:mt-1 text-lg md:text-xl font-bold text-theme-700'>
-                {item.title.day}/{item.title.month}/{item.title.year}
-              </h3>
+              {item.title.day && item.title.month && item.title.year && (
+                <h3 className='tracking-tight leading-none pl-20 md:pl-20 mt-2 lg:mt-1 text-lg md:text-xl font-bold text-theme-700'>
+                  {item.title.day}/{item.title.month}/{item.title.year}
+                </h3>
+              )}
+              
             </div>
 
             <div className='relative pl-20 pr-4 w-full'>{item.content}</div>
