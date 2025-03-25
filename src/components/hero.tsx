@@ -74,37 +74,37 @@ export const Hero = () => {
       id: 1,
       name: t('pages.home.hero.people.1.name'),
       designation: t('pages.home.hero.people.1.time'),
-      image: '/images/approved/1.jpg',
+      image: '/images/approved/1.webp',
     },
     {
       id: 2,
       name: t('pages.home.hero.people.2.name'),
       designation: t('pages.home.hero.people.2.time'),
-      image: '/images/approved/2.jpg',
+      image: '/images/approved/2.webp',
     },
     {
       id: 3,
       name: t('pages.home.hero.people.3.name'),
       designation: t('pages.home.hero.people.3.time'),
-      image: '/images/approved/3.jpg',
+      image: '/images/approved/3.webp',
     },
     {
       id: 4,
       name: t('pages.home.hero.people.4.name'),
       designation: t('pages.home.hero.people.4.time'),
-      image: '/images/approved/4.jpg',
+      image: '/images/approved/4.webp',
     },
     {
       id: 5,
       name: t('pages.home.hero.people.5.name'),
       designation: t('pages.home.hero.people.5.time'),
-      image: '/images/approved/5.jpg',
+      image: '/images/approved/5.webp',
     },
     {
       id: 6,
       name: t('pages.home.hero.people.6.name'),
       designation: t('pages.home.hero.people.6.time'),
-      image: '/images/approved/6.jpg',
+      image: '/images/approved/6.webp',
     },
   ]
 
@@ -119,10 +119,10 @@ export const Hero = () => {
           <span> {t('pages.home.hero.sub-title')}</span>
         </HoverBorderGradient>
 
-        <h1 className='text-neutral-900 text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
+        <h1 className='text-neutral-900 text-4xl lg:text-5xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
           {t('pages.home.hero.title.1')}
         </h1>
-        <h2 className='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-theme-400 pb-8 z-20'>
+        <h2 className='relative font-bold tracking-tight text-4xl lg:text-5xl font-sans text-theme-400 pb-8 z-20'>
           <TypeAnimation
             sequence={[
               t('pages.home.hero.title.2'),
@@ -140,9 +140,7 @@ export const Hero = () => {
           />
         </h2>
 
-        <p className='max-w-xl text-left text-base relative md:text-lg text-neutral-500'>
-          {t('pages.home.hero.description')}
-        </p>
+        <p className='max-w-xl text-sm md:text-lg text-neutral-500'>{t('pages.home.hero.description')}</p>
 
         <button
           type='button'
@@ -189,12 +187,12 @@ export const Hero = () => {
             zIndex: 3,
           }}
         >
-          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/1.webm'
               type='video/webm'
-              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
+              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
             />
           </div>
         </div>
@@ -204,12 +202,12 @@ export const Hero = () => {
             zIndex: 2,
           }}
         >
-          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/2.webm'
               type='video/webm'
-              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
+              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
             />
           </div>
         </div>
@@ -219,12 +217,12 @@ export const Hero = () => {
             zIndex: 1,
           }}
         >
-          <img src='/images/mockup.png' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
             <LazyLoadVideo
               src='/videos/hero/3.webm'
               type='video/webm'
-              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-1.5 rounded-md lg:rounded-3xl'
+              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
             />
           </div>
         </div>

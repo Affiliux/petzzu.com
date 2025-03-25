@@ -19,7 +19,13 @@ export function Footer() {
       <div className='container flex flex-col md:flex-row justify-between'>
         <div className='w-full md:w-1/3'>
           <Link href='/'>
-            <img src={`/logos/${theme}/logo+name.png`} className='h-12' alt='Babyzzu logo' width={200} height={56} />
+            <img
+              src={`/images/logos/${theme}/logo+name.webp`}
+              className='h-12'
+              alt='Babyzzu logo'
+              width={200}
+              height={56}
+            />
           </Link>
           <p className='text-sm text-neutral-500 mt-4'>{t('description')}</p>
 
@@ -55,7 +61,7 @@ export function Footer() {
       <div className='container flex flex-col-reverse md:flex-row items-center justify-between mt-12 md:mt-8 gap-4'>
         <p className='text-sm text-neutral-500'>{t('footer.copyright')}</p>
 
-        <img src='./pagarme-extend.png' alt='pagarme logo' className='h-8 lg:h-6' />
+        <img src='./pagarme-extend.webp' alt='pagarme logo' className='h-8 lg:h-6' />
       </div>
     </div>
   )
