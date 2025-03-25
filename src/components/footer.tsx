@@ -15,7 +15,7 @@ export function Footer() {
   const { theme } = useApplication()
 
   return (
-    <div className='py-10 md:pt-20 mt-20 border-t border-t-neutral-200'>
+    <div className='py-10 md:pt-20 mt-20 border-t border-t-neutral-200/60'>
       <div className='container flex flex-col md:flex-row justify-between'>
         <div className='w-full md:w-1/3'>
           <Link href='/'>

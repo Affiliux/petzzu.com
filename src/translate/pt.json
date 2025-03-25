@@ -46,7 +46,7 @@
       "twitter": "Twitter"
     },
     "offer": {
-      "title": "💥 Super Promoção",
+      "title": "✨ Apenas hoje",
       "description1": "Todos os planos com",
       "description2": "de desconto, aproveite!"
     },
@@ -72,7 +72,13 @@
       "seconds": "segundos",
       "mili": "milissegundos",
       "of": "de",
-      "since": "Nasceu dia"
+      "since": "Nasceu dia",
+
+      "birth_date": {
+        "day": "Dia",
+        "month": "Mês",
+        "year": "Ano"
+      }
     }
   },
   "pages": {
@@ -80,13 +86,13 @@
       "hero": {
         "sub-title": "Vamos começar?",
         "title": {
-          "1": "Surpreenda",
-          "2": "alguém especial",
-          "3": "seu amor",
-          "4": "seu filho",
-          "5": "seu familiar"
+          "1": "Eternize",
+          "2": "Cada sorriso",
+          "3": "Cada descoberta",
+          "4": "Cada memória",
+          "5": "Cada momento"
         },
-        "description": "Pequenos gestos criam memórias inesquecíveis. Surpreenda quem você ama eternizando cada momento especial e acompanhe sua jornada desde os primeiros sorrisos.",
+        "description": "Pequenos gestos constroem grandes lembranças. Cada sorriso, cada descoberta e cada nova fase do seu bebê são momentos únicos que merecem ser registrados. Acompanhe essa linda jornada e eternize cada detalhe com carinho.",
         "input": {
           "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
           "errors": {
@@ -110,8 +116,7 @@
           },
           "4": {
             "name": "Camila & Felipe",
-            "time": "4 meses atrás",
-            "image": "https://cdn.babyzzu.com/lp-assets/Michael%20Franca%20Studio.jpg"
+            "time": "4 meses atrás"
           },
           "5": {
             "name": "Bia & Henrique",
@@ -122,7 +127,7 @@
             "time": "2 meses atrás"
           }
         },
-        "rating": "Aprovado por 23.628 pessoas"
+        "rating": "Aprovado por 714 mães e pais"
       },
       "how-work": {
         "subtitle": "Como funciona?",
@@ -203,53 +208,53 @@
         "title": "Depoimentos",
         "description": "Veja o que nossos clientes estão dizendo sobre a Babyzzu",
         "1": {
-          "name": "Mariana e João",
+          "name": "Mariana",
           "time": "1 mês atrás",
-          "message": "Adoramos criar a linha do tempo do nosso bebê! Conseguimos registrar todos os momentos especiais com fotos, vídeos e mensagens. Ficou lindo e emocionante!"
+          "message": "Adorei criar a linha do tempo do meu bebê! Consegui registrar todos os momentos especiais com fotos, vídeos e mensagens. Ficou lindo e emocionante!"
         },
         "2": {
-          "name": "Ana e Pedro",
+          "name": "Ana",
           "time": "2 dias atrás",
-          "message": "O Babyzzu nos ajudou a organizar e eternizar cada fase do crescimento do nosso filho. É incrível poder reviver cada momento com tanta facilidade!"
+          "message": "O Babyzzu me ajudou a organizar e eternizar cada fase do crescimento do meu filho. É incrível poder reviver cada momento com tanta facilidade!"
         },
         "3": {
-          "name": "Lucas e Carol",
+          "name": "Lucas",
           "time": "3 meses atrás",
-          "message": "Montamos a linha do tempo da nossa bebê desde o nascimento e ficou perfeito! Agora temos todas as lembranças reunidas em um só lugar, de um jeito especial."
+          "message": "Montei a linha do tempo da minha bebê desde o nascimento e ficou perfeito! Agora tenho todas as lembranças reunidas em um só lugar, de um jeito especial."
         },
         "4": {
-          "name": "Camila e Felipe",
+          "name": "Marcelo",
           "time": "4 meses atrás",
-          "message": "A plataforma é super intuitiva e fácil de usar! Criamos a linha do tempo com as fotos mais marcantes do nosso filho e adoramos o resultado!"
+          "message": "A plataforma é super intuitiva e fácil de usar! Criei a linha do tempo com as fotos mais marcantes do meu filho e adorei o resultado!"
         },
         "5": {
           "name": "Bia e Henrique",
           "time": "1 ano atrás",
-          "message": "Foi emocionante criar esse registro digital para o nosso bebê! Com certeza será um presente valioso para ele no futuro."
+          "message": "Foi emocionante criar esse registro digital para o nosso bebê! Com certeza será um presente valioso para ele no futuro. Estamos felizes em ter cada detalhe guardado com tanto carinho!"
         },
         "6": {
-          "name": "Clara e Rafael",
+          "name": "Clara",
           "time": "2 meses atrás",
-          "message": "O Babyzzu tornou muito mais fácil guardar e compartilhar os momentos especiais do nosso bebê com a família. Todos amaram a ideia!"
+          "message": "O Babyzzu tornou muito mais fácil guardar e compartilhar os momentos especiais do meu bebê com a família. Todos amaram a ideia!"
         },
         "7": {
-          "name": "Vanessa e Ricardo",
+          "name": "Vanessa",
           "time": "1 semana atrás",
-          "message": "Ficamos encantados com a possibilidade de criar um registro interativo do crescimento do nosso bebê. Cada detalhe faz toda a diferença!"
+          "message": "Fiquei encantada com a possibilidade de criar um registro interativo do crescimento do meu bebê. Cada detalhe faz toda a diferença!"
         },
         "8": {
-          "name": "Carla e Bruno",
+          "name": "Bruno",
           "time": "4 meses atrás",
-          "message": "Criar essa linha do tempo foi uma das melhores decisões que tomamos! Agora temos um registro lindo e organizado de todos os momentos do nosso pequeno."
+          "message": "Criar essa linha do tempo foi uma das melhores decisões que tomei! Agora tenho um registro lindo e organizado de todos os momentos do meu pequeno."
         },
         "9": {
           "name": "Larissa e Tiago",
           "time": "9 meses atrás",
-          "message": "Foi incrível montar essa linha do tempo cheia de lembranças e detalhes especiais. Um presente para toda a vida!"
+          "message": "Foi incrível montar essa linha do tempo cheia de lembranças e detalhes especiais. Um presente para toda a vida! Poder reviver cada etapa juntos nos enche de emoção."
         }
       },
       "cta": {
-        "title": "Garanta agora mesmo e surpreenda!",
+        "title": "Garanta agora mesmo e eternize momentos!",
         "button": "Começar agora"
       },
       "plans": {
@@ -316,28 +321,28 @@
         "title": "Vários Recursos",
         "description": "Veja os recursos que você pode adicionar à sua página personalizada",
         "1": {
-          "title": "Linha do Tempo",
-          "description": "Uma linha do tempo exclusivamente feita para o crescimento do bebê."
+          "title": "Contador de Tempo",
+          "description": "Acompanhe em tempo real a idade e o desenvolvimento de cada etapa."
         },
         "2": {
-          "title": "Contador de Tempo",
-          "description": "Acompanhe em tempo real o desenvolvimento de cada etapa."
-        },
-        "3": {
-          "title": "QRCode Exclusivo",
-          "description": "Crie seu QR Code exclusivo e torne cada interação única, prática e memorável."
-        },
-        "4": {
-          "title": "Imagens para cada Mês",
-          "description": "Eternize cada momento único do mês com imagens especiais que capturam memórias inesquecíveis!"
-        },
-        "5": {
-          "title": "URL Personalizada",
-          "description": "Transforme sua presença online com uma URL personalizada."
-        },
-        "6": {
           "title": "Fundo Colorido",
           "description": "Destaque sua página com um fundo colorido vibrante e cativante, criando uma experiência visual única e envolvente!"
+        },
+        "3": {
+          "title": "Timeline de lembranças",
+          "description": "Crie uma linha do tempo com fotos e mensagens para cada lembrança especial.",
+          "1": {
+            "title": "Primeiro respiro",
+            "description": "O dia em que nasceu foi mágico!"
+          },
+          "2": {
+            "title": "Primeiro Banho",
+            "description": "O primeiro banho foi incrível!"
+          }
+        },
+        "4": {
+          "title": "Em todo lugar",
+          "description": "Crie sua página e compartilhe de qualquer lugar do mundo. Aceitamos pagamentos internacionais."
         }
       }
     },
@@ -693,16 +698,6 @@
       "recommended": "Recomendado",
       "back": "Voltar etapa",
       "button": "Finalizar"
-    }
-  },
-  "slug": {
-    "birth_date": {
-      "day": "Dia",
-      "month": "Mês",
-      "year": "Ano"
-    },
-    "facts": {
-      "title": "Conheça um pouco sobre mim:"
     }
   },
   "checkout": {

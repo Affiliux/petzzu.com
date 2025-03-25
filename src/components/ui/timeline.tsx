@@ -36,15 +36,18 @@ export const Timeline = ({ data }: { data: TimelineEntryProps[] }) => {
     <div className='w-full font-sans px-0' ref={containerRef}>
       <div ref={ref} className='relative max-w-7xl mx-auto pb-20'>
         {data.map((item, index) => (
-          <div key={index} className={`flex flex-col justify-start ${index !== 0 ? 'pt-28' : 'pt-14 lg:pt-24'}`}>
+          <div key={index} className={`flex flex-col justify-start ${index !== 0 ? 'pt-20' : 'pt-12 lg:pt-20'}`}>
             <div className='sticky z-40 top-40 self-start w-[95%] lg:max-w-sm md:w-full'>
               <div className='h-8 absolute left-4 md:left-4 w-8 rounded-full bg-theme-300 flex items-center justify-center'>
                 <div className='h-2 w-2 rounded-full bg-theme-600 border border-theme-300 p-2' />
               </div>
 
-              <h3 className='tracking-tight leading-none pl-20 md:pl-20 mt-2 lg:mt-1 text-lg md:text-xl font-bold text-theme-700'>
-                {item.title.day}/{item.title.month}/{item.title.year}
-              </h3>
+              {item.title.day && item.title.month && item.title.year && (
+                <h3 className='tracking-tight leading-none pl-20 md:pl-20 mt-2 lg:mt-1 text-lg md:text-xl font-bold text-theme-700'>
+                  {item.title.day}/{item.title.month}/{item.title.year}
+                </h3>
+              )}
+              
             </div>
 
             <div className='relative pl-20 pr-4 w-full'>{item.content}</div>

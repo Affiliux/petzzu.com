@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { IconCoin, IconHearts, IconListNumbers, IconQrcode } from '@tabler/icons-react'
 
+import { useApplication } from '@/contexts/ApplicationContext'
+
 import { HoverBorderGradient } from './ui/hover-border-gradient'
 
 import { cn } from '@/lib/utils'
@@ -13,6 +15,9 @@ import { cn } from '@/lib/utils'
 export function HowWork() {
   // hooks
   const t = useTranslations('pages.home')
+
+  // contexts
+  const { theme } = useApplication()
 
   // variables
   const features = [
@@ -58,7 +63,7 @@ export function HowWork() {
         ))}
       </div>
 
-      <div className='flex flex-col lg:flex-row items-center justify-center gap-16 mt-12 lg:mt-0'>
+      <div className='flex flex-col lg:flex-row items-center justify-center gap-16 mt-12 lg:mt-14'>
         <div>
           <p className='text-neutral-900 font-bold text-3xl lg:text-4xl lg:max-w-md'>
             {t('how-work.example.title.1')} <span className='text-theme-600'>{t('how-work.example.title.2')}</span>{' '}
@@ -66,7 +71,7 @@ export function HowWork() {
           </p>
         </div>
 
-        <Image src='/images/example.png' alt={'example image'} className='lg:mt-14' width={540} height={520} />
+        <Image src={`/images/examples/${theme}.png`} alt={'example image'} width={450} height={450} />
       </div>
     </div>
   )
@@ -86,9 +91,9 @@ const Feature = ({
   return (
     <div
       className={cn(
-        'flex flex-col lg:border-r py-10 relative group/feature border-neutral-300',
-        (index === 0 || index === 4) && 'lg:border-l border-neutral-300',
-        index < 4 && 'lg:border-b border-neutral-300',
+        'flex flex-col border-b border-l lg:border-l-0 lg:border-b-0 lg:border-r py-10 relative group/feature border-neutral-200/600',
+        (index === 0 || index === 4) && 'lg:border-l border-neutral-200/600',
+        index < 4 && 'lg:border-b border-neutral-200/600',
       )}
     >
       {index < 4 && (
@@ -99,7 +104,7 @@ const Feature = ({
       )}
       <div className='mb-4 relative z-10 px-10 text-theme-500'>{icon}</div>
       <div className='text-lg font-bold mb-2 relative z-10 px-10'>
-        <div className='absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 group-hover/feature:bg-theme-500 transition-all duration-200 origin-center' />
+        <div className='absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full border-neutral-200/600 group-hover/feature:bg-theme-500 transition-all duration-200 origin-center' />
         <span className='group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-900'>
           {title}
         </span>
