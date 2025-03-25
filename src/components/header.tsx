@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 
+import { formatDate } from 'date-fns'
 import { ChevronDown, Globe, Layers, LogOut, Menu, User, X } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -39,8 +40,11 @@ export function Header() {
     <nav className='absolute top-0 left-0 w-full bg-white border-b border-neutral-200/60 z-50'>
       <div className='py-1.5 px-4 text-left md:text-center font-medium font-sans tracking-tight text-xs md:text-sm bg-gradient-to-r text-white from-theme-600 via-theme-700 to-theme-300'>
         <p className='text-center text-white'>
-          <b>{t('config.offer.title')}</b> - {t('config.offer.description1')}{' '}
-          <b className='text-sm md:text-base'>50%</b> {t('config.offer.description2')}
+          <b>
+            {t('config.offer.title')} {formatDate(new Date(), 'dd/MM/yyyy')}
+          </b>{' '}
+          - {t('config.offer.description1')} <b className='text-sm md:text-base'>50%</b>{' '}
+          {t('config.offer.description2')}
         </p>
       </div>
 
@@ -79,9 +83,8 @@ export function Header() {
           {/* Theme Switcher */}
           <ThemeSwitcher />
 
-          {/* Language Switcher (commented until we found a international gateway) */}
-
-          {/* <DropdownMenu>
+          {/* Language Switcher */}
+          <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='ghost' size='icon'>
                 <Globe className='h-5 w-5' />
@@ -99,7 +102,7 @@ export function Header() {
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
-          </DropdownMenu> */}
+          </DropdownMenu>
 
           {/* User Profile */}
           {account?.email ? (

@@ -16,35 +16,35 @@ export default function Page() {
           {t('title')}
         </h1>
 
-        <div className='text-neutral-400 text-sm mt-10 py-4 px-8 border-l-4 max-w-4xl border-blue-700'>
-          <b className='text-white'>{t('content.acceptance_of_terms')}</b>
+        <div className='text-muted-foreground text-sm mt-10 py-4 px-8 border-l-4 max-w-4xl border-theme-700'>
+          <b className='theme-neutral-900'>{t('content.acceptance_of_terms')}</b>
           <p>{t('content.acceptance_description')}</p>
           <br />
-          <b className='text-white'>{t('content.service_description_title')}</b>
+          <b className='theme-neutral-900'>{t('content.service_description_title')}</b>
           <p>{t('content.service_description')}</p>
           <br />
-          <b className='text-white'>{t('content.registration_and_security_title')}</b>
+          <b className='theme-neutral-900'>{t('content.registration_and_security_title')}</b>
           <p>{t('content.registration_and_security')}</p>
           <br />
-          <b className='text-white'>{t('content.privacy_policy_title')}</b>
+          <b className='theme-neutral-900'>{t('content.privacy_policy_title')}</b>
           <p>{t('content.privacy_policy')}</p>
           <br />
-          <b className='text-white'>{t('content.user_content_title')}</b>
+          <b className='theme-neutral-900'>{t('content.user_content_title')}</b>
           <p>{t('content.user_content')}</p>
           <br />
-          <b className='text-white'>{t('content.payments_refund_policy_title')}</b>
+          <b className='theme-neutral-900'>{t('content.payments_refund_policy_title')}</b>
           <p>{t('content.payments_refund_policy')}</p>
           <br />
-          <b className='text-white'>{t('content.service_changes_title')}</b>
+          <b className='theme-neutral-900'>{t('content.service_changes_title')}</b>
           <p>{t('content.service_changes')}</p>
           <br />
-          <b className='text-white'>{t('content.limitation_of_liability_title')}</b>
+          <b className='theme-neutral-900'>{t('content.limitation_of_liability_title')}</b>
           <p>{t('content.limitation_of_liability')}</p>
           <br />
-          <b className='text-white'>{t('content.terms_update_title')}</b>
+          <b className='theme-neutral-900'>{t('content.terms_update_title')}</b>
           <p>{t('content.terms_update')}</p>
           <br />
-          <b className='text-white'>{t('content.contact_title')}</b>
+          <b className='theme-neutral-900'>{t('content.contact_title')}</b>
           <p>{t('content.contact')}</p>
           <br />
         </div>
