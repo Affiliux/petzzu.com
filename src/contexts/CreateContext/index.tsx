@@ -39,6 +39,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
   const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
   const [plan, set_plan] = useState<PlanProps | undefined>()
   const [payment, set_payment] = useState<PaymentProps | null>(null)
+  const [payment_info, set_payment_info] = useState<{ email: string; phone: string } | null>(null)
 
   async function onCreatePre(payload: CreatePrePayloadProps): Promise<void> {
     try {
@@ -149,6 +150,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         plan,
         theme_show_type,
         date_show_type,
+        payment_info,
         //
         set_pre,
         set_pre_medias,
@@ -157,6 +159,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         set_plan,
         set_theme_show_type,
         set_date_show_type,
+        set_payment_info,
         //
         onCreatePre,
         onUpdatePre,

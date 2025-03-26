@@ -31,6 +31,9 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
   // hooks
   const t = useTranslations()
 
+  const storedEmail = localStorage.getItem('user_email')
+  const storedPhone = localStorage.getItem('user_phone')
+
   const formSchema = z.object({
     name: z
       .string()
@@ -38,7 +41,6 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
       .refine(value => !validateName(value), {
         message: t('checkout.payment.inputs.name.invalid'),
       }),
-    email: z.string().nonempty(t('checkout.payment.inputs.email.required')),
     document: z
       .string()
       .nonempty(t('checkout.payment.inputs.document.required'))
@@ -46,7 +48,6 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
         message: t('checkout.payment.inputs.document.invalid'),
       }),
 
-    phone: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,8 +56,6 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
     mode: 'onBlur',
     defaultValues: {
       name: '',
-      email: '',
-      phone: '',
       document: '',
     },
   })
@@ -65,31 +64,30 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
   const [loading, set_loading] = useState<boolean>(false)
 
   // variables
-  const DISABLED =
-    loading ||
-    !form.formState.isDirty ||
-    !!form.formState.errors.document ||
-    !!form.formState.errors.email ||
-    !!form.formState.errors.name ||
-    !!form.formState.errors.phone
+    const DISABLED =
+      loading ||
+      !form.formState.isDirty ||
+      !!form.formState.errors.document ||
+      !!form.formState.errors.name ||
+      !storedEmail ||
+      !storedPhone
+
 
   async function handleSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)
 
     try {
-      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-
-      if (regex.test(values.email.trim())) {
-        await onCreate({
-          method: PaymentMethodsEnum.PIX,
-          email: values.email.trim(),
-          phone: removeMask(values.phone.trim()),
-          name: values.name.trim(),
-          document: removeMask(values.document.trim()),
-        })
-      } else {
-        form.setError('email', { message: t('checkout.payment.inputs.email.invalid') })
+      if (!storedEmail || !storedPhone) {
+        throw new Error('Missing email or phone')
       }
+
+      await onCreate({
+        method: PaymentMethodsEnum.PIX,
+        email: storedEmail,
+        phone: removeMask(storedPhone),
+        name: values.name.trim(),
+        document: removeMask(values.document.trim()),
+      })
     } catch (error: any) {
       console.error(error)
     } finally {
@@ -148,59 +146,9 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
                           onChange={e => field.onChange(maskCPF(e.target.value))}
                         />
                       </FormControl>
-
                       <FormMessage className='text-red-500 text-sm mt-1 text-right'>
                         {form.formState.errors.document?.message}
                       </FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className='w-full'>
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t('checkout.payment.inputs.email.label')}</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder={t('checkout.payment.inputs.email.placeholder')}
-                          type='email'
-                          className='w-full'
-                          {...field}
-                        />
-                      </FormControl>
-
-                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                        {form.formState.errors.email?.message}
-                      </FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className='w-full'>
-                <FormField
-                  control={form.control}
-                  name='phone'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
-                      <FormControl>
-                        <PhoneInput
-                          placeholder={t('checkout.payment.inputs.phone.placeholder')}
-                          className='w-full'
-                          onChange={e => field.onChange(e)}
-                        />
-                      </FormControl>
-
-                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                        {form.formState.errors.phone?.message}
-                      </FormMessage>
-
-                      <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
                     </FormItem>
                   )}
                 />

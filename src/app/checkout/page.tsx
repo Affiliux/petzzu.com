@@ -127,6 +127,8 @@ export default function Page() {
       if (body.gateway === PaymentMethodsEnum.STONE_CARD) set_is_card_stone(true)
 
       localStorage.removeItem('hasSavePre')
+      localStorage.removeItem('user_email')
+      localStorage.removeItem('user_phone')
     } catch (error: any) {
       console.error(error)
 

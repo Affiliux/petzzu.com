@@ -1,43 +1,76 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useTranslations } from 'next-intl'
-import { IconCheck, IconChevronLeft, IconChevronRight, IconLoader, IconStarFilled, IconX } from '@tabler/icons-react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
 
-import type { DiscountProps, PlanProps } from '@/typings/application'
-import { useApplication } from '@/contexts/ApplicationContext'
+import { useCreate } from '@/contexts/CreateContext'
 
-import { HoverBorderGradient } from './ui/hover-border-gradient'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
+import { Input } from './ui/input'
+import { PhoneInput } from './ui/phone-input'
+
+import { removeMask } from '@/lib/helpers/formatters'
+import formatToE164 from '@/lib/helpers/formatters/formatToE164'
 
 interface Step5Props {
-  plans: PlanProps[]
-  discount: DiscountProps | null
-  selected: PlanProps | undefined
-  setPlan: Dispatch<SetStateAction<PlanProps | undefined>>
+  isEdit?: boolean
   onNext: () => Promise<void>
-  onBack: () => void
+  onBack?: () => void
 }
 
-export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: Step5Props) => {
+export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
+
   // hooks
   const t = useTranslations()
-
-  // contexts
-  const { currency } = useApplication()
+  const { set_payment_info } = useCreate()
 
   // states
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   // variables
-  const FORMAT_INTL_LOCALE = t('config.defaults.country')
-  const FORMAT_INTL_CURRENCY = currency ?? 'BRL'
+  const storedEmail = localStorage.getItem('user_email') 
+  const storedPhone = localStorage.getItem('user_phone')
 
-  async function handleSubmit() {
+  const formSchema = z.object({
+    email: z.string().nonempty(t('checkout.payment.inputs.email.required')),
+    phone: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
+  })
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    reValidateMode: 'onChange',
+    mode: 'onBlur',
+    defaultValues: {
+      email: storedEmail || '',
+      phone: storedPhone ? formatToE164(storedPhone) : '',
+    },
+  })
+
+  const DISABLED = loading || !!form.formState.errors.email || !!form.formState.errors.phone
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
-
     try {
-      await onNext()
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+      if (regex.test(values.email.trim())) {
+        const email = values.email.trim()
+        const phone = values.phone
+
+        localStorage.setItem('user_email', email)
+        localStorage.setItem('user_phone', phone)
+
+        set_payment_info({ email, phone })
+
+        await onNext()
+      } else {
+        form.setError('email', { message: t('checkout.payment.inputs.email.invalid') })
+      }
     } catch (error) {
       console.error(error)
     } finally {
@@ -45,254 +78,91 @@ export const Step5 = ({ plans, discount, selected, setPlan, onNext, onBack }: St
     }
   }
 
-  useEffect(() => {
-    const find = plans.find(plan => plan.sku.includes(`plan_month_${t('config.defaults.currency')}`))
-
-    if (!selected) setPlan(find)
-    if (selected && !selected.sku.includes(`plan_month_${t('config.defaults.currency')}`)) setPlan(find)
-  }, [])
-
   return (
-    <div className='relative flex flex-col gap-8 z-50 w-full mt-8'>
-      <div className='flex flex-col gap-4'>
-        {plans.map(plan =>
-          plan.sku.includes(FORMAT_INTL_CURRENCY) && FORMAT_INTL_LOCALE.includes('-') && FORMAT_INTL_CURRENCY ? (
-            <div
-              key={plan.sku}
-              onClick={() => {
-                if (plan.sku !== selected?.sku) setPlan(plan)
-                else handleSubmit()
-              }}
-              className='w-full'
-            >
-              <HoverBorderGradient
-                containerClassName={`rounded-xl w-full transform duration-200 bg-white ${
-                  plan.sku === selected?.sku ? 'scale-105 my-2' : 'opacity-50'
-                }`}
-                as='button'
-                className={`relative p-5 w-full flex gap-8 text-left cursor-pointer bg-white transform duration-200`}
-              >
-                <div className='flex flex-col justify-between'>
-                  <div className='w-full'>
-                    <p className='text-2xl font-bold relative z-20 text-left text-neutral-900 mt-4'>
-                      {t(`steps.step5.plans.${plan.sku.split('_')[1]}.title`)}
-                    </p>
-                    <p className='text-lg font-light relative z-20 text-left text-muted-foreground'>
-                      {t(`steps.step5.plans.${plan.sku.split('_')[1]}.counter`)}
-                    </p>
-                  </div>
-
-                  <div className='md:hidden flex text-neutral-200 relative z-20'>
-                    <ul className='list-none mt-4'>
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.2`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.4`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.6`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
-                      <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
-
-                      {plan.sku.includes('annual') ? (
-                        <>
-                          <StepPerCheck
-                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
-                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
-                          />
-                          <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
-                        </>
-                      ) : plan.sku.includes('month') ? (
-                        <>
-                          <StepPerCheck
-                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
-                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
-                          />
-                          <StepPerCheck
-                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
-                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <StepPerUnCheck
-                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
-                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
-                          />
-                          <StepPerUnCheck
-                            title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
-                            sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
-                          />
-                        </>
-                      )}
-                    </ul>
-                  </div>
-
-                  <div className='mt-8'>
-                    <p className='text-lg font-black text-theme-600 line-through'>
-                      {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
-                        style: 'currency',
-                        currency: plan.currency,
-                      }).format(plan.price + plan.price)}
-                    </p>
-
-                    <p className='text-2xl font-black text-neutral-900 -mt-1'>
-                      {Intl.NumberFormat(FORMAT_INTL_LOCALE, {
-                        style: 'currency',
-                        currency: plan.currency,
-                      }).format(
-                        discount
-                          ? plan.price - (plan.sku.includes('basic') ? discount.discount_basic : discount.discount_pro)
-                          : plan.price,
-                      )}{' '}
-                      <span className='font-light text-xs text-neutral-500'>
-                        {t(`steps.step5.plans.${plan.sku.split('_')[1]}.price_recurrence`)}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-                {plan.sku.includes('annual') && (
-                  <div className='bg-theme-100 border border-theme-300 text-theme-900 text-sm gap-1 font-semibold flex items-center rounded-full px-2 py-[2px] z-50 absolute -top-3 right-4'>
-                    <IconStarFilled size={12} />
-                    <p>{t('steps.step5.recommended')}</p>
-                  </div>
-                )}
-
-                <div className='hidden md:flex text-neutral-200 relative z-20'>
-                  <ul className='list-none mt-4'>
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.1`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.2`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.3`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.4`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.5`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.6`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
-                    <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
-
-                    {plan.sku.includes('annual') ? (
-                      <>
-                        <StepPerCheck
-                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
-                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
-                        />
-                        <StepCheck title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`)} />
-                      </>
-                    ) : plan.sku.includes('month') ? (
-                      <>
-                        <StepPerCheck
-                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
-                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
-                        />
-                        <StepPerCheck
-                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
-                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <StepPerUnCheck
-                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[0]}
-                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.9`).split('|')[1]}
-                        />
-                        <StepPerUnCheck
-                          title={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[0]}
-                          sub={t(`steps.step5.plans.${plan.sku.split('_')[1]}.benefits.10`).split('|')[1]}
-                        />
-                      </>
-                    )}
-                  </ul>
-                </div>
-              </HoverBorderGradient>
-            </div>
-          ) : null,
-        )}
-      </div>
-
-      <div className='flex items-center justify-between gap-4 mt-4'>
-        <button
-          type='button'
-          onClick={onBack}
-          disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-            loading ? 'opacity-50' : ''
-          }`}
-        >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
-            <>
-              <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step5.back')}
-            </>
-          </span>
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={loading || !selected}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-            loading || !selected ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-          }`}
-        >
-          <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
-            {loading ? (
-              <IconLoader size={20} className='animate-spin' />
-            ) : (
-              <>
-                {t('steps.step5.button')}
-                <IconChevronRight size={20} className='ml-4' />
-              </>
+    <Form {...form}>
+      <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={form.handleSubmit(onSubmit)}>
+        <div className='flex flex-col gap-4'>
+          <FormField
+            control={form.control}
+            name='email'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('checkout.payment.inputs.email.label')}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={t('checkout.payment.inputs.email.placeholder')}
+                    type='email'
+                    className='w-full'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                  {form.formState.errors.email?.message}
+                </FormMessage>
+              </FormItem>
             )}
-          </span>
-        </button>
-      </div>
-    </div>
-  )
-}
+          />
 
-const StepCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
-        <IconCheck size={14} />
-      </div>
-      <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
-    </li>
-  )
-}
+          <FormField
+            control={form.control}
+            name='phone'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
+                <FormControl>
+                  <PhoneInput
+                    placeholder={t('checkout.payment.inputs.phone.placeholder')}
+                    className='w-full'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                  {form.formState.errors.phone?.message}
+                </FormMessage>
+                <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
+              </FormItem>
+            )}
+          />
+        </div>
 
-const StepPerCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center mb-1 md:mb-0'>
-      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
-        <IconCheck size={14} />
-      </div>
-      <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
-        <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
-        <p className={`text-theme-600 text-xs`}>({sub})</p>
-      </div>
-    </li>
-  )
-}
-
-const StepPerUnCheck = ({ title, sub, bold }: { title: string; sub?: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center mb-1 md:mb-0'>
-      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
-        <IconX size={14} />
-      </div>
-      <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
-        <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
-        <p className={`text-theme-600 text-xs`}>({sub})</p>
-      </div>
-    </li>
-  )
-}
-
-const StepUnCheck = ({ title, bold }: { title: string; bold?: boolean }) => {
-  return (
-    <li className='flex gap-2 items-center'>
-      <div className='flex items-center justify-center text-theme-600 bg-theme-100 rounded-full h-4 w-4'>
-        <IconX size={14} />
-      </div>
-      <p className={`text-muted-foreground text-sm ${bold && 'font-bold'}`}>{title}</p>
-    </li>
+        <div className='flex items-center justify-between gap-4 mt-4'>
+          {onBack && (
+            <button
+              type='button'
+              onClick={onBack}
+              disabled={loading}
+              className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+                loading ? 'opacity-50' : ''
+              }`}
+            >
+              <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+                <>
+                  <IconChevronLeft size={20} className='mr-4' />
+                  {t('steps.step1.back')}
+                </>
+              </span>
+            </button>
+          )}
+          <button
+            type='submit'
+            disabled={DISABLED}
+            className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+              DISABLED ? 'opacity-50' : ''
+            }`}
+          >
+            <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+              {loading ? (
+                <IconLoader size={20} className='animate-spin' />
+              ) : (
+                <>
+                  {isEdit ? t('pages.account.pages.edit.actions.next') : t('steps.step1.button')}
+                  <IconChevronRight size={20} className='ml-4' />
+                </>
+              )}
+            </span>
+          </button>
+        </div>
+      </form>
+    </Form>
   )
 }

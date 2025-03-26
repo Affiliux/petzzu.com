@@ -30,9 +30,10 @@ interface CardFormProps {
 export const CardForm = ({ onCreate }: CardFormProps) => {
   const t = useTranslations()
 
+  const storedEmail = localStorage.getItem('user_email')
+  const storedPhone = localStorage.getItem('user_phone')
+
   const formSchema = z.object({
-    email: z.string().nonempty(t('checkout.payment.inputs.email.required')),
-    phone: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
     name: z.string().nonempty(t('checkout.payment.inputs-card.name.required')),
     document: z
       .string()
@@ -65,8 +66,6 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     reValidateMode: 'onChange',
     mode: 'onBlur',
     defaultValues: {
-      email: '',
-      phone: '',
       document: '',
       name: '',
       cvv: '',
@@ -81,9 +80,9 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     loading ||
     !form.formState.isDirty ||
     !!form.formState.errors.document ||
-    !!form.formState.errors.email ||
+    !!storedEmail ||
     !!form.formState.errors.name ||
-    !!form.formState.errors.phone ||
+    !!storedPhone ||
     !!form.formState.errors.cvv ||
     !!form.formState.errors.number ||
     !!form.formState.errors.expiry
@@ -92,35 +91,29 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     set_loading(true)
 
     try {
-      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-
-      if (regex.test(values.email.trim())) {
-        const { data: response } = await axios.post(
-          `https://api.pagar.me/core/v5/tokens?appId=${process.env.NEXT_PUBLIC_STONE_APP_ID}`,
-          {
-            type: 'card',
-            card: {
-              number: removeMask(values.number),
-              holder_name: values.name,
-              exp_month: Number(values.expiry.split('/')[0]),
-              exp_year: Number(values.expiry.split('/')[1]),
-              cvv: values.cvv,
-            },
+      const { data: response } = await axios.post(
+        `https://api.pagar.me/core/v5/tokens?appId=${process.env.NEXT_PUBLIC_STONE_APP_ID}`,
+        {
+          type: 'card',
+          card: {
+            number: removeMask(values.number),
+            holder_name: values.name,
+            exp_month: Number(values.expiry.split('/')[0]),
+            exp_year: Number(values.expiry.split('/')[1]),
+            cvv: values.cvv,
           },
-        )
+        },
+      )
 
-        if (response.id) {
-          await onCreate({
-            method: PaymentMethodsEnum.STONE_CARD,
-            email: values.email.trim(),
-            phone: removeMask(values.phone.trim()),
-            name: values.name.trim(),
-            document: removeMask(values.document.trim()),
-            cardToken: response.id,
-          })
-        }
-      } else {
-        form.setError('email', { message: t('checkout.payment.inputs.email.invalid') })
+      if (response.id) {
+        await onCreate({
+          method: PaymentMethodsEnum.STONE_CARD,
+          email: storedEmail,
+          phone: removeMask(storedPhone),
+          name: values.name.trim(),
+          document: removeMask(values.document.trim()),
+          cardToken: response.id,
+        })
       }
     } catch (error: any) {
       console.error(error)
@@ -163,55 +156,6 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
                       <FormMessage className='text-red-500 text-sm mt-1 text-right'>
                         {form.formState.errors.document?.message}
                       </FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className='w-full'>
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t('checkout.payment.inputs.email.label')}</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder={t('checkout.payment.inputs.email.placeholder')}
-                          type='email'
-                          className='w-full'
-                          {...field}
-                        />
-                      </FormControl>
-
-                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                        {form.formState.errors.email?.message}
-                      </FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className='w-full'>
-                <FormField
-                  control={form.control}
-                  name='phone'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
-                      <FormControl>
-                        <PhoneInput
-                          placeholder={t('checkout.payment.inputs.phone.placeholder')}
-                          className='w-full'
-                          onChange={e => field.onChange(e)}
-                        />
-                      </FormControl>
-
-                      <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                        {form.formState.errors.phone?.message}
-                      </FormMessage>
-
-                      <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
                     </FormItem>
                   )}
                 />

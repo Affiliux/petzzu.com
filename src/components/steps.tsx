@@ -15,6 +15,7 @@ import { Step2 } from './step2'
 import { Step3 } from './step3'
 import { Step4 } from './step4'
 import { Step5 } from './step5'
+import { Step6 } from './step6'
 import { UploadFileResponseProps } from '../typings/timeline'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
@@ -150,11 +151,21 @@ export const Steps = ({
 
           {step === 5 && (
             <Step5
+              onBack={() => setStep(4)}
+              onNext={async () => {
+                await onUpdate()
+                setStep(6)
+              }}
+            />
+          )}
+
+          {step === 6 && (
+            <Step6
               plans={plans}
               discount={discount}
               selected={plan}
               setPlan={setPlan}
-              onBack={() => setStep(4)}
+              onBack={() => setStep(5)}
               onNext={async () => {
                 await onUpdate()
                 router.push('/checkout')
