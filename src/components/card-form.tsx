@@ -86,8 +86,6 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     !!form.formState.errors.expiry ||
     !storedEmail ||
     !storedPhone
-    
-    console.log('CardForm', DISABLED)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)
