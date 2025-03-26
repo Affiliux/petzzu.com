@@ -596,7 +596,7 @@
         }
       },
       "modal": {
-        "title": "Você deseja excluir a lembrança",
+        "title": "Você deseja excluir essa lembrança",
         "actions": {
           "delete": "Sim, excluir",
           "cancel": "Cancelar"

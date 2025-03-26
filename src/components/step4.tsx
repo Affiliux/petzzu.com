@@ -428,8 +428,10 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
       <AnimatedModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalContent>
           <h4 className='text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-8'>
-            {t('steps.step4.modal.title')}{' '}
-            <span className='block mt-2 text-base font-normal'>&ldquo;{entryToDelete?.title}&rdquo; ?</span>
+            {t('steps.step4.modal.title')} ? {' '}
+            {entryToDelete?.title && (
+              <span className='block mt-2 text-base font-normal'>&ldquo;{entryToDelete?.title}&rdquo;</span>
+            )}
           </h4>
           <div className='flex flex-col items-center gap-4 w-full'>
             <button
