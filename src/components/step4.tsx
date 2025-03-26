@@ -2,6 +2,7 @@
 
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import { set } from 'date-fns'
 import { enUS, es, ptBR } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 import { v4 as uuidv4 } from 'uuid'
@@ -16,11 +17,13 @@ import { useTimeline } from '@/contexts/TimelineContext'
 import { toast } from '@/hooks/use-toast'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
+import { ModalContent } from './ui/animated-modal'
 import { Button } from './ui/button'
 import { Calendar } from './ui/calendar'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import RichTextEditor from './ui/text-editor'
+import AnimatedModal from './modal'
 import { RenderImage } from './render-image'
 
 import { MAX_FILE_SIZE } from '@/constants'
@@ -47,6 +50,8 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
   // states
   const [timelineEntries, setTimelineEntries] = useState<TimelineEntryProps[]>(child.timeLine || [])
   const [loading, setLoading] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [entryToDelete, setEntryToDelete] = useState<TimelineEntryProps | null>(null)
 
   // variables
   const VALUE_MESSAGE =
@@ -220,199 +225,241 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
   }, [timelineEntries])
 
   return (
-    <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
-      <div className='mb-4'>
-        <button
-          type='button'
-          onClick={handleAddTimelineEntry}
-          disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-            loading ? 'opacity-50' : ''
-          }`}
-        >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white-100 px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
-            <>
-              <IconPlus size={20} className='mr-4' />
-              {t('steps.step4.accordion.actions.new')}
-            </>
-          </span>
-        </button>
-      </div>
-
-      <Accordion type='multiple'>
-        {timelineEntries.map((entry, index) => (
-          <AccordionItem
-            key={entry.id}
-            value={entry.id}
-            className='border border-b-neutral-200/60 border-neutral-200/60 w-full shadow-lg shadow-neutral-200/30 rounded-lg mb-2'
+    <>
+      <div className='relative flex flex-col gap-4 z-50 w-full mt-8'>
+        <div className='mb-4'>
+          <button
+            type='button'
+            onClick={handleAddTimelineEntry}
+            disabled={loading}
+            className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+              loading ? 'opacity-50' : ''
+            }`}
           >
-            <AccordionTrigger className='p-4' noUnderline>
-              {entry.title.length ? entry.title : `${index + 1}° ${t('steps.step4.accordion.title')}`}
-            </AccordionTrigger>
+            <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white-100 px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
+              <>
+                <IconPlus size={20} className='mr-4' />
+                {t('steps.step4.accordion.actions.new')}
+              </>
+            </span>
+          </button>
+        </div>
 
-            <AccordionContent className='p-4'>
-              <div className='flex flex-col gap-6'>
-                <div className='relative flex flex-col gap-2'>
-                  <Label className='font-semibold text-neutral-900'>{t('steps.step4.name.label')}</Label>
-                  <Input
-                    id={`timeline.${entry.id}.title`}
-                    placeholder={t('steps.step4.name.placeholder')}
-                    type='text'
-                    autoComplete='off'
-                    value={entry.title}
-                    onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
-                    onChange={e => {
-                      const updatedEntry = { ...entry, title: e.target.value }
-                      setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                    }}
-                  />
-                </div>
+        <Accordion type='multiple'>
+          {timelineEntries.map((entry, index) => (
+            <AccordionItem
+              key={entry.id}
+              value={entry.id}
+              className='border border-b-neutral-200/60 border-neutral-200/60 w-full shadow-lg shadow-neutral-200/30 rounded-lg mb-2'
+            >
+              <AccordionTrigger className='p-4' noUnderline>
+                {entry.title.length ? entry.title : `${index + 1}° ${t('steps.step4.accordion.title')}`}
+              </AccordionTrigger>
 
-                <div className='relative flex flex-col gap-2'>
-                  <Label className='font-semibold text-neutral-900'>{t('steps.step4.message.label')}</Label>
-                  <RichTextEditor
-                    value={entry.description}
-                    onChange={newDesc => {
-                      const updatedEntry = { ...entry, description: newDesc }
-                      setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                    }}
-                    onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
-                    placeholder={t('steps.step4.message.placeholder')}
-                  />
+              <AccordionContent className='p-4'>
+                <div className='flex flex-col gap-6'>
+                  <div className='relative flex flex-col gap-2'>
+                    <Label className='font-semibold text-neutral-900'>{t('steps.step4.name.label')}</Label>
+                    <Input
+                      id={`timeline.${entry.id}.title`}
+                      placeholder={t('steps.step4.name.placeholder')}
+                      type='text'
+                      autoComplete='off'
+                      value={entry.title}
+                      onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
+                      onChange={e => {
+                        const updatedEntry = { ...entry, title: e.target.value }
+                        setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                      }}
+                    />
+                  </div>
 
-                  <p className='absolute bottom-2 right-3 text-xs text-neutral-900'>{VALUE_MESSAGE?.length ?? 0}/100</p>
-                </div>
-
-                <div className='relative flex flex-col gap-2'>
-                  <Label className='font-semibold text-neutral-900'>{t('steps.step4.date.label')}</Label>
-                  <Calendar
-                    mode='single'
-                    captionLayout='dropdown'
-                    className={'rounded-md border border-neutral-200/60 flex items-center justify-center relative z-50'}
-                    locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
-                    selected={new Date(entry.date)}
-                    onSelect={selectedDate => {
-                      const updatedEntry = { ...entry, date: selectedDate?.toISOString() }
-                      setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
-                      handleUpdateTimelineEntry(entry.id, updatedEntry)
-                    }}
-                    fromYear={1950}
-                    toYear={new Date().getFullYear()}
-                  />
-                </div>
-
-                <div className='relative flex flex-col gap-2'>
-                  <Label className='font-semibold text-neutral-900'>{t('steps.step4.images.label')}</Label>
-                  <div
-                    className='relative border-2 border-neutral-200/60 border-dashed rounded-lg px-8 py-8'
-                    id='dropzone'
-                  >
-                    <input
-                      multiple
-                      type='file'
-                      accept='image/*'
-                      size={100 * 1024 * 1024}
-                      className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
-                      onChange={e => handleSelectFiles(entry.id, e)}
+                  <div className='relative flex flex-col gap-2'>
+                    <Label className='font-semibold text-neutral-900'>{t('steps.step4.message.label')}</Label>
+                    <RichTextEditor
+                      value={entry.description}
+                      onChange={newDesc => {
+                        const updatedEntry = { ...entry, description: newDesc }
+                        setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                      }}
+                      onBlur={() => handleUpdateTimelineEntry(entry.id, entry)}
+                      placeholder={t('steps.step4.message.placeholder')}
                     />
 
-                    <div className='text-center mt-4'>
-                      <p className='mt-1 text-xs text-gray-500'>{t('steps.step4.images.placeholder')}</p>
-                      <p className='mt-1 text-xs text-gray-500'>{t('steps.step4.images.max')}</p>
-                    </div>
+                    <p className='absolute bottom-2 right-3 text-xs text-neutral-900'>
+                      {VALUE_MESSAGE?.length ?? 0}/100
+                    </p>
+                  </div>
 
-                    <div className='grid grid-cols-4 gap-4 mt-8'>
-                      {entry.media.map(file => (
-                        <div
-                          key={file.id}
-                          className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
-                        >
-                          <RenderImage
-                            src={file.url}
-                            alt={file.id}
-                            className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
-                            height={65}
-                            width={65}
-                          />
+                  <div className='relative flex flex-col gap-2'>
+                    <Label className='font-semibold text-neutral-900'>{t('steps.step4.date.label')}</Label>
+                    <Calendar
+                      mode='single'
+                      captionLayout='dropdown'
+                      className={
+                        'rounded-md border border-neutral-200/60 flex items-center justify-center relative z-50'
+                      }
+                      locale={locale === 'pt-BR' ? ptBR : locale === 'es' ? es : enUS}
+                      selected={new Date(entry.date)}
+                      onSelect={selectedDate => {
+                        const updatedEntry = { ...entry, date: selectedDate?.toISOString() }
+                        setTimelineEntries(prev => prev.map(item => (item.id === entry.id ? updatedEntry : item)))
+                        handleUpdateTimelineEntry(entry.id, updatedEntry)
+                      }}
+                      fromYear={1950}
+                      toYear={new Date().getFullYear()}
+                    />
+                  </div>
 
-                          <button
-                            onClick={() => handleRemove(entry.id, file.id)}
-                            disabled={loading}
-                            className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
+                  <div className='relative flex flex-col gap-2'>
+                    <Label className='font-semibold text-neutral-900'>{t('steps.step4.images.label')}</Label>
+                    <div
+                      className='relative border-2 border-neutral-200/60 border-dashed rounded-lg px-8 py-8'
+                      id='dropzone'
+                    >
+                      <input
+                        multiple
+                        type='file'
+                        accept='image/*'
+                        size={100 * 1024 * 1024}
+                        className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20'
+                        onChange={e => handleSelectFiles(entry.id, e)}
+                      />
+
+                      <div className='text-center mt-4'>
+                        <p className='mt-1 text-xs text-gray-500'>{t('steps.step4.images.placeholder')}</p>
+                        <p className='mt-1 text-xs text-gray-500'>{t('steps.step4.images.max')}</p>
+                      </div>
+
+                      <div className='grid grid-cols-4 gap-4 mt-8'>
+                        {entry.media.map(file => (
+                          <div
+                            key={file.id}
+                            className='image-item rounded-md relative z-30 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px]'
                           >
-                            <IconX size={14} />
-                          </button>
-                        </div>
-                      ))}
+                            <RenderImage
+                              src={file.url}
+                              alt={file.id}
+                              className='rounded-lg w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] object-cover'
+                              height={65}
+                              width={65}
+                            />
+
+                            <button
+                              onClick={() => handleRemove(entry.id, file.id)}
+                              disabled={loading}
+                              className='absolute -top-2 left-[40px] lg:left-[55px] p-1 text-sm rounded-full font-bold bg-gray-100 hover:bg-red-500 hover:text-white text-neutral-900 flex items-center cursor-pointer justify-center'
+                            >
+                              <IconX size={14} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className='mt-4'>
-                  <button
-                    type='button'
-                    onClick={() => {
-                      handleRemoveTimelineEntry(entry.id)
-                      window.scrollTo(0, 0)
-                    }}
-                    disabled={loading}
-                    className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-                      loading ? 'opacity-50' : ''
-                    }`}
-                  >
-                    <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white-100 px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
-                      <>
-                        <IconTrash size={20} className='mr-4' />
-                        {t('steps.step4.accordion.actions.delete')}
-                      </>
-                    </span>
-                  </button>
+                  <div className='mt-4'>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setEntryToDelete(entry)
+                        setIsOpen(true)
+                      }}
+                      disabled={loading}
+                      className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+                        loading ? 'opacity-50' : ''
+                      }`}
+                    >
+                      <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-white-100 px-3 py-1 text-sm font-semibold text-neutral-900 backdrop-blur-3xl'>
+                        <>
+                          <IconTrash size={20} className='mr-4' />
+                          {t('steps.step4.accordion.actions.delete')}
+                        </>
+                      </span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
 
-      <div className='flex items-center justify-between gap-4 mt-4'>
-        <button
-          type='button'
-          onClick={onBack}
-          disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-            loading ? 'opacity-50' : ''
-          }`}
-        >
-          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
-            <>
-              <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step4.back')}
-            </>
-          </span>
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-            loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-          }`}
-        >
-          <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
-            {loading ? (
-              <IconLoader size={20} className='animate-spin' />
-            ) : (
+        <div className='flex items-center justify-between gap-4 mt-4'>
+          <button
+            type='button'
+            onClick={onBack}
+            disabled={loading}
+            className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+              loading ? 'opacity-50' : ''
+            }`}
+          >
+            <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
               <>
-                {isEdit
-                  ? t('pages.account.pages.edit.actions.next')
-                  : IS_NEXT_DISABLED
-                    ? t('steps.step4.skip')
-                    : t('steps.step4.button')}
-                <IconChevronRight size={20} className='ml-4' />
+                <IconChevronLeft size={20} className='mr-4' />
+                {t('steps.step4.back')}
               </>
-            )}
-          </span>
-        </button>
+            </span>
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+              loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            }`}
+          >
+            <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+              {loading ? (
+                <IconLoader size={20} className='animate-spin' />
+              ) : (
+                <>
+                  {isEdit
+                    ? t('pages.account.pages.edit.actions.next')
+                    : IS_NEXT_DISABLED
+                      ? t('steps.step4.skip')
+                      : t('steps.step4.button')}
+                  <IconChevronRight size={20} className='ml-4' />
+                </>
+              )}
+            </span>
+          </button>
+        </div>
       </div>
-    </div>
+
+      <AnimatedModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <ModalContent>
+          <h4 className='text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-8'>
+            {t('steps.step4.modal.title')}{' '}
+            <span className='block mt-2 text-base font-normal'>&ldquo;{entryToDelete?.title}&rdquo; ?</span>
+          </h4>
+          <div className='flex flex-col items-center gap-4 w-full'>
+            <button
+              type='button'
+              onClick={() => {
+                handleRemoveTimelineEntry(entryToDelete?.id)
+                setIsOpen(false)
+                window.scrollTo(0, 0)
+              }}
+              className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0`}
+            >
+              <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+                {t('steps.step4.modal.actions.delete')}
+              </span>
+            </button>
+            <button
+              type='button'
+              onClick={e => {
+                e.preventDefault()
+                setIsOpen(false)
+              }}
+              className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0`}
+            >
+              <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+                {t('steps.step4.modal.actions.cancel')}
+              </span>
+            </button>
+          </div>
+        </ModalContent>
+      </AnimatedModal>
+    </>
   )
 }
