@@ -6,7 +6,9 @@
  * @return string
  */
 
-export function formatToE164(phone: string): string {
+type formatToE164Props = string | undefined
+
+export function formatToE164(phone: formatToE164Props): string {
   if (!phone) return ''
   // Remove all non-digit characters
   const digits = phone.replace(/\D/g, '')
