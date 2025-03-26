@@ -46,7 +46,7 @@ export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
     reValidateMode: 'onChange',
     mode: 'onBlur',
     defaultValues: {
-      email: storedEmail || '',
+      email: storedEmail ? storedEmail : '',
       phone: storedPhone ? formatToE164(storedPhone) : '',
     },
   })
