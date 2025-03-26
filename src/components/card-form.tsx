@@ -80,12 +80,14 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     loading ||
     !form.formState.isDirty ||
     !!form.formState.errors.document ||
-    !!storedEmail ||
     !!form.formState.errors.name ||
-    !!storedPhone ||
     !!form.formState.errors.cvv ||
     !!form.formState.errors.number ||
-    !!form.formState.errors.expiry
+    !!form.formState.errors.expiry ||
+    !storedEmail ||
+    !storedPhone
+    
+    console.log('CardForm', DISABLED)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)
