@@ -47,7 +47,6 @@ export const Timeline = ({ data }: { data: TimelineEntryProps[] }) => {
                   {item.title.day}/{item.title.month}/{item.title.year}
                 </h3>
               )}
-              
             </div>
 
             <div className='relative pl-20 pr-4 w-full'>{item.content}</div>

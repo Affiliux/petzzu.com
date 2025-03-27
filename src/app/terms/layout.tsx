@@ -19,7 +19,7 @@ export default function Layout({
         <Header />
       </div>
 
-      <div className='w-full bg-transparent bg-dot-neutral-500/20 relative flex items-center justify-center'>
+      <div className='w-full bg-transparent bg-dot-neutral-500/20 relative flex items-center justify-center mt-16'>
         {children}
       </div>
 

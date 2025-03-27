@@ -30,8 +30,6 @@ interface CardFormProps {
 export const CardForm = ({ onCreate }: CardFormProps) => {
   const t = useTranslations()
 
-
-
   const formSchema = z.object({
     name: z.string().nonempty(t('checkout.payment.inputs-card.name.required')),
     document: z
@@ -83,7 +81,6 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     !!form.formState.errors.cvv ||
     !!form.formState.errors.number ||
     !!form.formState.errors.expiry
-
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)

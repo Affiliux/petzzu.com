@@ -396,8 +396,30 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
             <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
               <>
                 <IconChevronLeft size={20} className='mr-4' />
-                {t('steps.step4.back')}
+                {isEdit ? t('pages.account.pages.edit.actions.back') : t('steps.step4.back')}
               </>
+            </span>
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+              loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            }`}
+          >
+            <span className='inline-flex h-full w-full  items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+              {loading ? (
+                <IconLoader size={20} className='animate-spin' />
+              ) : (
+                <>
+                  {isEdit
+                    ? t('pages.account.pages.edit.actions.save')
+                    : IS_NEXT_DISABLED
+                      ? t('steps.step4.skip')
+                      : t('steps.step4.button')}
+                  <IconChevronRight size={20} className='ml-4' />
+                </>
+              )}
             </span>
           </button>
           <button
@@ -428,7 +450,7 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
       <AnimatedModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalContent>
           <h4 className='text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-8'>
-            {t('steps.step4.modal.title')} ? {' '}
+            {t('steps.step4.modal.title')} ?{' '}
             {entryToDelete?.title && (
               <span className='block mt-2 text-base font-normal'>&ldquo;{entryToDelete?.title}&rdquo;</span>
             )}

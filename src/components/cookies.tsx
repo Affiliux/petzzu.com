@@ -4,10 +4,13 @@ import React, { useEffect, useState } from 'react'
 
 import { useTranslations } from 'next-intl'
 
+import { useQueryParams } from '@/hooks/use-query-params'
+
 import { get_cookie, set_cookie } from '@/infrastructure/cache/cookies'
 
 export const Cookies = () => {
   // hooks
+  const queryParams = useQueryParams()
   const t = useTranslations('config.cookies')
 
   // states
@@ -33,8 +36,10 @@ export const Cookies = () => {
 
   async function handleGet() {
     try {
-      const cookie = await get_cookie('cookies')
-      if (cookie !== 'accepted') setShow(true)
+      if (queryParams?.dc && queryParams?.dc.includes('tik')) {
+        const cookie = await get_cookie('cookies')
+        if (cookie !== 'accepted') setShow(true)
+      }
     } catch (error) {
       console.error(error)
     }

@@ -19,8 +19,8 @@ export function PageCardLoader(props: IContentLoaderProps) {
       width={isMobile() || isTablet() ? window.innerWidth - 64 : 300}
       height={400}
       viewBox={`0 0 ${isMobile() || isTablet() ? window.innerWidth - 64 : 300} 400`}
-      backgroundColor='#202020'
-      foregroundColor='#161616'
+      backgroundColor='#f5f5f5'
+      foregroundColor='#efefef'
       {...props}
     >
       <rect

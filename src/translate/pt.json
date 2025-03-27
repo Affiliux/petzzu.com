@@ -101,32 +101,6 @@
           }
         },
         "button": "Começar",
-        "people": {
-          "1": {
-            "name": "João & Maria",
-            "time": "1 mês atrás"
-          },
-          "2": {
-            "name": "Ana & Pedro",
-            "time": "2 dias atrás"
-          },
-          "3": {
-            "name": "Lucas & Carol",
-            "time": "3 meses atrás"
-          },
-          "4": {
-            "name": "Camila & Felipe",
-            "time": "4 meses atrás"
-          },
-          "5": {
-            "name": "Bia & Henrique",
-            "time": "1 ano atrás"
-          },
-          "6": {
-            "name": "Clara & Rafael",
-            "time": "2 meses atrás"
-          }
-        },
         "rating": "Aprovado por 714 mamães e papais"
       },
       "how-work": {

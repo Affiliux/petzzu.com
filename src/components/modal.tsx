@@ -17,9 +17,7 @@ export default function AnimatedModal({ isOpen, onClose, children }: AnimatedMod
   return (
     <div className='py-40 flex items-center justify-center'>
       <Modal open={isOpen} onClose={onClose}>
-        <ModalBody>
-          {children}
-        </ModalBody>
+        <ModalBody>{children}</ModalBody>
       </Modal>
     </div>
   )

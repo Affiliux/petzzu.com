@@ -9,7 +9,7 @@ import CreateProvider from './CreateContext'
 import TimelineProvider from './TimelineContext'
 
 export function Providers({ children }: { children: ReactNode }) {
-  return (
+  return typeof window !== 'undefined' ? (
     <ApplicationProvider>
       <TimelineProvider>
         <CreateProvider>
@@ -19,5 +19,7 @@ export function Providers({ children }: { children: ReactNode }) {
         </CreateProvider>
       </TimelineProvider>
     </ApplicationProvider>
+  ) : (
+    <>{children}</>
   )
 }

@@ -22,7 +22,7 @@ export default function Layout({
         <Header />
       </div>
 
-      <div className='container py-8 mt-24'>{children}</div>
+      <div className='container py-8 mt-32'>{children}</div>
 
       <Footer />
       <ButtonToTop />
