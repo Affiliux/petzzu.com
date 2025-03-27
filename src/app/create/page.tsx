@@ -92,6 +92,13 @@ export default function Page() {
       id: 5,
       title: t('steps.step5.title'),
       description: t('steps.step5.description'),
+      checked: !!child.email && !!child.phoneNumber && !!child.ddd,
+      skip: false,
+    },
+    {
+      id: 6,
+      title: t('steps.step6.title'),
+      description: t('steps.step6.description'),
       checked: !!plan,
       skip: false,
     },
@@ -203,11 +210,13 @@ export default function Page() {
     try {
       if (!pre) throw new Error('Pre ID not found')
       if (!plan) throw new Error('Please select a plan')
-
       await onUpdatePre({
         id: pre,
         child_name: child.child_name,
         birth_date: child.birth_date,
+        phoneNumber: child.phoneNumber,
+        ddd: child.ddd,
+        email: child.email,
         sex: child.sex,
         lang: t('config.defaults.country'),
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.BLUE,

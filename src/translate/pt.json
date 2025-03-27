@@ -569,6 +569,13 @@
           "delete": "Excluir lembrança"
         }
       },
+      "modal": {
+        "title": "Você deseja excluir essa lembrança",
+        "actions": {
+          "delete": "Sim, excluir",
+          "cancel": "Cancelar"
+        }
+      },
       "name": {
         "label": "Nome da lembrança",
         "placeholder": "Ex: Primeiro banho",
@@ -611,6 +618,10 @@
       "button": "Próxima etapa"
     },
     "step5": {
+      "title": "Informações de contato",
+      "description": "Para que seja possivel salvar a sua pagina é necessario informar o seu email e telefone."
+    },
+    "step6": {
       "title": "Plano ideal",
       "description": "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo.",
       "plans": {
