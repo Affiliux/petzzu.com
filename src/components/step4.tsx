@@ -386,7 +386,7 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
           <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
             <>
               <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step4.back')}
+              {isEdit ? t('pages.account.pages.edit.actions.back') : t('steps.step4.back')}
             </>
           </span>
         </button>
@@ -403,7 +403,7 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
             ) : (
               <>
                 {isEdit
-                  ? t('pages.account.pages.edit.actions.next')
+                  ? t('pages.account.pages.edit.actions.save')
                   : IS_NEXT_DISABLED
                     ? t('steps.step4.skip')
                     : t('steps.step4.button')}

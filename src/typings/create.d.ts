@@ -6,9 +6,7 @@ import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 // Create pre with the following properties:
 export type CreatePreProps = {
   child_name: string
-  message: string
   birth_date: string
-  parent_name: string
   sex: string
   lang?: string
   themeShowType?: ThemeShowTypeEnum

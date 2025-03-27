@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Calendar, Edit2, ExternalLink, Info, PauseCircle, PlayCircle, Receipt, XIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -28,8 +29,9 @@ export function PageCard({ page }: { page: PageProps }) {
 
   // states
   const [open, setOpen] = useState<boolean>(false)
+  const [image, setImage] = useState<boolean>(false)
 
-  async function handleCheckPaymenta() {
+  async function handleCheckPayment() {
     try {
       await new Promise(resolve => setTimeout(resolve, 5000))
 
@@ -51,12 +53,12 @@ export function PageCard({ page }: { page: PageProps }) {
 
   return (
     <>
-      <Card className='relative overflow-hidden w-full transition-all duration-300 hover:shadow-lg border-muted/40 bg-card'>
-        {/* <div className='relative h-48 overflow-hidden'>
+      <Card className='relative overflow-hidden w-full transition-all duration-300 hover:shadow-md shadow-neutral-200/50 border-neutral-200/60 bg-card'>
+        <div className='relative h-48 overflow-hidden'>
           {!!page.media[0]?.url && (
             <Image
               src={page.media[0].url}
-              alt={page.coupleName}
+              alt={page.child_name}
               fill
               onError={() => setImage(true)}
               className='object-cover transition-transform duration-300 hover:scale-105'
@@ -66,17 +68,17 @@ export function PageCard({ page }: { page: PageProps }) {
           {(image || !page.media[0]?.url) && (
             <Image
               src={'/images/placeholder.svg'}
-              alt={page.coupleName}
+              alt={page.child_name}
               fill
               className='object-cover transition-transform duration-300 hover:scale-105'
             />
           )}
 
           <div className='absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300' />
-        </div> */}
+        </div>
 
         <CardContent className='pt-6'>
-          {/* <h2 className='text-xl font-semibold mb-1 text-foreground'>{page.coupleName}</h2> */}
+          <h2 className='text-xl font-semibold mb-1 text-foreground'>{page.child_name}</h2>
           <div className='flex items-center text-sm text-muted-foreground mb-6'>
             <Calendar className='w-4 h-4 mr-2' />
             <span>
@@ -168,7 +170,7 @@ export function PageCard({ page }: { page: PageProps }) {
         <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
           <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-black bg-opacity-95 backdrop-blur-lg transition-opacity duration-300'>
             <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg shadow-sm'>
-              {page.qrCode64 && <PixPayment payment={page} onCheckPayment={handleCheckPaymenta} />}
+              {page.qrCode64 && <PixPayment payment={page} onCheckPayment={handleCheckPayment} />}
             </div>
 
             <button

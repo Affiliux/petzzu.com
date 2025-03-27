@@ -207,9 +207,7 @@ export default function Page() {
       await onUpdatePre({
         id: pre,
         child_name: child.child_name,
-        message: child.message,
         birth_date: child.birth_date,
-        parent_name: child.parent_name,
         sex: child.sex,
         lang: t('config.defaults.country'),
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.BLUE,
@@ -237,7 +235,7 @@ export default function Page() {
   }, [locale, plans])
 
   useEffect(() => {
-    onGetPlans()
+    if (plans.length <= 0) onGetPlans()
   }, [])
 
   useEffect(() => {

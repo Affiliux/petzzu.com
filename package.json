@@ -82,7 +82,6 @@
     "react-dom": "^19",
     "react-hook-form": "^7.53.2",
     "react-phone-number-input": "^3.4.9",
-    "react-type-animation": "^3.2.0",
     "simplex-noise": "^4.0.3",
     "swiper": "^11.1.15",
     "tailwind-merge": "^3.0.1",

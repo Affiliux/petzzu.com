@@ -2,16 +2,16 @@
 
 import React, { useState } from 'react'
 
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { TypeAnimation } from 'react-type-animation'
 import { IconChevronRight, IconLoader, IconStarFilled } from '@tabler/icons-react'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
-import { AnimatedTooltip } from './ui/animated-tooltip'
 import { HoverBorderGradient } from './ui/hover-border-gradient'
 import { LazyLoadVideo } from './lazy-video'
+import TypingAnimation from './type-animation'
 
 export const Hero = () => {
   // hooks
@@ -72,39 +72,23 @@ export const Hero = () => {
   const people = [
     {
       id: 1,
-      name: t('pages.home.hero.people.1.name'),
-      designation: t('pages.home.hero.people.1.time'),
       image: '/images/approved/1.webp',
     },
     {
       id: 2,
-      name: t('pages.home.hero.people.2.name'),
-      designation: t('pages.home.hero.people.2.time'),
       image: '/images/approved/2.webp',
     },
     {
       id: 3,
-      name: t('pages.home.hero.people.3.name'),
-      designation: t('pages.home.hero.people.3.time'),
       image: '/images/approved/3.webp',
     },
     {
       id: 4,
-      name: t('pages.home.hero.people.4.name'),
-      designation: t('pages.home.hero.people.4.time'),
       image: '/images/approved/4.webp',
     },
     {
       id: 5,
-      name: t('pages.home.hero.people.5.name'),
-      designation: t('pages.home.hero.people.5.time'),
       image: '/images/approved/5.webp',
-    },
-    {
-      id: 6,
-      name: t('pages.home.hero.people.6.name'),
-      designation: t('pages.home.hero.people.6.time'),
-      image: '/images/approved/6.webp',
     },
   ]
 
@@ -123,20 +107,14 @@ export const Hero = () => {
           {t('pages.home.hero.title.1')}
         </h1>
         <h2 className='relative font-bold tracking-tight text-4xl lg:text-5xl font-sans text-theme-400 pb-8 z-20'>
-          <TypeAnimation
-            sequence={[
+          <TypingAnimation
+            phrases={[
               t('pages.home.hero.title.2'),
-              2000,
               t('pages.home.hero.title.3'),
-              2000,
               t('pages.home.hero.title.4'),
-              2000,
               t('pages.home.hero.title.5'),
-              2000,
             ]}
-            wrapper='span'
-            speed={50}
-            repeat={Infinity}
+            classNames='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-red-500 pb-8 z-20'
           />
         </h2>
 
@@ -163,69 +141,58 @@ export const Hero = () => {
           </span>
         </button>
 
-        <div className='flex flex-row items-center mt-6 w-full'>
-          <AnimatedTooltip items={people} />
+        <div className='flex items-center gap-4 mt-6'>
+          <div className='flex -space-x-2'>
+            {people.map((data, index) => (
+              <div
+                key={data.id}
+                className='relative w-8 h-8 rounded-full border border-white shadow-sm overflow-hidden'
+                style={{ zIndex: 6 - index }}
+              >
+                <Image src={data.image} alt={`Couple ${index}`} fill className='object-cover' />
+              </div>
+            ))}
+          </div>
 
-          <div className='relative ml-8 md:ml-12'>
-            <div className='flex flex-row items-center gap-2'>
-              <IconStarFilled size={16} color='#FFD700' />
-              <IconStarFilled size={16} color='#FFD700' />
-              <IconStarFilled size={16} color='#FFD700' />
-              <IconStarFilled size={16} color='#FFD700' />
-              <IconStarFilled size={16} color='#FFD700' />
+          <div className='flex flex-col gap-1'>
+            <div className='flex'>
+              {[1, 2, 3, 4, 5].map(index => (
+                <IconStarFilled key={index} className='w-4 h-4 fill-amber-400 text-amber-400' />
+              ))}
             </div>
 
-            <div className='text-neutral-700 text-xs mt-2'>{t('pages.home.hero.rating')}</div>
+            <p className='text-xs text-white'>{t('pages.home.hero.rating')}</p>
           </div>
         </div>
       </div>
 
       <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
-        <div
-          className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[0deg] lg:translate-x-[-200px] aspect-[9/16] transition-all duration-300 hover:z-50 hover:scale-110'
-          style={{
-            zIndex: 3,
-          }}
-        >
-          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
-            <LazyLoadVideo
-              src='/videos/hero/1.webm'
-              type='video/webm'
-              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
-            />
-          </div>
-        </div>
-        <div
-          className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[10deg] aspect-[9/16] lg:mt-8 transition-all translate-x-[120px] lg:translate-x-[0px] duration-300 hover:z-50 hover:scale-110'
-          style={{
-            zIndex: 2,
-          }}
-        >
-          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
-            <LazyLoadVideo
-              src='/videos/hero/2.webm'
-              type='video/webm'
-              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
-            />
-          </div>
-        </div>
-        <div
-          className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[20deg] aspect-[9/16] lg:mt-32 translate-x-[240px] lg:translate-x-[200px] transition-all duration-300 hover:z-50 hover:scale-110'
-          style={{
-            zIndex: 1,
-          }}
-        >
-          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
-          <div className='relative w-[97%] h-full rounded-xl lg:rounded-3xl overflow-hidden cursor-not-allowed z-40'>
-            <LazyLoadVideo
-              src='/videos/hero/3.webm'
-              type='video/webm'
-              classNames='absolute left-1 rounded-xl lg:rounded-3xl h-full'
-            />
-          </div>
-        </div>
+        {['/videos/hero/1.webm', '/videos/hero/2.webm', '/videos/hero/3.webm'].map((videoSrc, index) => {
+          const rotation = [0, 10, 20][index]
+          const translateX = [0, 120, 240][index]
+          const lgTranslateX = [-200, 0, 200][index]
+          const marginTop = [0, 'lg:mt-8', 'lg:mt-32'][index]
+          const zIndex = 3 - index
+
+          return (
+            <div
+              key={index}
+              className={`absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[${rotation}deg] aspect-[9/16] ${marginTop} transition-all translate-x-[${translateX}px] lg:translate-x-[${lgTranslateX}px] duration-300 hover:z-50 hover:scale-110`}
+              style={{
+                zIndex,
+              }}
+            >
+              <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+              <div className='relative w-[97%] h-[99%] rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+                <LazyLoadVideo
+                  src={videoSrc}
+                  type='video/webm'
+                  classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-2 rounded-md lg:rounded-3xl'
+                />
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
