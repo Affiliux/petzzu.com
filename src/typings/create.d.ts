@@ -7,10 +7,10 @@ import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 export type CreatePreProps = {
   child_name: string
   birth_date: string
-  ddd: string
+  ddd?: string
   sex: string
-  phoneNumber: string
-  email: string
+  phoneNumber?: string
+  email?: string
   lang?: string
   themeShowType?: ThemeShowTypeEnum
   dateShowType: DateShowTypeEnum

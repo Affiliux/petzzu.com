@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useAccount } from '@/contexts/AccountContext'
 import { useApplication } from '@/contexts/ApplicationContext'
+import { useTimeline } from '@/contexts/TimelineContext'
 
 import { toast } from '@/hooks/use-toast'
 
@@ -43,7 +44,9 @@ export default function Page() {
     onNewMedia,
     onRemoveMedia,
     onUpdatePage,
+
   } = useAccount()
+  const { onUploadTimelineFile, onDeleteTimelineFile } = useTimeline()
 
   // steps
   const [step, set_step] = useState(1)
@@ -95,7 +98,7 @@ export default function Page() {
         sex: child.sex,
         dateShowType: date_show_type,
         themeShowType: theme_show_type,
-        timeLine: [],
+        timeLine: child.timeLine,
       })
 
       toast({
@@ -123,7 +126,6 @@ export default function Page() {
         child_name: selected.child_name,
         birth_date: selected.birth_date,
         sex: selected.sex,
-        lang: selected.lang,
         dateShowType: selected.dateShowType,
         themeShowType: selected.themeShowType,
         timeLine: [],
@@ -171,7 +173,8 @@ export default function Page() {
             {step === 1 && (
               <Step1
                 isEdit
-                theme={selected.themeShowType}
+                themeShowType={selected.themeShowType}
+                setThemeShowType={set_theme_show_type}
                 child={child}
                 setChild={set_child}
                 onNext={async () => set_step(2)}
@@ -201,17 +204,17 @@ export default function Page() {
               />
             )}
 
-            {/* {step === 4 && (
+            {step === 4 && (
               <Step4
                 isEdit
                 child={child}
                 setChild={set_child}
-                onSaveMedia={onNewMediaTimeline}
-                onRemoveMedia={onRemoveMediaTimeline}
+                onSaveMedia={onUploadTimelineFile}
+                onRemoveMedia={onDeleteTimelineFile}
                 onBack={() => set_step(3)}
                 onNext={handleSave}
               />
-            )} */}
+            )} 
 
             {step !== 6 && (
               <div className='py-4 mt-6 px-4 bg-green-700/10 text-green-700 text-center text-sm border rounded-md border-green-700 border-dashed'>

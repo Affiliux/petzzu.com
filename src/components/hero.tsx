@@ -106,7 +106,7 @@ export const Hero = () => {
         <h1 className='text-neutral-900 text-4xl lg:text-5xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
           {t('pages.home.hero.title.1')}
         </h1>
-        <h2 className='relative font-bold tracking-tight text-4xl lg:text-5xl font-sans text-theme-400 pb-8 z-20'>
+        <h2 className='relative font-bold tracking-tight text-4xl lg:text-5xl font-sans text-theme-400 pb-4 z-20'>
           <TypingAnimation
             phrases={[
               t('pages.home.hero.title.2'),
@@ -114,7 +114,7 @@ export const Hero = () => {
               t('pages.home.hero.title.4'),
               t('pages.home.hero.title.5'),
             ]}
-            classNames='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-red-500 pb-8 z-20'
+            classNames='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-theme-600 z-20'
           />
         </h2>
 
@@ -167,32 +167,54 @@ export const Hero = () => {
       </div>
 
       <div className='relative lg:flex items-center w-full lg:w-1/2 justify-center'>
-        {['/videos/hero/1.webm', '/videos/hero/2.webm', '/videos/hero/3.webm'].map((videoSrc, index) => {
-          const rotation = [0, 10, 20][index]
-          const translateX = [0, 120, 240][index]
-          const lgTranslateX = [-200, 0, 200][index]
-          const marginTop = [0, 'lg:mt-8', 'lg:mt-32'][index]
-          const zIndex = 3 - index
-
-          return (
-            <div
-              key={index}
-              className={`absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[${rotation}deg] aspect-[9/16] ${marginTop} transition-all translate-x-[${translateX}px] lg:translate-x-[${lgTranslateX}px] duration-300 hover:z-50 hover:scale-110`}
-              style={{
-                zIndex,
-              }}
-            >
-              <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
-              <div className='relative w-[97%] h-[99%] rounded-2xl overflow-hidden cursor-not-allowed z-40'>
-                <LazyLoadVideo
-                  src={videoSrc}
-                  type='video/webm'
-                  classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-2 rounded-md lg:rounded-3xl'
-                />
-              </div>
-            </div>
-          )
-        })}
+        <div
+          className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[0deg] lg:translate-x-[-200px] aspect-[9/16] transition-all duration-300 hover:z-50 hover:scale-110'
+          style={{
+            zIndex: 3,
+            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
+          }}
+        >
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-[99%] rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+            <LazyLoadVideo
+              src='/videos/hero/1.webm'
+              type='video/webm'
+              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-2 rounded-md lg:rounded-3xl'
+            />
+          </div>
+        </div>
+        <div
+          className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[10deg] aspect-[9/16] lg:mt-8 transition-all translate-x-[120px] lg:translate-x-[0px] duration-300 hover:z-50 hover:scale-110'
+          style={{
+            zIndex: 2,
+            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
+          }}
+        >
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-[99%] rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+            <LazyLoadVideo
+              src='/videos/hero/2.webm'
+              type='video/webm'
+              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-2 rounded-md lg:rounded-3xl'
+            />
+          </div>
+        </div>
+        <div
+          className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[20deg] aspect-[9/16] lg:mt-32 translate-x-[240px] lg:translate-x-[200px] transition-all duration-300 hover:z-50 hover:scale-110'
+          style={{
+            zIndex: 1,
+            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
+          }}
+        >
+          <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
+          <div className='relative w-[97%] h-[99%] rounded-2xl overflow-hidden cursor-not-allowed z-40'>
+            <LazyLoadVideo
+              src='/videos/hero/3.webm'
+              type='video/webm'
+              classNames='absolute top-0.5 left-0.5 lg:left-1 lg:top-2 rounded-md lg:rounded-3xl'
+            />
+          </div>
+        </div>
       </div>
     </div>
   )

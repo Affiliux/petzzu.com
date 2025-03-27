@@ -34,7 +34,7 @@ export default function Page() {
 
   return (
     <>
-      <div className='w-screen h-full overflow-x-hidden' id='start'>
+      <div className='h-full overflow-x-hidden' id='start'>
         <div className='h-[50rem] bg-transparent bg-grid-neutral-200/40 relative flex items-center justify-center'>
           {/* Radial gradient for the container to give a faded look */}
           <div className='absolute pointer-events-none inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]'></div>
