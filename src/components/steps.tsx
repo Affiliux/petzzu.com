@@ -21,8 +21,6 @@ import { UploadFileResponseProps } from '../typings/timeline'
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 interface StepsComponentProps {
-  theme: ThemeShowTypeEnum
-  //
   pre: string | null
   step: number
   steps: StepsProps[]
@@ -52,7 +50,7 @@ interface StepsComponentProps {
 }
 
 export const Steps = ({
-  theme,
+  themeShowType,
   //
   pre,
   step,
@@ -69,6 +67,7 @@ export const Steps = ({
   setDateShowType,
   setPlan,
   setStep,
+  setThemeShowType,
   //
   onClose,
   onNewMedia,
@@ -89,7 +88,8 @@ export const Steps = ({
 
           {step === 1 && (
             <Step1
-              theme={theme}
+              themeShowType={themeShowType}
+              setThemeShowType={setThemeShowType}
               child={child}
               setChild={setChild}
               onBack={onClose}

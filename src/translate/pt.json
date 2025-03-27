@@ -504,6 +504,16 @@
     "step1": {
       "title": "Qual nome do seu Filho(a)?",
       "description": "Insira o nome do seu filho(a) e o gênero para personalizar a página.",
+      "theme-show-types": {
+        "title": "Cor do tema",
+        "blue": "Azul",
+        "gold": "Dourado",
+        "pink": "Rosa",
+        "green": "Verde",
+        "lilac": "Lilás",
+        "red": "Vermelho",
+        "gray": "Cinza"
+      },
       "input": {
         "placeholder": "Ex: Caio Castro",
         "errors": {
@@ -512,6 +522,7 @@
         }
       },
       "gender": {
+        "title": "Gênero",
         "options": {
           "male": "Masculino",
           "female": "Feminino"

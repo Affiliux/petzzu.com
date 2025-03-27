@@ -110,9 +110,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         set_pre(response.id)
         set_child({
           child_name: response.child_name,
-          message: response.message,
           birth_date: response.birth_date,
-          parent_name: response.parent_name,
           phoneNumber: response.phoneNumber,
           ddd: response.ddd,
           email: response.email,

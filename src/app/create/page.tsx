@@ -275,7 +275,6 @@ export default function Page() {
   return (
     <>
       <Steps
-        theme={theme}
         pre={pre}
         step={step}
         steps={steps}

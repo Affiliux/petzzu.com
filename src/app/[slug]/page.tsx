@@ -53,7 +53,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }
 
   useEffect(() => {
-    onChangeTheme(child?.themeShowType ?? ThemeShowTypeEnum.BLUE)
+    onChangeTheme(child?.themeShowType ?? ThemeShowTypeEnum.GRAY)
 
     if (child && child.inactiveReason === 'Awaiting payment') {
       if (child.urlPayment && child.urlPayment.includes('https')) {

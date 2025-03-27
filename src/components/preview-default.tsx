@@ -62,8 +62,10 @@ export const PreviewDefault = ({ child, dateShowType, medias, selected }: Previe
       .replace(/\s+/g, '-') // Replaces spaces with hyphens
       .replace(/^-+|-+$/g, '') // Removes extra hyphens at the start or end
       .toLowerCase()
-      .replace(/&/g, 'e') // Replaces '&' with 'e'
+      .replace(/&/g, 'e') // Repl
   }
+
+  console.log('child', child.themeShowType)
 
   return (
     <div className='relative border border-neutral-200/60 no-scrollbar overflow-x-hidden w-full min-h-screen lg:min-h-[85vh] lg:h-[85vh] lg:max-h-[85vh] rounded-lg bg-theme-100 shadow-lg shadow-neutral-200/50'>
