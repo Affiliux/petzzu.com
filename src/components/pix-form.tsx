@@ -31,9 +31,6 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
   // hooks
   const t = useTranslations()
 
-  const storedEmail = localStorage.getItem('user_email')
-  const storedPhone = localStorage.getItem('user_phone')
-
   const formSchema = z.object({
     name: z
       .string()
@@ -47,7 +44,6 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
       .refine(value => validateCPF(value), {
         message: t('checkout.payment.inputs.document.invalid'),
       }),
-
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,27 +60,15 @@ export const PixForm = ({ onCreate, onCheckPayment, payment }: PixFormProps) => 
   const [loading, set_loading] = useState<boolean>(false)
 
   // variables
-    const DISABLED =
-      loading ||
-      !form.formState.isDirty ||
-      !!form.formState.errors.document ||
-      !!form.formState.errors.name ||
-      !storedEmail ||
-      !storedPhone
-
+  const DISABLED =
+    loading || !form.formState.isDirty || !!form.formState.errors.document || !!form.formState.errors.name
 
   async function handleSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)
 
     try {
-      if (!storedEmail || !storedPhone) {
-        throw new Error('Missing email or phone')
-      }
-
       await onCreate({
         method: PaymentMethodsEnum.PIX,
-        email: storedEmail,
-        phone: removeMask(storedPhone),
         name: values.name.trim(),
         document: removeMask(values.document.trim()),
       })

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
@@ -8,37 +8,33 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
 
+import { CreatePrePayloadProps } from '@/typings/create'
 import { useCreate } from '@/contexts/CreateContext'
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { PhoneInput } from './ui/phone-input'
 
-import { removeMask } from '@/lib/helpers/formatters'
 import formatToE164 from '@/lib/helpers/formatters/formatToE164'
 
 interface Step5Props {
   isEdit?: boolean
   onNext: () => Promise<void>
   onBack?: () => void
+  child: CreatePrePayloadProps
+  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
 }
 
-export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
-
+export const Step5 = ({ isEdit, onNext, onBack, child, setChild }: Step5Props) => {
   // hooks
   const t = useTranslations()
-  const { set_payment_info } = useCreate()
 
   // states
   const [loading, setLoading] = useState<boolean>(false)
 
-  // variables
-  const storedEmail = localStorage.getItem('user_email') 
-  const storedPhone = localStorage.getItem('user_phone')
-
   const formSchema = z.object({
     email: z.string().nonempty(t('checkout.payment.inputs.email.required')),
-    phone: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
+    phoneNumber: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,12 +42,12 @@ export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
     reValidateMode: 'onChange',
     mode: 'onBlur',
     defaultValues: {
-      email: storedEmail ? storedEmail : '',
-      phone: storedPhone ? formatToE164(storedPhone) : '',
+      email: child.email || '',
+      phoneNumber: child.phoneNumber ? formatToE164(child.phoneNumber) : '',
     },
   })
 
-  const DISABLED = loading || !!form.formState.errors.email || !!form.formState.errors.phone
+  const DISABLED = loading || !!form.formState.errors.email || !!form.formState.errors.phoneNumber
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
@@ -60,12 +56,14 @@ export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
 
       if (regex.test(values.email.trim())) {
         const email = values.email.trim()
-        const phone = values.phone
+        const phoneNumber = values.phoneNumber
 
-        localStorage.setItem('user_email', email)
-        localStorage.setItem('user_phone', phone)
-
-        set_payment_info({ email, phone })
+        setChild(prevChild => ({
+          ...prevChild,
+          email: email,
+          phoneNumber: phoneNumber,
+          ddd: phoneNumber.slice(1, 3),
+        }))
 
         await onNext()
       } else {
@@ -93,7 +91,14 @@ export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
                     placeholder={t('checkout.payment.inputs.email.placeholder')}
                     type='email'
                     className='w-full'
-                    {...field}
+                    onChange={value => {
+                      field.onChange(value)
+                      setChild(prevChild => ({
+                        ...prevChild,
+                        email: value.target.value,
+                      }))
+                    }}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage className='text-red-500 text-sm mt-1 text-right'>
@@ -105,7 +110,7 @@ export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
 
           <FormField
             control={form.control}
-            name='phone'
+            name='phoneNumber'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
@@ -113,11 +118,20 @@ export const Step5 = ({ isEdit, onNext, onBack }: Step5Props) => {
                   <PhoneInput
                     placeholder={t('checkout.payment.inputs.phone.placeholder')}
                     className='w-full'
-                    {...field}
+                    defaultCountry='BR'
+                    value={field.value}
+                    onChange={value => {
+                      field.onChange(value)
+                      setChild(prevChild => ({
+                        ...prevChild,
+                        phoneNumber: value,
+                      }))
+                    }}
+                    onBlur={field.onBlur}
                   />
                 </FormControl>
                 <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                  {form.formState.errors.phone?.message}
+                  {form.formState.errors.phoneNumber?.message}
                 </FormMessage>
                 <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
               </FormItem>

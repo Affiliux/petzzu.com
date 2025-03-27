@@ -32,7 +32,6 @@ export default function Page() {
     date_show_type,
     plan,
     payment,
-    payment_info,
     theme_show_type,
     set_pre,
     set_child,
@@ -93,7 +92,7 @@ export default function Page() {
       id: 5,
       title: t('steps.step5.title'),
       description: t('steps.step5.description'),
-      checked: !!payment_info,
+      checked: !!child.email && !!child.phoneNumber && !!child.ddd,
       skip: false,
     },
     {
@@ -211,12 +210,14 @@ export default function Page() {
     try {
       if (!pre) throw new Error('Pre ID not found')
       if (!plan) throw new Error('Please select a plan')
-
       await onUpdatePre({
         id: pre,
         child_name: child.child_name,
         message: child.message,
         birth_date: child.birth_date,
+        phoneNumber: child.phoneNumber,
+        ddd: child.ddd,
+        email: child.email,
         parent_name: child.parent_name,
         sex: child.sex,
         lang: t('config.defaults.country'),

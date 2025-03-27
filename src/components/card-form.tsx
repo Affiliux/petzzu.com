@@ -30,8 +30,7 @@ interface CardFormProps {
 export const CardForm = ({ onCreate }: CardFormProps) => {
   const t = useTranslations()
 
-  const storedEmail = localStorage.getItem('user_email')
-  const storedPhone = localStorage.getItem('user_phone')
+
 
   const formSchema = z.object({
     name: z.string().nonempty(t('checkout.payment.inputs-card.name.required')),
@@ -83,9 +82,8 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
     !!form.formState.errors.name ||
     !!form.formState.errors.cvv ||
     !!form.formState.errors.number ||
-    !!form.formState.errors.expiry ||
-    !storedEmail ||
-    !storedPhone
+    !!form.formState.errors.expiry
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     set_loading(true)
@@ -108,8 +106,6 @@ export const CardForm = ({ onCreate }: CardFormProps) => {
       if (response.id) {
         await onCreate({
           method: PaymentMethodsEnum.STONE_CARD,
-          email: storedEmail,
-          phone: removeMask(storedPhone),
           name: values.name.trim(),
           document: removeMask(values.document.trim()),
           cardToken: response.id,

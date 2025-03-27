@@ -29,6 +29,9 @@ export type ChildProps = {
   message: string
   sex: string
   birth_date: string
+  ddd: string
+  phoneNumber: string
+  email: string
   media: MediaProps[]
   timeLine: TimelineEntryProps[]
   isActive: boolean

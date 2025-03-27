@@ -151,6 +151,8 @@ export const Steps = ({
 
           {step === 5 && (
             <Step5
+              child={child}
+              setChild={setChild}
               onBack={() => setStep(4)}
               onNext={async () => {
                 await onUpdate()

@@ -103,10 +103,7 @@ export default function Page() {
         affiliateCampaignCode: '',
         plan: plan.sku,
         gateway: payment_info.method,
-        email: payment_info.email,
         name: payment_info.name,
-        ddd: payment_info.phone.slice(0, 2),
-        phoneNumber: payment_info.phone.slice(2),
         cpf: payment_info.document,
         cardToken: payment_info.cardToken,
         idDiscountCupom: discount && discount.id,
@@ -127,8 +124,6 @@ export default function Page() {
       if (body.gateway === PaymentMethodsEnum.STONE_CARD) set_is_card_stone(true)
 
       localStorage.removeItem('hasSavePre')
-      localStorage.removeItem('user_email')
-      localStorage.removeItem('user_phone')
     } catch (error: any) {
       console.error(error)
 
@@ -150,10 +145,7 @@ export default function Page() {
 
       const body: UpdatePaymentPayloadProps = {
         gateway: payment_info.method,
-        email: payment_info.email,
         name: payment_info.name,
-        ddd: payment_info.phone.slice(0, 2),
-        phoneNumber: payment_info.phone.slice(2),
         cpf: payment_info.document,
         cardToken: payment_info.cardToken,
       }
