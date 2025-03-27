@@ -31,11 +31,7 @@ export default function Page() {
 
       <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12'>
         {pages?.length > 0 ? (
-          <>
-            {pages?.map(page => (
-              <PageCard key={page.id} page={page} />
-            ))}
-          </>
+          <>{pages?.map(page => <PageCard key={page.id} page={page} />)}</>
         ) : (
           <>
             <PageCardLoader />

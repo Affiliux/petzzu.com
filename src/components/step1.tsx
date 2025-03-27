@@ -26,7 +26,16 @@ interface Step1Props {
   setThemeShowType: Dispatch<SetStateAction<ThemeShowTypeEnum>>
 }
 
-export const Step1 = ({ isEdit, child, setChild, onNext, onNew, onBack, themeShowType, setThemeShowType }: Step1Props) => {
+export const Step1 = ({
+  isEdit,
+  child,
+  setChild,
+  onNext,
+  onNew,
+  onBack,
+  themeShowType,
+  setThemeShowType,
+}: Step1Props) => {
   // hooks
   const t = useTranslations()
   const { onChangeTheme } = useApplication()
@@ -89,15 +98,15 @@ export const Step1 = ({ isEdit, child, setChild, onNext, onNew, onBack, themeSho
     }
   }
 
- const themes = [
-   { id: 1, name: t('steps.step1.theme-show-types.blue'), data: ThemeShowTypeEnum.BLUE, color: '#7DA2FF' },
-   { id: 2, name: t('steps.step1.theme-show-types.gold'), data: ThemeShowTypeEnum.GOLD, color: '#FFF2B3' },
-   { id: 3, name: t('steps.step1.theme-show-types.pink'), data: ThemeShowTypeEnum.PINK, color: '#F997CD' },
-   { id: 4, name: t('steps.step1.theme-show-types.green'), data: ThemeShowTypeEnum.GREEN, color: '#95BA7C' },
-   { id: 5, name: t('steps.step1.theme-show-types.lilac'), data: ThemeShowTypeEnum.LILAC, color: '#E9D8FF' },
-   { id: 6, name: t('steps.step1.theme-show-types.red'), data: ThemeShowTypeEnum.RED, color: '#FFB2B2' },
-   { id: 7, name: t('steps.step1.theme-show-types.gray'), data: ThemeShowTypeEnum.GRAY, color: '#D9D9D9' },
- ]
+  const themes = [
+    { id: 1, name: t('steps.step1.theme-show-types.blue'), data: ThemeShowTypeEnum.BLUE, color: '#7DA2FF' },
+    { id: 2, name: t('steps.step1.theme-show-types.gold'), data: ThemeShowTypeEnum.GOLD, color: '#FFF2B3' },
+    { id: 3, name: t('steps.step1.theme-show-types.pink'), data: ThemeShowTypeEnum.PINK, color: '#F997CD' },
+    { id: 4, name: t('steps.step1.theme-show-types.green'), data: ThemeShowTypeEnum.GREEN, color: '#95BA7C' },
+    { id: 5, name: t('steps.step1.theme-show-types.lilac'), data: ThemeShowTypeEnum.LILAC, color: '#E9D8FF' },
+    { id: 6, name: t('steps.step1.theme-show-types.red'), data: ThemeShowTypeEnum.RED, color: '#FFB2B2' },
+    { id: 7, name: t('steps.step1.theme-show-types.gray'), data: ThemeShowTypeEnum.GRAY, color: '#D9D9D9' },
+  ]
 
   useEffect(() => {
     setValue('child_name', child.child_name)

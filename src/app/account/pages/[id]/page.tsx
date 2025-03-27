@@ -44,7 +44,6 @@ export default function Page() {
     onNewMedia,
     onRemoveMedia,
     onUpdatePage,
-
   } = useAccount()
   const { onUploadTimelineFile, onDeleteTimelineFile } = useTimeline()
 
@@ -214,7 +213,7 @@ export default function Page() {
                 onBack={() => set_step(3)}
                 onNext={handleSave}
               />
-            )} 
+            )}
 
             {step !== 6 && (
               <div className='py-4 mt-6 px-4 bg-green-700/10 text-green-700 text-center text-sm border rounded-md border-green-700 border-dashed'>
