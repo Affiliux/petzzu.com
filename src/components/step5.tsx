@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
@@ -8,67 +8,73 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
 
-import { CreatePrePayloadProps } from '@/typings/create'
-import { useCreate } from '@/contexts/CreateContext'
+import type { CreatePrePayloadProps } from '@/typings/create'
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { PhoneInput } from './ui/phone-input'
 
-import formatToE164 from '@/lib/helpers/formatters/formatToE164'
+import { formatToE164, removeMask } from '@/lib/helpers/formatters'
 
 interface Step5Props {
-  isEdit?: boolean
-  onNext: () => Promise<void>
-  onBack?: () => void
   child: CreatePrePayloadProps
   setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  onNext: () => Promise<void>
+  onBack?: () => void
 }
 
-export const Step5 = ({ isEdit, onNext, onBack, child, setChild }: Step5Props) => {
+export const Step5 = ({ child, setChild, onNext, onBack }: Step5Props) => {
   // hooks
   const t = useTranslations()
 
-  // states
-  const [loading, setLoading] = useState<boolean>(false)
-
   const formSchema = z.object({
-    email: z.string().nonempty(t('checkout.payment.inputs.email.required')),
-    phoneNumber: z.string().nonempty(t('checkout.payment.inputs.phone.required')),
+    email: z.string({ message: t('steps.step5.inputs.email.required') }),
+    phone: z.string({ message: t('steps.step5.inputs.email.required') }),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    reValidateMode: 'onChange',
-    mode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
       email: child.email || '',
-      phoneNumber: child.phoneNumber ? formatToE164(child.phoneNumber) : '',
+      phone: child.phoneNumber ? formatToE164(child.phoneNumber) : '',
     },
   })
 
-  const DISABLED = loading || !!form.formState.errors.email || !!form.formState.errors.phoneNumber
+  // states
+  const [loading, setLoading] = useState<boolean>(false)
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  // variables
+  const DISABLED = loading || !form.formState.isDirty || !!form.formState.errors.email || !!form.formState.errors.phone
+
+  async function handleSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
+
     try {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-      if (regex.test(values.email.trim())) {
-        const email = values.email.trim()
-        const phoneNumber = values.phoneNumber
+      const email = values.email.trim()
+      const ddd = removeMask(values.phone.trim()).slice(0, 2)
+      const phoneNumber = removeMask(values.phone.trim()).slice(2)
 
-        setChild(prevChild => ({
-          ...prevChild,
-          email: email,
-          phoneNumber: phoneNumber,
-          ddd: phoneNumber.slice(1, 3),
-        }))
-
-        await onNext()
-      } else {
-        form.setError('email', { message: t('checkout.payment.inputs.email.invalid') })
+      if (!regex.test(email)) {
+        form.setError('email', { message: t('steps.step5.inputs.email.invalid') })
+        return
       }
+
+      if (phoneNumber.length < 9 || ddd.length < 1) {
+        form.setError('phone', { message: t('steps.step5.inputs.phone.invalid') })
+        return
+      }
+
+      setChild({
+        ...child,
+        email,
+        ddd,
+        phoneNumber,
+      })
+
+      await onNext()
     } catch (error) {
       console.error(error)
     } finally {
@@ -77,106 +83,120 @@ export const Step5 = ({ isEdit, onNext, onBack, child, setChild }: Step5Props) =
   }
 
   return (
-    <Form {...form}>
-      <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={form.handleSubmit(onSubmit)}>
-        <div className='flex flex-col gap-4'>
-          <FormField
-            control={form.control}
-            name='email'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('checkout.payment.inputs.email.label')}</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder={t('checkout.payment.inputs.email.placeholder')}
-                    type='email'
-                    className='w-full'
-                    onChange={value => {
-                      field.onChange(value)
-                      setChild(prevChild => ({
-                        ...prevChild,
-                        email: value.target.value,
-                      }))
-                    }}
-                    value={field.value}
-                  />
-                </FormControl>
-                <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                  {form.formState.errors.email?.message}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
+    <div>
+      <Form {...form}>
+        <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={form.handleSubmit(handleSubmit)}>
+          <div className='flex flex-col gap-2 rounded-lg'>
+            <div className='w-full'>
+              <FormField
+                control={form.control}
+                name='email'
+                render={({ field: { onChange, ...props } }) => (
+                  <FormItem>
+                    <FormLabel>{t('steps.step5.inputs.email.label')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t('steps.step5.inputs.email.placeholder')}
+                        type='email'
+                        className='w-full'
+                        onChange={e => {
+                          onChange(e)
+                          const email = e.target.value.trim()
 
-          <FormField
-            control={form.control}
-            name='phoneNumber'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('checkout.payment.inputs.phone.label')}</FormLabel>
-                <FormControl>
-                  <PhoneInput
-                    placeholder={t('checkout.payment.inputs.phone.placeholder')}
-                    className='w-full'
-                    defaultCountry='BR'
-                    value={field.value}
-                    onChange={value => {
-                      field.onChange(value)
-                      setChild(prevChild => ({
-                        ...prevChild,
-                        phoneNumber: value,
-                      }))
-                    }}
-                    onBlur={field.onBlur}
-                  />
-                </FormControl>
-                <FormMessage className='text-red-500 text-sm mt-1 text-right'>
-                  {form.formState.errors.phoneNumber?.message}
-                </FormMessage>
-                <p className='text-neutral-500 text-xs mt-2'>{t('checkout.payment.inputs.phone.important')}</p>
-              </FormItem>
-            )}
-          />
-        </div>
+                          setChild(prevChild => ({
+                            ...prevChild,
+                            email: email,
+                          }))
+                        }}
+                        {...props}
+                      />
+                    </FormControl>
 
-        <div className='flex items-center justify-between gap-4 mt-4'>
-          {onBack && (
+                    <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                      {form.formState.errors.email?.message}
+                    </FormMessage>
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className='w-full'>
+              <FormField
+                control={form.control}
+                name='phone'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('steps.step5.inputs.phone.label')}</FormLabel>
+                    <FormControl>
+                      <PhoneInput
+                        value={field.value}
+                        defaultCountry={t('config.defaults.country').split('-')[1] as any}
+                        placeholder={t('steps.step5.inputs.phone.placeholder')}
+                        className='w-full'
+                        onChange={e => {
+                          field.onChange(e)
+
+                          const ddd = removeMask(e.trim()).slice(0, 2)
+                          const phoneNumber = removeMask(e.trim()).slice(2)
+
+                          setChild(prev => ({
+                            ...prev,
+                            ddd,
+                            phoneNumber,
+                          }))
+                        }}
+                        onBlur={field.onBlur}
+                      />
+                    </FormControl>
+
+                    <FormMessage className='text-red-500 text-sm mt-1 text-right'>
+                      {form.formState.errors.phone?.message}
+                    </FormMessage>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+
+          <div className='flex items-center justify-between gap-4 mt-8'>
+            {onBack && (
+              <button
+                type='button'
+                onClick={onBack}
+                disabled={loading}
+                className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
+                  loading ? 'opacity-50' : ''
+                }`}
+              >
+                <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
+                  <>
+                    <IconChevronLeft size={20} className='mr-4' />
+                    {t('steps.step1.back')}
+                  </>
+                </span>
+              </button>
+            )}
             <button
-              type='button'
-              onClick={onBack}
-              disabled={loading}
+              type='submit'
+              disabled={DISABLED}
               className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-                loading ? 'opacity-50' : ''
+                DISABLED ? 'opacity-50' : ''
               }`}
             >
               <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
-                <>
-                  <IconChevronLeft size={20} className='mr-4' />
-                  {t('steps.step1.back')}
-                </>
+                {loading ? (
+                  <IconLoader size={20} className='animate-spin' />
+                ) : (
+                  <>
+                    {t('steps.step1.button')}
+                    <IconChevronRight size={20} className='ml-4' />
+                  </>
+                )}
               </span>
             </button>
-          )}
-          <button
-            type='submit'
-            disabled={DISABLED}
-            className={`relative w-full inline-flex h-[3.2rem] overflow-hidden rounded-lg p-[2px] border border-neutral-200/60 focus:outline-none focus:ring-0 ${
-              DISABLED ? 'opacity-50' : ''
-            }`}
-          >
-            <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
-              {loading ? (
-                <IconLoader size={20} className='animate-spin' />
-              ) : (
-                <>
-                  {isEdit ? t('pages.account.pages.edit.actions.next') : t('steps.step1.button')}
-                  <IconChevronRight size={20} className='ml-4' />
-                </>
-              )}
-            </span>
-          </button>
-        </div>
-      </form>
-    </Form>
+          </div>
+        </form>
+      </Form>
+    </div>
   )
 }

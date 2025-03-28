@@ -21,18 +21,7 @@
         "title": "Selecionar Idioma",
         "pt": "Português",
         "en": "English",
-        "es": "Español",
-        "de": "Deutsch"
-      },
-      "themes": {
-        "title": "Selecionar Tema",
-        "blue": "Azul",
-        "pink": "Rosa",
-        "gold": "Dourado",
-        "green": "Verde",
-        "lilac": "Lilás",
-        "red": "Vermelho",
-        "gray": "Cinza"
+        "es": "Español"
       }
     },
     "footer": {
@@ -73,7 +62,6 @@
       "mili": "milissegundos",
       "of": "de",
       "since": "Nasceu dia",
-
       "birth_date": {
         "day": "Dia",
         "month": "Mês",
@@ -92,7 +80,7 @@
           "4": "Cada memória",
           "5": "Cada momento"
         },
-        "description": "Pequenos gestos constroem grandes lembranças. Cada sorriso, cada descoberta e cada nova fase do seu bebê são momentos únicos que merecem ser registrados. Acompanhe essa linda jornada e eternize cada detalhe com carinho.",
+        "description": "Eternize cada lembranças, sorrisos, descobertas e cada nova fase do seu bebê são momentos únicos que merecem ser registrados. Acompanhe essa linda jornada e eternize cada detalhe com carinho.",
         "input": {
           "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
           "errors": {
@@ -630,7 +618,22 @@
     },
     "step5": {
       "title": "Informações de contato",
-      "description": "Para que seja possivel salvar a sua pagina é necessario informar o seu email e telefone."
+      "description": "Preencha as informações de contato para receber o QR code e o link da página personalizada.",
+      "inputs": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "Ex: seu.email@gmail.com",
+          "invalid": "E-mail Inválido",
+          "required": "Campo obrigatório"
+        },
+        "phone": {
+          "label": "Telefone",
+          "placeholder": "Ex: (99) 99999-9999",
+          "important": "* Você também irá receber seu produto por WhatsApp, caso não receba por e-mail.",
+          "invalid": "Telefone Inválido",
+          "required": "Campo obrigatório"
+        }
+      }
     },
     "step6": {
       "title": "Plano ideal",
@@ -748,19 +751,6 @@
           "label": "CPF",
           "placeholder": "Ex: 999.999.999-99",
           "invalid": "CPF Inválido",
-          "required": "Campo obrigatório"
-        },
-        "email": {
-          "label": "E-mail",
-          "placeholder": "Ex: seu.email@gmail.com",
-          "invalid": "E-mail Inválido",
-          "required": "Campo obrigatório"
-        },
-        "phone": {
-          "label": "Telefone",
-          "placeholder": "Ex: (99) 99999-9999",
-          "important": "* Você também irá receber seu produto por WhatsApp, caso não receba por e-mail.",
-          "invalid": "Telefone Inválido",
           "required": "Campo obrigatório"
         }
       },

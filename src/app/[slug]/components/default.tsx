@@ -25,7 +25,7 @@ export const DefaultTheme = ({ child }: DefaultThemeProps) => {
                 </div>
               )}
 
-              <div className='-mt-4'>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
+              <div>{!!child?.timeLine && <BabyTimeline timeline={child.timeLine} />}</div>
 
               {!!child?.birth_date && (
                 <DateCount date={child.birth_date} type={child.dateShowType ?? DateShowTypeEnum.DEFAULT} />

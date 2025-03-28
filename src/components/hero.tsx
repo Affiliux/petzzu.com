@@ -103,20 +103,18 @@ export const Hero = () => {
           <span> {t('pages.home.hero.sub-title')}</span>
         </HoverBorderGradient>
 
-        <h1 className='text-neutral-900 text-4xl lg:text-5xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
+        <h1 className='text-neutral-900 text-5xl lg:text-6xl font-sans pt-3 relative z-20 font-bold tracking-tight'>
           {t('pages.home.hero.title.1')}
         </h1>
-        <h2 className='relative font-bold tracking-tight text-4xl lg:text-5xl font-sans text-theme-400 pb-4 z-20'>
-          <TypingAnimation
-            phrases={[
-              t('pages.home.hero.title.2'),
-              t('pages.home.hero.title.3'),
-              t('pages.home.hero.title.4'),
-              t('pages.home.hero.title.5'),
-            ]}
-            classNames='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-theme-600 z-20'
-          />
-        </h2>
+        <TypingAnimation
+          phrases={[
+            t('pages.home.hero.title.2'),
+            t('pages.home.hero.title.3'),
+            t('pages.home.hero.title.4'),
+            t('pages.home.hero.title.5'),
+          ]}
+          classNames='relative font-bold tracking-tight text-5xl lg:text-6xl font-sans text-theme-600 z-20 pb-4'
+        />
 
         <p className='max-w-xl text-sm md:text-lg text-neutral-500'>{t('pages.home.hero.description')}</p>
 
@@ -161,7 +159,7 @@ export const Hero = () => {
               ))}
             </div>
 
-            <p className='text-xs text-white'>{t('pages.home.hero.rating')}</p>
+            <p className='text-xs text-neutral-900'>{t('pages.home.hero.rating')}</p>
           </div>
         </div>
       </div>
@@ -171,7 +169,6 @@ export const Hero = () => {
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[0deg] lg:translate-x-[-200px] aspect-[9/16] transition-all duration-300 hover:z-50 hover:scale-110'
           style={{
             zIndex: 3,
-            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
           }}
         >
           <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
@@ -187,7 +184,6 @@ export const Hero = () => {
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[10deg] aspect-[9/16] lg:mt-8 transition-all translate-x-[120px] lg:translate-x-[0px] duration-300 hover:z-50 hover:scale-110'
           style={{
             zIndex: 2,
-            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
           }}
         >
           <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />
@@ -203,7 +199,6 @@ export const Hero = () => {
           className='absolute w-[80%] max-w-[100px] lg:max-w-[220px] lg:rotate-[20deg] aspect-[9/16] lg:mt-32 translate-x-[240px] lg:translate-x-[200px] transition-all duration-300 hover:z-50 hover:scale-110'
           style={{
             zIndex: 1,
-            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px',
           }}
         >
           <img src='/images/mockup.webp' alt='mockup' className='absolute z-50 w-full h-full' />

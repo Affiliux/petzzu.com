@@ -12,6 +12,8 @@ import { useCreate } from '@/contexts/CreateContext'
 import { useTimeline } from '@/contexts/TimelineContext'
 
 import { ButtonToTop } from '@/components/button-to-top'
+import Loading from '@/components/loading'
+import AnimatedModal from '@/components/modal'
 import { Steps } from '@/components/steps'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
@@ -227,25 +229,29 @@ export default function Page() {
     }
   }
 
-  useEffect(() => {
-    if (!!plans.length) {
-      if (plan && plan.sku.includes('unique')) {
-        const find = plans.find(plan => plan.sku.includes(`plan_unique_${currency}`))
-        set_plan(find)
+  async function handlePlans() {
+    try {
+      if (!!plans.length) {
+        if (plan && plan.sku.includes('unique')) {
+          const find = plans.find(plan => plan.sku.includes(`plan_unique_${currency}`))
+          set_plan(find)
+        }
+        if (plan && plan.sku.includes('annual')) {
+          const find = plans.find(plan => plan.sku.includes(`plan_annual_${currency}`))
+          set_plan(find)
+        } else {
+          const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
+          set_plan(find)
+        }
       }
-      if (plan && plan.sku.includes('annual')) {
-        const find = plans.find(plan => plan.sku.includes(`plan_annual_${currency}`))
-        set_plan(find)
-      } else {
-        const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
-        set_plan(find)
-      }
+    } catch (error: any) {
+      console.error(error)
     }
-  }, [locale, plans])
+  }
 
   useEffect(() => {
-    if (plans.length <= 0) onGetPlans()
-  }, [])
+    handlePlans()
+  }, [locale, plans])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -312,14 +318,8 @@ export default function Page() {
         onCreatePre={handleCreatePre}
       />
 
-      {(loading || !theme) && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
-          <Loader2 size={56} className='animate-spin text-theme-900' />
-        </div>
-      )}
-
-      {!!has_save && !loading && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
+      <AnimatedModal isOpen={!!has_save && !loading} onClose={handleCancel}>
+        <div className='container max-w-lg flex flex-col items-center justify-center gap-8'>
           <div className='container max-w-lg flex flex-col items-center justify-center gap-8'>
             <div>
               <h1 className='text-neutral-900 text-2xl font-bold text-center'>{t('steps.continue.title')}</h1>
@@ -360,8 +360,9 @@ export default function Page() {
             </div>
           </div>
         </div>
-      )}
+      </AnimatedModal>
 
+      <Loading loading={loading} />
       <ButtonToTop />
     </>
   )

@@ -1,7 +1,6 @@
 'use client'
-import React from 'react'
 
-import { useTranslations } from 'next-intl'
+import React from 'react'
 
 import { Modal, ModalBody, ModalContent } from '@/components/ui/animated-modal'
 
@@ -12,13 +11,11 @@ interface AnimatedModalProps {
 }
 
 export default function AnimatedModal({ isOpen, onClose, children }: AnimatedModalProps) {
-  const t = useTranslations()
-
   return (
-    <div className='py-40 flex items-center justify-center'>
-      <Modal open={isOpen} onClose={onClose}>
-        <ModalBody>{children}</ModalBody>
-      </Modal>
-    </div>
+    <Modal open={isOpen} onClose={onClose}>
+      <ModalBody>
+        <ModalContent>{children}</ModalContent>
+      </ModalBody>
+    </Modal>
   )
 }

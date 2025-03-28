@@ -1,4 +1,5 @@
 'use client'
+
 import React, { createContext, ReactNode, useContext, useEffect, useRef } from 'react'
 
 import { AnimatePresence, motion } from 'motion/react'
@@ -62,7 +63,9 @@ export const ModalBody = ({ children, className }: { children: ReactNode; classN
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{
+            opacity: 0,
+          }}
           animate={{
             opacity: 1,
             backdropFilter: 'blur(10px)',
@@ -71,13 +74,14 @@ export const ModalBody = ({ children, className }: { children: ReactNode; classN
             opacity: 0,
             backdropFilter: 'blur(0px)',
           }}
-          className='fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full flex items-center justify-center z-50 px-4 py-6'
+          className='fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full flex items-center justify-center z-50'
         >
           <Overlay />
+
           <motion.div
             ref={modalRef}
             className={cn(
-              'max-h-[90%] w-full md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 rounded-xl md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden mx-auto my-auto',
+              'max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden',
               className,
             )}
             initial={{
@@ -112,7 +116,7 @@ export const ModalBody = ({ children, className }: { children: ReactNode; classN
 }
 
 export const ModalContent = ({ children, className }: { children: ReactNode; className?: string }) => {
-  return <div className={cn('flex flex-col flex-1 p-6 md:p-8 lg:p-10', className)}>{children}</div>
+  return <div className={cn('flex flex-col flex-1 p-8 md:p-10', className)}>{children}</div>
 }
 
 const Overlay = ({ className }: { className?: string }) => {

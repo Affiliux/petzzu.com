@@ -1,8 +1,6 @@
 'use client'
 
-import React, { useMemo } from 'react'
-
-import { Loader2 } from 'lucide-react'
+import React from 'react'
 
 import { useApplication } from '@/contexts/ApplicationContext'
 
@@ -26,7 +24,7 @@ export const runtime = 'edge'
 
 export default function Page() {
   // contexts
-  const { loading_application, theme } = useApplication()
+  const { theme } = useApplication()
 
   const SPOTLIGHT_COLOR = theme
     ? formatHexToHsl(THEMES[theme]['--theme-900'])

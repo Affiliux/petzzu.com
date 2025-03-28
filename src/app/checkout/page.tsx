@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-import { Check, CreditCard, Loader2, Lock, QrCode, ShoppingCart, Sparkles } from 'lucide-react'
+import { Check, CreditCard, Lock, QrCode, ShoppingCart, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -16,6 +16,7 @@ import { useCreate } from '@/contexts/CreateContext'
 import { toast } from '@/hooks/use-toast'
 
 import { CardForm } from '@/components/card-form'
+import Loading from '@/components/loading'
 import { PayPalForm } from '@/components/paypal-form'
 import { PixForm } from '@/components/pix-form'
 import { StripeForm } from '@/components/stripe-form'
@@ -33,7 +34,7 @@ export default function Page() {
   const router = useRouter()
 
   // contexts
-  const { theme, discount, plans, currency, order_bumps } = useApplication()
+  const { discount, plans, currency, order_bumps } = useApplication()
   const {
     pre,
     payment,
@@ -551,11 +552,7 @@ export default function Page() {
         </>
       )}
 
-      {(loading || !theme) && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex flex-col items-center justify-center z-[9999]'>
-          <Loader2 size={56} className='animate-spin text-theme-900' />
-        </div>
-      )}
+      <Loading loading={loading} />
     </>
   )
 }

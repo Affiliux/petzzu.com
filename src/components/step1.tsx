@@ -105,7 +105,6 @@ export const Step1 = ({
     { id: 4, name: t('steps.step1.theme-show-types.green'), data: ThemeShowTypeEnum.GREEN, color: '#95BA7C' },
     { id: 5, name: t('steps.step1.theme-show-types.lilac'), data: ThemeShowTypeEnum.LILAC, color: '#E9D8FF' },
     { id: 6, name: t('steps.step1.theme-show-types.red'), data: ThemeShowTypeEnum.RED, color: '#FFB2B2' },
-    { id: 7, name: t('steps.step1.theme-show-types.gray'), data: ThemeShowTypeEnum.GRAY, color: '#D9D9D9' },
   ]
 
   useEffect(() => {
@@ -192,7 +191,7 @@ export const Step1 = ({
         </div>
       </div>
 
-      <div className='flex items-center justify-between gap-4 mt-4'>
+      <div className='flex items-center justify-between gap-4 mt-8'>
         {onBack && (
           <button
             type='button'

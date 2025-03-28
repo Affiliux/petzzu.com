@@ -3,7 +3,6 @@
 import React from 'react'
 
 import { ButtonToTop } from '@/components/button-to-top'
-import { Cookies } from '@/components/cookies'
 import { CTA } from '@/components/cta'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
@@ -19,14 +18,12 @@ export default function Layout({
         <Header />
       </div>
 
-      <div className='w-full bg-transparent bg-dot-neutral-500/20 relative flex items-center justify-center mt-16'>
+      <div className='w-full bg-transparent bg-dot-red-200/10 relative flex items-center justify-center mt-16'>
         {children}
       </div>
 
       <CTA />
       <Footer />
-
-      <Cookies />
       <ButtonToTop />
     </div>
   )
