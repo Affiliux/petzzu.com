@@ -17,7 +17,7 @@ export default function Layout({
         <Header />
       </div>
 
-      <div className='container mx-auto px-4 md:px-6 py-8 mt-24'>
+      <div className='container mx-auto px-4 md:px-6 py-8 mt-32'>
         <div className='grid gap-10 lg:grid-cols-2'>{children}</div>
       </div>
 

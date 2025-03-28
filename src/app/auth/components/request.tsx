@@ -21,7 +21,10 @@ export function RequestForm({ set_email }: { set_email: (email: string | null) =
   const t = useTranslations('pages.auth.request')
 
   const sign_in_validation = z.object({
-    email: z.string().min(1, { message: 'form.email.validation.required' }).email('form.email.validation.invalid'),
+    email: z
+      .string()
+      .min(1, { message: t('form.email.validation.required') })
+      .email({ message: t('form.email.validation.invalid') }),
   })
 
   const form = useForm<z.infer<typeof sign_in_validation>>({
@@ -37,11 +40,6 @@ export function RequestForm({ set_email }: { set_email: (email: string | null) =
 
   // states
   const [loading, setLoading] = useState<boolean>(false)
-
-  function handleError(message?: string): string {
-    if (message) return t(`${message}`)
-    else return ''
-  }
 
   async function handleSubmit(values: z.infer<typeof sign_in_validation>) {
     setLoading(true)
@@ -82,7 +80,7 @@ export function RequestForm({ set_email }: { set_email: (email: string | null) =
                   <Input type='email' placeholder={t('form.email.placeholder')} {...field} />
                 </FormControl>
 
-                <FormMessage>{handleError(form.getFieldState('email').error?.message)}</FormMessage>
+                <FormMessage>{form.getFieldState('email').error?.message}</FormMessage>
               </FormItem>
             )}
           />

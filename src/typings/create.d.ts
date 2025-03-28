@@ -6,10 +6,11 @@ import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 // Create pre with the following properties:
 export type CreatePreProps = {
   child_name: string
-  message: string
   birth_date: string
-  parent_name: string
+  ddd?: string
   sex: string
+  phoneNumber?: string
+  email?: string
   lang?: string
   themeShowType?: ThemeShowTypeEnum
   dateShowType: DateShowTypeEnum
@@ -64,9 +65,9 @@ export type CreateFromPreProps = {
   affiliateCode: string
   affiliateCampaignCode: string
   cpf?: string
-  email: string
-  phoneNumber: string
-  ddd: string
+  email?: string
+  phoneNumber?: string
+  ddd?: string
   name?: string
   cardToken?: string
   idDiscountCupom: string | null
@@ -97,6 +98,9 @@ export type PreProps = {
   lang: string
   birth_date: string
   sex: string
+  ddd: string
+  phoneNumber: string
+  email: string
   media: MediaProps[]
   themeShowType: ThemeShowTypeEnum
   dateShowType: DateShowTypeEnum
@@ -111,10 +115,10 @@ export type UpdatePaymentProps = {
   gateway: string
   name?: string
   cardToken?: string
-  ddd: string
-  phoneNumber: string
+  ddd?: string
+  phoneNumber?: string
   cpf: string
-  email: string
+  email?: string
 }
 
 export interface UpdatePaymentPayloadProps extends UpdatePaymentProps {}

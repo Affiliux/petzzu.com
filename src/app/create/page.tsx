@@ -12,6 +12,8 @@ import { useCreate } from '@/contexts/CreateContext'
 import { useTimeline } from '@/contexts/TimelineContext'
 
 import { ButtonToTop } from '@/components/button-to-top'
+import Loading from '@/components/loading'
+import AnimatedModal from '@/components/modal'
 import { Steps } from '@/components/steps'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
@@ -92,6 +94,13 @@ export default function Page() {
       id: 5,
       title: t('steps.step5.title'),
       description: t('steps.step5.description'),
+      checked: !!child.email && !!child.phoneNumber && !!child.ddd,
+      skip: false,
+    },
+    {
+      id: 6,
+      title: t('steps.step6.title'),
+      description: t('steps.step6.description'),
       checked: !!plan,
       skip: false,
     },
@@ -203,13 +212,13 @@ export default function Page() {
     try {
       if (!pre) throw new Error('Pre ID not found')
       if (!plan) throw new Error('Please select a plan')
-
       await onUpdatePre({
         id: pre,
         child_name: child.child_name,
-        message: child.message,
         birth_date: child.birth_date,
-        parent_name: child.parent_name,
+        phoneNumber: child.phoneNumber,
+        ddd: child.ddd,
+        email: child.email,
         sex: child.sex,
         lang: t('config.defaults.country'),
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.BLUE,
@@ -220,25 +229,29 @@ export default function Page() {
     }
   }
 
-  useEffect(() => {
-    if (!!plans.length) {
-      if (plan && plan.sku.includes('unique')) {
-        const find = plans.find(plan => plan.sku.includes(`plan_unique_${currency}`))
-        set_plan(find)
+  async function handlePlans() {
+    try {
+      if (!!plans.length) {
+        if (plan && plan.sku.includes('unique')) {
+          const find = plans.find(plan => plan.sku.includes(`plan_unique_${currency}`))
+          set_plan(find)
+        }
+        if (plan && plan.sku.includes('annual')) {
+          const find = plans.find(plan => plan.sku.includes(`plan_annual_${currency}`))
+          set_plan(find)
+        } else {
+          const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
+          set_plan(find)
+        }
       }
-      if (plan && plan.sku.includes('annual')) {
-        const find = plans.find(plan => plan.sku.includes(`plan_annual_${currency}`))
-        set_plan(find)
-      } else {
-        const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
-        set_plan(find)
-      }
+    } catch (error: any) {
+      console.error(error)
     }
-  }, [locale, plans])
+  }
 
   useEffect(() => {
-    onGetPlans()
-  }, [])
+    handlePlans()
+  }, [locale, plans])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -268,7 +281,6 @@ export default function Page() {
   return (
     <>
       <Steps
-        theme={theme}
         pre={pre}
         step={step}
         steps={steps}
@@ -306,14 +318,8 @@ export default function Page() {
         onCreatePre={handleCreatePre}
       />
 
-      {(loading || !theme) && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
-          <Loader2 size={56} className='animate-spin text-theme-900' />
-        </div>
-      )}
-
-      {!!has_save && !loading && (
-        <div className='h-screen w-full fixed top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
+      <AnimatedModal isOpen={!!has_save && !loading} onClose={handleCancel}>
+        <div className='container max-w-lg flex flex-col items-center justify-center gap-8'>
           <div className='container max-w-lg flex flex-col items-center justify-center gap-8'>
             <div>
               <h1 className='text-neutral-900 text-2xl font-bold text-center'>{t('steps.continue.title')}</h1>
@@ -354,8 +360,9 @@ export default function Page() {
             </div>
           </div>
         </div>
-      )}
+      </AnimatedModal>
 
+      <Loading loading={loading} />
       <ButtonToTop />
     </>
   )

@@ -21,18 +21,7 @@
         "title": "Selecionar Idioma",
         "pt": "Português",
         "en": "English",
-        "es": "Español",
-        "de": "Deutsch"
-      },
-      "themes": {
-        "title": "Selecionar Tema",
-        "blue": "Azul",
-        "pink": "Rosa",
-        "gold": "Dourado",
-        "green": "Verde",
-        "lilac": "Lilás",
-        "red": "Vermelho",
-        "gray": "Cinza"
+        "es": "Español"
       }
     },
     "footer": {
@@ -73,7 +62,6 @@
       "mili": "milissegundos",
       "of": "de",
       "since": "Nasceu dia",
-
       "birth_date": {
         "day": "Dia",
         "month": "Mês",
@@ -92,7 +80,7 @@
           "4": "Cada memória",
           "5": "Cada momento"
         },
-        "description": "Pequenos gestos constroem grandes lembranças. Cada sorriso, cada descoberta e cada nova fase do seu bebê são momentos únicos que merecem ser registrados. Acompanhe essa linda jornada e eternize cada detalhe com carinho.",
+        "description": "Eternize cada lembranças, sorrisos, descobertas e cada nova fase do seu bebê são momentos únicos que merecem ser registrados. Acompanhe essa linda jornada e eternize cada detalhe com carinho.",
         "input": {
           "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
           "errors": {
@@ -101,32 +89,6 @@
           }
         },
         "button": "Começar",
-        "people": {
-          "1": {
-            "name": "João & Maria",
-            "time": "1 mês atrás"
-          },
-          "2": {
-            "name": "Ana & Pedro",
-            "time": "2 dias atrás"
-          },
-          "3": {
-            "name": "Lucas & Carol",
-            "time": "3 meses atrás"
-          },
-          "4": {
-            "name": "Camila & Felipe",
-            "time": "4 meses atrás"
-          },
-          "5": {
-            "name": "Bia & Henrique",
-            "time": "1 ano atrás"
-          },
-          "6": {
-            "name": "Clara & Rafael",
-            "time": "2 meses atrás"
-          }
-        },
         "rating": "Aprovado por 714 mamães e papais"
       },
       "how-work": {
@@ -530,6 +492,16 @@
     "step1": {
       "title": "Qual nome do seu Filho(a)?",
       "description": "Insira o nome do seu filho(a) e o gênero para personalizar a página.",
+      "theme-show-types": {
+        "title": "Cor do tema",
+        "blue": "Azul",
+        "gold": "Dourado",
+        "pink": "Rosa",
+        "green": "Verde",
+        "lilac": "Lilás",
+        "red": "Vermelho",
+        "gray": "Cinza"
+      },
       "input": {
         "placeholder": "Ex: Caio Castro",
         "errors": {
@@ -538,6 +510,7 @@
         }
       },
       "gender": {
+        "title": "Gênero",
         "options": {
           "male": "Masculino",
           "female": "Feminino"
@@ -595,6 +568,13 @@
           "delete": "Excluir lembrança"
         }
       },
+      "modal": {
+        "title": "Você deseja excluir essa lembrança",
+        "actions": {
+          "delete": "Sim, excluir",
+          "cancel": "Cancelar"
+        }
+      },
       "name": {
         "label": "Nome da lembrança",
         "placeholder": "Ex: Primeiro banho",
@@ -637,6 +617,25 @@
       "button": "Próxima etapa"
     },
     "step5": {
+      "title": "Informações de contato",
+      "description": "Preencha as informações de contato para receber o QR code e o link da página personalizada.",
+      "inputs": {
+        "email": {
+          "label": "E-mail",
+          "placeholder": "Ex: seu.email@gmail.com",
+          "invalid": "E-mail Inválido",
+          "required": "Campo obrigatório"
+        },
+        "phone": {
+          "label": "Telefone",
+          "placeholder": "Ex: (99) 99999-9999",
+          "important": "* Você também irá receber seu produto por WhatsApp, caso não receba por e-mail.",
+          "invalid": "Telefone Inválido",
+          "required": "Campo obrigatório"
+        }
+      }
+    },
+    "step6": {
       "title": "Plano ideal",
       "description": "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo.",
       "plans": {
@@ -752,19 +751,6 @@
           "label": "CPF",
           "placeholder": "Ex: 999.999.999-99",
           "invalid": "CPF Inválido",
-          "required": "Campo obrigatório"
-        },
-        "email": {
-          "label": "E-mail",
-          "placeholder": "Ex: seu.email@gmail.com",
-          "invalid": "E-mail Inválido",
-          "required": "Campo obrigatório"
-        },
-        "phone": {
-          "label": "Telefone",
-          "placeholder": "Ex: (99) 99999-9999",
-          "important": "* Você também irá receber seu produto por WhatsApp, caso não receba por e-mail.",
-          "invalid": "Telefone Inválido",
           "required": "Campo obrigatório"
         }
       },

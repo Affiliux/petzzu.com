@@ -11,6 +11,8 @@ import { useChild } from '@/contexts/ChildContext'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
+import Loading from '@/components/loading'
+import AnimatedModal from '@/components/modal'
 import { PixPayment } from '@/components/pix'
 import { SuccessModal } from '@/components/success'
 
@@ -52,11 +54,23 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
     }
   }
 
-  useEffect(() => {
-    onChangeTheme(child?.themeShowType ?? ThemeShowTypeEnum.BLUE)
+  async function handleCheckPayment() {
+    try {
+      await onGetChildBySlug(slug)
+    } catch (error: any) {
+      console.error(error)
 
-    if (child && child.inactiveReason === 'Awaiting payment') {
-      if (child.urlPayment && child.urlPayment.includes('https')) {
+      if (error.message === 'Website not found') {
+        router.replace('/')
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!!child && child?.themeShowType) onChangeTheme(child?.themeShowType ?? ThemeShowTypeEnum.GRAY)
+
+    if (!!child && child?.inactiveReason === 'Awaiting payment') {
+      if (child?.urlPayment && child?.urlPayment.includes('https')) {
         router.replace(child.urlPayment)
       } else if (child.urlPayment && !child.urlPayment.includes('https')) {
         set_payment(true)
@@ -74,35 +88,23 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
   return (
     <>
-      {(loading || !theme) && (
-        <div className='h-screen w-full absolute top-0 left-0 bg-neutral-200/30 backdrop-blur-xl flex items-center justify-center z-[9999]'>
-          <Loader2 size={56} className='animate-spin text-neutral-900' />
-        </div>
-      )}
-
       <div className='relative bg-theme-100 h-full min-h-screen'>
-        {child && !loading && <DefaultTheme child={child} />}
+        {!!child && !loading && <DefaultTheme child={child} />}
 
-        {child && (success || payment) && (
-          <div className='fixed top-0 h-full left-0 right-0 bottom-0 w-full overflow-hidden z-50'>
-            <div className='fixed top-0 inset-0 z-[997] grid h-full lg:h-screen w-full min-h-screen lg:place-items-center bg-white/60 backdrop-blur-2xl transition-opacity duration-300'>
-              <div className='sticky top-10 m-4 py-8 px-4 lg:px-8 w-3/4 z-[999] lg:w-2/5 min-w-[90%] max-w-[90%] h-auto lg:max-h-[90vh] lg:min-w-[35%] lg:max-w-[35%] flex flex-col items-center justify-center rounded-lg'>
-                {payment ? (
-                  <>
-                    {child.qrCode64 && !child.qrCodeUrl && (
-                      <PixPayment payment={child} onCheckPayment={handleGetBySlug} />
-                    )}
-                  </>
-                ) : success ? (
-                  <SuccessModal child={child} onClose={() => set_success(false)} />
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
+        <AnimatedModal isOpen={!!child && !loading && (success || payment)} onClose={() => {}}>
+          <div className='flex flex-col items-center justify-center gap-8'>
+            {payment && child?.qrCode64 && !child?.qrCodeUrl ? (
+              <PixPayment payment={child} onCheckPayment={handleCheckPayment} />
+            ) : success ? (
+              <SuccessModal child={child} onClose={() => set_success(false)} />
+            ) : (
+              <></>
+            )}
           </div>
-        )}
+        </AnimatedModal>
       </div>
+
+      <Loading loading={loading} />
     </>
   )
 }

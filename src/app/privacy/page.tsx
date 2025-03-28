@@ -10,7 +10,7 @@ export default function Page() {
   const t = useTranslations('pages.privacy')
 
   return (
-    <div className='container bg-white py-12'>
+    <div className='container bg-white py-8'>
       <main className='flex flex-col gap-2 lg:gap-8 items-center justify-center'>
         <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-black mt-24 text-3xl lg:text-5xl font-sans relative z-20 font-bold tracking-tight'>
           {t('title')}

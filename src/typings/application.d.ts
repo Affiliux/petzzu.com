@@ -52,8 +52,8 @@ export interface StepsProps {
 // Payment form Props with the following properties:
 export interface PaymentFormProps {
   method: string
-  email: string
-  phone: string
+  email?: string
+  phone?: string
   name?: string
   document?: string
   cardToken?: string

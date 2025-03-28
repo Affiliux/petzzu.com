@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { IconChevronLeft, IconChevronRight, IconLoader } from '@tabler/icons-react'
 
 import type { CreatePrePayloadProps } from '@/typings/create'
+import { useApplication } from '@/contexts/ApplicationContext'
 
 import { Input } from './ui/input'
 
@@ -16,17 +17,28 @@ import { SexEnum, ThemeShowTypeEnum } from '@/enums'
 
 interface Step1Props {
   isEdit?: boolean
-  theme: ThemeShowTypeEnum
   child: CreatePrePayloadProps
   setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
   onNew?: ((child_name: string) => Promise<void>) | null
   onNext: () => Promise<void>
   onBack?: () => void
+  themeShowType: ThemeShowTypeEnum
+  setThemeShowType: Dispatch<SetStateAction<ThemeShowTypeEnum>>
 }
 
-export const Step1 = ({ isEdit, child, setChild, onNext, onNew, onBack }: Step1Props) => {
+export const Step1 = ({
+  isEdit,
+  child,
+  setChild,
+  onNext,
+  onNew,
+  onBack,
+  themeShowType,
+  setThemeShowType,
+}: Step1Props) => {
   // hooks
   const t = useTranslations()
+  const { onChangeTheme } = useApplication()
 
   const formSchema = z.object({
     child_name: z
@@ -86,6 +98,15 @@ export const Step1 = ({ isEdit, child, setChild, onNext, onNew, onBack }: Step1P
     }
   }
 
+  const themes = [
+    { id: 1, name: t('steps.step1.theme-show-types.blue'), data: ThemeShowTypeEnum.BLUE, color: '#7DA2FF' },
+    { id: 2, name: t('steps.step1.theme-show-types.gold'), data: ThemeShowTypeEnum.GOLD, color: '#FFF2B3' },
+    { id: 3, name: t('steps.step1.theme-show-types.pink'), data: ThemeShowTypeEnum.PINK, color: '#F997CD' },
+    { id: 4, name: t('steps.step1.theme-show-types.green'), data: ThemeShowTypeEnum.GREEN, color: '#95BA7C' },
+    { id: 5, name: t('steps.step1.theme-show-types.lilac'), data: ThemeShowTypeEnum.LILAC, color: '#E9D8FF' },
+    { id: 6, name: t('steps.step1.theme-show-types.red'), data: ThemeShowTypeEnum.RED, color: '#FFB2B2' },
+  ]
+
   useEffect(() => {
     setValue('child_name', child.child_name)
     setValue('gender', child.sex)
@@ -116,8 +137,9 @@ export const Step1 = ({ isEdit, child, setChild, onNext, onNew, onBack }: Step1P
         <p className='text-red-500 text-sm mt-1 text-right'>{errors.child_name?.message}</p>
       </div>
 
-      <div className='w-full mt-2'>
-        <div className='flex flex-col md:flex-row gap-2'>
+      <div className='w-full mt-4'>
+        <h2 className='font-semibold text-neutral-900'>{t('steps.step1.gender.title')}</h2>
+        <div className='flex flex-col md:flex-row gap-2 mt-4'>
           {SEX_OPTIONS.map(sex => (
             <div
               key={sex.id}
@@ -142,7 +164,34 @@ export const Step1 = ({ isEdit, child, setChild, onNext, onNew, onBack }: Step1P
         <p className='text-red-500 text-sm mt-1 text-right'>{errors.gender?.message}</p>
       </div>
 
-      <div className='flex items-center justify-between gap-4 mt-4'>
+      <div className='w-full mt-4'>
+        <h2 className='font-semibold text-neutral-900'>{t('steps.step1.theme-show-types.title')}</h2>
+        <div className='grid grid-cols-2 gap-2 mt-4'>
+          {themes.map(theme => (
+            <div
+              key={theme.id}
+              className={`flex items-center rounded-lg border p-4 cursor-pointer hover:bg-neutral-100/20 border-neutral-200/60 w-full`}
+              onClick={() => {
+                setThemeShowType(theme.data)
+                setChild(prev => ({ ...prev, themeShowType: theme.data }))
+                onChangeTheme(theme.data)
+              }}
+            >
+              {theme.data === themeShowType ? (
+                <div className='border border-theme-300 rounded-full h-4 w-4 flex items-center justify-center mr-2'>
+                  <div className='bg-theme-800 rounded-full h-2.5 w-2.5' />
+                </div>
+              ) : (
+                <div className='border border-neutral-200/60 rounded-full h-4 w-4 mr-2' />
+              )}
+              <div className='w-4 h-4 rounded-md mr-2' style={{ backgroundColor: theme.color }} />
+              <h2 className='text-sm font-medium leading-none text-neutral-800 truncate'>{theme.name}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className='flex items-center justify-between gap-4 mt-8'>
         {onBack && (
           <button
             type='button'

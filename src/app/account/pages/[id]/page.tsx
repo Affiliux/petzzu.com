@@ -6,9 +6,17 @@ import { ChevronLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
+import { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { useAccount } from '@/contexts/AccountContext'
+import { useApplication } from '@/contexts/ApplicationContext'
+import { useTimeline } from '@/contexts/TimelineContext'
 
 import { toast } from '@/hooks/use-toast'
+
+import { Step1 } from '@/components/step1'
+import { Step2 } from '@/components/step2'
+import { Step3 } from '@/components/step3'
+import { Step4 } from '@/components/step4'
 
 import { HeaderEdit } from './components/header-edit'
 
@@ -20,16 +28,78 @@ export default function Page() {
   const router = useRouter()
 
   // contexts
-  const { selected } = useAccount()
+  const { plans } = useApplication()
+  const {
+    selected,
+    child,
+    medias,
+    theme_show_type,
+    date_show_type,
+    plan,
+    set_child,
+    set_medias,
+    set_theme_show_type,
+    set_date_show_type,
+    set_plan,
+    onNewMedia,
+    onRemoveMedia,
+    onUpdatePage,
+  } = useAccount()
+  const { onUploadTimelineFile, onDeleteTimelineFile } = useTimeline()
 
   // steps
   const [step, set_step] = useState(1)
 
-  // variables
-  const steps = []
+  // states
+  const steps = [
+    {
+      id: 1,
+      title: t('steps.step1.title'),
+      description: t('steps.step1.description'),
+      checked: !!child.child_name && !!child.sex,
+      skip: false,
+    },
+    {
+      id: 2,
+      title: t('steps.step2.title'),
+      description: t('steps.step2.description'),
+      checked: !!child.birth_date,
+      skip: false,
+    },
+    {
+      id: 3,
+      title: t('steps.step3.title'),
+      description: t('steps.step3.description'),
+      checked: !!medias.length,
+      skip: false,
+    },
+    {
+      id: 4,
+      title: t('steps.step4.title'),
+      description: t('steps.step4.description'),
+      checked:
+        Array.isArray(child.timeLine) &&
+        child.timeLine.length > 0 &&
+        child.timeLine.every(
+          entry => !!entry.title.trim() && !!entry.date && Array.isArray(entry.media) && entry.media.length > 0,
+        ),
+      skip: false,
+    },
+  ]
 
   async function handleSave() {
     try {
+      if (!plan) throw new Error('Please select a plan')
+
+      await onUpdatePage(selected.id, {
+        child_name: child.child_name,
+        birth_date: child.birth_date,
+        sex: child.sex,
+        dateShowType: date_show_type,
+        themeShowType: theme_show_type,
+        timeLine: child.timeLine,
+      })
+
       toast({
         title: t('pages.account.pages.edit.toast.success.title'),
         description: t('pages.account.pages.edit.toast.success.description'),
@@ -51,7 +121,28 @@ export default function Page() {
     if (!selected) router.push('/account/pages')
 
     if (selected) {
-      //
+      const previewChildProps: CreatePrePayloadProps = {
+        child_name: selected.child_name,
+        birth_date: selected.birth_date,
+        sex: selected.sex,
+        dateShowType: selected.dateShowType,
+        themeShowType: selected.themeShowType,
+        timeLine: [],
+      }
+
+      const mediaChildProps: MediaPreProps[] = selected.media.map(media => ({
+        id: media.id,
+        url: media.url,
+      }))
+
+      set_child(previewChildProps)
+      set_medias(mediaChildProps)
+      set_theme_show_type(selected.themeShowType)
+      set_date_show_type(selected.dateShowType)
+
+      if (!!selected.planSku) {
+        set_plan(plans.find(plan => plan.sku.includes(selected.planSku)))
+      }
     }
   }, [selected])
 
@@ -61,14 +152,16 @@ export default function Page() {
 
   return (
     <div className='w-full'>
-      <div className='border-b border-neutral-800 pb-12'>
+      <div className='border-b border-neutral-200/60 pb-12'>
         <div className='flex items-center gap-2 -ml-2'>
           <ChevronLeft className='w-10 h-10 cursor-pointer' onClick={() => router.push('/account/pages')} />
-          <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-white text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
+          <h1 className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-black text-3xl lg:text-4xl font-sans py-2 relative z-20 font-bold tracking-tight'>
             {t('pages.account.pages.edit.title')}
           </h1>
         </div>
-        <p className='max-w-2xl text-base md:text-lg text-neutral-400'>{t('pages.account.pages.edit.description')}</p>
+        <p className='max-w-2xl text-base md:text-lg text-muted-foreground'>
+          {t('pages.account.pages.edit.description')}
+        </p>
       </div>
 
       {selected && (
@@ -76,8 +169,54 @@ export default function Page() {
           <div className='w-full h-full'>
             <HeaderEdit steps={steps} activeStep={step} />
 
+            {step === 1 && (
+              <Step1
+                isEdit
+                themeShowType={selected.themeShowType}
+                setThemeShowType={set_theme_show_type}
+                child={child}
+                setChild={set_child}
+                onNext={async () => set_step(2)}
+              />
+            )}
+
+            {step === 2 && (
+              <Step2
+                isEdit
+                child={child}
+                setChild={set_child}
+                dateShowType={date_show_type}
+                setDateShowType={set_date_show_type}
+                onBack={() => set_step(1)}
+                onNext={async () => set_step(3)}
+              />
+            )}
+
+            {step === 3 && (
+              <Step3
+                isEdit
+                medias={medias}
+                onSaveMedia={async media => await onNewMedia({ id: selected.id, file: media })}
+                onRemoveMedia={async id => await onRemoveMedia({ idWebsite: selected.id, idFile: id })}
+                onBack={() => set_step(2)}
+                onNext={async () => set_step(4)}
+              />
+            )}
+
+            {step === 4 && (
+              <Step4
+                isEdit
+                child={child}
+                setChild={set_child}
+                onSaveMedia={onUploadTimelineFile}
+                onRemoveMedia={onDeleteTimelineFile}
+                onBack={() => set_step(3)}
+                onNext={handleSave}
+              />
+            )}
+
             {step !== 6 && (
-              <div className='py-4 mt-6 px-4 bg-green-700/10 text-white text-center text-sm border rounded-md border-green-900 border-dashed'>
+              <div className='py-4 mt-6 px-4 bg-green-700/10 text-green-700 text-center text-sm border rounded-md border-green-700 border-dashed'>
                 {t('pages.account.pages.edit.save-info')}
               </div>
             )}

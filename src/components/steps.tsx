@@ -15,13 +15,12 @@ import { Step2 } from './step2'
 import { Step3 } from './step3'
 import { Step4 } from './step4'
 import { Step5 } from './step5'
+import { Step6 } from './step6'
 import { UploadFileResponseProps } from '../typings/timeline'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 interface StepsComponentProps {
-  theme: ThemeShowTypeEnum
-  //
   pre: string | null
   step: number
   steps: StepsProps[]
@@ -51,7 +50,7 @@ interface StepsComponentProps {
 }
 
 export const Steps = ({
-  theme,
+  themeShowType,
   //
   pre,
   step,
@@ -68,6 +67,7 @@ export const Steps = ({
   setDateShowType,
   setPlan,
   setStep,
+  setThemeShowType,
   //
   onClose,
   onNewMedia,
@@ -88,7 +88,8 @@ export const Steps = ({
 
           {step === 1 && (
             <Step1
-              theme={theme}
+              themeShowType={themeShowType}
+              setThemeShowType={setThemeShowType}
               child={child}
               setChild={setChild}
               onBack={onClose}
@@ -150,11 +151,23 @@ export const Steps = ({
 
           {step === 5 && (
             <Step5
+              child={child}
+              setChild={setChild}
+              onBack={() => setStep(4)}
+              onNext={async () => {
+                await onUpdate()
+                setStep(6)
+              }}
+            />
+          )}
+
+          {step === 6 && (
+            <Step6
               plans={plans}
               discount={discount}
               selected={plan}
               setPlan={setPlan}
-              onBack={() => setStep(4)}
+              onBack={() => setStep(5)}
               onNext={async () => {
                 await onUpdate()
                 router.push('/checkout')

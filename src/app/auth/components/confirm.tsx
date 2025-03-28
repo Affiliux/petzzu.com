@@ -41,11 +41,6 @@ export function ConfirmForm({ email }: { email: string | null }) {
   const [loading, setLoading] = useState<boolean>(false)
   const [timer, setTimer] = useState<number>(60)
 
-  function handleError(message?: string): string {
-    if (message) return t(`${message}`)
-    else return ''
-  }
-
   async function handleResendCode() {
     setLoading(true)
 
@@ -117,7 +112,7 @@ export function ConfirmForm({ email }: { email: string | null }) {
                   </InputOTP>
                 </FormControl>
 
-                <FormMessage>{handleError(form.getFieldState('code').error?.message)}</FormMessage>
+                <FormMessage>{form.getFieldState('code').error?.message}</FormMessage>
               </FormItem>
             )}
           />

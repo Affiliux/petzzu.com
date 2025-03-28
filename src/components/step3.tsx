@@ -166,7 +166,7 @@ export const Step3 = ({ isEdit, onNext, onBack, onSaveMedia, onRemoveMedia, medi
           <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-theme-100 px-3 py-1 text-sm font-semibold text-theme-600 backdrop-blur-3xl'>
             <>
               <IconChevronLeft size={20} className='mr-4' />
-              {t('steps.step3.back')}
+              {isEdit ? t('pages.account.pages.edit.actions.back') : t('steps.step3.back')}
             </>
           </span>
         </button>

@@ -16,8 +16,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
-import { ThemeSwitcher } from './theme-switcher'
-
 import { locales } from '@/i18n'
 
 export function Header() {
@@ -80,9 +78,6 @@ export function Header() {
 
         {/* Desktop Right Icons */}
         <div style={{ display: 'none' }} className='md:!flex md:items-center md:space-x-4'>
-          {/* Theme Switcher */}
-          <ThemeSwitcher />
-
           {/* Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -135,9 +130,6 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <div style={{ display: 'flex' }} className='md:!hidden items-center space-x-2'>
-          {/* Theme Switcher */}
-          <ThemeSwitcher />
-
           {/* User Profile Mobile */}
           {account ? (
             <Sheet open={mobileAccountOpen} onOpenChange={setMobileAccountOpen}>
