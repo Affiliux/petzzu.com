@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 
-import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
@@ -26,7 +25,7 @@ export default function Page() {
   const router = useRouter()
 
   // contexts
-  const { theme, locale, plans, discount, currency, onGetPlans } = useApplication()
+  const { locale, plans, discount, currency } = useApplication()
   const {
     pre,
     child,
