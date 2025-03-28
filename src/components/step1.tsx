@@ -40,6 +40,9 @@ export const Step1 = ({
   const t = useTranslations()
   const { onChangeTheme } = useApplication()
 
+  const getNextTheme = localStorage.getItem('NEXT_THEME')
+  console.log(getNextTheme)
+
   const formSchema = z.object({
     child_name: z
       .string()
@@ -111,6 +114,18 @@ export const Step1 = ({
     setValue('child_name', child.child_name)
     setValue('gender', child.sex)
   }, [child])
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('NEXT_THEME') as ThemeShowTypeEnum | null
+
+    if (storedTheme) {
+      const themeExists = themes.some(theme => theme.data === storedTheme)
+
+      if (themeExists) {
+        setThemeShowType(storedTheme)
+      }
+    }
+  }, [])
 
   return (
     <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={handleSubmit(onSubmit)}>
