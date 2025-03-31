@@ -19,6 +19,7 @@ import { Step3 } from '@/components/step3'
 import { Step4 } from '@/components/step4'
 
 import { HeaderEdit } from './components/header-edit'
+import { PreviewDefault } from '../../../../components/preview-default'
 
 export const runtime = 'edge'
 
@@ -206,6 +207,7 @@ export default function Page() {
             {step === 4 && (
               <Step4
                 isEdit
+                idWebsite={selected.id}
                 child={child}
                 setChild={set_child}
                 onSaveMedia={onUploadTimelineFile}
@@ -222,7 +224,9 @@ export default function Page() {
             )}
           </div>
 
-          <div className='w-full h-full'></div>
+          <div className='w-full h-full'>
+            <PreviewDefault child={child} dateShowType={date_show_type} medias={medias} selected={plan} />
+          </div>
         </div>
       )}
     </div>

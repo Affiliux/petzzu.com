@@ -36,16 +36,35 @@ interface Step4Props {
   onRemoveMedia: (idPreTimeline: string, id: string) => Promise<void>
   onNext: () => Promise<void>
   onBack: () => void
+  idWebsite?: string
 }
 
-export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, onRemoveMedia }: Step4Props) => {
+export const Step4 = ({
+  isEdit,
+  child,
+  setChild,
+  onNext,
+  onBack,
+  onSaveMedia,
+  onRemoveMedia,
+  idWebsite,
+}: Step4Props) => {
   // hooks
   const t = useTranslations()
 
   // contexts
   const { locale } = useApplication()
   const { pre } = useCreate()
-  const { onCreateTimeline, onUpdateTimeline, onDeleteTimeline } = useTimeline()
+  const {
+    onCreateTimeline,
+    onUpdateTimeline,
+    onDeleteTimeline,
+    onCreateTimelineEdit,
+    onDeleteTimelineEdit,
+    onUpdateTimelineEdit,
+    onUploadTimelineFileEdit,
+    onDeleteTimelineFileEdit,
+  } = useTimeline()
 
   // states
   const [timelineEntries, setTimelineEntries] = useState<TimelineEntryProps[]>(child.timeLine || [])
@@ -70,6 +89,27 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
     timelineEntries?.length === 0 ||
     timelineEntries?.some(entry => !entry?.title?.trim() || !entry?.date || entry?.media?.length === 0)
 
+  // functions
+  function getCreateMethod() {
+    return isEdit ? onCreateTimelineEdit : onCreateTimeline
+  }
+
+  function getDeleteMethod() {
+    return isEdit ? onDeleteTimelineEdit : onDeleteTimeline
+  }
+
+  function getUpdateMethod() {
+    return isEdit ? onUpdateTimelineEdit : onUpdateTimeline
+  }
+
+  function getSaveMediaMethod() {
+    return isEdit ? onUploadTimelineFileEdit : onSaveMedia
+  }
+
+  function getRemoveMediaMethod() {
+    return isEdit ? onDeleteTimelineFileEdit : onRemoveMedia
+  }
+
   async function handleAddTimelineEntry() {
     try {
       const newEntry = {
@@ -82,9 +122,13 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
         updatedAt: new Date().toISOString(),
       }
 
-      const response = await onCreateTimeline(pre, newEntry)
+      const createMethod = getCreateMethod()
+      const idToUse = isEdit ? idWebsite : pre
 
-      const updatedEntry = { ...newEntry, id: response.id }
+      const response = await createMethod(idToUse, newEntry)
+      const entryId = response?.id || newEntry.id
+
+      const updatedEntry = { ...newEntry, id: entryId }
       setTimelineEntries(prev => [...prev, updatedEntry])
     } catch (error) {
       console.error(error)
@@ -93,7 +137,8 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
 
   async function handleRemoveTimelineEntry(id: string) {
     try {
-      await onDeleteTimeline(id)
+      const deleteMethod = getDeleteMethod()
+      await deleteMethod(id)
       setTimelineEntries(prev => prev.filter(entry => entry.id !== id))
     } catch (error) {
       console.error(error)
@@ -102,7 +147,8 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
 
   async function handleUpdateTimelineEntry(id: string, updatedEntry: any) {
     try {
-      const response = await onUpdateTimeline(id, updatedEntry)
+      const updateMethod = getUpdateMethod()
+      const response = await updateMethod(id, updatedEntry)
 
       const updatedTimelineEntry = {
         ...updatedEntry,
@@ -130,9 +176,10 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
           title: 'Image Error!!',
           description: t('steps.step3.input.errors.maxFiles'),
         })
-
         return
       }
+
+      const saveMediaMethod = getSaveMediaMethod()
 
       await Promise.all(
         new_files.map(async file => {
@@ -157,8 +204,8 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
           } else {
             const formData = new FormData()
             formData.append('file', file)
+            const response = await saveMediaMethod(id, formData)
 
-            const response = await onSaveMedia(id, formData)
             if (response) {
               setTimelineEntries(prev =>
                 prev.map(entry =>
@@ -179,7 +226,6 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
       )
     } catch (error: any) {
       console.error(error)
-
       toast({
         title: t('steps.step3.toast.error-save.title'),
         description: t('steps.step3.toast.error-save.description'),
@@ -194,7 +240,8 @@ export const Step4 = ({ isEdit, child, setChild, onNext, onBack, onSaveMedia, on
     setLoading(true)
 
     try {
-      await onRemoveMedia(idPreTimeline, id)
+      const removeMediaMethod = getRemoveMediaMethod()
+      await removeMediaMethod(idPreTimeline, id)
 
       setTimelineEntries(prev =>
         prev.map(entry =>
