@@ -241,11 +241,19 @@ export const Step4 = ({
 
     try {
       const removeMediaMethod = getRemoveMediaMethod()
-      await removeMediaMethod(idPreTimeline, id)
+      const idTimeLine = isEdit ? idPreTimeline : undefined
+
+      if (isEdit) {
+        await removeMediaMethod(idTimeLine, id)
+      } else {
+        await removeMediaMethod(idPreTimeline, id)
+      }
 
       setTimelineEntries(prev =>
         prev.map(entry =>
-          entry.id === idPreTimeline ? { ...entry, media: entry.media.filter(media => media.id !== id) } : entry,
+          (isEdit ? entry.id === idTimeLine : entry.id === idPreTimeline)
+            ? { ...entry, media: entry.media.filter(media => media.id !== id) }
+            : entry,
         ),
       )
     } catch (error) {

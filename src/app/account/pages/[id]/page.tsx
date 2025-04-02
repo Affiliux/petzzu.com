@@ -90,8 +90,6 @@ export default function Page() {
 
   async function handleSave() {
     try {
-      if (!plan) throw new Error('Please select a plan')
-
       await onUpdatePage(selected.id, {
         child_name: child.child_name,
         birth_date: child.birth_date,
@@ -173,7 +171,7 @@ export default function Page() {
             {step === 1 && (
               <Step1
                 isEdit
-                themeShowType={selected.themeShowType}
+                themeShowType={theme_show_type}
                 setThemeShowType={set_theme_show_type}
                 child={child}
                 setChild={set_child}
