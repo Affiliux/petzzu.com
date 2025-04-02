@@ -108,6 +108,7 @@ export const Step1 = ({
     { id: 4, name: t('steps.step1.theme-show-types.green'), data: ThemeShowTypeEnum.GREEN, color: '#95BA7C' },
     { id: 5, name: t('steps.step1.theme-show-types.lilac'), data: ThemeShowTypeEnum.LILAC, color: '#E9D8FF' },
     { id: 6, name: t('steps.step1.theme-show-types.red'), data: ThemeShowTypeEnum.RED, color: '#FFB2B2' },
+    { id: 7, name: t('steps.step1.theme-show-types.gray'), data: ThemeShowTypeEnum.GRAY, color: '#e5e5e5' },
   ]
 
   useEffect(() => {
