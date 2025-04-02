@@ -208,7 +208,6 @@ export async function delete_timeline_file_edit(idTimeLine: string, idFile: stri
   }
 }
 
-
 /**
  * @name update_timeline_edit
  * @category Infrastructure -  HTTP - Services - Timeline

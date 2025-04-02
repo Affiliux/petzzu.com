@@ -130,7 +130,7 @@ export const Step1 = ({
 
   useEffect(() => {
     if (isEdit) {
-      setThemeShowType(child.themeShowType || ThemeShowTypeEnum.BLUE) 
+      setThemeShowType(child.themeShowType || ThemeShowTypeEnum.BLUE)
       onChangeTheme(child.themeShowType || ThemeShowTypeEnum.BLUE)
     } else {
       const storedTheme = localStorage.getItem('NEXT_THEME') as ThemeShowTypeEnum | null
@@ -144,7 +144,7 @@ export const Step1 = ({
         onChangeTheme(ThemeShowTypeEnum.BLUE)
       }
     }
-  }, [isEdit, child.themeShowType]) 
+  }, [isEdit, child.themeShowType])
 
   return (
     <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={handleSubmit(onSubmit)}>
