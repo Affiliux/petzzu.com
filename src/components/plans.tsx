@@ -29,8 +29,8 @@ export function Plans() {
         </div>
 
         <div id='plans' className='relative grid gap-6 md:grid-cols-3 z-40'>
-          {plans.map(plan =>
-            plan.sku.includes(FORMAT_INTL_CURRENCY) && FORMAT_INTL_LOCALE.includes('-') && FORMAT_INTL_CURRENCY ? (
+          {plans?.map(plan =>
+            plan?.sku?.includes(FORMAT_INTL_CURRENCY) && FORMAT_INTL_LOCALE.includes('-') && FORMAT_INTL_CURRENCY ? (
               <div key={plan.sku} className='w-full'>
                 <HoverBorderGradient
                   containerClassName={`rounded-xl w-full transform duration-200 bg-white`}

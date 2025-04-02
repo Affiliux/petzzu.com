@@ -40,6 +40,9 @@ export const Step1 = ({
   const t = useTranslations()
   const { onChangeTheme } = useApplication()
 
+  const getNextTheme = localStorage.getItem('NEXT_THEME')
+  console.log(getNextTheme)
+
   const formSchema = z.object({
     child_name: z
       .string()
@@ -105,12 +108,43 @@ export const Step1 = ({
     { id: 4, name: t('steps.step1.theme-show-types.green'), data: ThemeShowTypeEnum.GREEN, color: '#95BA7C' },
     { id: 5, name: t('steps.step1.theme-show-types.lilac'), data: ThemeShowTypeEnum.LILAC, color: '#E9D8FF' },
     { id: 6, name: t('steps.step1.theme-show-types.red'), data: ThemeShowTypeEnum.RED, color: '#FFB2B2' },
+    { id: 7, name: t('steps.step1.theme-show-types.gray'), data: ThemeShowTypeEnum.GRAY, color: '#e5e5e5' },
   ]
 
   useEffect(() => {
     setValue('child_name', child.child_name)
     setValue('gender', child.sex)
   }, [child])
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('NEXT_THEME') as ThemeShowTypeEnum | null
+
+    if (storedTheme) {
+      const themeExists = themes.some(theme => theme.data === storedTheme)
+
+      if (themeExists) {
+        setThemeShowType(storedTheme)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isEdit) {
+      setThemeShowType(child.themeShowType || ThemeShowTypeEnum.BLUE)
+      onChangeTheme(child.themeShowType || ThemeShowTypeEnum.BLUE)
+    } else {
+      const storedTheme = localStorage.getItem('NEXT_THEME') as ThemeShowTypeEnum | null
+      const themeExists = storedTheme && themes.some(theme => theme.data === storedTheme)
+
+      if (themeExists) {
+        setThemeShowType(storedTheme)
+        onChangeTheme(storedTheme)
+      } else {
+        setThemeShowType(ThemeShowTypeEnum.BLUE)
+        onChangeTheme(ThemeShowTypeEnum.BLUE)
+      }
+    }
+  }, [isEdit, child.themeShowType])
 
   return (
     <form className='relative flex flex-col z-50 w-full mt-8' onSubmit={handleSubmit(onSubmit)}>
@@ -173,8 +207,11 @@ export const Step1 = ({
               className={`flex items-center rounded-lg border p-4 cursor-pointer hover:bg-neutral-100/20 border-neutral-200/60 w-full`}
               onClick={() => {
                 setThemeShowType(theme.data)
-                setChild(prev => ({ ...prev, themeShowType: theme.data }))
+                if (isEdit) {
+                  setChild(prev => ({ ...prev, themeShowType: theme.data }))
+                }
                 onChangeTheme(theme.data)
+                localStorage.setItem('NEXT_THEME', theme.data)
               }}
             >
               {theme.data === themeShowType ? (

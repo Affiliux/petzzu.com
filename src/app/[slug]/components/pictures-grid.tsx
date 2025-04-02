@@ -32,7 +32,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
   const displayName = childNameParts?.length > 2 ? `${childNameParts[0]} ${childNameParts[1]}` : child.child_name
 
   return (
-    <div className='relative w-full max-w-2xl mx-auto px-6 mb-16'>
+    <div className='relative w-full max-w-2xl mx-auto px-6'>
       <div className='flex justify-center items-center mb-8'>
         {child?.child_name &&
           (child.child_name.length > 8 ? (
@@ -67,6 +67,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
           <CarouselPhotos images={images} />
         </div>
       )}
+
       {images.length == 2 && (
         <div className='flex flex-col justify-center items-center'>
           <div className='relative right-20 transform rotate-[2deg] left-10'>

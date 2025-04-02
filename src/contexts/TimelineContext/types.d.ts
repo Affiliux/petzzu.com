@@ -23,4 +23,13 @@ export interface TimelineContextProps {
     payload: UpdateTimelinePayloadProps,
   ) => Promise<UpdateTimelineResponseProps>
   onDeleteTimeline: (idPreWebsiteTimeLine: string) => Promise<void>
+  //
+  onCreateTimelineEdit: (idWebsite: string, payload: CreateTimelinePayloadProps) => Promise<CreateTimelineResponseProps>
+  onUploadTimelineFileEdit: (idTimeLine: string, file: FormData) => Promise<UploadFileResponseProps>
+  onDeleteTimelineFileEdit: (idTimeLine: string, idFile: string) => Promise<void>
+  onUpdateTimelineEdit: (
+    idTimeLine: string,
+    payload: UpdateTimelinePayloadProps,
+  ) => Promise<UpdateTimelineResponseProps>
+  onDeleteTimelineEdit: (idTimeLine: string) => Promise<void>
 }

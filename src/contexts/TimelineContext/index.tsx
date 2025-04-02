@@ -13,11 +13,16 @@ import type { MediaPreProps, NewMediaPayloadProps } from '../../typings/create'
 
 import {
   create_timeline,
+  create_timeline_edit,
   delete_timeline,
+  delete_timeline_edit,
   delete_timeline_file,
+  delete_timeline_file_edit,
   find_one_timeline,
   update_timeline,
+  update_timeline_edit,
   upload_timeline_file,
+  upload_timeline_file_edit,
 } from '@/infrastructure/http/services/timeline'
 
 export const TimelineContext = createContext<TimelineContextProps>({} as TimelineContextProps)
@@ -80,6 +85,55 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
     }
   }
 
+  //edit timeline methods
+
+  async function onCreateTimelineEdit(idWebsite: string, payload: CreateTimelinePayloadProps) {
+    try {
+      return await create_timeline_edit(idWebsite, payload)
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message ?? 'Error creating timeline')
+    }
+  }
+
+  async function onDeleteTimelineEdit(idTimeLine: string) {
+    try {
+      return await delete_timeline_edit(idTimeLine)
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message ?? 'Error deleting file')
+    }
+  }
+
+  async function onUploadTimelineFileEdit(idTimeLine: string, file: FormData): Promise<UploadFileResponseProps> {
+    try {
+      const payload: NewMediaPayloadProps = { id: idTimeLine, file }
+
+      const response = await upload_timeline_file_edit(idTimeLine, payload)
+
+      if (response) set_timeline_medias(prev => [...prev, response])
+
+      return response
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message ?? 'Error uploading file')
+    }
+  }
+
+  async function onDeleteTimelineFileEdit(idTimeLine: string, idFile: string): Promise<void> {
+    try {
+      const response = await delete_timeline_file_edit(idTimeLine, idFile)
+      if (response) set_timeline_medias(prev => prev.filter(media => media.id !== idFile))
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message ?? 'Error deleting file')
+    }
+  }
+
+  async function onUpdateTimelineEdit(idTimeLine: string, payload: UpdateTimelinePayloadProps) {
+    try {
+      return await update_timeline_edit(idTimeLine, payload)
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message ?? 'Error updating timeline')
+    }
+  }
+
   return (
     <TimelineContext.Provider
       value={{
@@ -93,6 +147,13 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
         onFindOneTimeline,
         onUpdateTimeline,
         onDeleteTimeline,
+        //
+        onCreateTimelineEdit,
+        onUploadTimelineFileEdit,
+        onDeleteTimelineFileEdit,
+        onUpdateTimelineEdit,
+        onDeleteTimelineEdit,
+        //
       }}
     >
       {children}
