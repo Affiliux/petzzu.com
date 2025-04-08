@@ -57,7 +57,6 @@ export function Plans() {
                         <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.benefits.7`)} />
                         <StepCheck title={t(`pages.home.plans.${plan.sku.split('_')[1]}.benefits.8`)} />
 
-
                         {plan.sku.includes('annual') ? (
                           <>
                             <StepPerCheck
