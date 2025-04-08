@@ -8,14 +8,14 @@ import { cn } from '@/lib/utils'
 type Direction = 'TOP' | 'LEFT' | 'BOTTOM' | 'RIGHT'
 
 export function HoverBorderGradient({
-  children,
+  childen,
   containerClassName,
   className,
   as: Tag = 'button',
   duration = 1,
   clockwise = true,
   ...props
-}: React.PropsWithChildren<
+}: React.PropsWithPetren<
   {
     as?: React.ElementType
     containerClassName?: string
@@ -66,7 +66,7 @@ export function HoverBorderGradient({
       )}
       {...props}
     >
-      <div className={cn('w-auto text-white z-10 bg-black px-4 py-2 rounded-[inherit]', className)}>{children}</div>
+      <div className={cn('w-auto text-white z-10 bg-black px-4 py-2 rounded-[inherit]', className)}>{childen}</div>
       <motion.div
         className={cn('flex-none inset-0 overflow-hidden absolute z-0 rounded-[inherit]')}
         style={{

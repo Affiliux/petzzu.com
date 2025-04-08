@@ -36,7 +36,7 @@ export function Header() {
 
   return (
     <nav className='absolute top-0 left-0 w-full bg-white border-b border-neutral-200/60 z-50'>
-      <div className='py-1.5 px-4 text-left md:text-center font-medium font-sans tracking-tight text-xs md:text-sm bg-gradient-to-r text-white from-theme-600 via-theme-700 to-theme-300'>
+      {/* <div className='py-1.5 px-4 text-left md:text-center font-medium font-sans tracking-tight text-xs md:text-sm bg-gradient-to-r text-white from-theme-600 via-theme-700 to-theme-300'>
         <p className='text-center text-white'>
           <b>
             {t('config.offer.title')} {formatDate(new Date(), 'dd/MM/yyyy')}
@@ -44,18 +44,19 @@ export function Header() {
           - {t('config.offer.description1')} <b className='text-sm md:text-base'>50%</b>{' '}
           {t('config.offer.description2')}
         </p>
-      </div>
+      </div> */}
 
       <div className='container flex items-center justify-between py-3'>
         {/* Logo */}
-        <img
-          src={`/images/logos/${theme}/logo+name.webp`}
-          className='h-8 sm:h-12 w-auto max-w-[140px] sm:max-w-[200px]'
-          alt='Babyzzu logo'
-          width={200}
-          height={56}
-        />
-
+        {theme && (
+          <img
+            src={`/images/logos/${theme}/logo+name.webp`}
+            className='h-10 sm:h-12 w-auto max-w-[140px] sm:max-w-[200px]'
+            alt='Petzzu logo'
+            width={200}
+            height={56}
+          />
+        )}
         {/* Desktop Navigation */}
         <div style={{ display: 'none' }} className='md:!flex md:items-center md:space-x-8'>
           <Link href='/' className='font-medium hover:text-neutral-700 transition-colors'>
@@ -80,7 +81,7 @@ export function Header() {
         <div style={{ display: 'none' }} className='md:!flex md:items-center md:space-x-4'>
           {/* Language Switcher */}
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger asPet>
               <Button variant='ghost' size='icon'>
                 <Globe className='h-5 w-5' />
                 <span className='sr-only'>{t('config.header.languages.title')}</span>
@@ -102,7 +103,7 @@ export function Header() {
           {/* User Profile */}
           {account?.email ? (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger asPet>
                 <Button variant='ghost' className='flex items-center gap-2'>
                   <User className='h-5 w-5' />
                   <span className='hidden lg:inline'>{t('config.header.account.title')}</span>
@@ -133,7 +134,7 @@ export function Header() {
           {/* User Profile Mobile */}
           {account ? (
             <Sheet open={mobileAccountOpen} onOpenChange={setMobileAccountOpen}>
-              <SheetTrigger asChild>
+              <SheetTrigger asPet>
                 <Button variant='ghost' size='icon'>
                   <User className='h-5 w-5' />
                   <span className='sr-only'>{t('config.header.account.title')}</span>
@@ -192,7 +193,7 @@ export function Header() {
 
           {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
+            <SheetTrigger asPet>
               <Button variant='ghost' size='icon'>
                 <Menu className='h-5 w-5' />
                 <span className='sr-only'>{t('config.header.nav.title')}</span>

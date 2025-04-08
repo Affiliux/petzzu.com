@@ -11,12 +11,12 @@ import { CarouselPhotos } from './carousel'
 
 import { formatDate } from '@/lib/helpers/formatters'
 
-interface BabyTimelineProps {
+interface PetTimelineProps {
   timeline: TimelineEntryProps[] | undefined
   selectedPlan?: PlanProps | undefined
 }
 
-export function BabyTimeline({ timeline, selectedPlan }: BabyTimelineProps) {
+export function PetTimeline({ timeline, selectedPlan }: PetTimelineProps) {
   // variables
   const SORTED_TIMELINE = timeline?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 

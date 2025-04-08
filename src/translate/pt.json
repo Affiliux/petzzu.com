@@ -1,7 +1,7 @@
 {
   "config": {
-    "title": "Babyzzu ©",
-    "description": "A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais.",
+    "title": "Petzzu ©",
+    "description": "A Petzzu é uma plataforma que permite criar páginas incríveis para pessoas incríveis.",
     "keywords": "amor, relacionamento, amizades, aniversário, presente, página, dedicatória, surpresa",
     "skip": "Pular etapa",
     "header": {
@@ -25,7 +25,7 @@
       }
     },
     "footer": {
-      "copyright": "Copyright © 2025 - Babyzzu.com",
+      "copyright": "Copyright © 2025 - Petzzu.com",
       "terms": "Termos de uso",
       "privacy": "Política de privacidade",
       "instagram": "Instagram",
@@ -75,12 +75,12 @@
         "sub-title": "Vamos começar?",
         "title": {
           "1": "Eternize",
-          "2": "Cada sorriso",
-          "3": "Cada descoberta",
+          "2": "Cada lambida",
+          "3": "Cada travessura",
           "4": "Cada memória",
           "5": "Cada momento"
         },
-        "description": "Eternize cada lembranças, sorrisos, descobertas e cada nova fase do seu bebê são momentos únicos que merecem ser registrados. Acompanhe essa linda jornada e eternize cada detalhe com carinho.",
+        "description": "Eternize cada lambida, travessura e olhar cheio de amor! 🐾 Cada momento ao lado do seu pet é único e merece ser guardado para sempre. Registre cada descoberta, cada brincadeira e cada nova fase dessa linda jornada com todo o carinho que seu melhor amigo merece. 💕🐶🐱",
         "input": {
           "placeholder": "Ex: João & Maria ou Feliz Aniversário ou etc",
           "errors": {
@@ -140,13 +140,13 @@
       "faq": {
         "title": "Perguntas Frequentes",
         "contact": "Dúvidas? Entre em contato por aqui",
-        "description": "Aqui estão algumas perguntas frequentes para ajudar você a entender melhor a Babyzzu. Caso tenha alguma dúvida, entre em contato conosco.",
+        "description": "Aqui estão algumas perguntas frequentes para ajudar você a entender melhor a Petzzu. Caso tenha alguma dúvida, entre em contato conosco.",
         "1": {
-          "question": "O que é a Babyzzu?",
-          "answer": "Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e também o tempo da união."
+          "question": "O que é a Petzzu?",
+          "answer": "Petzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e também o tempo que começou."
         },
         "2": {
-          "question": "Como posso criar uma página personalizada na Babyzzu?",
+          "question": "Como posso criar uma página personalizada na Petzzu?",
           "answer": "Para criar sua página personalizada, siga as etapas preenchendo o formulário com as informações solicitadas. Após o preenchimento, você será direcionado para o pagamento."
         },
         "3": {
@@ -168,51 +168,51 @@
       },
       "testimonials": {
         "title": "Depoimentos",
-        "description": "Veja o que nossos clientes estão dizendo sobre a Babyzzu",
+        "description": "Veja o que nossos clientes estão dizendo sobre a Petzzu",
         "1": {
-          "name": "Mariana",
-          "time": "1 mês atrás",
-          "message": "Adorei criar a linha do tempo do meu bebê! Consegui registrar todos os momentos especiais com fotos, vídeos e mensagens. Ficou lindo e emocionante!"
+        "name": "Mariana",
+        "time": "1 mês atrás",
+        "message": "Foi tão especial montar a linha do tempo do meu pet... Cada foto, cada vídeo trouxe lembranças que aqueceram o coração. Ficou emocionante ver tudo juntinho assim, como uma linda homenagem!"
         },
         "2": {
-          "name": "Ana",
-          "time": "2 dias atrás",
-          "message": "O Babyzzu me ajudou a organizar e eternizar cada fase do crescimento do meu filho. É incrível poder reviver cada momento com tanta facilidade!"
+        "name": "Ana",
+        "time": "2 dias atrás",
+        "message": "A Petzzu me ajudou a transformar os momentos com meu bichinho em uma recordação pra vida toda. É mágico poder olhar pra trás e reviver cada etapa com tanto carinho!"
         },
         "3": {
-          "name": "Lucas",
-          "time": "3 meses atrás",
-          "message": "Montei a linha do tempo da minha bebê desde o nascimento e ficou perfeito! Agora tenho todas as lembranças reunidas em um só lugar, de um jeito especial."
+        "name": "Lucas",
+        "time": "3 meses atrás",
+        "message": "Desde o dia que meu cãozinho chegou até hoje, tudo está registrado de forma tão bonita... Ver essa história contada assim me emocionou de verdade. Foi um presente pra mim e pra ele!"
         },
         "4": {
-          "name": "Marcelo",
-          "time": "4 meses atrás",
-          "message": "A plataforma é super intuitiva e fácil de usar! Criei a linha do tempo com as fotos mais marcantes do meu filho e adorei o resultado!"
+        "name": "Marcelo",
+        "time": "4 meses atrás",
+        "message": "A plataforma é super prática, e o resultado é simplesmente encantador! Ver as fotos do meu gato organizadas com tanto cuidado me deixou cheio de orgulho (e um pouco emocionado também)."
         },
         "5": {
-          "name": "Bia e Henrique",
-          "time": "1 ano atrás",
-          "message": "Foi emocionante criar esse registro digital para o nosso bebê! Com certeza será um presente valioso para ele no futuro. Estamos felizes em ter cada detalhe guardado com tanto carinho!"
+        "name": "Bia e Henrique",
+        "time": "1 ano atrás",
+        "message": "Criar esse registro foi mais do que especial — foi uma forma de celebrar a história do nosso pet com amor. A gente olha e relembra cada detalhe com um sorriso no rosto e o coração quentinho."
         },
         "6": {
-          "name": "Clara",
-          "time": "2 meses atrás",
-          "message": "O Babyzzu tornou muito mais fácil guardar e compartilhar os momentos especiais do meu bebê com a família. Todos amaram a ideia!"
+        "name": "Clara",
+        "time": "2 meses atrás",
+        "message": "Com a Petzzu, guardar e compartilhar os momentos do meu pet ficou tão mais fácil! Minha família amou ver cada pedacinho da história dele reunido com tanto carinho."
         },
         "7": {
-          "name": "Vanessa",
-          "time": "1 semana atrás",
-          "message": "Fiquei encantada com a possibilidade de criar um registro interativo do crescimento do meu bebê. Cada detalhe faz toda a diferença!"
+        "name": "Vanessa",
+        "time": "1 semana atrás",
+        "message": "Fiquei encantada com cada detalhe da plataforma. Poder acompanhar o crescimento do meu bichinho desse jeitinho tão especial foi uma das melhores coisas que já fiz por ele!"
         },
         "8": {
-          "name": "Bruno",
-          "time": "4 meses atrás",
-          "message": "Criar essa linha do tempo foi uma das melhores decisões que tomei! Agora tenho um registro lindo e organizado de todos os momentos do meu pequeno."
+        "name": "Bruno",
+        "time": "4 meses atrás",
+        "message": "Essa linha do tempo virou meu cantinho favorito. Reunir tudo que vivi com meu pet em um lugar só me trouxe muita alegria e gratidão. Valeu cada segundo!"
         },
         "9": {
-          "name": "Larissa e Tiago",
-          "time": "9 meses atrás",
-          "message": "Foi incrível montar essa linha do tempo cheia de lembranças e detalhes especiais. Um presente para toda a vida! Poder reviver cada etapa juntos nos enche de emoção."
+        "name": "Larissa e Tiago",
+        "time": "9 meses atrás",
+        "message": "Montar essa linha do tempo foi um momento único pra gente. Rimos, choramos e relembramos tanta coisa linda. Agora temos um registro cheio de amor que vamos guardar pra sempre."
         }
       },
       "cta": {
@@ -227,7 +227,7 @@
           "counter": "Compra somente uma vez",
           "price_recurrence": "/uma vez",
           "benefits": {
-            "1": "Linha do tempo da criança",
+            "1": "Linha do tempo do pet",
             "2": "Data de nascimento",
             "3": "Contator em tempo real de vida",
             "4": "Album de fotos na capa",
@@ -245,7 +245,7 @@
           "counter": "Assinatura mensal",
           "price_recurrence": "/por mes",
           "benefits": {
-            "1": "Linha do tempo da criança",
+            "1": "Linha do tempo do pet",
             "2": "Data de nascimento",
             "3": "Contator em tempo real de vida",
             "4": "Album de fotos na capa",
@@ -263,7 +263,7 @@
           "counter": "Assinatura anual",
           "price_recurrence": "/por ano",
           "benefits": {
-            "1": "Linha do tempo da criança",
+            "1": "Linha do tempo do pet",
             "2": "Data de nascimento",
             "3": "Contator em tempo real de vida",
             "4": "Album de fotos na capa",
@@ -337,13 +337,13 @@
         "data_retention_description": "Reteremos suas informações pessoais apenas pelo tempo necessário para cumprir as finalidades para as quais foram coletadas, ou conforme exigido por lei.",
 
         "your_rights_title": "7. Seus Direitos",
-        "your_rights_description": "Você tem o direito de acessar, corrigir ou excluir suas informações pessoais. Para exercer esses direitos, entre em contato conosco pelo email: contact@babyzzu.com.",
+        "your_rights_description": "Você tem o direito de acessar, corrigir ou excluir suas informações pessoais. Para exercer esses direitos, entre em contato conosco pelo email: contact@Petzzu.com.",
 
         "changes_to_policy_title": "8. Alterações nesta Política de Privacidade",
         "changes_to_policy_description": "Podemos atualizar esta Política de Privacidade periodicamente. Quando isso ocorrer, a data da “última atualização” no topo desta página será alterada. É sua responsabilidade revisar esta política periodicamente para se manter informado sobre possíveis modificações.",
 
         "contact_title": "9. Contato",
-        "contact_description": "Se tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco pelo email: contact@babyzzu.com."
+        "contact_description": "Se tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco pelo email: contact@Petzzu.com."
       }
     },
     "terms": {
@@ -354,7 +354,7 @@
         "acceptance_description": "Ao acessar e utilizar nossa plataforma, você concorda em cumprir e ser vinculado a estes Termos de Uso. Se não concordar com qualquer parte desses termos, por favor, não utilize a plataforma.",
 
         "service_description_title": "2. Descrição do Serviço",
-        "service_description": "A Babyzzu oferece um serviço que permite a casais criarem uma página personalizada através do preenchimento de um formulário com nomes, data de nascimento e de inicio de gravidez, uma mensagem especial e até 4 mídias por categoria. Após o preenchimento, o casal é direcionado para o pagamento e, ao concluir, recebe um link com um QR Code enviado por email.",
+        "service_description": "A Petzzu oferece um serviço que permite a casais criarem uma página personalizada através do preenchimento de um formulário com nomes, data de nascimento e de inicio de gravidez, uma mensagem especial e até 4 mídias por categoria. Após o preenchimento, o casal é direcionado para o pagamento e, ao concluir, recebe um link com um QR Code enviado por email.",
 
         "registration_and_security_title": "3. Cadastro e Segurança",
         "registration_and_security": "Para utilizar nossos serviços, você deve fornecer um endereço de email válido. Não compartilharemos seu email com terceiros.",
@@ -369,7 +369,7 @@
         "payments_refund_policy": "Os pagamentos são processados através da Stripe e Pagar.me / Stone. Após a confirmação do pagamento, o responsável receberá um link para acessar a página personalizada por email. Reembolsos não são oferecidos, exceto em casos excepcionais, a nosso critério exclusivo.",
 
         "service_changes_title": "7. Alterações no Serviço",
-        "service_changes": "Nos comprometemos a manter o serviço disponível durante o período contratado, conforme o plano escolhido (no plano básico ou avançado). No entanto, em situações extraordinárias, como questões técnicas, legais ou financeiras, reservamo-nos o direito de modificar ou descontinuar o serviço. Em caso de descontinuação, notificaremos os usuários com antecedência e buscaremos oferecer alternativas adequadas sempre que possível. A Babyzzu não se responsabiliza por perdas decorrentes de modificações ou interrupções em circunstâncias extraordinárias, mas envidaremos esforços para minimizar impactos.",
+        "service_changes": "Nos comprometemos a manter o serviço disponível durante o período contratado, conforme o plano escolhido (no plano básico ou avançado). No entanto, em situações extraordinárias, como questões técnicas, legais ou financeiras, reservamo-nos o direito de modificar ou descontinuar o serviço. Em caso de descontinuação, notificaremos os usuários com antecedência e buscaremos oferecer alternativas adequadas sempre que possível. A Petzzu não se responsabiliza por perdas decorrentes de modificações ou interrupções em circunstâncias extraordinárias, mas envidaremos esforços para minimizar impactos.",
 
         "limitation_of_liability_title": "8. Limitação de Responsabilidade",
         "limitation_of_liability": "Não seremos responsáveis por danos indiretos, incidentais, especiais ou consequentes relacionados ao uso ou incapacidade de uso da plataforma.",
@@ -378,7 +378,7 @@
         "terms_update": "Podemos revisar estes Termos de Uso periodicamente. Quando isso ocorrer, atualizaremos a data da \"última atualização\" no topo desta página. É sua responsabilidade revisar os Termos de Uso periodicamente para se manter informado sobre possíveis alterações.",
 
         "contact_title": "10. Contato",
-        "contact": "Se tiver dúvidas sobre os Termos de Uso, entre em contato conosco pelo email: contact@babyzzu.com"
+        "contact": "Se tiver dúvidas sobre os Termos de Uso, entre em contato conosco pelo email: contact@Petzzu.com"
       }
     },
     "auth": {
@@ -490,10 +490,10 @@
       "continue": "Continuar página"
     },
     "step1": {
-      "title": "Qual nome do seu Filho(a)?",
-      "description": "Insira o nome do seu filho(a) e o gênero para personalizar a página.",
+      "title": "Insira os dados do seu Amiguinho",
+      "description": "Preencha os campos para criar a página personalizada.",
       "theme-show-types": {
-        "title": "Cor do tema",
+        "title": "Escolha uma cor de tema",
         "blue": "Azul",
         "gold": "Dourado",
         "pink": "Rosa",
@@ -503,28 +503,33 @@
         "gray": "Cinza"
       },
       "input": {
-        "placeholder": "Ex: Caio Castro",
+        "title": "Nome do Pet",
+        "placeholder": "Ex: Paçoca",
         "errors": {
           "min": "Mínimo de 3 caracteres",
           "max": "Máximo de 100 caracteres"
         }
       },
-      "gender": {
-        "title": "Gênero",
-        "options": {
-          "male": "Masculino",
-          "female": "Feminino"
-        },
+      "species": {
+        "title": "Espécie do Pet",
+        "placeholder": "Ex: Cachorro",
         "errors": {
-          "required": "Selecione o gênero"
+          "required": "Selecione a espécie do pet"
+        }
+      },
+      "breed": {
+        "title": "Raça do Pet",
+        "placeholder": "Ex: American Bully",
+        "errors": {
+          "required": "Selecione a raça do pet"
         }
       },
       "back": "Voltar etapa",
       "button": "Próxima etapa"
     },
     "step2": {
-      "title": "Quando ele nasceu?",
-      "description": "Insira a data de nascimento da criança.",
+      "title": "Quando seu bichinho nasceu?",
+      "description": "Insira a data de nascimento do pet.",
       "show-types": {
         "title": "Modo de mostrar",
         "default": "Padrão",
@@ -560,7 +565,7 @@
     },
     "step4": {
       "title": "Lembranças especiais",
-      "description": "Acrescente quantas lembranças quiser. Por exemplo: Primeiro banho, Primeiro sorriso.",
+      "description": "Acrescente quantas lembranças quiser. Por exemplo: Primeiro banho, Primeiro brinquedo.",
       "accordion": {
         "title": "Lembrança",
         "actions": {
@@ -644,7 +649,7 @@
           "counter": "Compra somente uma vez",
           "price_recurrence": "/uma vez",
           "benefits": {
-            "1": "Linha do tempo da criança",
+            "1": "Linha do tempo do pet",
             "2": "Data de nascimento",
             "3": "Contator em tempo real de vida",
             "4": "Album de fotos na capa",
@@ -662,7 +667,7 @@
           "counter": "Assinatura mensal",
           "price_recurrence": "/por mes",
           "benefits": {
-            "1": "Linha do tempo da criança",
+            "1": "Linha do tempo do pet",
             "2": "Data de nascimento",
             "3": "Contator em tempo real de vida",
             "4": "Album de fotos na capa",
@@ -680,7 +685,7 @@
           "counter": "Assinatura anual",
           "price_recurrence": "/por ano",
           "benefits": {
-            "1": "Linha do tempo da criança",
+            "1": "Linha do tempo do pet",
             "2": "Data de nascimento",
             "3": "Contator em tempo real de vida",
             "4": "Album de fotos na capa",

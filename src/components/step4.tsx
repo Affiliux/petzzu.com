@@ -30,8 +30,8 @@ import { MAX_FILE_SIZE } from '@/constants'
 
 interface Step4Props {
   isEdit?: boolean
-  child: CreatePrePayloadProps
-  setChild: React.Dispatch<React.SetStateAction<CreatePrePayloadProps>>
+  pet: CreatePrePayloadProps
+  setPet: React.Dispatch<React.SetStateAction<CreatePrePayloadProps>>
   onSaveMedia: (id: string, media: FormData) => Promise<UploadFileResponseProps>
   onRemoveMedia: (idPreTimeline: string, id: string) => Promise<void>
   onNext: () => Promise<void>
@@ -39,16 +39,7 @@ interface Step4Props {
   idWebsite?: string
 }
 
-export const Step4 = ({
-  isEdit,
-  child,
-  setChild,
-  onNext,
-  onBack,
-  onSaveMedia,
-  onRemoveMedia,
-  idWebsite,
-}: Step4Props) => {
+export const Step4 = ({ isEdit, pet, setPet, onNext, onBack, onSaveMedia, onRemoveMedia, idWebsite }: Step4Props) => {
   // hooks
   const t = useTranslations()
 
@@ -67,14 +58,14 @@ export const Step4 = ({
   } = useTimeline()
 
   // states
-  const [timelineEntries, setTimelineEntries] = useState<TimelineEntryProps[]>(child.timeLine || [])
+  const [timelineEntries, setTimelineEntries] = useState<TimelineEntryProps[]>(pet.timeLine || [])
   const [loading, setLoading] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState(false)
   const [entryToDelete, setEntryToDelete] = useState<TimelineEntryProps | null>(null)
 
   // variables
   const VALUE_MESSAGE =
-    child.timeLine?.map(entry => entry.description) ||
+    pet.timeLine?.map(entry => entry.description) ||
     ''
       ?.replaceAll('<p>', '')
       .replaceAll('</p>', '')
@@ -114,7 +105,7 @@ export const Step4 = ({
     try {
       const newEntry = {
         id: uuidv4(),
-        date: timelineEntries.length === 0 ? child?.birth_date : new Date().toISOString(),
+        date: timelineEntries.length === 0 ? pet?.birth_date : new Date().toISOString(),
         title: '',
         description: '',
         media: [],
@@ -276,7 +267,7 @@ export const Step4 = ({
   }
 
   useEffect(() => {
-    setChild({ ...child, timeLine: timelineEntries })
+    setPet({ ...pet, timeLine: timelineEntries })
   }, [timelineEntries])
 
   return (

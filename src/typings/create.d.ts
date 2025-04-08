@@ -1,11 +1,11 @@
-import type { MediaProps, PaymentProps } from './child'
+import type { MediaProps, PaymentProps } from './pet'
 import type { TimelineEntryProps } from './timeline'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
 
 // Create pre with the following properties:
 export type CreatePreProps = {
-  child_name: string
+  pet_name: string
   birth_date: string
   ddd?: string
   sex: string
@@ -92,7 +92,7 @@ export interface CreateFromPreResponseProps extends PaymentProps {
 // Get pre with the following properties:
 export type PreProps = {
   id: string
-  child_name: string
+  pet_name: string
   message: string
   parent_name: string
   lang: string

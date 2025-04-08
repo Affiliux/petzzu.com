@@ -15,15 +15,15 @@ import { DateShowTypeEnum } from '@/enums'
 
 interface Step2Props {
   isEdit?: boolean
-  child: CreatePrePayloadProps
-  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  pet: CreatePrePayloadProps
+  setPet: Dispatch<SetStateAction<CreatePrePayloadProps>>
   dateShowType: DateShowTypeEnum
   setDateShowType: Dispatch<SetStateAction<DateShowTypeEnum>>
   onNext: () => Promise<void>
   onBack: () => void
 }
 
-export const Step2 = ({ isEdit, child, dateShowType, setChild, setDateShowType, onNext, onBack }: Step2Props) => {
+export const Step2 = ({ isEdit, pet, dateShowType, setPet, setDateShowType, onNext, onBack }: Step2Props) => {
   // hooks
   const t = useTranslations()
 
@@ -32,7 +32,7 @@ export const Step2 = ({ isEdit, child, dateShowType, setChild, setDateShowType, 
 
   // states
   const [loading, setLoading] = useState<boolean>(false)
-  const [date, setDate] = useState<Date | undefined>(child?.birth_date ? new Date(child?.birth_date) : undefined)
+  const [date, setDate] = useState<Date | undefined>(pet?.birth_date ? new Date(pet?.birth_date) : undefined)
 
   // variables
   const types = [
@@ -54,7 +54,7 @@ export const Step2 = ({ isEdit, child, dateShowType, setChild, setDateShowType, 
   }
 
   useEffect(() => {
-    if (date) setChild({ ...child, birth_date: date.toISOString() })
+    if (date) setPet({ ...pet, birth_date: date.toISOString() })
   }, [date])
 
   return (

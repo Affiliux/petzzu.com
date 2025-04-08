@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { IconLoader } from '@tabler/icons-react'
 
 import type { PaymentFormProps } from '@/typings/application'
-import type { PaymentProps } from '@/typings/child'
+import type { PaymentProps } from '@/typings/pet'
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'

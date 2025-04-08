@@ -8,9 +8,9 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
 export default function Layout({
-  children,
+  childen,
 }: Readonly<{
-  children: React.ReactNode
+  childen: React.ReactNode
 }>) {
   return (
     <div className='w-full min-h-screen'>
@@ -19,7 +19,7 @@ export default function Layout({
       </div>
 
       <div className='w-full bg-transparent bg-dot-red-200/10 relative flex items-center justify-center mt-16'>
-        {children}
+        {childen}
       </div>
 
       <CTA />

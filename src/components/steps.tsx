@@ -5,7 +5,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/navigation'
 
 import type { DiscountProps, PlanProps, StepsProps } from '@/typings/application'
-import type { PaymentProps } from '@/typings/child'
+import type { PaymentProps } from '@/typings/pet'
 import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 
 import { HeaderStep } from './header-step'
@@ -26,7 +26,7 @@ interface StepsComponentProps {
   steps: StepsProps[]
   plans: PlanProps[]
   //
-  child: CreatePrePayloadProps
+  pet: CreatePrePayloadProps
   payment: PaymentProps | null
   medias: MediaPreProps[]
   themeShowType: ThemeShowTypeEnum
@@ -34,7 +34,7 @@ interface StepsComponentProps {
   plan?: PlanProps
   discount: DiscountProps | null
   //
-  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  setPet: Dispatch<SetStateAction<CreatePrePayloadProps>>
   setThemeShowType: Dispatch<SetStateAction<ThemeShowTypeEnum>>
   setDateShowType: Dispatch<SetStateAction<DateShowTypeEnum>>
   setPlan: Dispatch<SetStateAction<PlanProps | undefined>>
@@ -46,7 +46,7 @@ interface StepsComponentProps {
   onNewMediaTimeline: (idPreTimeline: string, media: FormData) => Promise<UploadFileResponseProps>
   onRemoveMediaTimeline: (idPreTimeline: string, id: string) => Promise<void>
   onUpdate: () => Promise<void>
-  onCreatePre: (child_name: string) => Promise<void>
+  onCreatePre: (pet_name: string) => Promise<void>
 }
 
 export const Steps = ({
@@ -57,13 +57,13 @@ export const Steps = ({
   steps,
   plans,
   //
-  child,
+  pet,
   dateShowType,
   medias,
   plan,
   discount,
   //
-  setChild,
+  setPet,
   setDateShowType,
   setPlan,
   setStep,
@@ -90,13 +90,13 @@ export const Steps = ({
             <Step1
               themeShowType={themeShowType}
               setThemeShowType={setThemeShowType}
-              child={child}
-              setChild={setChild}
+              pet={pet}
+              setPet={setPet}
               onBack={onClose}
               onNew={
                 !pre
-                  ? async (child_name: string) => {
-                      await onCreatePre(child_name)
+                  ? async (pet_name: string) => {
+                      await onCreatePre(pet_name)
                       setStep(2)
                     }
                   : null
@@ -110,8 +110,8 @@ export const Steps = ({
 
           {step === 2 && (
             <Step2
-              child={child}
-              setChild={setChild}
+              pet={pet}
+              setPet={setPet}
               dateShowType={dateShowType}
               setDateShowType={setDateShowType}
               onBack={() => setStep(1)}
@@ -137,8 +137,8 @@ export const Steps = ({
 
           {step === 4 && (
             <Step4
-              child={child}
-              setChild={setChild}
+              pet={pet}
+              setPet={setPet}
               onSaveMedia={onNewMediaTimeline}
               onRemoveMedia={onRemoveMediaTimeline}
               onBack={() => setStep(3)}
@@ -151,8 +151,8 @@ export const Steps = ({
 
           {step === 5 && (
             <Step5
-              child={child}
-              setChild={setChild}
+              pet={pet}
+              setPet={setPet}
               onBack={() => setStep(4)}
               onNext={async () => {
                 await onUpdate()
@@ -177,7 +177,7 @@ export const Steps = ({
         </div>
 
         <div className='w-full lg:w-1/2 h-full'>
-          <PreviewDefault child={child} dateShowType={dateShowType} medias={medias} selected={plan} />
+          <PreviewDefault pet={pet} dateShowType={dateShowType} medias={medias} selected={plan} />
         </div>
       </div>
     </div>

@@ -17,13 +17,13 @@ import { PhoneInput } from './ui/phone-input'
 import { formatToE164, removeMask } from '@/lib/helpers/formatters'
 
 interface Step5Props {
-  child: CreatePrePayloadProps
-  setChild: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  pet: CreatePrePayloadProps
+  setPet: Dispatch<SetStateAction<CreatePrePayloadProps>>
   onNext: () => Promise<void>
   onBack?: () => void
 }
 
-export const Step5 = ({ child, setChild, onNext, onBack }: Step5Props) => {
+export const Step5 = ({ pet, setPet, onNext, onBack }: Step5Props) => {
   // hooks
   const t = useTranslations()
 
@@ -36,8 +36,8 @@ export const Step5 = ({ child, setChild, onNext, onBack }: Step5Props) => {
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      email: child.email || '',
-      phone: child.phoneNumber ? formatToE164(child.phoneNumber) : '',
+      email: pet.email || '',
+      phone: pet.phoneNumber ? formatToE164(pet.phoneNumber) : '',
     },
   })
 
@@ -67,8 +67,8 @@ export const Step5 = ({ child, setChild, onNext, onBack }: Step5Props) => {
         return
       }
 
-      setChild({
-        ...child,
+      setPet({
+        ...pet,
         email,
         ddd,
         phoneNumber,
@@ -103,8 +103,8 @@ export const Step5 = ({ child, setChild, onNext, onBack }: Step5Props) => {
                           onChange(e)
                           const email = e.target.value.trim()
 
-                          setChild(prevChild => ({
-                            ...prevChild,
+                          setPet(prevPet => ({
+                            ...prevPet,
                             email: email,
                           }))
                         }}
@@ -139,7 +139,7 @@ export const Step5 = ({ child, setChild, onNext, onBack }: Step5Props) => {
                           const ddd = removeMask(e.trim()).slice(0, 2)
                           const phoneNumber = removeMask(e.trim()).slice(2)
 
-                          setChild(prev => ({
+                          setPet(prev => ({
                             ...prev,
                             ddd,
                             phoneNumber,

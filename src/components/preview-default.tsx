@@ -8,9 +8,9 @@ import { useTranslations } from 'next-intl'
 import { PlanProps } from '@/typings/application'
 import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 
-import { BabyTimeline } from './baby-timeline'
 import { CloudBackground } from './clouds-background'
 import { DateCount } from './date-count'
+import { PetTimeline } from './pet-timeline'
 import PicturesGridPreview from './pictures-grid-preview'
 
 import { DateShowTypeEnum } from '@/enums'
@@ -28,22 +28,22 @@ const lora = Lora({
 })
 
 interface PreviewDefaultProps {
-  child: CreatePrePayloadProps
+  pet: CreatePrePayloadProps
   dateShowType: DateShowTypeEnum
   medias: MediaPreProps[]
   selected: PlanProps | undefined
 }
 
-export const PreviewDefault = ({ child, dateShowType, medias, selected }: PreviewDefaultProps) => {
+export const PreviewDefault = ({ pet, dateShowType, medias, selected }: PreviewDefaultProps) => {
   // hooks
   const t = useTranslations()
 
   // variables
-  const { value, unit } = formatAge(t, child?.birth_date)
+  const { value, unit } = formatAge(t, pet?.birth_date)
 
   // variables
-  const CHILD_NAME_PARTS = child?.child_name?.split(' ')
-  const DISPLAY_NAME = CHILD_NAME_PARTS?.length > 2 ? `${CHILD_NAME_PARTS[0]} ${CHILD_NAME_PARTS[1]}` : child.child_name
+  const CHILD_NAME_PARTS = pet?.pet_name?.split(' ')
+  const DISPLAY_NAME = CHILD_NAME_PARTS?.length > 2 ? `${CHILD_NAME_PARTS[0]} ${CHILD_NAME_PARTS[1]}` : pet.pet_name
 
   function removeEmojis(str: string) {
     return str
@@ -55,7 +55,7 @@ export const PreviewDefault = ({ child, dateShowType, medias, selected }: Previe
   }
 
   function baseSlug() {
-    return removeEmojis(child?.child_name ?? '')
+    return removeEmojis(pet?.pet_name ?? '')
       .normalize('NFD') // Normalize to separate accent from letters
       .replace(/[\u0300-\u036f]/g, '') // Remove accent marks
       .replace(/[^a-zA-Z0-9 ]/g, '') // Removes special characters
@@ -75,18 +75,18 @@ export const PreviewDefault = ({ child, dateShowType, medias, selected }: Previe
         </div>
 
         <div className='w-5/6'>
-          <p className='text-xs text-neutral-900 mt-[1.5px] text-right truncate'>https://babyzzu.com/{baseSlug()}</p>
+          <p className='text-xs text-neutral-900 mt-[1.5px] text-right truncate'>https://petzzu.com/{baseSlug()}</p>
         </div>
       </div>
 
       <div className='relative container h-full mt-14 bg-theme-100 lg:bg-theme-100 z-40'>
         <div className='relative rounded-lg h-full z-40'>
           <div className='flex justify-center items-center mb-8'>
-            {child?.child_name &&
-              (child?.child_name?.length > 8 ? (
+            {pet?.pet_name &&
+              (pet?.pet_name?.length > 8 ? (
                 <div className='flex flex-col items-center text-center'>
                   <div className='flex flex-row items-baseline gap-2'>
-                    {child?.birth_date && (
+                    {pet?.birth_date && (
                       <>
                         <span className='text-7xl font-bold text-theme-600'>{value}</span>
                         <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
@@ -103,7 +103,7 @@ export const PreviewDefault = ({ child, dateShowType, medias, selected }: Previe
                 </div>
               ) : (
                 <div className='flex items-center'>
-                  {child.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
+                  {pet.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
                   <div className='flex flex-col ml-3 mt-3'>
                     <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
                     <div className='text-4xl font-medium text-theme-600 leading-tight mt-1 font-happy-school'>
@@ -118,8 +118,8 @@ export const PreviewDefault = ({ child, dateShowType, medias, selected }: Previe
             <PicturesGridPreview images={medias} selectedPlan={selected} />
           </div>
 
-          {!!child?.timeLine && <BabyTimeline timeline={child?.timeLine} selectedPlan={selected} />}
-          {!!child?.birth_date && <DateCount date={child.birth_date} type={dateShowType} />}
+          {!!pet?.timeLine && <PetTimeline timeline={pet?.timeLine} selectedPlan={selected} />}
+          {!!pet?.birth_date && <DateCount date={pet.birth_date} type={dateShowType} />}
         </div>
 
         <CloudBackground quantity={20} />

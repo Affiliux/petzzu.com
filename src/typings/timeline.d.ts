@@ -18,7 +18,7 @@ export interface TimelineEntryProps extends BaseEntityProps {
 
 export interface PreWebsiteProps extends BaseEntityProps {
   id: string
-  child_name: string
+  pet_name: string
   sex: string
   birth_date: string
   media: MediaProps[]

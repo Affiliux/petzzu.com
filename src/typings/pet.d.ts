@@ -1,4 +1,4 @@
-// Definition: Child types
+// Definition: Pet types
 
 import type { TimelineEntryProps } from '@/typings/timeline'
 
@@ -21,13 +21,12 @@ export type MediaProps = {
   updatedAt?: string
 }
 
-// Child Props with the following properties:
-export type ChildProps = {
+// Pet Props with the following properties:
+export type PetProps = {
   id: string
-  child_name: string
+  pet_name: string
   slug: string
   message: string
-  sex: string
   birth_date: string
   ddd: string
   phoneNumber: string
@@ -48,12 +47,12 @@ export type ChildProps = {
 }
 
 interface DefaultThemeProps {
-  child: ChildResponseProps
+  pet: PetResponseProps
 }
 
-// Get Child
-export interface ChildPayloadProps {}
-export interface ChildResponseProps extends ChildProps, PaymentProps {
+// Get Pet
+export interface PetPayloadProps {}
+export interface PetResponseProps extends PetProps, PaymentProps {
   description: ReactNode
   name: ReactNode
   media: MediaProps[]

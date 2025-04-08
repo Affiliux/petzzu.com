@@ -13,7 +13,7 @@ export function CloudflareAnalytics({ token }: { token: string }) {
         token: token,
       }),
     )
-    document.body.appendChild(script)
+    document.body.appendPet(script)
   }, [])
 
   return null

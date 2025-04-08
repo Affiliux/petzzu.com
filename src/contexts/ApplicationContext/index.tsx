@@ -17,7 +17,7 @@ import { get_discount, get_order_bump, get_plans } from '@/infrastructure/http/s
 
 export const ApplicationContext = createContext<ApplicationContextType>({} as ApplicationContextType)
 
-export default function ApplicationProvider({ children }: ApplicationProviderProps) {
+export default function ApplicationProvider({ childen }: ApplicationProviderProps) {
   // hooks
   const queryParams = useQueryParams()
 
@@ -186,7 +186,7 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
         onGetDiscount,
       }}
     >
-      {children}
+      {childen}
     </ApplicationContext.Provider>
   )
 }

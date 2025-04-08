@@ -28,14 +28,14 @@ export default function Page() {
   const { locale, plans, discount, currency } = useApplication()
   const {
     pre,
-    child,
+    pet,
     pre_medias,
     date_show_type,
     plan,
     payment,
     theme_show_type,
     set_pre,
-    set_child,
+    set_pet,
     set_pre_medias,
     set_date_show_type,
     set_plan,
@@ -60,14 +60,14 @@ export default function Page() {
       id: 1,
       title: t('steps.step1.title'),
       description: t('steps.step1.description'),
-      checked: !!child.child_name && !!child.sex,
+      checked: !!pet.pet_name && !!pet.sex,
       skip: false,
     },
     {
       id: 2,
       title: t('steps.step2.title'),
       description: t('steps.step2.description'),
-      checked: !!child.birth_date,
+      checked: !!pet.birth_date,
       skip: false,
     },
     {
@@ -82,9 +82,9 @@ export default function Page() {
       title: t('steps.step4.title'),
       description: t('steps.step4.description'),
       checked:
-        Array.isArray(child.timeLine) &&
-        child.timeLine.length > 0 &&
-        child.timeLine.every(
+        Array.isArray(pet.timeLine) &&
+        pet.timeLine.length > 0 &&
+        pet.timeLine.every(
           entry => !!entry.title.trim() && !!entry.date && Array.isArray(entry.media) && entry.media.length > 0,
         ),
       skip: false,
@@ -93,7 +93,7 @@ export default function Page() {
       id: 5,
       title: t('steps.step5.title'),
       description: t('steps.step5.description'),
-      checked: !!child.email && !!child.phoneNumber && !!child.ddd,
+      checked: !!pet.email && !!pet.phoneNumber && !!pet.ddd,
       skip: false,
     },
     {
@@ -119,7 +119,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_child({} as CreatePrePayloadProps)
+      set_pet({} as CreatePrePayloadProps)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       set_plan(undefined)
@@ -144,7 +144,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_child({} as CreatePrePayloadProps)
+      set_pet({} as CreatePrePayloadProps)
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       set_plan(undefined)
@@ -181,7 +181,7 @@ export default function Page() {
     }
   }
 
-  async function handleCreatePre(child_name: string) {
+  async function handleCreatePre(pet_name: string) {
     set_loading(true)
 
     try {
@@ -190,7 +190,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_child({ ...child, child_name })
+      set_pet({ ...pet, pet_name })
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       set_plan(undefined)
@@ -198,7 +198,7 @@ export default function Page() {
       const find = plans.find(plan => plan.sku.includes(`plan_month_${currency}`))
       set_plan(find)
 
-      await onCreatePre({ ...child, child_name: child_name })
+      await onCreatePre({ ...pet, pet_name: pet_name })
     } catch (error: any) {
       console.error(error)
       router.replace('/')
@@ -213,12 +213,12 @@ export default function Page() {
       if (!plan) throw new Error('Please select a plan')
       await onUpdatePre({
         id: pre,
-        child_name: child.child_name,
-        birth_date: child.birth_date,
-        phoneNumber: child.phoneNumber,
-        ddd: child.ddd,
-        email: child.email,
-        sex: child.sex,
+        pet_name: pet.pet_name,
+        birth_date: pet.birth_date,
+        phoneNumber: pet.phoneNumber,
+        ddd: pet.ddd,
+        email: pet.email,
+        sex: pet.sex,
         lang: t('config.defaults.country'),
         themeShowType: theme_show_type ?? ThemeShowTypeEnum.BLUE,
         dateShowType: date_show_type,
@@ -267,7 +267,7 @@ export default function Page() {
       set_pre(null)
       set_payment(null)
 
-      set_child({ ...child })
+      set_pet({ ...pet })
       set_date_show_type(DateShowTypeEnum.DEFAULT)
 
       set_plan(undefined)
@@ -285,7 +285,7 @@ export default function Page() {
         steps={steps}
         plans={plans}
         //
-        child={child}
+        pet={pet}
         payment={payment}
         medias={pre_medias}
         themeShowType={theme_show_type}
@@ -295,7 +295,7 @@ export default function Page() {
         //
         setStep={set_step}
         setPlan={set_plan}
-        setChild={set_child}
+        setPet={set_pet}
         setThemeShowType={set_theme_show_type}
         setDateShowType={set_date_show_type}
         //
@@ -310,7 +310,7 @@ export default function Page() {
           set_pre_medias([])
           set_timeline_medias([])
 
-          set_child({} as CreatePrePayloadProps)
+          set_pet({} as CreatePrePayloadProps)
 
           router.replace('/')
         }}

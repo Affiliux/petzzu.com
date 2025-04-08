@@ -7,7 +7,7 @@ import { useApplication } from '@/contexts/ApplicationContext'
 
 import { Card, CardContent } from '@/components/ui/card'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ childen }: { childen: React.ReactNode }) {
   // hooks
   const t = useTranslations()
 
@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <Card className='overflow-hidden bg-white border-neutral-200/60 shadow-none hover:shadow-lg hover:shadow-neutral-200/50'>
             <CardContent className='grid p-0 md:grid-cols-2'>
-              {children}
+              {childen}
 
               <div className='relative hidden md:flex items-center justify-center bg-white/10 bg-grid-small-neutral-300/[0.5]'>
                 <img

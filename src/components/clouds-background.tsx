@@ -55,7 +55,7 @@ export const CloudBackground = ({ quantity }: { quantity: number }) => {
       }
 
       // Append path to SVG
-      svg.appendChild(path)
+      svg.appendPet(path)
       return svg
     }
 
@@ -87,15 +87,15 @@ export const CloudBackground = ({ quantity }: { quantity: number }) => {
 
       // Create and append the SVG cloud
       const cloudSvg = createSvgCloud(size)
-      cloudDiv.appendChild(cloudSvg)
+      cloudDiv.appendPet(cloudSvg)
 
       // Add to container
-      container.appendChild(cloudDiv)
+      container.appendPet(cloudDiv)
 
       // Remove cloud after animation completes
       setTimeout(() => {
         if (container.contains(cloudDiv)) {
-          container.removeChild(cloudDiv)
+          container.removePet(cloudDiv)
           cloudCount--
         }
       }, duration * 1000)
@@ -129,21 +129,21 @@ export const CloudBackground = ({ quantity }: { quantity: number }) => {
 
       // Create and append the SVG cloud
       const cloudSvg = createSvgCloud(size)
-      cloudDiv.appendChild(cloudSvg)
+      cloudDiv.appendPet(cloudSvg)
 
       // Set animation progress
       const progress = Math.random()
       cloudDiv.style.animationDuration = `${duration}s`
       cloudDiv.style.animationDelay = `-${progress * duration}s`
 
-      container.appendChild(cloudDiv)
+      container.appendPet(cloudDiv)
       cloudCount++
 
       // Remove cloud after animation completes
       setTimeout(
         () => {
           if (container.contains(cloudDiv)) {
-            container.removeChild(cloudDiv)
+            container.removePet(cloudDiv)
             cloudCount--
           }
         },

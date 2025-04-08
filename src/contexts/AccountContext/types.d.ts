@@ -15,7 +15,7 @@ import type { CreatePrePayloadProps, MediaPreProps } from '@/typings/create'
 import { ThemeShowTypeEnum } from '@/enums'
 
 export type AccountProviderProps = {
-  children: ReactNode
+  childen: ReactNode
 }
 
 export type AccountContextType = {
@@ -31,7 +31,7 @@ export type AccountContextType = {
   pages: PageProps[]
   selected: PageProps | null
   medias: MediaPreProps[]
-  child: CreatePrePayloadProps
+  pet: CreatePrePayloadProps
   plan: PlanProps | undefined
   theme_show_type: ThemeShowTypeEnum
   date_show_type: DateShowTypeEnum
@@ -40,7 +40,7 @@ export type AccountContextType = {
   set_pages: Dispatch<SetStateAction<PageProps[]>>
   set_selected: Dispatch<SetStateAction<PageProps | null>>
   set_medias: Dispatch<SetStateAction<MediaPreProps[]>>
-  set_child: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  set_pet: Dispatch<SetStateAction<CreatePrePayloadProps>>
   set_plan: Dispatch<SetStateAction<PlanProps | undefined>>
   set_theme_show_type: Dispatch<SetStateAction<ThemeShowTypeEnum>>
   set_date_show_type: Dispatch<SetStateAction<DateShowTypeEnum>>

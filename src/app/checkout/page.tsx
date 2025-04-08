@@ -46,7 +46,7 @@ export default function Page() {
     set_plan,
     set_pre_medias,
     set_pre,
-    set_child,
+    set_pet,
   } = useCreate()
 
   // states
@@ -72,7 +72,7 @@ export default function Page() {
     set_pre(null)
     set_payment(null)
 
-    set_child({} as CreatePrePayloadProps)
+    set_pet({} as CreatePrePayloadProps)
     set_plan(undefined)
 
     const find = plans.find(plan => plan.sku.includes(`plan_pro_${currency}`))

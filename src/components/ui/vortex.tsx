@@ -6,7 +6,7 @@ import { createNoise3D } from 'simplex-noise'
 import { cn } from '@/lib/utils'
 
 interface VortexProps {
-  children?: any
+  childen?: any
   className?: string
   containerClassName?: string
   particleCount?: number
@@ -238,7 +238,7 @@ export const Vortex = (props: VortexProps) => {
         <canvas ref={canvasRef}></canvas>
       </motion.div>
 
-      <div className={cn('relative z-10', props.className)}>{props.children}</div>
+      <div className={cn('relative z-10', props.className)}>{props.childen}</div>
     </div>
   )
 }

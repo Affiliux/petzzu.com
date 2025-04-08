@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { IconCopy } from '@tabler/icons-react'
 
-import type { PaymentProps } from '@/typings/child'
+import type { PaymentProps } from '@/typings/pet'
 
 import { Button } from './ui/button'
 

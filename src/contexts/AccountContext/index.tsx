@@ -33,13 +33,13 @@ import {
 
 export const AccountContext = createContext<AccountContextType>({} as AccountContextType)
 
-export default function AccountProvider({ children }: AccountProviderProps) {
+export default function AccountProvider({ childen }: AccountProviderProps) {
   // states
   const [account, set_account] = useState<AccountProps | null>(null)
   const [pages, set_pages] = useState<PageProps[]>([])
   const [selected, set_selected] = useState<PageProps | null>(null)
   const [medias, set_medias] = useState<MediaPreProps[]>([])
-  const [child, set_child] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
+  const [pet, set_pet] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
   const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.BLUE)
   const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
   const [plan, set_plan] = useState<PlanProps | undefined>()
@@ -117,7 +117,7 @@ export default function AccountProvider({ children }: AccountProviderProps) {
         if (old.id === id) {
           return {
             ...old,
-            child_name: page.child_name,
+            pet_name: page.pet_name,
             birth_date: page.birth_date,
             sex: page.sex,
             dateShowType: page.dateShowType,
@@ -207,7 +207,7 @@ export default function AccountProvider({ children }: AccountProviderProps) {
         pages,
         selected,
         medias,
-        child,
+        pet,
         plan,
         date_show_type,
         theme_show_type,
@@ -216,7 +216,7 @@ export default function AccountProvider({ children }: AccountProviderProps) {
         set_pages,
         set_selected,
         set_medias,
-        set_child,
+        set_pet,
         set_plan,
         set_theme_show_type,
         set_date_show_type,
@@ -231,7 +231,7 @@ export default function AccountProvider({ children }: AccountProviderProps) {
         onRemoveMedia,
       }}
     >
-      {children}
+      {childen}
     </AccountContext.Provider>
   )
 }

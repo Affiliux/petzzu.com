@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import type { MediaProps } from '@/typings/child'
+import type { MediaProps } from '@/typings/pet'
 
 import 'swiper/css'
 import 'swiper/css/effect-cards'

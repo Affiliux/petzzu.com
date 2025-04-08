@@ -32,12 +32,12 @@ export default function Page() {
   const { plans } = useApplication()
   const {
     selected,
-    child,
+    pet,
     medias,
     theme_show_type,
     date_show_type,
     plan,
-    set_child,
+    set_pet,
     set_medias,
     set_theme_show_type,
     set_date_show_type,
@@ -57,14 +57,14 @@ export default function Page() {
       id: 1,
       title: t('steps.step1.title'),
       description: t('steps.step1.description'),
-      checked: !!child.child_name && !!child.sex,
+      checked: !!pet.pet_name && !!pet.sex,
       skip: false,
     },
     {
       id: 2,
       title: t('steps.step2.title'),
       description: t('steps.step2.description'),
-      checked: !!child.birth_date,
+      checked: !!pet.birth_date,
       skip: false,
     },
     {
@@ -79,9 +79,9 @@ export default function Page() {
       title: t('steps.step4.title'),
       description: t('steps.step4.description'),
       checked:
-        Array.isArray(child.timeLine) &&
-        child.timeLine.length > 0 &&
-        child.timeLine.every(
+        Array.isArray(pet.timeLine) &&
+        pet.timeLine.length > 0 &&
+        pet.timeLine.every(
           entry => !!entry.title.trim() && !!entry.date && Array.isArray(entry.media) && entry.media.length > 0,
         ),
       skip: false,
@@ -91,12 +91,12 @@ export default function Page() {
   async function handleSave() {
     try {
       await onUpdatePage(selected.id, {
-        child_name: child.child_name,
-        birth_date: child.birth_date,
-        sex: child.sex,
+        pet_name: pet.pet_name,
+        birth_date: pet.birth_date,
+        sex: pet.sex,
         dateShowType: date_show_type,
         themeShowType: theme_show_type,
-        timeLine: child.timeLine,
+        timeLine: pet.timeLine,
       })
 
       toast({
@@ -120,8 +120,8 @@ export default function Page() {
     if (!selected) router.push('/account/pages')
 
     if (selected) {
-      const previewChildProps: CreatePrePayloadProps = {
-        child_name: selected.child_name,
+      const previewPetProps: CreatePrePayloadProps = {
+        pet_name: selected.pet_name,
         birth_date: selected.birth_date,
         sex: selected.sex,
         dateShowType: selected.dateShowType,
@@ -129,13 +129,13 @@ export default function Page() {
         timeLine: [],
       }
 
-      const mediaChildProps: MediaPreProps[] = selected.media.map(media => ({
+      const mediaPetProps: MediaPreProps[] = selected.media.map(media => ({
         id: media.id,
         url: media.url,
       }))
 
-      set_child(previewChildProps)
-      set_medias(mediaChildProps)
+      set_pet(previewPetProps)
+      set_medias(mediaPetProps)
       set_theme_show_type(selected.themeShowType)
       set_date_show_type(selected.dateShowType)
 
@@ -173,8 +173,8 @@ export default function Page() {
                 isEdit
                 themeShowType={theme_show_type}
                 setThemeShowType={set_theme_show_type}
-                child={child}
-                setChild={set_child}
+                pet={pet}
+                setPet={set_pet}
                 onNext={async () => set_step(2)}
               />
             )}
@@ -182,8 +182,8 @@ export default function Page() {
             {step === 2 && (
               <Step2
                 isEdit
-                child={child}
-                setChild={set_child}
+                pet={pet}
+                setPet={set_pet}
                 dateShowType={date_show_type}
                 setDateShowType={set_date_show_type}
                 onBack={() => set_step(1)}
@@ -206,8 +206,8 @@ export default function Page() {
               <Step4
                 isEdit
                 idWebsite={selected.id}
-                child={child}
-                setChild={set_child}
+                pet={pet}
+                setPet={set_pet}
                 onSaveMedia={onUploadTimelineFile}
                 onRemoveMedia={onDeleteTimelineFile}
                 onBack={() => set_step(3)}
@@ -223,7 +223,7 @@ export default function Page() {
           </div>
 
           <div className='w-full h-full'>
-            <PreviewDefault child={child} dateShowType={date_show_type} medias={medias} selected={plan} />
+            <PreviewDefault pet={pet} dateShowType={date_show_type} medias={medias} selected={plan} />
           </div>
         </div>
       )}

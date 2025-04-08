@@ -27,19 +27,19 @@ import { ThemeShowTypeEnum } from '@/enums'
 
 interface AccordionListProps {
   theme: ThemeShowTypeEnum
-  child: PreWebsiteProps
-  setChild: React.Dispatch<React.SetStateAction<PreWebsiteProps>>
+  pet: PreWebsiteProps
+  setPet: React.Dispatch<React.SetStateAction<PreWebsiteProps>>
   onSaveMedia: (timelineId: string, media: FormData) => Promise<void>
   onRemoveMedia: (timelineId: string, mediaId: string) => Promise<void>
 }
 
-const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: AccordionListProps) => {
+const AccordionList = ({ theme, pet, setPet, onSaveMedia, onRemoveMedia }: AccordionListProps) => {
   const t = useTranslations()
   const { locale } = useApplication()
   const { pre } = useCreate()
 
   const { onCreateTimeline, onUpdateTimeline, onDeleteTimelineFile, onDeleteTimeline } = useTimeline()
-  const [accordions, setAccordions] = useState<TimelineEntryProps[]>(child.timeLine || [])
+  const [accordions, setAccordions] = useState<TimelineEntryProps[]>(pet.timeLine || [])
   const [loading, setLoading] = useState(false)
 
   const addAccordion = async () => {
@@ -54,7 +54,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
 
       const newEntry = response as unknown as TimelineEntryProps
       setAccordions([...accordions, newEntry])
-      setChild(prev => ({
+      setPet(prev => ({
         ...prev,
         timeLine: [...(prev.timeLine || []), newEntry],
       }))
@@ -72,7 +72,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
     try {
       await onDeleteTimeline(id)
       setAccordions(prev => prev.filter(entry => entry.id !== id))
-      setChild(prev => ({
+      setPet(prev => ({
         ...prev,
         timeLine: prev.timeLine.filter(entry => entry.id !== id),
       }))
@@ -99,7 +99,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
       if (!event.target.files) return
       const new_files = Array.from(event.target.files)
 
-      if (child?.media?.length + new_files.length > 1) {
+      if (pet?.media?.length + new_files.length > 1) {
         toast({
           variant: 'destructive',
           title: 'Image Error!!',
@@ -153,7 +153,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
     try {
       await onRemoveMedia(timelineId, mediaId)
 
-      setChild(prev => ({
+      setPet(prev => ({
         ...prev,
         timeLine: prev.timeLine.map(entry =>
           entry.id === timelineId ? { ...entry, media: entry.media.filter(file => file.id !== mediaId) } : entry,
@@ -217,7 +217,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                   className='w-full'
                   onChange={async e => {
                     const newTitle = e.target.value
-                    setChild(prev => ({
+                    setPet(prev => ({
                       ...prev,
                       timeLine: prev.timeLine.map(entry =>
                         entry.id === accordion.id ? { ...entry, title: newTitle } : entry,
@@ -244,7 +244,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                       step3={true}
                       onChange={async e => {
                         const newDescription = e
-                        setChild(prev => ({
+                        setPet(prev => ({
                           ...prev,
                           timeLine: prev.timeLine.map(entry =>
                             entry.id === accordion.id ? { ...entry, description: newDescription } : entry,
@@ -273,7 +273,7 @@ const AccordionList = ({ theme, child, setChild, onSaveMedia, onRemoveMedia }: A
                     className='rounded-md border border-neutral-300 flex items-center justify-center relative z-50 sm:w-full 2xl:w-1/2 h-full'
                     selected={new Date(accordion.date)}
                     onSelect={async date => {
-                      setChild(prev => ({
+                      setPet(prev => ({
                         ...prev,
                         timeLine: prev.timeLine.map(entry =>
                           entry.id === accordion.id ? { ...entry, date: date.toISOString().split('T')[0] } : entry,

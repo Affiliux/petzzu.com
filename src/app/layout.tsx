@@ -23,29 +23,29 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://babyzzu.com'),
-  title: 'Babyzzu  ©',
-  description: 'A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais.',
+  metadataBase: new URL('https://petzzu.com'),
+  title: 'Petzzu  ©',
+  description: 'A Petzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais.',
   openGraph: {
     type: 'website',
-    url: 'https://www.babyzzu.com',
-    title: 'Babyzzu - Sua nova forma de eternizar lembranças',
+    url: 'https://www.petzzu.com',
+    title: 'Petzzu - Sua nova forma de eternizar lembranças',
     description:
-      'A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e criar uma linha do tempo com todas as suas lembranças.',
+      'A Petzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e criar uma linha do tempo com todas as suas lembranças.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Babyzzu - Sua nova forma de eternizar lembranças',
+    title: 'Petzzu - Sua nova forma de eternizar lembranças',
     description:
-      'A Babyzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e criar uma linha do tempo com todas as suas lembranças.',
+      'A Petzzu é uma plataforma que permite criar páginas personalizadas para pessoas especiais. Você pode adicionar fotos, uma mensagem e criar uma linha do tempo com todas as suas lembranças.',
   },
   authors: { name: 'Affiliux' },
 }
 
 export default async function RootLayout({
-  children,
+  childen,
 }: Readonly<{
-  children: React.ReactNode
+  childen: React.ReactNode
 }>) {
   const locale = await getLocale()
 
@@ -64,7 +64,7 @@ export default async function RootLayout({
       <NextIntlClientProvider messages={messages}>
         <Providers>
           <body className={`antialiased overflow-x-hidden bg-white min-h-screen h-full`} suppressHydrationWarning>
-            {children}
+            {childen}
 
             <Toaster />
           </body>

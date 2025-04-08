@@ -6,14 +6,14 @@ import { Dancing_Script } from 'next/font/google'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import type { ChildProps } from '@/typings/child'
+import type { PetProps } from '@/typings/pet'
 
 import { CarouselPhotos } from '@/components/carousel'
 
 import { formatAge } from '@/lib/helpers/formatters'
 
 interface PicturesGridProps {
-  child: ChildProps
+  pet: PetProps
 }
 
 const dancing = Dancing_Script({
@@ -21,24 +21,24 @@ const dancing = Dancing_Script({
   subsets: ['latin'],
 })
 
-export default function PicturesGrid({ child }: PicturesGridProps) {
+export default function PicturesGrid({ pet }: PicturesGridProps) {
   // hooks
   const t = useTranslations()
 
   // variables
-  const { value, unit } = formatAge(t, child?.birth_date)
-  const images = child.media || []
-  const childNameParts = child?.child_name?.split(' ')
-  const displayName = childNameParts?.length > 2 ? `${childNameParts[0]} ${childNameParts[1]}` : child.child_name
+  const { value, unit } = formatAge(t, pet?.birth_date)
+  const images = pet.media || []
+  const petNameParts = pet?.pet_name?.split(' ')
+  const displayName = petNameParts?.length > 2 ? `${petNameParts[0]} ${petNameParts[1]}` : pet.pet_name
 
   return (
     <div className='relative w-full max-w-2xl mx-auto px-6'>
       <div className='flex justify-center items-center mb-8'>
-        {child?.child_name &&
-          (child.child_name.length > 8 ? (
+        {pet?.pet_name &&
+          (pet.pet_name.length > 8 ? (
             <div className='flex flex-col items-center text-center'>
               <div className='flex flex-row items-baseline gap-2'>
-                {child.birth_date && (
+                {pet.birth_date && (
                   <>
                     <span className='text-7xl font-bold text-theme-600'>{value}</span>
                     <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none `}>{unit}</div>
@@ -53,7 +53,7 @@ export default function PicturesGrid({ child }: PicturesGridProps) {
             </div>
           ) : (
             <div className='flex items-center'>
-              {child.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
+              {pet.birth_date && <span className='text-8xl font-bold text-theme-600'>{value}</span>}
               <div className='flex flex-col ml-3 mt-3'>
                 <div className={`${dancing.className} text-3xl italic text-theme-600 leading-none`}>{unit}</div>
                 <div className='text-4xl font-medium text-theme-600 leading-tight font-happy-school'>{displayName}</div>

@@ -5,7 +5,7 @@ import type { DiscountProps, PlanProps, YouTubeVideoProps } from '@/typings/appl
 import { ThemeShowTypeEnum } from '@/enums'
 
 export type ApplicationProviderProps = {
-  children: ReactNode
+  childen: ReactNode
 }
 
 export type ApplicationContextType = {

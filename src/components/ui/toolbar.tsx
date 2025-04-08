@@ -5,11 +5,11 @@ import { ToggleGroup as ToggleGroupPrimitive, Toolbar as ToolbarPrimitive } from
 import { cn } from '@/lib/utils'
 
 interface ToolbarProps {
-  children: React.ReactNode
+  childen: React.ReactNode
   className?: string
 }
 
-const Toolbar = ({ children, className }: ToolbarProps) => {
+const Toolbar = ({ childen, className }: ToolbarProps) => {
   return (
     <ToolbarPrimitive
       className={cn(
@@ -17,7 +17,7 @@ const Toolbar = ({ children, className }: ToolbarProps) => {
         className,
       )}
     >
-      {children}
+      {childen}
     </ToolbarPrimitive>
   )
 }

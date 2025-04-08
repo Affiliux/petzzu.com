@@ -5,7 +5,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import { PlanProps } from '@/typings/application'
-import type { MediaProps } from '@/typings/child'
+import type { MediaProps } from '@/typings/pet'
 
 import { CarouselPhotos } from './carousel'
 

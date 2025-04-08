@@ -1,15 +1,15 @@
 {
-  "name": "babyzzu.com",
+  "name": "Petzzu.com",
   "version": "0.0.2",
   "private": true,
   "license": "MIT",
-  "description": "A web application for babyzzu clients",
+  "description": "A web application for Petzzu clients",
   "keywords": [
-    "Babyzzu"
+    "Petzzu"
   ],
-  "repository": "https://github.com/Affiliux/babyzzu.com",
-  "bugs": "https://github.com/Affiliux/babyzzu.com/issues",
-  "homepage": "https://github.com/Affiliux/babyzzu.com#readme",
+  "repository": "https://github.com/Affiliux/Petzzu.com",
+  "bugs": "https://github.com/Affiliux/Petzzu.com/issues",
+  "homepage": "https://github.com/Affiliux/Petzzu.com#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

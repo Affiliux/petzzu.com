@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://www.babyzzu.com',
+    sitemap: 'https://www.petzzu.com',
   }
 }

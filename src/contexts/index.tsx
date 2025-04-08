@@ -4,8 +4,8 @@ import { ReactNode } from 'react'
 
 import AccountProvider from './AccountContext'
 import ApplicationProvider from './ApplicationContext'
-import ChildProvider from './ChildContext'
 import CreateProvider from './CreateContext'
+import PetProvider from './PetContext'
 import TimelineProvider from './TimelineContext'
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -14,7 +14,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <TimelineProvider>
         <CreateProvider>
           <AccountProvider>
-            <ChildProvider>{children}</ChildProvider>
+            <PetProvider>{children}</PetProvider>
           </AccountProvider>
         </CreateProvider>
       </TimelineProvider>

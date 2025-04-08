@@ -6,7 +6,7 @@
  *
  */
 
-import { MediaProps } from './child'
+import { MediaProps } from './pet'
 import type { MediaPreProps } from './create'
 import { TimelineEntryProps } from './timeline'
 
@@ -69,7 +69,7 @@ export interface EmailConfirmResponseProps extends RefreshTokenProps {
 
 export type PageProps = {
   id: string
-  child_name: string
+  pet_name: string
   slug: string
   birth_date: string
   planSku: string
@@ -95,7 +95,7 @@ export interface PageResponseProps {
 
 // Update Page
 export type UpdatePage = {
-  child_name: string
+  pet_name: string
   birth_date: string
   sex: string
   timeLine: TimelineEntryProps[]

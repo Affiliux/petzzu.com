@@ -9,11 +9,11 @@ import { cn } from '@/lib/utils'
 const MouseEnterContext = createContext<[boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined>(undefined)
 
 export const CardContainer = ({
-  children,
+  childen,
   className,
   containerClassName,
 }: {
-  children?: React.ReactNode
+  childen?: React.ReactNode
   className?: string
   containerClassName?: string
 }) => {
@@ -56,24 +56,24 @@ export const CardContainer = ({
             transformStyle: 'preserve-3d',
           }}
         >
-          {children}
+          {childen}
         </div>
       </div>
     </MouseEnterContext.Provider>
   )
 }
 
-export const CardBody = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+export const CardBody = ({ childen, className }: { childen: React.ReactNode; className?: string }) => {
   return (
     <div className={cn('h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]', className)}>
-      {children}
+      {childen}
     </div>
   )
 }
 
 export const CardItem = ({
   as: Tag = 'div',
-  children,
+  childen,
   className,
   translateX = 0,
   translateY = 0,
@@ -84,7 +84,7 @@ export const CardItem = ({
   ...rest
 }: {
   as?: React.ElementType
-  children: React.ReactNode
+  childen: React.ReactNode
   className?: string
   translateX?: number | string
   translateY?: number | string
@@ -112,7 +112,7 @@ export const CardItem = ({
 
   return (
     <Tag ref={ref} className={cn('w-fit transition duration-200 ease-linear', className)} {...rest}>
-      {children}
+      {childen}
     </Tag>
   )
 }

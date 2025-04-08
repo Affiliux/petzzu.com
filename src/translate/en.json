@@ -1,7 +1,7 @@
 {
   "config": {
-    "title": "Babyzzu ©",
-    "description": "Babyzzu is a platform that allows you to create personalized pages for special people.",
+    "title": "Petzzu ©",
+    "description": "Petzzu is a platform that allows you to create personalized pages for special people.",
     "keywords": "love, relationship, friendships, birthday, gift, page, dedication, surprise",
     "skip": "Skip step",
     "header": {
@@ -25,7 +25,7 @@
       }
     },
     "footer": {
-      "copyright": "Copyright © 2025 - Babyzzu.com",
+      "copyright": "Copyright © 2025 - Petzzu.com",
       "terms": "Terms of Use",
       "privacy": "Privacy Policy",
       "instagram": "Instagram",
@@ -80,7 +80,7 @@
           "4": "Every memory",
           "5": "Every moment"
         },
-        "description": "Eternalize every memory, smiles, discoveries, and each new phase of your baby are unique moments that deserve to be recorded. Follow this beautiful journey and eternalize every detail with care.",
+        "description": "Eternalize every memory, smiles, discoveries, and each new phase of your pet are unique moments that deserve to be recorded. Follow this beautiful journey and eternalize every detail with care.",
         "input": {
           "placeholder": "Ex: John & Mary or Happy Birthday or etc",
           "errors": {
@@ -140,13 +140,13 @@
       "faq": {
         "title": "Frequently Asked Questions",
         "contact": "Questions? Contact us here",
-        "description": "Here are some frequently asked questions to help you better understand Babyzzu. If you have any questions, please contact us.",
+        "description": "Here are some frequently asked questions to help you better understand Petzzu. If you have any questions, please contact us.",
         "1": {
-          "question": "What is Babyzzu?",
-          "answer": "Babyzzu is a platform that allows you to create personalized pages for special people. You can add photos, a message, and also the time of the union."
+          "question": "What is Petzzu?",
+          "answer": "Petzzu is a platform that allows you to create personalized pages for special people. You can add photos, a message, and also the time of the union."
         },
         "2": {
-          "question": "How can I create a personalized page on Babyzzu?",
+          "question": "How can I create a personalized page on Petzzu?",
           "answer": "To create your personalized page, follow the steps by filling out the form with the requested information. After filling it out, you will be directed to the payment."
         },
         "3": {
@@ -168,21 +168,21 @@
       },
       "testimonials": {
         "title": "Testimonials",
-        "description": "See what our customers are saying about Babyzzu",
+        "description": "See what our customers are saying about Petzzu",
         "1": {
           "name": "Mariana",
           "time": "1 month ago",
-          "message": "I loved creating my baby's timeline! I managed to record all the special moments with photos, videos, and messages. It turned out beautiful and emotional!"
+          "message": "I loved creating my pet's timeline! I managed to record all the special moments with photos, videos, and messages. It turned out beautiful and emotional!"
         },
         "2": {
           "name": "Ana",
           "time": "2 days ago",
-          "message": "Babyzzu helped me organize and eternalize each phase of my child's growth. It's amazing to be able to relive each moment so easily!"
+          "message": "Petzzu helped me organize and eternalize each phase of my pet's growth. It's amazing to be able to relive each moment so easily!"
         },
         "3": {
           "name": "Lucas",
           "time": "3 months ago",
-          "message": "I set up my baby's timeline from birth and it turned out perfect! Now I have all the memories gathered in one place, in a special way."
+          "message": "I set up my pet's timeline from birth and it turned out perfect! Now I have all the memories gathered in one place, in a special way."
         },
         "4": {
           "name": "Marcelo",
@@ -192,17 +192,17 @@
         "5": {
           "name": "Bia and Henrique",
           "time": "1 year ago",
-          "message": "It was emotional to create this digital record for our baby! It will surely be a valuable gift for him in the future. We are happy to have every detail stored with so much care!"
+          "message": "It was emotional to create this digital record for our pet! It will surely be a valuable gift for him in the future. We are happy to have every detail stored with so much care!"
         },
         "6": {
           "name": "Clara",
           "time": "2 months ago",
-          "message": "Babyzzu made it much easier to save and share my baby's special moments with the family. Everyone loved the idea!"
+          "message": "Petzzu made it much easier to save and share my pet's special moments with the family. Everyone loved the idea!"
         },
         "7": {
           "name": "Vanessa",
           "time": "1 week ago",
-          "message": "I was enchanted by the possibility of creating an interactive record of my baby's growth. Every detail makes all the difference!"
+          "message": "I was enchanted by the possibility of creating an interactive record of my pet's growth. Every detail makes all the difference!"
         },
         "8": {
           "name": "Bruno",
@@ -227,7 +227,7 @@
           "counter": "One-time purchase",
           "price_recurrence": "/once",
           "benefits": {
-            "1": "Child's timeline",
+            "1": "Pet's timeline",
             "2": "Birth date",
             "3": "Real-time life counter",
             "4": "Album photos on the cover",
@@ -245,7 +245,7 @@
           "counter": "Monthly subscription",
           "price_recurrence": "/per month",
           "benefits": {
-            "1": "Child's timeline",
+            "1": "Pet's timeline",
             "2": "Birth date",
             "3": "Real-time life counter",
             "4": "Album photos on the cover",
@@ -263,7 +263,7 @@
           "counter": "Annual subscription",
           "price_recurrence": "/per year",
           "benefits": {
-            "1": "Child's timeline",
+            "1": "Pet's timeline",
             "2": "Birth date",
             "3": "Real-time life counter",
             "4": "Album photos on the cover",
@@ -317,7 +317,7 @@
         "information_we_collect_title": "2. Information We Collect",
         "information_we_collect": "We collect the following information when using our platform:",
 
-        "registration_info": "• Registration Information: Name, pregnancy start date, birth date, personalized message, pregnancy photos, child photos, and email address.",
+        "registration_info": "• Registration Information: Name, pregnancy start date, birth date, personalized message, pregnancy photos, pet photos, and email address.",
         "payment_info": "• Payment Information: The email registered with Stripe or Pagar.me / Stone to process the payment and send the link to the personalized page.",
 
         "how_we_use_information_title": "3. How We Use Your Information",
@@ -337,13 +337,13 @@
         "data_retention_description": "We will retain your personal information only for as long as necessary to fulfill the purposes for which it was collected, or as required by law.",
 
         "your_rights_title": "7. Your Rights",
-        "your_rights_description": "You have the right to access, correct, or delete your personal information. To exercise these rights, contact us at: contact@babyzzu.com.",
+        "your_rights_description": "You have the right to access, correct, or delete your personal information. To exercise these rights, contact us at: contact@petzzu.com.",
 
         "changes_to_policy_title": "8. Changes to this Privacy Policy",
         "changes_to_policy_description": "We may update this Privacy Policy periodically. When we do, the \"last updated\" date at the top of this page will be changed. It is your responsibility to review this policy periodically to stay informed about possible changes.",
 
         "contact_title": "9. Contact",
-        "contact_description": "If you have any questions about this Privacy Policy, please contact us at: contact@babyzzu.com."
+        "contact_description": "If you have any questions about this Privacy Policy, please contact us at: contact@petzzu.com."
       }
     },
     "terms": {
@@ -354,7 +354,7 @@
         "acceptance_description": "By accessing and using our platform, you agree to comply with and be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the platform.",
 
         "service_description_title": "2. Service Description",
-        "service_description": "Babyzzu offers a service that allows couples to create a personalized page by filling out a form with names, birth date, and pregnancy start date, a special message, and up to 4 media per category. After filling out the form, the couple is directed to the payment and, upon completion, receives a link with a QR Code sent by email.",
+        "service_description": "Petzzu offers a service that allows couples to create a personalized page by filling out a form with names, birth date, and pregnancy start date, a special message, and up to 4 media per category. After filling out the form, the couple is directed to the payment and, upon completion, receives a link with a QR Code sent by email.",
 
         "registration_and_security_title": "3. Registration and Security",
         "registration_and_security": "To use our services, you must provide a valid email address. We will not share your email with third parties.",
@@ -363,13 +363,13 @@
         "privacy_policy": "We value your privacy. Your data will not be processed or sold to third parties. The provided email will be used exclusively to send the link to your personalized page.",
 
         "user_content_title": "5. User Content",
-        "user_content": "You are solely responsible for the content you enter on the platform, including photos, messages, and information about the pregnancy and baby. We are not responsible for inappropriate or illegal content uploaded by users.",
+        "user_content": "You are solely responsible for the content you enter on the platform, including photos, messages, and information about the pregnancy and pet. We are not responsible for inappropriate or illegal content uploaded by users.",
 
         "payments_refund_policy_title": "6. Payments and Refund Policy",
         "payments_refund_policy": "Payments are processed through Stripe and Pagar.me / Stone. After payment confirmation, the responsible party will receive a link to access the personalized page by email. Refunds are not offered, except in exceptional cases, at our sole discretion.",
 
         "service_changes_title": "7. Service Changes",
-        "service_changes": "We are committed to keeping the service available during the contracted period, according to the chosen plan (basic or advanced plan). However, in extraordinary situations, such as technical, legal, or financial issues, we reserve the right to modify or discontinue the service. In case of discontinuation, we will notify users in advance and seek to offer suitable alternatives whenever possible. Babyzzu is not responsible for losses resulting from modifications or interruptions in extraordinary circumstances, but we will make efforts to minimize impacts.",
+        "service_changes": "We are committed to keeping the service available during the contracted period, according to the chosen plan (basic or advanced plan). However, in extraordinary situations, such as technical, legal, or financial issues, we reserve the right to modify or discontinue the service. In case of discontinuation, we will notify users in advance and seek to offer suitable alternatives whenever possible. Petzzu is not responsible for losses resulting from modifications or interruptions in extraordinary circumstances, but we will make efforts to minimize impacts.",
 
         "limitation_of_liability_title": "8. Limitation of Liability",
         "limitation_of_liability": "We will not be liable for indirect, incidental, special, or consequential damages related to the use or inability to use the platform.",
@@ -378,7 +378,7 @@
         "terms_update": "We may revise these Terms of Use periodically. When we do, we will update the \"last updated\" date at the top of this page. It is your responsibility to review the Terms of Use periodically to stay informed about possible changes.",
 
         "contact_title": "10. Contact",
-        "contact": "If you have any questions about the Terms of Use, please contact us at: contact@babyzzu.com"
+        "contact": "If you have any questions about the Terms of Use, please contact us at: contact@petzzu.com"
       }
     },
     "auth": {
@@ -490,8 +490,8 @@
       "continue": "Continue page"
     },
     "step1": {
-      "title": "What is your child's name?",
-      "description": "Enter your child's name and gender to personalize the page.",
+      "title": "What is your pet's name?",
+      "description": "Enter your pet's name and gender to personalize the page.",
       "theme-show-types": {
         "title": "Theme color",
         "blue": "Blue",
@@ -524,7 +524,7 @@
     },
     "step2": {
       "title": "When were they born?",
-      "description": "Enter the child's birth date.",
+      "description": "Enter the pet's birth date.",
       "show-types": {
         "title": "Display mode",
         "default": "Default",
@@ -644,7 +644,7 @@
           "counter": "One-time purchase",
           "price_recurrence": "/once",
           "benefits": {
-            "1": "Child's timeline",
+            "1": "Pet's timeline",
             "2": "Birth date",
             "3": "Real-time life counter",
             "4": "Album photos on the cover",
@@ -662,7 +662,7 @@
           "counter": "Monthly subscription",
           "price_recurrence": "/per month",
           "benefits": {
-            "1": "Child's timeline",
+            "1": "Pet's timeline",
             "2": "Birth date",
             "3": "Real-time life counter",
             "4": "Album photos on the cover",
@@ -680,7 +680,7 @@
           "counter": "Annual subscription",
           "price_recurrence": "/per year",
           "benefits": {
-            "1": "Child's timeline",
+            "1": "Pet's timeline",
             "2": "Birth date",
             "3": "Real-time life counter",
             "4": "Album photos on the cover",

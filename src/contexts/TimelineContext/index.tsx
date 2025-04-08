@@ -27,7 +27,7 @@ import {
 
 export const TimelineContext = createContext<TimelineContextProps>({} as TimelineContextProps)
 
-export default function TimelineProvider({ children }: { children: React.ReactNode }) {
+export default function TimelineProvider({ childen }: { childen: React.ReactNode }) {
   const [timeline_medias, set_timeline_medias] = useState<MediaPreProps[]>([])
 
   async function onCreateTimeline(idPreWebsite: string, payload: CreateTimelinePayloadProps) {
@@ -156,7 +156,7 @@ export default function TimelineProvider({ children }: { children: React.ReactNo
         //
       }}
     >
-      {children}
+      {childen}
     </TimelineContext.Provider>
   )
 }

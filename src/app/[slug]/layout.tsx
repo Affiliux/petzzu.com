@@ -1,9 +1,9 @@
 'use client'
 
 export default function Layout({
-  children,
+  childen,
 }: Readonly<{
-  children: React.ReactNode
+  childen: React.ReactNode
 }>) {
-  return <div>{children}</div>
+  return <div>{childen}</div>
 }

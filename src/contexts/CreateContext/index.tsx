@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState } from 'react'
 
 import type { PlanProps } from '@/typings/application'
-import type { ChildResponseProps, PaymentProps } from '@/typings/child'
+import type { PetResponseProps, PaymentProps } from '@/typings/pet'
 import type {
   CreateFromPrePayloadProps,
   CreatePrePayloadProps,
@@ -17,7 +17,7 @@ import type {
 import type { CreateContextType, CreateProviderProps } from './types'
 
 import { DateShowTypeEnum, ThemeShowTypeEnum } from '@/enums'
-import { get_child_id } from '@/infrastructure/http/services/child'
+import { get_pet_id } from '@/infrastructure/http/services/pet'
 import {
   create_from_pre,
   create_pre,
@@ -30,11 +30,11 @@ import {
 
 export const CreateContext = createContext<CreateContextType>({} as CreateContextType)
 
-export default function CreateProvider({ children }: CreateProviderProps) {
+export default function CreateProvider({ childen }: CreateProviderProps) {
   // states
   const [pre, set_pre] = useState<string | null>(null)
   const [pre_medias, set_pre_medias] = useState<MediaPreProps[]>([])
-  const [child, set_child] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
+  const [pet, set_pet] = useState<CreatePrePayloadProps>({} as CreatePrePayloadProps)
   const [theme_show_type, set_theme_show_type] = useState<ThemeShowTypeEnum>(ThemeShowTypeEnum.BLUE)
   const [date_show_type, set_date_show_type] = useState<DateShowTypeEnum>(DateShowTypeEnum.DEFAULT)
   const [plan, set_plan] = useState<PlanProps | undefined>()
@@ -92,9 +92,9 @@ export default function CreateProvider({ children }: CreateProviderProps) {
     }
   }
 
-  async function onCheckPayment(id: string): Promise<ChildResponseProps> {
+  async function onCheckPayment(id: string): Promise<PetResponseProps> {
     try {
-      const response = await get_child_id(id)
+      const response = await get_pet_id(id)
       return response
     } catch (error: any) {
       console.error(error)
@@ -108,8 +108,8 @@ export default function CreateProvider({ children }: CreateProviderProps) {
 
       if (response) {
         set_pre(response.id)
-        set_child({
-          child_name: response.child_name,
+        set_pet({
+          pet_name: response.pet_name,
           birth_date: response.birth_date,
           phoneNumber: response.phoneNumber,
           ddd: response.ddd,
@@ -146,7 +146,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         pre,
         pre_medias,
         payment,
-        child,
+        pet,
         plan,
         theme_show_type,
         date_show_type,
@@ -154,7 +154,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         set_pre,
         set_pre_medias,
         set_payment,
-        set_child,
+        set_pet,
         set_plan,
         set_theme_show_type,
         set_date_show_type,
@@ -169,7 +169,7 @@ export default function CreateProvider({ children }: CreateProviderProps) {
         onUpdatePayment,
       }}
     >
-      {children}
+      {childen}
     </CreateContext.Provider>
   )
 }

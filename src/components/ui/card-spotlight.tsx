@@ -9,7 +9,7 @@ import { CanvasRevealEffect } from '@/components/ui/canvas-reveal-effect'
 import { cn } from '@/lib/utils'
 
 export const CardSpotlight = ({
-  children,
+  childen,
   radius = 350,
   color = '#262626',
   className,
@@ -17,7 +17,7 @@ export const CardSpotlight = ({
 }: {
   radius?: number
   color?: string
-  children: React.ReactNode
+  childen: React.ReactNode
 } & React.HTMLAttributes<HTMLDivElement>) => {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -67,7 +67,7 @@ export const CardSpotlight = ({
           />
         )}
       </motion.div>
-      {children}
+      {childen}
     </div>
   )
 }

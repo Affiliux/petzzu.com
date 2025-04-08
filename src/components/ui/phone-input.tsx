@@ -70,7 +70,7 @@ const CountrySelect = ({ disabled, value: selectedCountry, options: countryList,
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asPet>
         <Button
           type='button'
           variant='outline'

@@ -6,10 +6,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export const BackgroundBeamsWithCollision = ({
-  children,
+  childen,
   className,
 }: {
-  children: React.ReactNode
+  childen: React.ReactNode
   className?: string
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -134,7 +134,7 @@ export const BackgroundBeamsWithCollision = ({
         />
       ))}
 
-      {children}
+      {childen}
       <div
         ref={containerRef}
         className='absolute bottom-0 bg-neutral-100 w-full inset-x-0 pointer-events-none'

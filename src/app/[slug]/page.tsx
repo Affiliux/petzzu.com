@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { useApplication } from '@/contexts/ApplicationContext'
-import { useChild } from '@/contexts/ChildContext'
+import { usePet } from '@/contexts/PetContext'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
@@ -31,7 +31,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
   // contexts
   const { theme, onChangeTheme } = useApplication()
-  const { child, onGetChildBySlug } = useChild()
+  const { pet, onGetPetBySlug } = usePet()
 
   // states
   const [payment, set_payment] = useState<boolean>(false)
@@ -42,7 +42,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
     set_loading(true)
 
     try {
-      await onGetChildBySlug(slug)
+      await onGetPetBySlug(slug)
     } catch (error: any) {
       console.error(error)
 
@@ -56,7 +56,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
   async function handleCheckPayment() {
     try {
-      await onGetChildBySlug(slug)
+      await onGetPetBySlug(slug)
     } catch (error: any) {
       console.error(error)
 
@@ -67,16 +67,16 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }
 
   useEffect(() => {
-    if (!!child && child?.themeShowType) onChangeTheme(child?.themeShowType ?? ThemeShowTypeEnum.GRAY)
+    if (!!pet && pet?.themeShowType) onChangeTheme(pet?.themeShowType ?? ThemeShowTypeEnum.GRAY)
 
-    if (!!child && child?.inactiveReason === 'Awaiting payment') {
-      if (child?.urlPayment && child?.urlPayment.includes('https')) {
-        router.replace(child.urlPayment)
-      } else if (child.urlPayment && !child.urlPayment.includes('https')) {
+    if (!!pet && pet?.inactiveReason === 'Awaiting payment') {
+      if (pet?.urlPayment && pet?.urlPayment.includes('https')) {
+        router.replace(pet.urlPayment)
+      } else if (pet.urlPayment && !pet.urlPayment.includes('https')) {
         set_payment(true)
       }
     }
-  }, [child])
+  }, [pet])
 
   useEffect(() => {
     handleGetBySlug()
@@ -89,14 +89,14 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   return (
     <>
       <div className='relative bg-theme-100 h-full min-h-screen'>
-        {!!child && !loading && <DefaultTheme child={child} />}
+        {!!pet && !loading && <DefaultTheme pet={pet} />}
 
-        <AnimatedModal isOpen={!!child && !loading && (success || payment)} onClose={() => {}}>
+        <AnimatedModal isOpen={!!pet && !loading && (success || payment)} onClose={() => {}}>
           <div className='flex flex-col items-center justify-center gap-8'>
-            {payment && child?.qrCode64 && !child?.qrCodeUrl ? (
-              <PixPayment payment={child} onCheckPayment={handleCheckPayment} />
+            {payment && pet?.qrCode64 && !pet?.qrCodeUrl ? (
+              <PixPayment payment={pet} onCheckPayment={handleCheckPayment} />
             ) : success ? (
-              <SuccessModal child={child} onClose={() => set_success(false)} />
+              <SuccessModal pet={pet} onClose={() => set_success(false)} />
             ) : (
               <></>
             )}

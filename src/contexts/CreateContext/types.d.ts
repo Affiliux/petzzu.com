@@ -1,6 +1,6 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
-import type { ChildResponseProps, PaymentProps } from '@/typings/child'
+import type { PetResponseProps, PaymentProps } from '@/typings/pet'
 import type {
   CreateFromPrePayloadProps,
   CreatePrePayloadProps,
@@ -15,7 +15,7 @@ import type {
 import { DateShowTypeEnum, PhotosSliderEnum, ThemeShowTypeEnum } from '@/enums'
 
 export type CreateProviderProps = {
-  children: ReactNode
+  childen: ReactNode
 }
 
 export type CreateContextType = {
@@ -23,7 +23,7 @@ export type CreateContextType = {
   pre: string | null
   pre_medias: MediaPreProps[]
   payment: PaymentProps | null
-  child: CreatePrePayloadProps
+  pet: CreatePrePayloadProps
   plan: PlanProps | undefined
   theme_show_type: ThemeShowTypeEnum
   date_show_type: DateShowTypeEnum
@@ -31,7 +31,7 @@ export type CreateContextType = {
   set_pre: Dispatch<SetStateAction<string | null>>
   set_pre_medias: Dispatch<SetStateAction<MediaPreProps[]>>
   set_payment: Dispatch<SetStateAction<PaymentProps | null>>
-  set_child: Dispatch<SetStateAction<CreatePrePayloadProps>>
+  set_pet: Dispatch<SetStateAction<CreatePrePayloadProps>>
   set_plan: Dispatch<SetStateAction<PlanProps | undefined>>
   set_theme_show_type: Dispatch<SetStateAction<ThemeShowTypeEnum>>
   set_date_show_type: Dispatch<SetStateAction<DateShowTypeEnum>>
@@ -41,7 +41,7 @@ export type CreateContextType = {
   onNewMedia: (payload: NewMediaPayloadProps) => Promise<void>
   onRemoveMedia: (payload: RemoveMediaPayloadProps) => Promise<void>
   onCreateFromPre: (payload: CreateFromPrePayloadProps) => Promise<void>
-  onCheckPayment: (id: string) => Promise<ChildResponseProps>
+  onCheckPayment: (id: string) => Promise<PetResponseProps>
   onGetPre: (id: string) => Promise<void>
   onUpdatePayment: (payload: UpdatePaymentPayloadProps, id: string) => Promise<void>
 }

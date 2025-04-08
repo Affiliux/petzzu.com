@@ -58,7 +58,7 @@ export function PageCard({ page }: { page: PageProps }) {
           {!!page.media[0]?.url && (
             <Image
               src={page.media[0].url}
-              alt={page.child_name}
+              alt={page.pet_name}
               fill
               onError={() => setImage(true)}
               className='object-cover transition-transform duration-300 hover:scale-105'
@@ -68,7 +68,7 @@ export function PageCard({ page }: { page: PageProps }) {
           {(image || !page.media[0]?.url) && (
             <Image
               src={'/images/placeholder.svg'}
-              alt={page.child_name}
+              alt={page.pet_name}
               fill
               className='object-cover transition-transform duration-300 hover:scale-105'
             />
@@ -78,7 +78,7 @@ export function PageCard({ page }: { page: PageProps }) {
         </div>
 
         <CardContent className='pt-6'>
-          <h2 className='text-xl font-semibold mb-1 text-foreground'>{page.child_name}</h2>
+          <h2 className='text-xl font-semibold mb-1 text-foreground'>{page.pet_name}</h2>
           <div className='flex items-center text-sm text-muted-foreground mb-6'>
             <Calendar className='w-4 h-4 mr-2' />
             <span>
@@ -122,7 +122,7 @@ export function PageCard({ page }: { page: PageProps }) {
               </div>
 
               <div className='w-full space-y-2.5'>
-                <Button asChild variant='outline' size='sm' className='w-full group relative overflow-hidden'>
+                <Button asPet variant='outline' size='sm' className='w-full group relative overflow-hidden'>
                   <Link
                     href={`/account/pages/${page.id}`}
                     onClick={() => {
@@ -135,7 +135,7 @@ export function PageCard({ page }: { page: PageProps }) {
                   </Link>
                 </Button>
 
-                <Button asChild variant='outline' size='sm' className='w-full group relative overflow-hidden'>
+                <Button asPet variant='outline' size='sm' className='w-full group relative overflow-hidden'>
                   <Link href={`/${page.slug}`} target='_blank' className='flex items-center justify-end gap-2'>
                     <ExternalLink className='w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1' />
                     <span>{t('actions.view')}</span>

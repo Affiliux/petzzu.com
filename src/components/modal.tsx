@@ -7,14 +7,14 @@ import { Modal, ModalBody, ModalContent } from '@/components/ui/animated-modal'
 interface AnimatedModalProps {
   isOpen: boolean
   onClose: () => void
-  children: React.ReactNode
+  childen: React.ReactNode
 }
 
-export default function AnimatedModal({ isOpen, onClose, children }: AnimatedModalProps) {
+export default function AnimatedModal({ isOpen, onClose, childen }: AnimatedModalProps) {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <ModalBody>
-        <ModalContent>{children}</ModalContent>
+        <ModalContent>{childen}</ModalContent>
       </ModalBody>
     </Modal>
   )

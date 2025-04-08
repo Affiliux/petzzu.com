@@ -1,7 +1,7 @@
 {
   "config": {
-    "title": "Babyzzu ©",
-    "description": "Babyzzu es una plataforma que permite crear páginas personalizadas para personas especiales.",
+    "title": "Petzzu ©",
+    "description": "Petzzu es una plataforma que permite crear páginas personalizadas para personas especiales.",
     "keywords": "amor, relación, amistades, cumpleaños, regalo, página, dedicatoria, sorpresa",
     "skip": "Saltar paso",
     "header": {
@@ -25,7 +25,7 @@
       }
     },
     "footer": {
-      "copyright": "Copyright © 2025 - Babyzzu.com",
+      "copyright": "Copyright © 2025 - Petzzu.com",
       "terms": "Términos de uso",
       "privacy": "Política de privacidad",
       "instagram": "Instagram",
@@ -140,13 +140,13 @@
       "faq": {
         "title": "Preguntas Frecuentes",
         "contact": "¿Dudas? Contáctanos aquí",
-        "description": "Aquí tienes algunas preguntas frecuentes para ayudarte a entender mejor Babyzzu. Si tienes alguna duda, contáctanos.",
+        "description": "Aquí tienes algunas preguntas frecuentes para ayudarte a entender mejor Petzzu. Si tienes alguna duda, contáctanos.",
         "1": {
-          "question": "¿Qué es Babyzzu?",
-          "answer": "Babyzzu es una plataforma que permite crear páginas personalizadas para personas especiales. Puedes añadir fotos, un mensaje y también el tiempo de la unión."
+          "question": "¿Qué es Petzzu?",
+          "answer": "Petzzu es una plataforma que permite crear páginas personalizadas para personas especiales. Puedes añadir fotos, un mensaje y también el tiempo de la unión."
         },
         "2": {
-          "question": "¿Cómo puedo crear una página personalizada en Babyzzu?",
+          "question": "¿Cómo puedo crear una página personalizada en Petzzu?",
           "answer": "Para crear tu página personalizada, sigue los pasos completando el formulario con la información solicitada. Después de completarlo, serás dirigido al pago."
         },
         "3": {
@@ -168,7 +168,7 @@
       },
       "testimonials": {
         "title": "Testimonios",
-        "description": "Mira lo que dicen nuestros clientes sobre Babyzzu",
+        "description": "Mira lo que dicen nuestros clientes sobre Petzzu",
         "1": {
           "name": "Mariana",
           "time": "Hace 1 mes",
@@ -177,7 +177,7 @@
         "2": {
           "name": "Ana",
           "time": "Hace 2 días",
-          "message": "Babyzzu me ayudó a organizar y guardar cada fase del crecimiento de mi hijo. ¡Es increíble poder revivir cada momento con tanta facilidad!"
+          "message": "Petzzu me ayudó a organizar y guardar cada fase del crecimiento de mi hijo. ¡Es increíble poder revivir cada momento con tanta facilidad!"
         },
         "3": {
           "name": "Lucas",
@@ -197,7 +197,7 @@
         "6": {
           "name": "Clara",
           "time": "Hace 2 meses",
-          "message": "Babyzzu hizo mucho más fácil guardar y compartir los momentos especiales de mi bebé con la familia. ¡A todos les encantó la idea!"
+          "message": "Petzzu hizo mucho más fácil guardar y compartir los momentos especiales de mi bebé con la familia. ¡A todos les encantó la idea!"
         },
         "7": {
           "name": "Vanessa",
@@ -337,13 +337,13 @@
         "data_retention_description": "Retendremos tu información personal solo durante el tiempo necesario para cumplir con los fines para los que fue recopilada, o según lo exija la ley.",
 
         "your_rights_title": "7. Tus Derechos",
-        "your_rights_description": "Tienes derecho a acceder, corregir o eliminar tu información personal. Para ejercer estos derechos, contáctanos en: contact@babyzzu.com.",
+        "your_rights_description": "Tienes derecho a acceder, corregir o eliminar tu información personal. Para ejercer estos derechos, contáctanos en: contact@petzzu.com.",
 
         "changes_to_policy_title": "8. Cambios en esta Política de Privacidad",
         "changes_to_policy_description": "Podemos actualizar esta Política de Privacidad periódicamente. Cuando lo hagamos, la fecha de \"última actualización\" en la parte superior de esta página cambiará. Es tu responsabilidad revisar esta política periódicamente para mantenerte informado sobre posibles cambios.",
 
         "contact_title": "9. Contacto",
-        "contact_description": "Si tienes alguna pregunta sobre esta Política de Privacidad, contáctanos en: contact@babyzzu.com."
+        "contact_description": "Si tienes alguna pregunta sobre esta Política de Privacidad, contáctanos en: contact@petzzu.com."
       }
     },
     "terms": {
@@ -354,7 +354,7 @@
         "acceptance_description": "Al acceder y utilizar nuestra plataforma, aceptas cumplir y estar sujeto a estos Términos de Uso. Si no estás de acuerdo con alguna parte de estos términos, por favor, no utilices la plataforma.",
 
         "service_description_title": "2. Descripción del Servicio",
-        "service_description": "Babyzzu ofrece un servicio que permite a las parejas crear una página personalizada completando un formulario con nombres, fecha de nacimiento y fecha de inicio del embarazo, un mensaje especial y hasta 4 medios por categoría. Después de completar el formulario, la pareja es dirigida al pago y, al finalizar, recibe un enlace con un Código QR enviado por correo electrónico.",
+        "service_description": "Petzzu ofrece un servicio que permite a las parejas crear una página personalizada completando un formulario con nombres, fecha de nacimiento y fecha de inicio del embarazo, un mensaje especial y hasta 4 medios por categoría. Después de completar el formulario, la pareja es dirigida al pago y, al finalizar, recibe un enlace con un Código QR enviado por correo electrónico.",
 
         "registration_and_security_title": "3. Registro y Seguridad",
         "registration_and_security": "Para utilizar nuestros servicios, debes proporcionar una dirección de correo electrónico válida. No compartiremos tu correo electrónico con terceros.",
@@ -369,7 +369,7 @@
         "payments_refund_policy": "Los pagos se procesan a través de Stripe y Pagar.me / Stone. Después de la confirmación del pago, el responsable recibirá un enlace para acceder a la página personalizada por correo electrónico. No se ofrecen reembolsos, excepto en casos excepcionales, a nuestro exclusivo criterio.",
 
         "service_changes_title": "7. Cambios en el Servicio",
-        "service_changes": "Nos comprometemos a mantener el servicio disponible durante el período contratado, según el plan elegido (plan básico o avanzado). Sin embargo, en situaciones extraordinarias, como problemas técnicos, legales o financieros, nos reservamos el derecho de modificar o discontinuar el servicio. En caso de discontinuación, notificaremos a los usuarios con anticipación y buscaremos ofrecer alternativas adecuadas siempre que sea posible. Babyzzu no se responsabiliza por pérdidas derivadas de modificaciones o interrupciones en circunstancias extraordinarias, pero haremos esfuerzos para minimizar los impactos.",
+        "service_changes": "Nos comprometemos a mantener el servicio disponible durante el período contratado, según el plan elegido (plan básico o avanzado). Sin embargo, en situaciones extraordinarias, como problemas técnicos, legales o financieros, nos reservamos el derecho de modificar o discontinuar el servicio. En caso de discontinuación, notificaremos a los usuarios con anticipación y buscaremos ofrecer alternativas adecuadas siempre que sea posible. Petzzu no se responsabiliza por pérdidas derivadas de modificaciones o interrupciones en circunstancias extraordinarias, pero haremos esfuerzos para minimizar los impactos.",
 
         "limitation_of_liability_title": "8. Limitación de Responsabilidad",
         "limitation_of_liability": "No seremos responsables por daños indirectos, incidentales, especiales o consecuentes relacionados con el uso o la incapacidad de usar la plataforma.",
@@ -378,7 +378,7 @@
         "terms_update": "Podemos revisar estos Términos de Uso periódicamente. Cuando lo hagamos, actualizaremos la fecha de \"última actualización\" en la parte superior de esta página. Es tu responsabilidad revisar los Términos de Uso periódicamente para mantenerte informado sobre posibles cambios.",
 
         "contact_title": "10. Contacto",
-        "contact": "Si tienes preguntas sobre los Términos de Uso, contáctanos en: contact@babyzzu.com"
+        "contact": "Si tienes preguntas sobre los Términos de Uso, contáctanos en: contact@petzzu.com"
       }
     },
     "auth": {

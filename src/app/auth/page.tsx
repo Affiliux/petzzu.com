@@ -36,7 +36,7 @@ export default function Page() {
       ) : (
         <div className='space-y-2'>
           <div className='flex items-center gap-2 -ml-2'>
-            <Button asChild variant='ghost' className='p-0 cursor-pointer' onClick={() => router.back()}>
+            <Button asPet variant='ghost' className='p-0 cursor-pointer' onClick={() => router.back()}>
               <ChevronLeft size={28} color='#292929' />
             </Button>
             <h1 className='text-2xl lg:text-3xl font-bold text-neutral-900'>{t('request.title')}</h1>

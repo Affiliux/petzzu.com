@@ -22,7 +22,7 @@ export function Footer() {
             <img
               src={`/images/logos/${theme}/logo+name.webp`}
               className='h-12'
-              alt='Babyzzu logo'
+              alt='Petzzu logo'
               width={200}
               height={56}
             />
@@ -49,10 +49,10 @@ export function Footer() {
         <div className='w-full md:w-1/3 md:flex md:justify-end mt-4 md:mt-0 pr-10'>
           <ul className='text-sm text-neutral-800 mt-4'>
             <li className='py-1'>
-              <Link href='https://www.instagram.com/babyzzu.oficial/'>{t('footer.instagram')}</Link>
+              <Link href='https://www.instagram.com/petzzu.oficial/'>{t('footer.instagram')}</Link>
             </li>
             <li className='py-1'>
-              <Link href='https://www.tiktok.com/@babyzzu.oficial'>{t('footer.tiktok')}</Link>
+              <Link href='https://www.tiktok.com/@petzzu.oficial'>{t('footer.tiktok')}</Link>
             </li>
           </ul>
         </div>

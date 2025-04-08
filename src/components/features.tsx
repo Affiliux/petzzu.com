@@ -78,19 +78,19 @@ export function Features() {
   )
 }
 
-const FeatureCard = ({ children, className }: { children?: React.ReactNode; className?: string }) => {
-  return <div className={cn(`px-4 py-4 sm:py-8 sm:px-8 relative overflow-hidden`, className)}>{children}</div>
+const FeatureCard = ({ childen, className }: { childen?: React.ReactNode; className?: string }) => {
+  return <div className={cn(`px-4 py-4 sm:py-8 sm:px-8 relative overflow-hidden`, className)}>{childen}</div>
 }
 
-const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
+const FeatureTitle = ({ childen }: { childen?: React.ReactNode }) => {
   return (
     <p className='max-w-5xl mx-auto text-left tracking-tight text-neutral-900 text-xl md:text-2xl md:leading-snug'>
-      {children}
+      {childen}
     </p>
   )
 }
 
-const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
+const FeatureDescription = ({ childen }: { childen?: React.ReactNode }) => {
   return (
     <p
       className={cn(
@@ -99,7 +99,7 @@ const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
         'text-left max-w-sm mx-0 md:text-sm my-2',
       )}
     >
-      {children}
+      {childen}
     </p>
   )
 }

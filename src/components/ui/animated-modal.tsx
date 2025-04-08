@@ -14,13 +14,13 @@ interface ModalContextType {
 const ModalContext = createContext<ModalContextType | undefined>(undefined)
 
 interface ModalProviderProps {
-  children: ReactNode
+  childen: ReactNode
   open: boolean
   onClose: () => void
 }
 
-export const ModalProvider = ({ children, open, onClose }: ModalProviderProps) => {
-  return <ModalContext.Provider value={{ open, onClose }}>{children}</ModalContext.Provider>
+export const ModalProvider = ({ childen, open, onClose }: ModalProviderProps) => {
+  return <ModalContext.Provider value={{ open, onClose }}>{childen}</ModalContext.Provider>
 }
 
 export const useModal = () => {
@@ -32,20 +32,20 @@ export const useModal = () => {
 }
 
 interface ModalProps {
-  children: ReactNode
+  childen: ReactNode
   open: boolean
   onClose: () => void
 }
 
-export function Modal({ children, open, onClose }: ModalProps) {
+export function Modal({ childen, open, onClose }: ModalProps) {
   return (
     <ModalProvider open={open} onClose={onClose}>
-      {children}
+      {childen}
     </ModalProvider>
   )
 }
 
-export const ModalBody = ({ children, className }: { children: ReactNode; className?: string }) => {
+export const ModalBody = ({ childen, className }: { childen: ReactNode; className?: string }) => {
   const { open, onClose } = useModal()
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export const ModalBody = ({ children, className }: { children: ReactNode; classN
               damping: 15,
             }}
           >
-            {children}
+            {childen}
           </motion.div>
         </motion.div>
       )}
@@ -115,8 +115,8 @@ export const ModalBody = ({ children, className }: { children: ReactNode; classN
   )
 }
 
-export const ModalContent = ({ children, className }: { children: ReactNode; className?: string }) => {
-  return <div className={cn('flex flex-col flex-1 p-8 md:p-10', className)}>{children}</div>
+export const ModalContent = ({ childen, className }: { childen: ReactNode; className?: string }) => {
+  return <div className={cn('flex flex-col flex-1 p-8 md:p-10', className)}>{childen}</div>
 }
 
 const Overlay = ({ className }: { className?: string }) => {
@@ -141,7 +141,7 @@ const Overlay = ({ className }: { className?: string }) => {
 export const useOutsideClick = (ref: React.RefObject<HTMLDivElement>, callback: Function) => {
   useEffect(() => {
     const listener = (event: any) => {
-      // DO NOTHING if the element being clicked is the target element or their children
+      // DO NOTHING if the element being clicked is the target element or their childen
       if (!ref.current || ref.current.contains(event.target)) {
         return
       }

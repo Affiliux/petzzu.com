@@ -6,11 +6,11 @@ import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export const BackgroundLines = ({
-  children,
+  childen,
   className,
   svgOptions,
 }: {
-  children: React.ReactNode
+  childen: React.ReactNode
   className?: string
   svgOptions?: {
     duration?: number
@@ -19,7 +19,7 @@ export const BackgroundLines = ({
   return (
     <div className={cn('h-[20rem] md:h-screen w-full bg-white dark:bg-black', className)}>
       <SVG svgOptions={svgOptions} />
-      {children}
+      {childen}
     </div>
   )
 }

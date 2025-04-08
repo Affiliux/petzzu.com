@@ -7,9 +7,9 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
 export default function Layout({
-  children,
+  childen,
 }: Readonly<{
-  children: React.ReactNode
+  childen: React.ReactNode
 }>) {
   return (
     <div className='w-full min-h-screen'>
@@ -18,7 +18,7 @@ export default function Layout({
       </div>
 
       <div className='container mx-auto px-4 md:px-6 py-8 mt-32'>
-        <div className='grid gap-10 lg:grid-cols-2'>{children}</div>
+        <div className='grid gap-10 lg:grid-cols-2'>{childen}</div>
       </div>
 
       <Footer />

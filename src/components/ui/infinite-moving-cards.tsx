@@ -30,12 +30,12 @@ export const InfiniteMovingCards = ({
   const [start, setStart] = useState(false)
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children)
+      const scrollerContent = Array.from(scrollerRef.current.childen)
 
       scrollerContent.forEach(item => {
         const duplicatedItem = item.cloneNode(true)
         if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem)
+          scrollerRef.current.appendPet(duplicatedItem)
         }
       })
 

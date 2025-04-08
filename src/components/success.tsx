@@ -5,14 +5,14 @@ import React, { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { IconDownload } from '@tabler/icons-react'
 
-import type { ChildProps } from '@/typings/child'
+import type { PetProps } from '@/typings/pet'
 
 interface SuccessModalProps {
-  child: ChildProps
+  pet: PetProps
   onClose: () => void
 }
 
-export const SuccessModal = ({ child, onClose }: SuccessModalProps) => {
+export const SuccessModal = ({ pet, onClose }: SuccessModalProps) => {
   // hooks
   const t = useTranslations('checkout.success')
 
@@ -31,14 +31,14 @@ export const SuccessModal = ({ child, onClose }: SuccessModalProps) => {
       <p className='text-muted-foreground text-sm w-3/4 text-center'>{t('description')}</p>
 
       <div className='flex flex-col mb-4 items-center justify-center w-full mt-8 border-dashed border border-theme-800 p-8 rounded-lg'>
-        {child?.qrCodeUrl && (
+        {pet?.qrCodeUrl && (
           <div className='border-2 border-theme-800 rounded-xl'>
-            <img src={child?.qrCodeUrl} className='rounded-xl h-[200px]' width={200} height={200} alt='QR Code' />
+            <img src={pet?.qrCodeUrl} className='rounded-xl h-[200px]' width={200} height={200} alt='QR Code' />
           </div>
         )}
 
         <a
-          href={child?.qrCodeUrl}
+          href={pet?.qrCodeUrl}
           target='_blank'
           className='text-white flex items-center justify-center text-center gap-2 text-xs lg:text-sm font-bold mt-4 cursor-pointer py-2 px-10 rounded-md bg-theme-900'
         >

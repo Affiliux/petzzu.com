@@ -7,9 +7,9 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
 export default function Layout({
-  children,
+  childen,
 }: Readonly<{
-  children: React.ReactNode
+  childen: React.ReactNode
 }>) {
   return (
     <div className='w-full min-h-screen'>
@@ -17,7 +17,7 @@ export default function Layout({
         <Header />
       </div>
 
-      <div className='container mx-auto py-8 mt-32'>{children}</div>
+      <div className='container mx-auto py-8 mt-32'>{childen}</div>
 
       <Footer />
       <ButtonToTop />
